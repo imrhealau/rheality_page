@@ -44,6 +44,17 @@
     box-shadow:0 6px 24px rgba(46,31,74,0.08);
   }
   .nav-inner img{height:34px;width:auto;display:block}
+  .tabs{display:flex;gap:4px;margin-left:auto}
+  .tabs a{
+    font-family:var(--disp);font-weight:700;font-size:0.9rem;color:var(--muted);
+    text-decoration:none;padding:8px 16px;border-radius:100px;white-space:nowrap;
+    transition:background .15s ease,color .15s ease;
+  }
+  .tabs a:hover{color:var(--plum)}
+  .tabs a:focus-visible{outline:3px solid var(--brand-deep);outline-offset:2px}
+  .tabs a.active{background:var(--brand);color:#fff}
+  .panel{display:none}
+  .panel.active{display:block}
   .btn{
     font-family:var(--disp);font-weight:700;font-size:0.92rem;
     background:var(--brand);color:#fff;text-decoration:none;
@@ -101,13 +112,13 @@
   .t-item{position:relative;margin-bottom:30px}
   .t-item::before{content:"";position:absolute;left:-33px;top:5px;width:13px;height:13px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px var(--bg)}
   .t-year{display:inline-block;font-family:var(--disp);font-weight:700;font-size:0.85rem;color:#fff;background:var(--brand);border-radius:100px;padding:4px 15px;margin-bottom:12px}
-  .t-card{display:grid;grid-template-columns:320px 1fr;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;max-width:820px}
-  .t-card img{width:100%;height:100%;min-height:220px;object-fit:cover;display:block}
-  .t-card .t-body{padding:22px 26px;align-self:center}
+  .t-card{display:grid;grid-template-columns:320px 1fr;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;max-width:820px;height:230px}
+  .t-card img{width:100%;height:230px;object-fit:cover;display:block}
+  .t-card .t-body{padding:22px 26px;align-self:center;overflow:hidden}
   .t-card h3{font-size:1.15rem;color:var(--plum);margin:0 0 8px}
   .t-card p{margin:0;color:var(--muted);font-size:0.95rem}
   .t-card.no-img{grid-template-columns:1fr}
-  @media (max-width:680px){.t-card{grid-template-columns:1fr}.t-card img{max-height:260px}}
+  @media (max-width:680px){.t-card{grid-template-columns:1fr;height:auto}.t-card img{height:200px}}
 
   footer{
     max-width:var(--maxw);margin:0 auto;padding:26px 20px 46px;
@@ -122,12 +133,17 @@
 <nav class="nav" aria-label="Main">
   <div class="nav-inner">
     <img src="logo-nav.png" alt="Rheality">
+    <div class="tabs">
+      <a href="#home" data-tab="home">Company</a>
+      <a href="#founder" data-tab="founder">Founder</a>
+    </div>
     <a class="btn" href="https://www.linkedin.com/company/rheality/">Get in touch</a>
   </div>
 </nav>
 
 <div class="wrap">
 
+<div class="panel" id="p-home">
 <header class="hero">
   <span class="eyebrow">Space-data market entry · Asia-Pacific</span>
   <h1>The revenue side of the space industry in Asia<span class="dot">.</span></h1>
@@ -155,7 +171,9 @@
     <p>The companies that win Asia-Pacific won't be the ones with the best satellite. They'll be the ones in the room.</p>
   </div>
 </section>
+</div>
 
+<div class="panel" id="p-founder">
 <section id="founder">
   <h2>Founder</h2>
   <div class="founder">
@@ -176,46 +194,47 @@
 
 <section id="story">
   <h2>In the room since school</h2>
-  <p class="lede">Space isn't a pivot for us — it's a throughline. Ten years, in order.</p>
+  <p class="lede">Space isn't a pivot for us — it's a throughline. Ten years, newest first.</p>
   <div class="timeline">
-    <div class="t-item"><span class="t-year">2016</span>
-      <div class="t-card"><img src="img/astro-hk-2016.jpg" alt="Hong Kong Astronomical Society camp, 2016">
-        <div class="t-body"><h3>Hong Kong Astronomical Society</h3><p>Astronomy camp — where the habit started.</p></div></div></div>
-    <div class="t-item"><span class="t-year">2017</span>
-      <div class="t-card"><img src="img/space-2017-medal.jpg" alt="Rhea receiving a medal from astronaut Jing Haipeng at the China Aerospace youth programme, 2017">
-        <div class="t-body"><h3>Medal from Jing Haipeng</h3><p>Presented by the veteran Shenzhou mission commander at the China Aerospace youth programme (Shine Tak Foundation, Hong Kong).</p></div></div></div>
-    <div class="t-item"><span class="t-year">2017</span>
-      <div class="t-card"><img src="img/space-2017-rockets.jpg" alt="Student delegation in front of Long March launch vehicles, China Aerospace exploration trip 2017">
-        <div class="t-body"><h3>Launch-vehicle facilities</h3><p>Student aerospace exploration delegation to China's space programme sites.</p></div></div></div>
-    <div class="t-item"><span class="t-year">2018</span>
-      <div class="t-card no-img">
-        <div class="t-body"><h3>Rio Tinto Scholarship — geophysics begins</h3><p>Awarded a full scholarship by Rio Tinto to read Geophysics at Imperial College London: the start of a decade in earth-and-space data.</p></div></div></div>
-    <div class="t-item"><span class="t-year">2020</span>
-      <div class="t-card"><img src="img/astrosoc-imperial.jpg" alt="Imperial College Astronomical Society events poster and telescope eyepieces">
-        <div class="t-body"><h3>Imperial AstroSoc presidency</h3><p>A season of society events — space weather, galactic archaeology, deep-sky observation, Greenwich Observatory.</p></div></div></div>
-    <div class="t-item"><span class="t-year">2021</span>
-      <div class="t-card no-img">
-        <div class="t-body"><h3>YouTube — crypto education channel</h3><p>0 → 6,000 subscribers in six months; negotiated a Binance affiliate partnership that drove 1,900+ sign-ups and US$250M+ in first-year trading volume.</p></div></div></div>
-    <div class="t-item"><span class="t-year">2022</span>
-      <div class="t-card"><img src="img/imperial-grad.jpg" alt="Rhea Lau graduating from Imperial College London">
-        <div class="t-body"><h3>Imperial College London graduation</h3><p>BSc Geophysics, completed on the Rio Tinto Scholarship.</p></div></div></div>
-    <div class="t-item"><span class="t-year">2024</span>
-      <div class="t-card"><img src="img/slb-eth-thesis.jpg" alt="Rhea holding her SLB x ETH master thesis at focusTerra, ETH Zurich">
-        <div class="t-body"><h3>SLB × ETH master thesis</h3><p>The deep-learning seismic imaging research that produced two SLB patent filings.</p></div></div></div>
-    <div class="t-item"><span class="t-year">2024</span>
-      <div class="t-card"><img src="img/msc-delft.jpg" alt="Rhea Lau at TU Delft graduation holding the diploma">
-        <div class="t-body"><h3>TU Delft graduation</h3><p>Joint MSc Applied Geophysics — ETH Zürich · TU Delft · RWTH Aachen.</p></div></div></div>
-    <div class="t-item"><span class="t-year">2025</span>
-      <div class="t-card"><img src="img/arup-hk.jpg" alt="Rhea at the Arup Hong Kong office">
-        <div class="t-body"><h3>Arup Hong Kong</h3><p>Geotechnical engineering — the buyer's seat for geospatial data.</p></div></div></div>
-    <div class="t-item"><span class="t-year">2025–26</span>
-      <div class="t-card"><img src="img/fugro.jpg" alt="Rhea at Fugro, pointing at the company motto wall">
-        <div class="t-body"><h3>Fugro — Solution Manager, GroundIQ</h3><p>The vendor's seat: APAC partnership and acquisition evaluation across Taiwan, the Philippines, and Indonesia.</p></div></div></div>
     <div class="t-item"><span class="t-year">2026</span>
       <div class="t-card no-img">
         <div class="t-body"><h3>Rheality Limited</h3><p>Founded in Hong Kong — the revenue side of the space industry in Asia.</p></div></div></div>
+    <div class="t-item"><span class="t-year">2025–26</span>
+      <div class="t-card"><img src="img/fugro.jpg" alt="Rhea at Fugro, pointing at the company motto wall">
+        <div class="t-body"><h3>Fugro — Solution Manager, GroundIQ</h3><p>The vendor's seat: APAC partnership and acquisition evaluation across Taiwan, the Philippines, and Indonesia.</p></div></div></div>
+    <div class="t-item"><span class="t-year">2025</span>
+      <div class="t-card"><img src="img/arup-hk.jpg" alt="Rhea at the Arup Hong Kong office">
+        <div class="t-body"><h3>Arup Hong Kong</h3><p>Geotechnical engineering — the buyer's seat for geospatial data.</p></div></div></div>
+    <div class="t-item"><span class="t-year">2024</span>
+      <div class="t-card"><img src="img/msc-delft.jpg" alt="Rhea Lau at TU Delft graduation holding the diploma">
+        <div class="t-body"><h3>TU Delft graduation</h3><p>Joint MSc Applied Geophysics — ETH Zürich · TU Delft · RWTH Aachen.</p></div></div></div>
+    <div class="t-item"><span class="t-year">2024</span>
+      <div class="t-card"><img src="img/slb-eth-thesis.jpg" alt="Rhea holding her SLB x ETH master thesis at focusTerra, ETH Zurich">
+        <div class="t-body"><h3>SLB × ETH master thesis</h3><p>The deep-learning seismic imaging research that produced two SLB patent filings.</p></div></div></div>
+    <div class="t-item"><span class="t-year">2022</span>
+      <div class="t-card"><img src="img/imperial-grad.jpg" alt="Rhea Lau graduating from Imperial College London">
+        <div class="t-body"><h3>Imperial College London graduation</h3><p>BSc Geophysics, completed on the Rio Tinto Scholarship.</p></div></div></div>
+    <div class="t-item"><span class="t-year">2021</span>
+      <div class="t-card no-img">
+        <div class="t-body"><h3>YouTube — crypto education channel</h3><p>0 → 6,000 subscribers in six months; negotiated a Binance affiliate partnership that drove 1,900+ sign-ups and US$250M+ in first-year trading volume.</p></div></div></div>
+    <div class="t-item"><span class="t-year">2020</span>
+      <div class="t-card"><img src="img/astrosoc-imperial.jpg" alt="Imperial College Astronomical Society events poster and telescope eyepieces">
+        <div class="t-body"><h3>Imperial AstroSoc presidency</h3><p>A season of society events — space weather, galactic archaeology, deep-sky observation, Greenwich Observatory.</p></div></div></div>
+    <div class="t-item"><span class="t-year">2018</span>
+      <div class="t-card no-img">
+        <div class="t-body"><h3>Rio Tinto Scholarship — geophysics begins</h3><p>Awarded a full scholarship by Rio Tinto to read Geophysics at Imperial College London: the start of a decade in earth-and-space data.</p></div></div></div>
+    <div class="t-item"><span class="t-year">2017</span>
+      <div class="t-card"><img src="img/space-2017-rockets.jpg" alt="Student delegation in front of Long March launch vehicles, China Aerospace exploration trip 2017">
+        <div class="t-body"><h3>Launch-vehicle facilities</h3><p>Student aerospace exploration delegation to China's space programme sites.</p></div></div></div>
+    <div class="t-item"><span class="t-year">2017</span>
+      <div class="t-card"><img src="img/space-2017-medal.jpg" alt="Rhea receiving a medal from astronaut Jing Haipeng at the China Aerospace youth programme, 2017">
+        <div class="t-body"><h3>Medal from Jing Haipeng</h3><p>Presented by the veteran Shenzhou mission commander at the China Aerospace youth programme (Shine Tak Foundation, Hong Kong).</p></div></div></div>
+    <div class="t-item"><span class="t-year">2016</span>
+      <div class="t-card"><img src="img/astro-hk-2016.jpg" alt="Hong Kong Astronomical Society camp, 2016">
+        <div class="t-body"><h3>Hong Kong Astronomical Society</h3><p>Astronomy camp — where the habit started.</p></div></div></div>
   </div>
 </section>
+</div>
 
 <section id="contact">
   <div class="dark" style="text-align:left">
@@ -242,6 +261,25 @@
     var addr = ['rhealityadmin','gmail.com'].join('@');
     document.querySelectorAll('.email-btn').forEach(function(a){ a.href = 'mailto:' + addr; });
   })();
+  // tab routing
+  (function(){
+    var tabs = ['home','founder'];
+    function show(name){
+      tabs.forEach(function(t){
+        document.getElementById('p-'+t).classList.toggle('active', t===name);
+        var a = document.querySelector('.tabs a[data-tab="'+t+'"]');
+        if(a) a.classList.toggle('active', t===name);
+      });
+      window.scrollTo(0,0);
+    }
+    function route(){
+      var h = location.hash.replace('#','');
+      show(tabs.indexOf(h) >= 0 ? h : 'home');
+    }
+    window.addEventListener('hashchange', route);
+    route();
+  })();
 </script>
+<noscript><style>.panel{display:block}</style></noscript>
 </body>
 </html>
