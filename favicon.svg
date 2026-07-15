@@ -3,13 +3,13 @@
     <mask id="frontgap">
       <rect width="512" height="512" fill="#fff"/>
       <g transform="rotate(-28 256 256)">
-        <path d="M 21 256 A 235 80 0 0 0 491 256" fill="none" stroke="#000" stroke-width="56"/>
+        <path d="M 21 256 A 235 58 0 0 0 491 256" fill="none" stroke="#000" stroke-width="56"/>
       </g>
     </mask>
   </defs>
   <!-- back half of the ring: visible outside the disc, hidden behind it -->
   <g transform="rotate(-28 256 256)">
-    <path d="M 21 256 A 235 80 0 0 1 491 256" fill="none" stroke="#CD5A1F" stroke-width="24"/>
+    <path d="M 21 256 A 235 58 0 0 1 491 256" fill="none" stroke="#CD5A1F" stroke-width="24"/>
   </g>
   <!-- planet disc with gap channel where the front band crosses -->
   <g mask="url(#frontgap)">
@@ -17,6 +17,6 @@
   </g>
   <!-- front half of the ring -->
   <g transform="rotate(-28 256 256)">
-    <path d="M 21 256 A 235 80 0 0 0 491 256" fill="none" stroke="#CD5A1F" stroke-width="24"/>
+    <path d="M 21 256 A 235 58 0 0 0 491 256" fill="none" stroke="#CD5A1F" stroke-width="24"/>
   </g>
 </svg>
