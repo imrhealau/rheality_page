@@ -57,7 +57,8 @@
     .nav-inner{padding:8px 10px 8px 14px;gap:8px}
     .nav-inner img{height:26px}
     .nav-inner > .btn{display:none}
-    .tabs a{padding:7px 12px;font-size:0.82rem}
+    .tabs a{padding:6px 10px;font-size:0.78rem}
+    .tabs{overflow-x:auto;-webkit-overflow-scrolling:touch}
   }
   .panel{display:none}
   .panel.active{display:block}
@@ -172,6 +173,8 @@
     <img src="logo-nav.png" alt="Rheality">
     <div class="tabs">
       <a href="#home" data-tab="home">Company</a>
+      <a href="#sellers" data-tab="sellers">Sellers</a>
+      <a href="#buyers" data-tab="buyers">Buyers</a>
       <a href="#founder" data-tab="founder">Founder</a>
     </div>
     <a class="btn" href="https://www.linkedin.com/company/rheality/">Get in touch</a>
@@ -236,8 +239,8 @@
 <section id="serve">
   <h2>Who We Serve</h2>
   <div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(340px,1fr))">
-    <div class="card"><div class="pip">📡</div><h3>Sell Side — Space-Data Companies</h3><p>You have the satellites and no Asia-Pacific revenue. We find your buyers, open the doors, run the meetings, and close your first deals in the region — retainer plus success fee, so we only win when you do.</p></div>
-    <div class="card"><div class="pip">🌏</div><h3>Buy Side — Nations &amp; Enterprises</h3><p>Floods, sinking ground, failing crops, assets too remote to watch — most organisations never imagine a satellite is the answer. We show you what space can already do for your problem, translate it into the right sensors and suppliers from both of the world's ecosystems, and stay accountable from first question to working data.</p></div>
+    <div class="card"><div class="pip">📡</div><h3>Sell Side — Space-Data Companies</h3><p>You have the satellites and no Asia-Pacific revenue. We find your buyers, open the doors, run the meetings, and close your first deals in the region — retainer plus success fee, so we only win when you do.</p><p style="margin-top:12px"><a href="#sellers" style="color:var(--brand-deep);font-weight:600;text-decoration:none">How it works for sellers →</a></p></div>
+    <div class="card"><div class="pip">🌏</div><h3>Buy Side — Nations &amp; Enterprises</h3><p>Floods, sinking ground, failing crops, assets too remote to watch — most organisations never imagine a satellite is the answer. We show you what space can already do for your problem, translate it into the right sensors and suppliers from both of the world's ecosystems, and stay accountable from first question to working data.</p><p style="margin-top:12px"><a href="#buyers" style="color:var(--brand-deep);font-weight:600;text-decoration:none">How it works for buyers →</a></p></div>
   </div>
 </section>
 
@@ -253,6 +256,62 @@
 <circle cx="653.8" cy="155.6" r="7" fill="rgba(205,90,31,0.35)"/><circle cx="653.8" cy="155.6" r="3.2" fill="#F0A574"/><circle cx="137.3" cy="122.9" r="2.4" fill="rgba(255,255,255,0.85)"/><circle cx="399.8" cy="74.0" r="2.4" fill="rgba(255,255,255,0.85)"/><circle cx="658.7" cy="106.5" r="2.4" fill="rgba(255,255,255,0.85)"/><circle cx="637.3" cy="235.3" r="2.4" fill="rgba(255,255,255,0.85)"/><circle cx="668.9" cy="177.1" r="2.4" fill="rgba(255,255,255,0.85)"/><circle cx="522.9" cy="147.5" r="2.4" fill="rgba(255,255,255,0.85)"/>
 <text x="662.8" y="158.6" font-family="ui-monospace,Menlo,monospace" font-size="9" letter-spacing="1.5" fill="#F0A574">HONG KONG</text>
 </svg></div>
+  </div>
+</section>
+</div>
+
+<div class="panel" id="p-sellers">
+<section>
+  <span class="eyebrow">For Sellers · Space-Data Companies</span>
+  <h2 style="font-size:clamp(2rem,5.5vw,3.2rem)">Your First Paying Customer in Asia-Pacific.</h2>
+  <p class="lede">You built the satellites. The revenue is twelve time zones away, behind languages, procurement cultures, and gatekeepers your sales team has never met. We get you to signed deals — and we only win when you do.</p>
+  <div class="cards">
+    <div class="card"><div class="pip">1</div><h3>Fit &amp; Targets</h3><p>Two weeks: we map your product to APAC verticals with real budgets, pick two or three beachhead markets, and agree the target list — grounded in market research we've done inside this industry, not guessed from afar.</p></div>
+    <div class="card"><div class="pip">2</div><h3>Doors &amp; Meetings</h3><p>We find the buyers, open the doors, and run the meetings — in Cantonese, Mandarin, or English. You join the calls that matter, with briefing notes on who's in the room and what they actually need.</p></div>
+    <div class="card"><div class="pip">3</div><h3>Close &amp; Grow</h3><p>Negotiation support through to signature, then account follow-through so deal one becomes deal two. Reporting you can put in front of your board.</p></div>
+  </div>
+  <div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(340px,1fr))">
+    <div class="card"><div class="pip">🤝</div><h3>How We Charge</h3><p>Monthly retainer plus a success fee on closed first-year revenue, on three-to-six-month engagements. One seller per data category — we don't run competing mandates.</p></div>
+    <div class="card"><div class="pip">🧭</div><h3>What You Learn Even If Nothing Closes</h3><p>Ground truth on APAC pricing, procurement, and competitors — the market research a strategy firm would charge six figures for, generated as a side effect of selling.</p></div>
+  </div>
+  <div class="dark cta-dark" style="text-align:left">
+    <span class="label">Selling into Asia-Pacific?</span>
+    <h2>Tell Us What You Sell.</h2>
+    <p>We'll tell you — honestly — whether we can get you revenue, in which market, and how fast.</p>
+    <div class="cta-row" style="margin-top:8px">
+      <a class="btn" href="https://www.linkedin.com/company/rheality/">Message us on LinkedIn</a>
+      <a class="btn ghost email-btn" href="#contact">Email us</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="panel" id="p-buyers">
+<section>
+  <span class="eyebrow">For Buyers · Nations &amp; Enterprises</span>
+  <h2 style="font-size:clamp(2rem,5.5vw,3.2rem)">Answers From Space — Without a Space Programme.</h2>
+  <p class="lede">Most organisations never imagine a satellite is the answer to their problem. It usually is. Satellites already watch ground movement in millimetres, floods in near-real-time, fires within minutes, crops field by field — you just have to know what to ask for. That's our job.</p>
+  <div class="cards">
+    <div class="card"><div class="pip">⛰️</div><h3>Ground &amp; Slopes</h3><p>Millimetre-scale movement of slopes, reclamations, dams, and tunnels — monitored from orbit, no sensors installed.</p></div>
+    <div class="card"><div class="pip">🌊</div><h3>Floods &amp; Typhoons</h3><p>Near-real-time flood extent through cloud and darkness; the evidence base for response and parametric insurance.</p></div>
+    <div class="card"><div class="pip">🔥</div><h3>Fires &amp; Haze</h3><p>Plantation and peatland fire detection in minutes, not news cycles.</p></div>
+    <div class="card"><div class="pip">🌾</div><h3>Crops &amp; Plantations</h3><p>Health, stress, and compliance across every field you manage — including the ones a truck can't reach.</p></div>
+    <div class="card"><div class="pip">🚢</div><h3>Maritime &amp; Ports</h3><p>Vessels, congestion, and coastal change across the region's busiest waters.</p></div>
+    <div class="card"><div class="pip">🏙️</div><h3>Assets Too Remote to Watch</h3><p>Mines, pipelines, borders, islands — if it's on Earth, something overhead can see it.</p></div>
+  </div>
+  <div class="cards">
+    <div class="card"><div class="pip">1</div><h3>Problem First</h3><p>You tell us the operational problem. No space knowledge needed — that's the point.</p></div>
+    <div class="card"><div class="pip">2</div><h3>Translate &amp; Source</h3><p>We turn it into the right sensors and suppliers from both of the world's space ecosystems, compared openly — we're vendor-neutral and our fees are disclosed.</p></div>
+    <div class="card"><div class="pip">3</div><h3>Working Data</h3><p>Pilot first, subscription when proven. We stay accountable from first question to answers on your desk.</p></div>
+  </div>
+  <div class="dark cta-dark" style="text-align:left">
+    <span class="label">Have a problem worth watching from orbit?</span>
+    <h2>Describe It. We'll Do the Translating.</h2>
+    <p>Twenty minutes, no jargon, and an honest answer on whether space can help.</p>
+    <div class="cta-row" style="margin-top:8px">
+      <a class="btn" href="https://www.linkedin.com/company/rheality/">Message us on LinkedIn</a>
+      <a class="btn ghost email-btn" href="#contact">Email us</a>
+    </div>
   </div>
 </section>
 </div>
@@ -386,7 +445,7 @@
   revealArm();
   // tab routing
   (function(){
-    var tabs = ['home','founder'];
+    var tabs = ['home','sellers','buyers','founder'];
     function show(name){
       tabs.forEach(function(t){
         document.getElementById('p-'+t).classList.toggle('active', t===name);
