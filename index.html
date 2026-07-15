@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rheality — Space data, sold in Asia-Pacific</title>
+<meta name="description" content="Rheality gets space-data companies their first revenue in Asia-Pacific: market entry, procurement navigation, licensing, and distribution.">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --plum:#33254E;
+    --plum-deep:#1E1537;
+    --brand:#CD5A1F;
+    --brand-deep:#A84613;
+    --ink:#352A4A;
+    --muted:#6F6488;
+    --bg:#F2EEF9;
+    --white:#ffffff;
+    --line:#E4DDF1;
+    --radius:20px;
+    --maxw:1080px;
+    --disp:'Fraunces',Georgia,serif;
+    --body:'Inter',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} .card,.btn{transition:none !important} }
+  body{
+    font-family:var(--body);color:var(--ink);margin:0;font-size:16.5px;line-height:1.65;
+    background:
+      radial-gradient(60% 50% at 50% 0%, rgba(122,80,255,0.16) 0%, transparent 70%),
+      radial-gradient(40% 40% at 90% 10%, rgba(205,90,31,0.06) 0%, transparent 70%),
+      var(--bg);
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px 80px}
+
+  nav.nav{position:sticky;top:18px;z-index:40;margin:18px auto 0;max-width:var(--maxw);padding:0 20px}
+  .nav-inner{
+    background:var(--white);border:1px solid var(--line);border-radius:100px;
+    padding:10px 14px 10px 22px;display:flex;align-items:center;justify-content:space-between;gap:18px;
+    box-shadow:0 6px 24px rgba(46,31,74,0.08);
+  }
+  .nav-inner img{height:34px;width:auto;display:block}
+  .btn{
+    font-family:var(--disp);font-weight:700;font-size:0.92rem;
+    background:var(--brand);color:#fff;text-decoration:none;
+    padding:10px 22px;border-radius:100px;white-space:nowrap;
+    transition:transform .15s ease, background .15s ease;display:inline-block;
+  }
+  .btn:hover{transform:translateY(-1px);background:var(--brand-deep)}
+  .btn:focus-visible{outline:3px solid var(--brand-deep);outline-offset:3px}
+  .btn.ghost{background:transparent;color:var(--plum);border:1.5px solid var(--line)}
+  .btn.ghost:hover{background:var(--white)}
+
+  header.hero{padding:88px 0 40px;max-width:820px}
+  .eyebrow{
+    display:inline-block;font-size:0.76rem;font-weight:600;letter-spacing:0.14em;
+    text-transform:uppercase;color:var(--plum);
+    background:rgba(205,90,31,0.14);border-radius:100px;padding:7px 16px;margin-bottom:24px;
+  }
+  h1,h2,h3{font-family:var(--disp);line-height:1.05;letter-spacing:-0.02em;margin:0}
+  h1{font-size:clamp(2.6rem,7vw,4.4rem);font-weight:700;color:var(--plum);letter-spacing:-0.03em;margin-bottom:14px;text-wrap:balance}
+  h1 .dot{color:var(--brand)}
+  h2{font-size:clamp(1.8rem,4.5vw,2.6rem);font-weight:700;color:var(--plum);margin:0 0 14px;text-wrap:balance}
+  .lede{color:var(--muted);font-size:1.12rem;max-width:640px;margin:0 0 28px}
+  .lede strong{color:var(--ink)}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap}
+
+  section{padding:44px 0 8px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:22px;margin:20px 0 10px}
+  .card{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:30px 28px;transition:transform .2s ease,box-shadow .2s ease;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(46,31,74,0.10)}
+  .pip{width:46px;height:46px;border-radius:13px;background:rgba(205,90,31,0.14);display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:1.35rem}
+  .card h3{font-size:1.25rem;font-weight:700;color:var(--plum);margin-bottom:9px}
+  .card p{color:var(--muted);margin:0;font-size:0.97rem}
+
+  .dark{background:var(--plum-deep);color:#fff;border-radius:var(--radius);padding:48px 44px;margin:34px 0 10px}
+  .dark h2{color:#fff}
+  .dark p{color:rgba(255,255,255,0.85);max-width:680px;margin:0 0 14px;font-size:1.05rem}
+  .dark .label{color:#F0A574;font-family:var(--disp);font-weight:700;font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;display:block;margin-bottom:14px}
+  @media (max-width:560px){.dark{padding:34px 24px}}
+
+  .founder{display:grid;grid-template-columns:1fr 1.6fr;gap:30px;align-items:start;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:36px 34px;margin:20px 0 10px}
+  @media (max-width:700px){.founder{grid-template-columns:1fr}}
+  .founder h3{font-size:1.5rem;color:var(--plum);margin-bottom:4px}
+  .founder .role{color:var(--brand);font-weight:600;font-size:0.9rem;margin:0 0 14px}
+  .founder p{color:var(--muted);margin:0 0 12px;font-size:0.98rem}
+  .founder ul{margin:0;padding-left:18px;color:var(--muted);font-size:0.95rem}
+  .founder li{margin-bottom:8px}
+  .founder li::marker{color:var(--brand)}
+
+  footer{
+    max-width:var(--maxw);margin:0 auto;padding:26px 20px 46px;
+    font-size:0.8rem;color:var(--muted);line-height:1.8;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  }
+  footer a{color:var(--plum);font-weight:600}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Main">
+  <div class="nav-inner">
+    <img src="logo-nav.png" alt="Rheality">
+    <a class="btn" href="https://www.linkedin.com/company/rheality/">Get in touch</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<header class="hero">
+  <span class="eyebrow">Space-data market entry · Asia-Pacific</span>
+  <h1>The revenue side of the space industry in Asia<span class="dot">.</span></h1>
+  <p class="lede">Space companies are building the satellites. Asia-Pacific is where the next decade of demand is. <strong>Rheality gets space-data companies their first revenue in APAC</strong> — market entry, procurement navigation, licensing, and distribution — then keeps it growing.</p>
+  <div class="cta-row">
+    <a class="btn" href="https://www.linkedin.com/company/rheality/">Talk to us on LinkedIn</a>
+    <a class="btn ghost" href="mailto:rhealau2000@gmail.com">Email the founder</a>
+  </div>
+</header>
+
+<section id="what">
+  <h2>What we do</h2>
+  <div class="cards">
+    <div class="card"><div class="pip">🚀</div><h3>Market entry</h3><p>Your first signed deal in Taiwan, the Philippines, Indonesia, Hong Kong, or the wider region — buyer identification, first meetings, negotiation, and close. Retainer plus success fee: we only win if you do.</p></div>
+    <div class="card"><div class="pip">🧭</div><h3>Procurement &amp; licensing navigation</h3><p>APAC buyers want the data but can't procure from Western vendors without a local counterpart — and vendors can't navigate the rules back. We've sat on both sides of that purchase. We run the maze for you.</p></div>
+    <div class="card"><div class="pip">🛰️</div><h3>Distribution that compounds</h3><p>One market becomes a playbook; the playbook becomes a channel. We're building the distribution and licensing layer between space-data suppliers and Asia-Pacific buyers — so selling into the region stops being a bespoke project.</p></div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="dark">
+    <span class="label">Why now</span>
+    <h2>The buyer side of Asia is opening — fast.</h2>
+    <p>Hong Kong has mandated its sovereign investment corporation to invest in the commercial space economy and is reforming LEO satellite licensing. Regional infrastructure, resources, and insurance buyers already spend on geospatial data — they just can't reach Western suppliers. The supply side is commoditizing exactly as the demand side switches on.</p>
+    <p>The companies that win Asia-Pacific won't be the ones with the best satellite. They'll be the ones in the room.</p>
+  </div>
+</section>
+
+<section id="founder">
+  <h2>Founder</h2>
+  <div class="founder">
+    <div>
+      <h3>Rhea Lau</h3>
+      <p class="role">Founder · Hong Kong &amp; UK</p>
+      <p>Geophysicist turned dealmaker — the vendor at Fugro, the buyer at Arup, the model-builder at SLB.</p>
+    </div>
+    <ul>
+      <li>BSc Geophysics, Imperial College London (Rio Tinto Scholar); Joint MSc Applied Geophysics — ETH Zürich, TU Delft, RWTH Aachen</li>
+      <li>Two machine-learning patent filings at SLB for deep-learning seismic image translation</li>
+      <li>Ran APAC partnership and acquisition evaluation for Fugro's ground-risk platform across Taiwan, the Philippines, and Indonesia; presented to group executive leadership</li>
+      <li>Geotechnical engineering at Arup Hong Kong — the buyer's seat for geospatial data</li>
+    </ul>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="dark" style="text-align:left">
+    <span class="label">Selling into Asia-Pacific?</span>
+    <h2>Your first APAC deal is one conversation away.</h2>
+    <p>Tell us what you sell and where you've tried. We'll tell you — honestly — whether we can get you revenue, and how fast.</p>
+    <div class="cta-row" style="margin-top:8px">
+      <a class="btn" href="https://www.linkedin.com/company/rheality/">Message us on LinkedIn</a>
+      <a class="btn" style="background:#fff;color:var(--plum-deep)" href="mailto:rhealau2000@gmail.com">rhealau2000@gmail.com</a>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <span>© 2026 Rheality Limited · Hong Kong</span>
+  <span><a href="https://www.linkedin.com/company/rheality/">LinkedIn</a></span>
+</footer>
+
+</body>
+</html>
