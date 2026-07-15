@@ -118,15 +118,15 @@
   .dark .label{color:#F0A574;font-family:var(--disp);font-weight:700;font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;display:block;margin-bottom:14px}
   @media (max-width:560px){.dark{padding:34px 24px}}
 
-  .founder{display:grid;grid-template-columns:auto 1fr 1.5fr;gap:30px;align-items:start;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:36px 34px;margin:20px 0 10px}
-  .founder .portrait{width:190px;border-radius:14px;display:block}
-  @media (max-width:820px){.founder{grid-template-columns:1fr};.founder .portrait{width:220px}}
-  .founder h3{font-size:1.5rem;color:var(--plum);margin-bottom:4px}
-  .founder .role{color:var(--brand);font-weight:600;font-size:0.9rem;margin:0 0 14px}
-  .founder p{color:var(--muted);margin:0 0 12px;font-size:0.98rem}
-  .founder ul{margin:0;padding-left:18px;color:var(--muted);font-size:0.95rem}
-  .founder li{margin-bottom:8px}
-  .founder li::marker{color:var(--brand)}
+  .founder{display:grid;grid-template-columns:auto 1fr;gap:26px 30px;align-items:center;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:34px;margin:20px 0 10px}
+  .founder .portrait{width:170px;border-radius:14px;display:block}
+  @media (max-width:640px){.founder{grid-template-columns:1fr};.founder .portrait{width:200px}}
+  .founder h3{font-size:1.7rem;color:var(--plum);margin-bottom:4px}
+  .founder .role{color:var(--brand);font-weight:600;font-size:0.9rem;margin:0 0 12px}
+  .founder p{color:var(--muted);margin:0;font-size:1.02rem;max-width:480px}
+  .f-facts{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px 22px;border-top:1px solid var(--line);padding-top:24px}
+  .f-fact strong{display:block;font-family:var(--disp);font-weight:700;font-size:1.3rem;color:var(--brand-deep);line-height:1.15;margin-bottom:5px}
+  .f-fact span{font-size:0.84rem;color:var(--muted);line-height:1.5;display:block}
 
   .timeline{position:relative;margin:30px 0 10px;padding-left:36px}
   .timeline::before{content:"";position:absolute;left:9px;top:10px;bottom:10px;width:3px;border-radius:2px;background:linear-gradient(to bottom,var(--brand),var(--plum))}
@@ -237,12 +237,13 @@
       <p class="role">Founder · Hong Kong &amp; UK</p>
       <p>Geophysicist turned dealmaker — the vendor at Fugro, the buyer at Arup, the model-builder at SLB.</p>
     </div>
-    <ul>
-      <li>BSc Geophysics, Imperial College London (Rio Tinto Scholar); Joint MSc Applied Geophysics — ETH Zürich, TU Delft, RWTH Aachen</li>
-      <li>Two machine-learning patent filings at SLB for deep-learning seismic image translation</li>
-      <li>First in Asia selected for Fugro's International Leadership Track; ran APAC partnership and acquisition evaluation for its ground-risk platform across Taiwan, the Philippines, and Indonesia, presenting to group executive leadership</li>
-      <li>Geotechnical engineering at Arup Hong Kong — the buyer's seat for geospatial data</li>
-    </ul>
+    <div class="f-facts">
+      <div class="f-fact"><strong>2 ML patents</strong><span>filed at SLB — deep-learning seismic imaging</span></div>
+      <div class="f-fact"><strong>1st in Asia</strong><span>Fugro International Leadership Track</span></div>
+      <div class="f-fact"><strong>3 APAC markets</strong><span>partnership &amp; M&amp;A evaluation — Taiwan · Philippines · Indonesia</span></div>
+      <div class="f-fact"><strong>Both sides</strong><span>buyer at Arup Hong Kong · vendor at Fugro</span></div>
+      <div class="f-fact"><strong>Imperial × IDEA League</strong><span>BSc Geophysics · Joint MSc — ETH Zürich, TU Delft, RWTH Aachen</span></div>
+    </div>
   </div>
 </section>
 
