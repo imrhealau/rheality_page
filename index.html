@@ -67,13 +67,23 @@
   .btn.ghost:hover{background:var(--white)}
 
   header.hero{
-    position:relative;overflow:hidden;
-    margin:-80px calc(50% - 50vw) 0;
+    display:grid;grid-template-columns:1.15fr 1fr;gap:44px;align-items:center;
+    padding:72px 0 34px;
   }
-  .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 62%;will-change:transform}
+  @media (max-width:860px){header.hero{grid-template-columns:1fr;gap:28px;padding-top:48px}}
+  .harbour-pin{
+    position:relative;border-radius:var(--radius);overflow:hidden;
+    border:1px solid var(--line);box-shadow:0 18px 50px rgba(46,31,74,0.16);
+    aspect-ratio:4/3;
+  }
+  .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 62%}
   .hero-veil{position:absolute;inset:0;background:
-    linear-gradient(105deg, rgba(24,15,46,0.62) 0%, rgba(24,15,46,0.2) 55%, rgba(24,15,46,0) 78%),
-    linear-gradient(to bottom, rgba(24,15,46,0.5) 0%, rgba(30,21,55,0.18) 48%, rgba(242,238,249,0) 80%, #F2EEF9 100%);
+    linear-gradient(to top, rgba(24,15,46,0.45) 0%, rgba(30,21,55,0.12) 45%, rgba(24,15,46,0.05) 100%);
+  }
+  .pin-caption{
+    position:absolute;left:14px;bottom:12px;z-index:2;
+    font-family:var(--disp);font-weight:700;font-size:0.78rem;letter-spacing:0.08em;
+    color:rgba(255,255,255,0.92);text-transform:uppercase;
   }
   .hero-stars{position:absolute;top:0;left:0;right:0;height:52%;pointer-events:none;opacity:0.8;
     background-image:
@@ -90,14 +100,7 @@
       radial-gradient(1px 1px at 52% 42%, rgba(255,255,255,0.55) 45%, transparent 60%),
       radial-gradient(1px 1px at 81% 38%, rgba(255,255,255,0.5) 45%, transparent 60%);
   }
-  .hero-inner{position:relative;max-width:var(--maxw);margin:0 auto;padding:200px 20px 170px}
-  .hero-inner{max-width:calc(var(--maxw));}
-  .hero h1{color:#fff;max-width:820px}
-  .hero .lede{color:rgba(255,255,255,0.85);max-width:600px}
-  .hero .lede strong{color:#fff}
-  .eyebrow-dark{background:rgba(16,9,34,0.55);color:#FFC9A3;border:1px solid rgba(255,255,255,0.28)}
-  .hero .btn.ghost{color:#fff;border-color:rgba(255,255,255,0.45)}
-  .hero .btn.ghost:hover{background:rgba(255,255,255,0.12)}
+  .hero-stars-note{display:none}
   .eyebrow{
     display:inline-block;font-size:0.76rem;font-weight:600;letter-spacing:0.14em;
     text-transform:uppercase;color:var(--plum);
@@ -176,17 +179,20 @@
 
 <div class="panel" id="p-home">
 <header class="hero">
-  <img class="hero-bg" src="img/harbour.jpg" alt="" aria-hidden="true">
-  <div class="hero-stars" aria-hidden="true"></div>
-  <div class="hero-veil"></div>
-  <div class="hero-inner">
-    <span class="eyebrow eyebrow-dark">Our mission · Hong Kong × Space</span>
+  <div>
+    <span class="eyebrow">Our mission · Hong Kong × Space</span>
     <h1>The revenue side of the space industry in Asia<span class="dot">.</span></h1>
     <p class="lede">Our mission is to make Asia-Pacific the easiest place in the world for a space company to earn revenue. <strong>Rheality gets space-data companies their first APAC deals</strong> — market entry, procurement navigation, licensing, and distribution — run from Hong Kong, the harbour where East has always met the world.</p>
     <div class="cta-row">
       <a class="btn" href="https://www.linkedin.com/company/rheality/">Talk to us on LinkedIn</a>
       <a class="btn ghost email-btn" href="#contact">Email the founder</a>
     </div>
+  </div>
+  <div class="harbour-pin">
+    <img class="hero-bg" src="img/harbour.jpg" alt="Victoria Harbour, Hong Kong, at purple dusk">
+    <div class="hero-stars" aria-hidden="true"></div>
+    <div class="hero-veil"></div>
+    <span class="pin-caption">Victoria Harbour · Hong Kong</span>
   </div>
 </header>
 
@@ -233,7 +239,7 @@
   <p class="lede">Space isn't a pivot for us — it's a throughline. Ten years, newest first.</p>
   <div class="timeline">
     <div class="t-item"><span class="t-year">2026</span>
-      <div class="t-card"><img src="img/rheality-launch.jpg" alt="Laptop showing the Rheality logo">
+      <div class="t-card"><img src="img/speaking.jpg" alt="Rhea Lau speaking on stage at Cyberport, Hong Kong">
         <div class="t-body"><h3>Rheality Limited</h3><p>Founded in Hong Kong — the revenue side of the space industry in Asia.</p></div></div></div>
     <div class="t-item"><span class="t-year">2025–26</span>
       <div class="t-card"><img src="img/fugro.jpg" alt="Rhea at Fugro, pointing at the company motto wall">
@@ -294,19 +300,17 @@
     var addr = ['rhealityadmin','gmail.com'].join('@');
     document.querySelectorAll('.email-btn').forEach(function(a){ a.href = 'mailto:' + addr; });
   })();
-  // purple veil fades out and skyline parallaxes as you scroll
+  // purple veil over the harbour fades out as you scroll
   (function(){
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var bg = document.querySelector('.hero-bg'),
-        veil = document.querySelector('.hero-veil'),
+    var veil = document.querySelector('.hero-veil'),
         stars = document.querySelector('.hero-stars');
-    if(!bg) return;
+    if(!veil) return;
     var ticking = false;
     function update(){
       var y = window.scrollY;
-      var f = Math.max(0, 1 - y/650);
-      bg.style.transform = 'translateY(' + (y*0.25) + 'px)';
-      veil.style.opacity = (0.35 + 0.65*f).toFixed(3);
+      var f = Math.max(0, 1 - y/500);
+      veil.style.opacity = (0.25 + 0.75*f).toFixed(3);
       stars.style.opacity = (0.8*f).toFixed(3);
       ticking = false;
     }
