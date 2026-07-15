@@ -120,7 +120,7 @@
   <p class="lede">Space companies are building the satellites. Asia-Pacific is where the next decade of demand is. <strong>Rheality gets space-data companies their first revenue in APAC</strong> — market entry, procurement navigation, licensing, and distribution — then keeps it growing.</p>
   <div class="cta-row">
     <a class="btn" href="https://www.linkedin.com/company/rheality/">Talk to us on LinkedIn</a>
-    <a class="btn ghost" href="mailto:rhealau2000@gmail.com">Email the founder</a>
+    <a class="btn ghost email-btn" href="#contact">Email the founder</a>
   </div>
 </header>
 
@@ -166,7 +166,7 @@
     <p>Tell us what you sell and where you've tried. We'll tell you — honestly — whether we can get you revenue, and how fast.</p>
     <div class="cta-row" style="margin-top:8px">
       <a class="btn" href="https://www.linkedin.com/company/rheality/">Message us on LinkedIn</a>
-      <a class="btn" style="background:#fff;color:var(--plum-deep)" href="mailto:rhealau2000@gmail.com">rhealau2000@gmail.com</a>
+      <a class="btn email-btn" style="background:#fff;color:var(--plum-deep)" href="#contact">Email us</a>
     </div>
   </div>
 </section>
@@ -178,5 +178,12 @@
   <span><a href="https://www.linkedin.com/company/rheality/">LinkedIn</a></span>
 </footer>
 
+<script>
+  // assemble mailto at runtime so the address isn't in the static HTML
+  (function(){
+    var addr = ['rhealityadmin','gmail.com'].join('@');
+    document.querySelectorAll('.email-btn').forEach(function(a){ a.href = 'mailto:' + addr; });
+  })();
+</script>
 </body>
 </html>
