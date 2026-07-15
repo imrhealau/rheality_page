@@ -366,16 +366,24 @@
     }, {passive:true});
   })();
   // timeline items rise in as they scroll into view
-  (function(){
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  var revealArm = (function(){
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return function(){};
     document.body.classList.add('reveal');
     var io = new IntersectionObserver(function(entries){
+      var batch = 0;
       entries.forEach(function(e){
-        if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+        if (e.isIntersecting){
+          e.target.style.transitionDelay = (batch++ * 90) + 'ms';
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
       });
-    }, {threshold: 0.15, rootMargin: '0px 0px -8% 0px'});
-    document.querySelectorAll('.t-item').forEach(function(el){ io.observe(el); });
+    }, {threshold: 0.12, rootMargin: '0px 0px -6% 0px'});
+    return function(){
+      document.querySelectorAll('.t-item:not(.in)').forEach(function(el){ io.unobserve(el); io.observe(el); });
+    };
   })();
+  revealArm();
   // tab routing
   (function(){
     var tabs = ['home','founder'];
@@ -390,6 +398,7 @@
     function route(){
       var h = location.hash.replace('#','');
       show(tabs.indexOf(h) >= 0 ? h : 'home');
+      if (typeof revealArm === 'function') revealArm();
     }
     window.addEventListener('hashchange', route);
     route();
