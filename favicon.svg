@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <mask id="frontgap">
+      <rect width="512" height="512" fill="#fff"/>
+      <g transform="rotate(-20 256 256)">
+        <path d="M 26 256 A 230 60 0 0 0 486 256" fill="none" stroke="#000" stroke-width="58"/>
+      </g>
+    </mask>
+  </defs>
+  <g mask="url(#frontgap)">
+    <circle cx="256" cy="256" r="168" fill="#CD5A1F"/>
+  </g>
+  <g transform="rotate(-20 256 256)">
+    <path d="M 26 256 A 230 60 0 0 0 486 256" fill="none" stroke="#CD5A1F" stroke-width="26"/>
+    <path d="M 26 256 A 230 60 0 0 1 486 256" fill="none" stroke="#CD5A1F" stroke-width="26" opacity="0"/>
+  </g>
+</svg>
