@@ -122,6 +122,12 @@
   @keyframes flowdash{to{stroke-dashoffset:-20}}
   @media (prefers-reduced-motion: reduce){.flow{animation:none}}
   @media (max-width:560px){.dark{padding:34px 24px}}
+  .cta-dark{background:linear-gradient(135deg,#A84613,#CD5A1F)}
+  .cta-dark .label{color:#FFDFC5}
+  .cta-dark .btn{background:#fff;color:var(--brand-deep)}
+  .cta-dark .btn:hover{background:#FFEFE3}
+  .cta-dark .btn.ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.55);box-shadow:none}
+  .cta-dark .btn.ghost:hover{border-color:#fff;color:#fff;background:rgba(255,255,255,0.12)}
 
   .founder{display:grid;grid-template-columns:auto 1fr;gap:26px 30px;align-items:center;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:34px;margin:20px 0 10px}
   .founder .portrait{width:170px;height:170px;border-radius:50%;object-fit:cover;object-position:50% 52%;display:block;border:3px solid rgba(205,90,31,0.25)}
@@ -309,13 +315,13 @@
 </div>
 
 <section id="contact">
-  <div class="dark" style="text-align:left">
+  <div class="dark cta-dark" style="text-align:left">
     <span class="label">Selling into Asia-Pacific?</span>
     <h2>Your First APAC Deal Is One Conversation Away.</h2>
     <p>Tell us what you sell and where you've tried. We'll tell you — honestly — whether we can get you revenue, and how fast.</p>
     <div class="cta-row" style="margin-top:8px">
       <a class="btn" href="https://www.linkedin.com/company/rheality/">Message us on LinkedIn</a>
-      <a class="btn email-btn" style="background:#fff;color:var(--plum-deep)" href="#contact">Email us</a>
+      <a class="btn ghost email-btn" href="#contact">Email us</a>
     </div>
   </div>
 </section>
