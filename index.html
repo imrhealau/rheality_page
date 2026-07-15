@@ -86,14 +86,21 @@
   .dark .label{color:#F0A574;font-family:var(--disp);font-weight:700;font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;display:block;margin-bottom:14px}
   @media (max-width:560px){.dark{padding:34px 24px}}
 
-  .founder{display:grid;grid-template-columns:1fr 1.6fr;gap:30px;align-items:start;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:36px 34px;margin:20px 0 10px}
-  @media (max-width:700px){.founder{grid-template-columns:1fr}}
+  .founder{display:grid;grid-template-columns:auto 1fr 1.5fr;gap:30px;align-items:start;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:36px 34px;margin:20px 0 10px}
+  .founder .portrait{width:190px;border-radius:14px;display:block}
+  @media (max-width:820px){.founder{grid-template-columns:1fr};.founder .portrait{width:220px}}
   .founder h3{font-size:1.5rem;color:var(--plum);margin-bottom:4px}
   .founder .role{color:var(--brand);font-weight:600;font-size:0.9rem;margin:0 0 14px}
   .founder p{color:var(--muted);margin:0 0 12px;font-size:0.98rem}
   .founder ul{margin:0;padding-left:18px;color:var(--muted);font-size:0.95rem}
   .founder li{margin-bottom:8px}
   .founder li::marker{color:var(--brand)}
+
+  .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;margin:20px 0 10px}
+  .gallery figure{margin:0;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+  .gallery figcaption{padding:14px 18px;font-size:0.88rem;color:var(--muted)}
+  .gallery figcaption strong{color:var(--plum)}
 
   footer{
     max-width:var(--maxw);margin:0 auto;padding:26px 20px 46px;
@@ -145,6 +152,7 @@
 <section id="founder">
   <h2>Founder</h2>
   <div class="founder">
+    <img class="portrait" src="img/founder.jpg" alt="Rhea Lau at Imperial College London graduation">
     <div>
       <h3>Rhea Lau</h3>
       <p class="role">Founder · Hong Kong &amp; UK</p>
@@ -156,6 +164,25 @@
       <li>Ran APAC partnership and acquisition evaluation for Fugro's ground-risk platform across Taiwan, the Philippines, and Indonesia; presented to group executive leadership</li>
       <li>Geotechnical engineering at Arup Hong Kong — the buyer's seat for geospatial data</li>
     </ul>
+  </div>
+</section>
+
+<section id="story">
+  <h2>In the room since school</h2>
+  <p class="lede">Space isn't a pivot for us — it's a throughline.</p>
+  <div class="gallery">
+    <figure>
+      <img src="img/space-2017-medal.jpg" alt="Rhea receiving a medal at the Shine Tak Foundation China Aerospace youth programme, 2017">
+      <figcaption><strong>2017 · China Aerospace youth programme</strong> — medal ceremony, Shine Tak Foundation science &amp; research development programme, Hong Kong.</figcaption>
+    </figure>
+    <figure>
+      <img src="img/space-2017-rockets.jpg" alt="Student delegation in front of Long March launch vehicles, China Aerospace exploration trip 2017">
+      <figcaption><strong>2017 · Launch-vehicle facilities</strong> — student aerospace exploration delegation to China's space programme sites.</figcaption>
+    </figure>
+    <figure>
+      <img src="img/msc-delft.jpg" alt="Rhea Lau at TU Delft graduation holding the diploma">
+      <figcaption><strong>2024 · TU Delft</strong> — Joint MSc Applied Geophysics (ETH Zürich · TU Delft · RWTH Aachen).</figcaption>
+    </figure>
   </div>
 </section>
 
