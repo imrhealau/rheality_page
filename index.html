@@ -96,11 +96,18 @@
   .founder li{margin-bottom:8px}
   .founder li::marker{color:var(--brand)}
 
-  .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;margin:20px 0 10px}
-  .gallery figure{margin:0;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
-  .gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
-  .gallery figcaption{padding:14px 18px;font-size:0.88rem;color:var(--muted)}
-  .gallery figcaption strong{color:var(--plum)}
+  .timeline{position:relative;margin:30px 0 10px;padding-left:36px}
+  .timeline::before{content:"";position:absolute;left:9px;top:10px;bottom:10px;width:3px;border-radius:2px;background:linear-gradient(to bottom,var(--brand),var(--plum))}
+  .t-item{position:relative;margin-bottom:30px}
+  .t-item::before{content:"";position:absolute;left:-33px;top:5px;width:13px;height:13px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px var(--bg)}
+  .t-year{display:inline-block;font-family:var(--disp);font-weight:700;font-size:0.85rem;color:#fff;background:var(--brand);border-radius:100px;padding:4px 15px;margin-bottom:12px}
+  .t-card{display:grid;grid-template-columns:320px 1fr;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;max-width:820px}
+  .t-card img{width:100%;height:100%;min-height:220px;object-fit:cover;display:block}
+  .t-card .t-body{padding:22px 26px;align-self:center}
+  .t-card h3{font-size:1.15rem;color:var(--plum);margin:0 0 8px}
+  .t-card p{margin:0;color:var(--muted);font-size:0.95rem}
+  .t-card.no-img{grid-template-columns:1fr}
+  @media (max-width:680px){.t-card{grid-template-columns:1fr}.t-card img{max-height:260px}}
 
   footer{
     max-width:var(--maxw);margin:0 auto;padding:26px 20px 46px;
@@ -169,40 +176,38 @@
 
 <section id="story">
   <h2>In the room since school</h2>
-  <p class="lede">Space isn't a pivot for us — it's a throughline.</p>
-  <div class="gallery">
-    <figure>
-      <img src="img/astro-hk-2016.jpg" alt="Hong Kong Astronomical Society camp, 2016">
-      <figcaption><strong>2016 · Hong Kong Astronomical Society</strong> — astronomy camp, where the habit started.</figcaption>
-    </figure>
-    <figure>
-      <img src="img/space-2017-medal.jpg" alt="Rhea receiving a medal from astronaut Jing Haipeng at the China Aerospace youth programme, 2017">
-      <figcaption><strong>2017 · Medal from Jing Haipeng</strong> — presented by the veteran Shenzhou mission commander at the China Aerospace youth programme (Shine Tak Foundation, Hong Kong).</figcaption>
-    </figure>
-    <figure>
-      <img src="img/space-2017-rockets.jpg" alt="Student delegation in front of Long March launch vehicles, China Aerospace exploration trip 2017">
-      <figcaption><strong>2017 · Launch-vehicle facilities</strong> — student aerospace exploration delegation to China's space programme sites.</figcaption>
-    </figure>
-    <figure>
-      <img src="img/astrosoc-imperial.jpg" alt="Imperial College Astronomical Society events poster and telescope eyepieces">
-      <figcaption><strong>2020–21 · Imperial AstroSoc presidency</strong> — running observations, guest lectures, and observatory trips for 100+ members.</figcaption>
-    </figure>
-    <figure>
-      <img src="img/slb-eth-thesis.jpg" alt="Rhea holding her SLB x ETH master thesis at focusTerra, ETH Zurich">
-      <figcaption><strong>2024 · SLB × ETH master thesis</strong> — the deep-learning seismic imaging research that produced two SLB patent filings.</figcaption>
-    </figure>
-    <figure>
-      <img src="img/msc-delft.jpg" alt="Rhea Lau at TU Delft graduation holding the diploma">
-      <figcaption><strong>2024 · TU Delft</strong> — Joint MSc Applied Geophysics (ETH Zürich · TU Delft · RWTH Aachen).</figcaption>
-    </figure>
-    <figure>
-      <img src="img/arup-hk.jpg" alt="Rhea at the Arup Hong Kong office">
-      <figcaption><strong>2025 · Arup Hong Kong</strong> — geotechnical engineering: the buyer's seat for geospatial data.</figcaption>
-    </figure>
-    <figure>
-      <img src="img/fugro.jpg" alt="Rhea at Fugro, pointing at the company motto wall">
-      <figcaption><strong>2025–26 · Fugro</strong> — Solution Manager, GroundIQ: the vendor's seat, running APAC partnership evaluation.</figcaption>
-    </figure>
+  <p class="lede">Space isn't a pivot for us — it's a throughline. Ten years, in order.</p>
+  <div class="timeline">
+    <div class="t-item"><span class="t-year">2016</span>
+      <div class="t-card"><img src="img/astro-hk-2016.jpg" alt="Hong Kong Astronomical Society camp, 2016">
+        <div class="t-body"><h3>Hong Kong Astronomical Society</h3><p>Astronomy camp — where the habit started.</p></div></div></div>
+    <div class="t-item"><span class="t-year">2017</span>
+      <div class="t-card"><img src="img/space-2017-medal.jpg" alt="Rhea receiving a medal from astronaut Jing Haipeng at the China Aerospace youth programme, 2017">
+        <div class="t-body"><h3>Medal from Jing Haipeng</h3><p>Presented by the veteran Shenzhou mission commander at the China Aerospace youth programme (Shine Tak Foundation, Hong Kong).</p></div></div></div>
+    <div class="t-item"><span class="t-year">2017</span>
+      <div class="t-card"><img src="img/space-2017-rockets.jpg" alt="Student delegation in front of Long March launch vehicles, China Aerospace exploration trip 2017">
+        <div class="t-body"><h3>Launch-vehicle facilities</h3><p>Student aerospace exploration delegation to China's space programme sites.</p></div></div></div>
+    <div class="t-item"><span class="t-year">2018–22</span>
+      <div class="t-card"><img src="img/imperial-grad.jpg" alt="Rhea Lau graduating from Imperial College London">
+        <div class="t-body"><h3>Imperial College London</h3><p>BSc Geophysics on a full Rio Tinto Scholarship — and president of the Astronomical Society, running observations, guest lectures, and observatory trips for 100+ members.</p></div></div></div>
+    <div class="t-item"><span class="t-year">2020–21</span>
+      <div class="t-card"><img src="img/astrosoc-imperial.jpg" alt="Imperial College Astronomical Society events poster and telescope eyepieces">
+        <div class="t-body"><h3>Imperial AstroSoc presidency</h3><p>A season of society events — space weather, galactic archaeology, deep-sky observation, Greenwich Observatory.</p></div></div></div>
+    <div class="t-item"><span class="t-year">2024</span>
+      <div class="t-card"><img src="img/slb-eth-thesis.jpg" alt="Rhea holding her SLB x ETH master thesis at focusTerra, ETH Zurich">
+        <div class="t-body"><h3>SLB × ETH master thesis</h3><p>The deep-learning seismic imaging research that produced two SLB patent filings.</p></div></div></div>
+    <div class="t-item"><span class="t-year">2024</span>
+      <div class="t-card"><img src="img/msc-delft.jpg" alt="Rhea Lau at TU Delft graduation holding the diploma">
+        <div class="t-body"><h3>TU Delft graduation</h3><p>Joint MSc Applied Geophysics — ETH Zürich · TU Delft · RWTH Aachen.</p></div></div></div>
+    <div class="t-item"><span class="t-year">2025</span>
+      <div class="t-card"><img src="img/arup-hk.jpg" alt="Rhea at the Arup Hong Kong office">
+        <div class="t-body"><h3>Arup Hong Kong</h3><p>Geotechnical engineering — the buyer's seat for geospatial data.</p></div></div></div>
+    <div class="t-item"><span class="t-year">2025–26</span>
+      <div class="t-card"><img src="img/fugro.jpg" alt="Rhea at Fugro, pointing at the company motto wall">
+        <div class="t-body"><h3>Fugro — Solution Manager, GroundIQ</h3><p>The vendor's seat: APAC partnership and acquisition evaluation across Taiwan, the Philippines, and Indonesia.</p></div></div></div>
+    <div class="t-item"><span class="t-year">2026</span>
+      <div class="t-card no-img">
+        <div class="t-body"><h3>Rheality Limited</h3><p>Founded in Hong Kong — the revenue side of the space industry in Asia.</p></div></div></div>
   </div>
 </section>
 
