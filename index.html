@@ -119,18 +119,23 @@
   @media (max-width:560px){.dark{padding:34px 24px}}
 
   .founder{display:grid;grid-template-columns:auto 1fr;gap:26px 30px;align-items:center;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:34px;margin:20px 0 10px}
-  .founder .portrait{width:170px;border-radius:14px;display:block}
-  @media (max-width:640px){.founder{grid-template-columns:1fr};.founder .portrait{width:200px}}
+  .founder .portrait{width:170px;height:170px;border-radius:50%;object-fit:cover;object-position:50% 30%;display:block;border:3px solid rgba(205,90,31,0.25)}
+  @media (max-width:640px){.founder{grid-template-columns:1fr};.founder .portrait{width:180px;height:180px}}
   .founder h3{font-size:1.7rem;color:var(--plum);margin-bottom:4px}
   .founder .role{color:var(--brand);font-weight:600;font-size:0.9rem;margin:0 0 12px}
   .founder p{color:var(--muted);margin:0;font-size:1.02rem;max-width:480px}
-  .f-facts{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px 22px;border-top:1px solid var(--line);padding-top:24px}
+  .f-facts{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:20px 24px;border-top:1px solid var(--line);padding-top:24px}
+  @media (max-width:760px){.f-facts{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:460px){.f-facts{grid-template-columns:1fr}}
   .f-fact strong{display:block;font-family:var(--disp);font-weight:700;font-size:1.3rem;color:var(--brand-deep);line-height:1.15;margin-bottom:5px}
   .f-fact span{font-size:0.84rem;color:var(--muted);line-height:1.5;display:block}
 
   .timeline{position:relative;margin:30px 0 10px;padding-left:36px}
   .timeline::before{content:"";position:absolute;left:9px;top:10px;bottom:10px;width:3px;border-radius:2px;background:linear-gradient(to bottom,var(--brand),var(--plum))}
   .t-item{position:relative;margin-bottom:30px}
+  body.reveal .t-item{opacity:0;transform:translateY(26px);transition:opacity .55s cubic-bezier(.2,.7,.3,1),transform .55s cubic-bezier(.2,.7,.3,1)}
+  body.reveal .t-item.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){body.reveal .t-item{opacity:1;transform:none;transition:none}}
   .t-item::before{content:"";position:absolute;left:-33px;top:5px;width:13px;height:13px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px var(--bg)}
   .t-year{display:inline-block;font-family:var(--disp);font-weight:700;font-size:0.85rem;color:#fff;background:var(--brand);border-radius:100px;padding:4px 15px;margin-bottom:12px}
   .t-card{display:grid;grid-template-columns:320px 1fr;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;max-width:820px;height:230px}
@@ -238,11 +243,12 @@
       <p>Geophysicist gone commercial — from FEM landslide models and patented seismic AI to scouting APAC markets for a €2B geo-data company.</p>
     </div>
     <div class="f-facts">
+      <div class="f-fact"><strong>Marsquake research</strong><span>NASA InSight seismology with ETH's Marsquake Service — Dr. Simon Stähler</span></div>
       <div class="f-fact"><strong>2 ML patents</strong><span>filed at SLB — seismic image translation with ViT, GAN &amp; CNN</span></div>
-      <div class="f-fact"><strong>Leadership Track</strong><span>first graduate from Fugro's APAC region on its international programme</span></div>
-      <div class="f-fact"><strong>3 APAC markets</strong><span>market research &amp; partner scouting — Taiwan · Philippines · Indonesia</span></div>
+      <div class="f-fact"><strong>BSc Geophysics</strong><span>Imperial College London — Rio Tinto Scholar</span></div>
+      <div class="f-fact"><strong>MSc Applied Geophysics</strong><span>joint degree — ETH Zürich · TU Delft · RWTH Aachen</span></div>
+      <div class="f-fact"><strong>Leadership Track</strong><span>first APAC-region graduate — market research &amp; partner scouting across Taiwan · Philippines · Indonesia</span></div>
       <div class="f-fact"><strong>US$250M+</strong><span>first-year trading volume via the Binance partnership she negotiated</span></div>
-      <div class="f-fact"><strong>BSc + MSc</strong><span>Geophysics — Imperial College London · ETH Zürich, TU Delft, RWTH Aachen</span></div>
     </div>
   </div>
 </section>
@@ -333,6 +339,17 @@
     window.addEventListener('scroll', function(){
       if(!ticking){ requestAnimationFrame(update); ticking = true; }
     }, {passive:true});
+  })();
+  // timeline items rise in as they scroll into view
+  (function(){
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+    document.body.classList.add('reveal');
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {threshold: 0.15, rootMargin: '0px 0px -8% 0px'});
+    document.querySelectorAll('.t-item').forEach(function(el){ io.observe(el); });
   })();
   // tab routing
   (function(){
