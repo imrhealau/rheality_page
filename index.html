@@ -72,6 +72,12 @@
     .tabs a{padding:6px 10px;font-size:0.78rem}
     .tabs{overflow-x:auto;-webkit-overflow-scrolling:touch}
   }
+  @media (max-width:400px){
+    .nav-inner{padding:8px 6px 8px 10px;gap:5px}
+    .nav-inner img{height:20px}
+    .tabs a{padding:6px 6px;font-size:0.72rem}
+    .tabs{gap:2px}
+  }
   .panel{display:none}
   .panel.active{display:block}
   .btn{
@@ -98,8 +104,15 @@
   .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 62%}
   .hero-veil{position:absolute;inset:0;background:
     linear-gradient(to top, rgba(24,15,46,0.45) 0%, rgba(30,21,55,0.12) 45%, rgba(24,15,46,0.05) 100%);
+    animation:veil-lift 2.5s ease-out 0.4s both;
   }
-  .hero-stars{position:absolute;left:5%;top:3%;width:42%;height:32%;pointer-events:none;opacity:0.9}
+  .hero-stars{position:absolute;left:5%;top:3%;width:42%;height:32%;pointer-events:none;animation:stars-dim 2.5s ease-out 0.4s both}
+  @keyframes veil-lift{from{opacity:1}to{opacity:0.25}}
+  @keyframes stars-dim{from{opacity:0.9}to{opacity:0.4}}
+  @media (prefers-reduced-motion: reduce){
+    .hero-veil{animation:none;opacity:0.25}
+    .hero-stars{animation:none;opacity:0.4}
+  }
   .hero-stars-note{display:none}
   .eyebrow{
     display:inline-block;font-size:0.76rem;font-weight:600;letter-spacing:0.14em;
@@ -426,24 +439,6 @@
       document.querySelectorAll('.email-btn').forEach(function(a){ a.href = 'mailto:' + addr; });
     } catch(e){}
   })();
-  // purple veil over the harbour fades out as you scroll
-  (function(){
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var veil = document.querySelector('.hero-veil'),
-        stars = document.querySelector('.hero-stars');
-    if(!veil) return;
-    var ticking = false;
-    function update(){
-      var y = window.scrollY;
-      var f = Math.max(0, 1 - y/500);
-      veil.style.opacity = (0.25 + 0.75*f).toFixed(3);
-      stars.style.opacity = (0.8*f).toFixed(3);
-      ticking = false;
-    }
-    window.addEventListener('scroll', function(){
-      if(!ticking){ requestAnimationFrame(update); ticking = true; }
-    }, {passive:true});
-  })();
   // timeline items rise in as they scroll into view
   var revealArm = (function(){
     try {
@@ -473,7 +468,10 @@
         var p = document.getElementById('p-'+t);
         if(p) p.classList.toggle('active', t===name);
         var a = document.querySelector('.tabs a[data-tab="'+t+'"]');
-        if(a) a.classList.toggle('active', t===name);
+        if(a){
+          a.classList.toggle('active', t===name);
+          if(t===name && a.scrollIntoView) a.scrollIntoView({block:'nearest', inline:'nearest'});
+        }
       });
       window.scrollTo(0,0);
     }
