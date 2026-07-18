@@ -190,7 +190,7 @@
   <div class="nav-inner">
     <img src="logo-nav.png" alt="Rheality">
     <div class="tabs">
-      <a href="#home" data-tab="home">Company</a>
+      <a href="#home" data-tab="home" class="active">Company</a>
       <a href="#sellers" data-tab="sellers">Sellers</a>
       <a href="#buyers" data-tab="buyers">Buyers</a>
       <a href="#founder" data-tab="founder">Founder</a>
@@ -201,7 +201,7 @@
 
 <div class="wrap">
 
-<div class="panel" id="p-home">
+<div class="panel active" id="p-home">
 <header class="hero">
   <div>
     <span class="eyebrow">Our Mission · Space for Every Nation</span>
@@ -421,8 +421,10 @@
 <script>
   // assemble mailto at runtime so the address isn't in the static HTML
   (function(){
-    var addr = ['rhea.lau','rheality.space'].join('@');
-    document.querySelectorAll('.email-btn').forEach(function(a){ a.href = 'mailto:' + addr; });
+    try {
+      var addr = ['rhea.lau','rheality.space'].join('@');
+      document.querySelectorAll('.email-btn').forEach(function(a){ a.href = 'mailto:' + addr; });
+    } catch(e){}
   })();
   // purple veil over the harbour fades out as you scroll
   (function(){
@@ -444,6 +446,7 @@
   })();
   // timeline items rise in as they scroll into view
   var revealArm = (function(){
+    try {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return function(){};
     document.body.classList.add('reveal');
     var io = new IntersectionObserver(function(entries){
@@ -459,6 +462,7 @@
     return function(){
       document.querySelectorAll('.t-item:not(.in)').forEach(function(el){ io.unobserve(el); io.observe(el); });
     };
+    } catch(e){ return function(){}; }
   })();
   revealArm();
   // tab routing
@@ -466,7 +470,8 @@
     var tabs = ['home','sellers','buyers','founder'];
     function show(name){
       tabs.forEach(function(t){
-        document.getElementById('p-'+t).classList.toggle('active', t===name);
+        var p = document.getElementById('p-'+t);
+        if(p) p.classList.toggle('active', t===name);
         var a = document.querySelector('.tabs a[data-tab="'+t+'"]');
         if(a) a.classList.toggle('active', t===name);
       });
