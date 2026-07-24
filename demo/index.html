@@ -23,6 +23,11 @@
       radial-gradient(40% 40% at 90% 10%, rgba(205,90,31,0.06) 0%, transparent 70%),
       var(--bg);}
   .wrap{max-width:1180px;margin:0 auto;padding:22px 20px 40px}
+  .topnav{display:flex;justify-content:flex-end;align-items:center;gap:18px;margin-bottom:14px;font-size:13.5px}
+  .topnav a{color:var(--mut);text-decoration:none}
+  .topnav a:hover{color:var(--plum)}
+  .topnav a.cta{color:#fff;background:var(--terra);padding:7px 14px;border-radius:20px;font-weight:500}
+  .topnav a.cta:hover{background:var(--terra-deep)}
   header{display:flex;align-items:center;justify-content:space-between;gap:16px;
     border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:18px;flex-wrap:wrap}
   .brand{display:flex;flex-direction:column;gap:6px}
@@ -68,6 +73,11 @@
 </head>
 <body>
 <div class="wrap">
+
+  <nav class="topnav">
+    <a href="how-it-works.html" class="cta">How it works</a>
+    <a href="terms.html">Terms &amp; disclaimer</a>
+  </nav>
 
   <header>
     <div class="brand">
