@@ -209,9 +209,9 @@
     <div class="tabs">
       <a href="#home" data-tab="home" class="active">Company</a>
       <a href="#product" data-tab="product">How It Works</a>
-      <a href="#pipeline" data-tab="pipeline">Live Monitor</a>
+      <a href="#pipeline" data-tab="pipeline">Demo</a>
       <a href="#founder" data-tab="founder">Founder</a>
-      <a href="demo/" class="demo-link">Live demo</a>
+      <a href="demo/" class="demo-link">Case study</a>
     </div>
     <a class="btn" href="https://www.linkedin.com/company/rheality/">Get in touch</a>
   </div>
@@ -364,12 +364,22 @@
   .pl-note{font-size:0.9rem;color:var(--muted);background:#FFF4EA;border:1px solid #F1D8C3;border-radius:14px;padding:16px 18px;margin-top:2px}
   .pl-src{font-size:0.8rem;color:var(--muted);margin-top:14px}
   .pl-src code{background:rgba(51,37,78,0.06);padding:1px 6px;border-radius:6px;font-size:0.92em}
+  .demo-photos{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:10px 0 6px}
+  .demo-photos figure{margin:0;background:var(--white);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .demo-photos img{width:100%;height:210px;object-fit:cover;display:block}
+  .demo-photos figcaption{padding:11px 15px;font-size:0.84rem;color:var(--ink);line-height:1.45}
+  .demo-photos figcaption span{display:block;color:var(--muted);font-size:0.74rem;margin-top:3px}
+  @media(max-width:640px){.demo-photos{grid-template-columns:1fr}.demo-photos img{height:190px}}
 </style>
 <section>
-  <span class="eyebrow">Live Pipeline · Real Sentinel-1 &amp; -2 Data</span>
-  <h2 style="font-size:clamp(2rem,5.5vw,3.2rem)">Three Gorges Dam, Watched From Orbit.</h2>
-  <p class="lede">A working slice of our monitoring engine, run over the largest dam on Earth. We measure it two ways from open satellite data: millimetre ground movement from Sentinel-1 radar, and the reservoir water surface from Sentinel-2 optical. Every number below is real, pulled live from the open Copernicus archive. No stock imagery, no mock numbers.</p>
-  <p style="margin:-14px 0 4px"><a href="pipeline/how-it-works.html" style="color:var(--brand-deep);font-weight:600;text-decoration:none">How this pipeline works, step by step &rarr;</a></p>
+  <span class="eyebrow">Demo · Real Satellite Monitoring</span>
+  <h2 style="font-size:clamp(2rem,5.5vw,3.2rem)">Two dams, watched from orbit.</h2>
+  <p class="lede">The same pipeline on two very different structures. The Three Gorges Dam, the largest on Earth, monitored live from open satellite data for both ground movement and reservoir water. And the Córrego do Feijão tailings dam at Brumadinho, whose 2019 collapse killed 270 people, reconstructed as a case study of what the deformation signal looks like before a failure. One we track today; the other is a hindcast, not a live feed.</p>
+  <div class="demo-photos">
+    <figure><img src="img/three-gorges.jpg" alt="The Three Gorges Dam on the Yangtze River, China" loading="lazy"><figcaption>Three Gorges Dam, China. The working dam we monitor live below.<span>Photo: Thomas Bächinger, CC BY-SA 2.0, via Wikimedia Commons.</span></figcaption></figure>
+    <figure><img src="img/brumadinho.jpg" alt="The Brumadinho valley buried in mine tailings after the 2019 dam collapse" loading="lazy"><figcaption>Córrego do Feijão tailings dam, Brumadinho, after its 2019 collapse. The case study below.<span>Photo: Guilherme Venaglia, CC BY-SA 4.0, via Wikimedia Commons.</span></figcaption></figure>
+  </div>
+  <p style="margin:8px 0 4px"><a href="pipeline/how-it-works.html" style="color:var(--brand-deep);font-weight:600;text-decoration:none">How this pipeline works, step by step &rarr;</a></p>
 
   <h2 style="margin:34px 0 6px;font-size:clamp(1.5rem,4.2vw,2.1rem)">Is the dam actually moving?</h2>
   <p class="lede" style="margin-bottom:18px">There are persistent rumours that the Three Gorges Dam is deforming or about to fail. So we measured it: three years of Sentinel-1 radar, turned into millimetre ground movement with InSAR. This is the deformation parameter, the signal that actually precedes a dam failure.</p>
@@ -412,6 +422,17 @@
 
   <div class="pl-note" id="pl-note"></div>
   <p class="pl-src" id="pl-src"></p>
+
+  <h2 style="margin:44px 0 6px;font-size:clamp(1.5rem,4.2vw,2.1rem)">The tailings example</h2>
+  <p class="lede" style="margin-bottom:16px">A working dam is the easy case. The tailings dam is the one that matters, where slow ground movement is the signal that precedes a collapse. On 25 January 2019 the Córrego do Feijão tailings dam at Brumadinho failed in seconds and killed 270 people, releasing about 12 million cubic metres of mine waste. It had been deforming, measurably, before it went.</p>
+  <div class="dark" style="text-align:left">
+    <span class="label">Case study · a hindcast, not a live feed</span>
+    <h2 style="color:#fff">What a failure looks like before it fails.</h2>
+    <p>We reconstruct the ground movement in the run-up to the collapse, from the published post-event record, to show exactly what an independent satellite monitor is built to catch. This is the deformation parameter doing the job it exists for.</p>
+    <div class="cta-row" style="margin-top:8px">
+      <a class="btn" href="demo/">Open the reconstruction &rarr;</a>
+    </div>
+  </div>
 
   <div class="dark cta-dark" style="text-align:left;margin-top:26px">
     <span class="label">Have an asset like this?</span>
