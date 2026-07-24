@@ -48,7 +48,7 @@ AOI = {
 TILE = "MGRS-49RDQ"
 STAC_URL = "https://earth-search.aws.element84.com/v1"
 COLLECTION = "sentinel-2-l2a"
-DATE_RANGE = "2023-01-01/2025-07-01"
+DATE_RANGE = "2023-01-01/2026-07-25"
 MAX_CLOUD = 60            # scene-level cloud cap; SCL does the per-pixel work
 DECIM = 6                 # read 10 m bands decimated x6 -> ~60 m grid (fast)
 NATIVE_RES = 10.0
@@ -104,11 +104,17 @@ def measure_scene(item):
     return float(water.sum()) * PIX_AREA_KM2, valid_frac
 
 
+NHARM = 4  # Fourier terms in the seasonal fit; 4 captures the reservoir's
+           # sharp, asymmetric drawdown so normal troughs are not flagged.
+
+
 def harmonic_baseline(doy, y):
-    """Fit annual + semi-annual seasonal cycle; return expected values."""
+    """Fit the seasonal cycle with an NHARM-term Fourier model; return expected."""
     t = np.asarray(doy, float) / 365.25 * 2 * math.pi
-    X = np.column_stack([
-        np.ones_like(t), np.sin(t), np.cos(t), np.sin(2 * t), np.cos(2 * t)])
+    cols = [np.ones_like(t)]
+    for k in range(1, NHARM + 1):
+        cols += [np.sin(k * t), np.cos(k * t)]
+    X = np.column_stack(cols)
     coef, *_ = np.linalg.lstsq(X, np.asarray(y, float), rcond=None)
     return X @ coef
 
@@ -181,7 +187,7 @@ def main():
         "method": {
             "water_index": "NDWI = (B03 - B08) / (B03 + B08), McFeeters 1996; water where NDWI > 0",
             "cloud_mask": "Sentinel-2 SCL; scenes below 80% cloud-free AOI coverage discarded",
-            "baseline": "annual + semi-annual harmonic regression of water area vs day-of-year",
+            "baseline": "4-term harmonic (Fourier) regression of water area vs day-of-year, capturing the reservoir's sharp seasonal drawdown",
             "anomaly": "robust z-score (MAD) of the residual; flagged at |z| >= 3",
             "limitation": "optical water-extent monitor, not millimetre structural deformation (Sentinel-1 InSAR extension)",
         },

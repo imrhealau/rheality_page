@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rheality — How the Three Gorges monitor works</title>
+<meta name="description" content="Step by step through the real Sentinel-2 pipeline behind the Three Gorges Live Monitor: open data in, NDWI water index, seasonal baseline, anomaly flag.">
+<link rel="icon" type="image/png" href="/favicon.png?v=6">
+<link rel="apple-touch-icon" href="/favicon.png?v=6">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F2EEF9;--panel:#fff;--line:#E4DDF1;--plum:#33254E;--terra:#CD5A1F;--terra-deep:#A84613;
+    --ink:#352A4A;--mut:#6F6488;--green:#2E9E6B;--disp:'Fraunces',Georgia,serif;--body:'Inter',system-ui,sans-serif;}
+  *{box-sizing:border-box}
+  body{margin:0;color:var(--ink);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;
+    background:radial-gradient(60% 50% at 50% 0%,rgba(122,80,255,.16) 0%,transparent 70%),var(--bg);}
+  .wrap{max-width:880px;margin:0 auto;padding:22px 22px 70px}
+  a{color:var(--terra-deep)}
+  .topnav{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;font-size:13.5px}
+  .topnav a{color:var(--mut);text-decoration:none}
+  .topnav a:hover{color:var(--plum)}
+  .topnav .cta{color:#fff;background:var(--terra);padding:7px 14px;border-radius:20px;font-weight:500}
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  .brand .logo{height:34px;width:auto;display:block}
+  .eyebrow{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--plum);background:rgba(205,90,31,.14);border-radius:20px;padding:5px 12px;margin-bottom:8px}
+  h2{font-family:var(--disp);color:var(--plum);font-size:28px;margin:8px 0 6px}
+  .lead{font-size:16px;color:var(--ink);max-width:680px}
+
+  /* hero pipeline */
+  .pipe{display:flex;align-items:flex-start;gap:0;margin:26px 0 8px;overflow-x:auto;padding-bottom:6px}
+  .pnode{flex:1;min-width:118px;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative}
+  .pnode .circ{width:56px;height:56px;border-radius:50%;background:#fff;border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;color:var(--terra-deep);box-shadow:0 6px 18px rgba(51,37,78,.06);z-index:2}
+  .pnode .circ svg{width:26px;height:26px}
+  .pnode span{font-size:12px;color:var(--plum);font-weight:500;margin-top:9px;max-width:110px}
+  .pnode::after{content:"";position:absolute;top:28px;left:50%;width:100%;height:2px;
+    background:linear-gradient(90deg,var(--line),var(--line));z-index:1}
+  .pnode:last-child::after{display:none}
+
+  /* timeline steps */
+  .steps{margin-top:26px}
+  .step{display:grid;grid-template-columns:56px 1fr;gap:20px}
+  .rail{position:relative;display:flex;justify-content:center}
+  .rail::before{content:"";position:absolute;top:52px;bottom:-18px;width:2px;background:var(--line)}
+  .step:last-child .rail::before{display:none}
+  .node{width:52px;height:52px;border-radius:50%;background:var(--terra);color:#fff;
+    display:flex;align-items:center;justify-content:center;position:relative;z-index:2;box-shadow:0 6px 16px rgba(205,90,31,.28)}
+  .node svg{width:24px;height:24px}
+  .node .n{position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:#fff;
+    color:var(--terra-deep);border:1px solid var(--line);font-size:12px;font-weight:600;font-family:var(--disp);
+    display:flex;align-items:center;justify-content:center}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px 20px;margin-bottom:20px;
+    box-shadow:0 6px 22px rgba(51,37,78,.05);transition:transform .15s ease, box-shadow .15s ease}
+  .card:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(51,37,78,.09)}
+  .card h3{margin:0 0 5px;font-size:17px;color:var(--plum)}
+  .card p{margin:0;color:var(--ink);font-size:14.5px}
+  .card code{background:rgba(51,37,78,.06);padding:1px 6px;border-radius:6px;font-size:13px}
+  .tag{display:inline-block;font-size:11px;font-weight:600;padding:2px 9px;border-radius:20px;margin-top:10px}
+  .tag.buy{background:rgba(46,158,107,.12);color:#1f7a51;border:1px solid rgba(46,158,107,.3)}
+  .tag.ours{background:rgba(205,90,31,.12);color:var(--terra-deep);border:1px solid rgba(205,90,31,.3)}
+  .note{background:#FFF4EA;border:1px solid #F1D8C3;border-radius:16px;padding:16px 20px;margin-top:6px;font-size:14.5px;color:var(--ink)}
+  .cta-row{margin-top:20px;padding:18px 22px;background:#fff;border:1px solid var(--line);border-radius:16px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;box-shadow:0 6px 22px rgba(51,37,78,.05)}
+  .cta-row p{margin:0;color:var(--plum);font-family:var(--disp);font-size:16px}
+  .cta-row a.btn{background:var(--terra);color:#fff;text-decoration:none;padding:9px 18px;border-radius:20px;font-weight:500;font-size:14px;white-space:nowrap}
+  .cta-row a.btn:hover{background:var(--terra-deep)}
+  .muted{color:var(--mut);font-size:13px;margin-top:22px}
+  @media(max-width:560px){.step{grid-template-columns:44px 1fr;gap:14px}.node{width:44px;height:44px}h2{font-size:24px}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <g id="i-db"><path d="M12 8c4.42 0 8-1.34 8-3s-3.58-3-8-3-8 1.34-8 3 3.58 3 8 3z"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></g>
+  <g id="i-crop"><path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M18 22V8a2 2 0 0 0-2-2H2"/></g>
+  <g id="i-drop"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 4.24 7 2c-.29 2.24-1.14 4.19-2.29 5.13S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></g>
+  <g id="i-activity"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></g>
+  <g id="i-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3z"/><path d="M12 9v4"/><path d="M12 17h.01"/></g>
+</defs></svg>
+
+<div class="wrap">
+  <nav class="topnav">
+    <a href="/">&larr; Home</a>
+    <a href="/#pipeline" class="cta">Open the Live Monitor</a>
+  </nav>
+  <div class="brand"><a href="/" aria-label="Rheality home"><img class="logo" src="/logo-nav.png" alt="Rheality"></a></div>
+  <span class="eyebrow">Live Pipeline · Three Gorges Dam</span>
+  <h2>How the Three Gorges monitor works</h2>
+  <p class="lead">The Live Monitor is a real pipeline, not a picture. Every point on its chart is measured from a Sentinel-2 satellite pass over the reservoir, pulled from open data with no download step, indexed for water, and checked against the season. Here is each stage, exactly as the code runs it.</p>
+
+  <div class="pipe">
+    <div class="pnode"><div class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-db"/></svg></div><span>Open archive</span></div>
+    <div class="pnode"><div class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-crop"/></svg></div><span>Read the reservoir</span></div>
+    <div class="pnode"><div class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-drop"/></svg></div><span>Mask &amp; index water</span></div>
+    <div class="pnode"><div class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-activity"/></svg></div><span>Seasonal baseline</span></div>
+    <div class="pnode"><div class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-alert"/></svg></div><span>Flag anomaly</span></div>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="rail"><div class="node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-db"/></svg><span class="n">1</span></div></div>
+      <div class="card">
+        <h3>Find the passes in the open archive</h3>
+        <p>We query the Sentinel-2 L2A catalogue over the dam at Sandouping through the Earth Search STAC on AWS Open Data. No login, no bulk download. We filter to the one map tile that fully covers the reservoir reach (<code>49RDQ</code>) and keep the clearest scene per month, from January 2023 to the most recent cloud-free pass.</p>
+        <span class="tag buy">Open data, no credentials</span>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="rail"><div class="node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-crop"/></svg><span class="n">2</span></div></div>
+      <div class="card">
+        <h3>Read only the pixels over the reservoir</h3>
+        <p>Each scene is a cloud-optimised GeoTIFF. Instead of pulling the whole image, we read just the window over the reservoir straight from the file on the web, at roughly 60 m. That turns a gigabyte-scale scene into a few megabytes and is why the whole history runs in minutes.</p>
+        <span class="tag buy">Bought infrastructure</span>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="rail"><div class="node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-drop"/></svg><span class="n">3</span></div></div>
+      <div class="card">
+        <h3>Mask the cloud, then index the water</h3>
+        <p>We drop cloud and shadow using the scene classification band that ships with every Sentinel-2 tile, and throw out any pass with less than 80 percent clear sky over the reservoir, so partial cloud cannot fake a drop. On what is left we compute the NDWI water index, <code>(green &minus; near-infrared) / (green + near-infrared)</code>, and count the pixels above zero as open water. That is the reservoir surface, in square kilometres, for that day.</p>
+        <span class="tag ours">Rheality's engine</span>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="rail"><div class="node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-activity"/></svg><span class="n">4</span></div></div>
+      <div class="card">
+        <h3>Learn what the season should look like</h3>
+        <p>A reservoir is supposed to rise and fall on a yearly rhythm, so a raw drop means nothing on its own. We fit a seasonal curve to the whole water-area history, a Fourier model in day-of-year that captures the reservoir's sharp yearly drawdown, so that for any date we know the level the season predicts. That fitted curve is the dashed line on the chart.</p>
+        <span class="tag ours">Rheality's engine</span>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="rail"><div class="node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-alert"/></svg><span class="n">5</span></div></div>
+      <div class="card">
+        <h3>Flag only what breaks the pattern</h3>
+        <p>Each pass is scored by how far it sits from the seasonal expectation, using a z-score built to resist outliers. Anything past three standard deviations is flagged for a human to explain. On the current run that is a single point, the unusually deep drawdown of May 2025, which is a hydrology story rather than a structural one, and exactly the kind of thing the flag is meant to surface.</p>
+        <span class="tag ours">Rheality's engine</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>What this measures, and what it does not.</strong> This pipeline reads the reservoir water <em>surface</em>, the clearest signal an optical satellite can give over a dam. It does not measure millimetre movement of the dam wall. That is the radar InSAR version of the same buy-the-data-and-verify engine, walked through <a href="/demo/how-it-works.html">here</a>, and it is the upgrade that turns a reservoir monitor into a structural one.
+  </div>
+
+  <div class="cta-row">
+    <p>See the output on the live chart.</p>
+    <a class="btn" href="/#pipeline">Open the Live Monitor &rarr;</a>
+  </div>
+
+  <p class="muted">Rheality provides decision-support monitoring data, not a safety guarantee. See
+  <a href="/demo/terms.html">Terms &amp; Disclaimer</a>. &nbsp; Rheality Limited, Hong Kong.</p>
+</div>
+</body>
+</html>

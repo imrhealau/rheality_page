@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-07-24T12:01:14Z",
+  "generated_utc": "2026-07-24T12:47:05Z",
   "aoi": {
     "name": "Three Gorges Dam and reservoir reach",
     "dam_lat": 30.826,
@@ -17,21 +17,21 @@
     "archive": "Element84 Earth Search STAC on AWS Open Data (no credentials)",
     "stac": "https://earth-search.aws.element84.com/v1",
     "collection": "sentinel-2-l2a",
-    "date_range": "2023-01-01/2025-07-01",
+    "date_range": "2023-01-01/2026-07-25",
     "resolution_m": 60.0
   },
   "method": {
     "water_index": "NDWI = (B03 - B08) / (B03 + B08), McFeeters 1996; water where NDWI > 0",
     "cloud_mask": "Sentinel-2 SCL; scenes below 80% cloud-free AOI coverage discarded",
-    "baseline": "annual + semi-annual harmonic regression of water area vs day-of-year",
+    "baseline": "4-term harmonic (Fourier) regression of water area vs day-of-year, capturing the reservoir's sharp seasonal drawdown",
     "anomaly": "robust z-score (MAD) of the residual; flagged at |z| >= 3",
     "limitation": "optical water-extent monitor, not millimetre structural deformation (Sentinel-1 InSAR extension)"
   },
   "summary": {
-    "scenes": 21,
+    "scenes": 29,
     "water_km2_min": 22.08,
-    "water_km2_max": 34.33,
-    "water_km2_mean": 30.12,
+    "water_km2_max": 34.6,
+    "water_km2_mean": 30.85,
     "anomalies": 1
   },
   "series": [
@@ -41,9 +41,9 @@
       "water_km2": 29.311,
       "valid_frac": 0.944,
       "cloud": 0.0,
-      "expected_km2": 32.306,
-      "residual_km2": -2.995,
-      "z": -1.89,
+      "expected_km2": 32.325,
+      "residual_km2": -3.014,
+      "z": -2.19,
       "anomaly": false
     },
     {
@@ -52,9 +52,9 @@
       "water_km2": 24.106,
       "valid_frac": 0.991,
       "cloud": 0.1,
-      "expected_km2": 28.54,
-      "residual_km2": -4.434,
-      "z": -2.6,
+      "expected_km2": 28.183,
+      "residual_km2": -4.077,
+      "z": -2.85,
       "anomaly": false
     },
     {
@@ -63,9 +63,9 @@
       "water_km2": 27.983,
       "valid_frac": 0.988,
       "cloud": 26.9,
-      "expected_km2": 27.5,
-      "residual_km2": 0.483,
-      "z": -0.18,
+      "expected_km2": 29.71,
+      "residual_km2": -1.727,
+      "z": -1.39,
       "anomaly": false
     },
     {
@@ -74,9 +74,9 @@
       "water_km2": 29.801,
       "valid_frac": 0.934,
       "cloud": 18.4,
-      "expected_km2": 28.062,
-      "residual_km2": 1.739,
-      "z": 0.44,
+      "expected_km2": 28.299,
+      "residual_km2": 1.502,
+      "z": 0.62,
       "anomaly": false
     },
     {
@@ -85,9 +85,9 @@
       "water_km2": 30.55,
       "valid_frac": 0.816,
       "cloud": 7.1,
-      "expected_km2": 29.717,
-      "residual_km2": 0.833,
-      "z": -0.01,
+      "expected_km2": 30.35,
+      "residual_km2": 0.2,
+      "z": -0.19,
       "anomaly": false
     },
     {
@@ -96,9 +96,9 @@
       "water_km2": 33.829,
       "valid_frac": 0.896,
       "cloud": 6.3,
-      "expected_km2": 32.051,
-      "residual_km2": 1.778,
-      "z": 0.46,
+      "expected_km2": 33.602,
+      "residual_km2": 0.227,
+      "z": -0.17,
       "anomaly": false
     },
     {
@@ -107,9 +107,9 @@
       "water_km2": 34.333,
       "valid_frac": 0.99,
       "cloud": 0.0,
-      "expected_km2": 32.365,
-      "residual_km2": 1.968,
-      "z": 0.55,
+      "expected_km2": 32.736,
+      "residual_km2": 1.597,
+      "z": 0.68,
       "anomaly": false
     },
     {
@@ -118,9 +118,9 @@
       "water_km2": 32.404,
       "valid_frac": 0.951,
       "cloud": 0.5,
-      "expected_km2": 33.082,
-      "residual_km2": -0.678,
-      "z": -0.75,
+      "expected_km2": 33.712,
+      "residual_km2": -1.308,
+      "z": -1.13,
       "anomaly": false
     },
     {
@@ -129,9 +129,9 @@
       "water_km2": 33.851,
       "valid_frac": 0.889,
       "cloud": 37.0,
-      "expected_km2": 32.485,
-      "residual_km2": 1.366,
-      "z": 0.26,
+      "expected_km2": 32.459,
+      "residual_km2": 1.392,
+      "z": 0.55,
       "anomaly": false
     },
     {
@@ -140,9 +140,9 @@
       "water_km2": 31.475,
       "valid_frac": 0.873,
       "cloud": 10.1,
-      "expected_km2": 29.788,
-      "residual_km2": 1.687,
-      "z": 0.41,
+      "expected_km2": 32.053,
+      "residual_km2": -0.578,
+      "z": -0.67,
       "anomaly": false
     },
     {
@@ -151,9 +151,9 @@
       "water_km2": 30.758,
       "valid_frac": 0.982,
       "cloud": 0.6,
-      "expected_km2": 28.54,
-      "residual_km2": 2.218,
-      "z": 0.67,
+      "expected_km2": 28.183,
+      "residual_km2": 2.575,
+      "z": 1.28,
       "anomaly": false
     },
     {
@@ -162,9 +162,9 @@
       "water_km2": 30.402,
       "valid_frac": 0.888,
       "cloud": 15.5,
-      "expected_km2": 27.499,
-      "residual_km2": 2.903,
-      "z": 1.01,
+      "expected_km2": 28.275,
+      "residual_km2": 2.127,
+      "z": 1.0,
       "anomaly": false
     },
     {
@@ -173,9 +173,9 @@
       "water_km2": 24.779,
       "valid_frac": 0.86,
       "cloud": 30.7,
-      "expected_km2": 28.547,
-      "residual_km2": -3.768,
-      "z": -2.27,
+      "expected_km2": 27.051,
+      "residual_km2": -2.272,
+      "z": -1.73,
       "anomaly": false
     },
     {
@@ -184,9 +184,9 @@
       "water_km2": 27.774,
       "valid_frac": 0.823,
       "cloud": 6.1,
-      "expected_km2": 29.31,
-      "residual_km2": -1.536,
-      "z": -1.17,
+      "expected_km2": 28.369,
+      "residual_km2": -0.595,
+      "z": -0.69,
       "anomaly": false
     },
     {
@@ -195,9 +195,9 @@
       "water_km2": 31.093,
       "valid_frac": 0.992,
       "cloud": 14.5,
-      "expected_km2": 30.13,
-      "residual_km2": 0.963,
-      "z": 0.06,
+      "expected_km2": 32.597,
+      "residual_km2": -1.504,
+      "z": -1.25,
       "anomaly": false
     },
     {
@@ -206,9 +206,9 @@
       "water_km2": 28.782,
       "valid_frac": 0.946,
       "cloud": 21.7,
-      "expected_km2": 32.365,
-      "residual_km2": -3.583,
-      "z": -2.18,
+      "expected_km2": 32.736,
+      "residual_km2": -3.954,
+      "z": -2.77,
       "anomaly": false
     },
     {
@@ -217,9 +217,9 @@
       "water_km2": 33.156,
       "valid_frac": 0.954,
       "cloud": 1.1,
-      "expected_km2": 32.639,
-      "residual_km2": 0.517,
-      "z": -0.16,
+      "expected_km2": 32.434,
+      "residual_km2": 0.722,
+      "z": 0.13,
       "anomaly": false
     },
     {
@@ -228,9 +228,9 @@
       "water_km2": 33.52,
       "valid_frac": 0.883,
       "cloud": 0.3,
-      "expected_km2": 32.673,
-      "residual_km2": 0.847,
-      "z": 0.0,
+      "expected_km2": 32.746,
+      "residual_km2": 0.774,
+      "z": 0.16,
       "anomaly": false
     },
     {
@@ -239,9 +239,9 @@
       "water_km2": 32.065,
       "valid_frac": 0.961,
       "cloud": 0.1,
-      "expected_km2": 29.572,
-      "residual_km2": 2.493,
-      "z": 0.81,
+      "expected_km2": 31.55,
+      "residual_km2": 0.515,
+      "z": 0.0,
       "anomaly": false
     },
     {
@@ -250,9 +250,9 @@
       "water_km2": 22.082,
       "valid_frac": 0.993,
       "cloud": 0.4,
-      "expected_km2": 27.738,
-      "residual_km2": -5.656,
-      "z": -3.2,
+      "expected_km2": 26.819,
+      "residual_km2": -4.737,
+      "z": -3.26,
       "anomaly": true
     },
     {
@@ -261,9 +261,97 @@
       "water_km2": 30.391,
       "valid_frac": 0.992,
       "cloud": 7.4,
-      "expected_km2": 27.535,
-      "residual_km2": 2.856,
-      "z": 0.99,
+      "expected_km2": 29.882,
+      "residual_km2": 0.509,
+      "z": 0.0,
+      "anomaly": false
+    },
+    {
+      "date": "2025-08-17",
+      "doy": 229,
+      "water_km2": 31.871,
+      "valid_frac": 0.974,
+      "cloud": 14.3,
+      "expected_km2": 29.09,
+      "residual_km2": 2.781,
+      "z": 1.41,
+      "anomaly": false
+    },
+    {
+      "date": "2025-10-28",
+      "doy": 301,
+      "water_km2": 34.6,
+      "valid_frac": 0.981,
+      "cloud": 2.3,
+      "expected_km2": 33.028,
+      "residual_km2": 1.572,
+      "z": 0.66,
+      "anomaly": false
+    },
+    {
+      "date": "2025-11-25",
+      "doy": 329,
+      "water_km2": 33.912,
+      "valid_frac": 0.9,
+      "cloud": 1.9,
+      "expected_km2": 32.97,
+      "residual_km2": 0.942,
+      "z": 0.27,
+      "anomaly": false
+    },
+    {
+      "date": "2026-01-09",
+      "doy": 9,
+      "water_km2": 33.761,
+      "valid_frac": 0.873,
+      "cloud": 0.0,
+      "expected_km2": 33.402,
+      "residual_km2": 0.359,
+      "z": -0.09,
+      "anomaly": false
+    },
+    {
+      "date": "2026-02-13",
+      "doy": 44,
+      "water_km2": 33.545,
+      "valid_frac": 0.939,
+      "cloud": 3.6,
+      "expected_km2": 32.484,
+      "residual_km2": 1.061,
+      "z": 0.34,
+      "anomaly": false
+    },
+    {
+      "date": "2026-03-10",
+      "doy": 69,
+      "water_km2": 32.375,
+      "valid_frac": 0.806,
+      "cloud": 29.2,
+      "expected_km2": 32.892,
+      "residual_km2": -0.517,
+      "z": -0.64,
+      "anomaly": false
+    },
+    {
+      "date": "2026-04-04",
+      "doy": 94,
+      "water_km2": 31.561,
+      "valid_frac": 0.964,
+      "cloud": 24.9,
+      "expected_km2": 29.981,
+      "residual_km2": 1.58,
+      "z": 0.67,
+      "anomaly": false
+    },
+    {
+      "date": "2026-05-06",
+      "doy": 126,
+      "water_km2": 30.568,
+      "valid_frac": 0.974,
+      "cloud": 16.9,
+      "expected_km2": 26.719,
+      "residual_km2": 3.849,
+      "z": 2.07,
       "anomaly": false
     }
   ]
