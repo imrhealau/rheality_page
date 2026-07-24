@@ -364,22 +364,65 @@
   .pl-note{font-size:0.9rem;color:var(--muted);background:#FFF4EA;border:1px solid #F1D8C3;border-radius:14px;padding:16px 18px;margin-top:2px}
   .pl-src{font-size:0.8rem;color:var(--muted);margin-top:14px}
   .pl-src code{background:rgba(51,37,78,0.06);padding:1px 6px;border-radius:6px;font-size:0.92em}
-  .demo-photos{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:10px 0 6px}
-  .demo-photos figure{margin:0;background:var(--white);border:1px solid var(--line);border-radius:16px;overflow:hidden}
-  .demo-photos img{width:100%;height:210px;object-fit:cover;display:block}
-  .demo-photos figcaption{padding:11px 15px;font-size:0.84rem;color:var(--ink);line-height:1.45}
-  .demo-photos figcaption span{display:block;color:var(--muted);font-size:0.74rem;margin-top:3px}
-  @media(max-width:640px){.demo-photos{grid-template-columns:1fr}.demo-photos img{height:190px}}
+  .demo-cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:8px 0 10px}
+  .demo-card{display:flex;flex-direction:column;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;text-decoration:none;color:inherit;transition:transform .18s ease,box-shadow .18s ease}
+  .demo-card:hover{transform:translateY(-4px);box-shadow:0 16px 44px rgba(46,31,74,0.14)}
+  .demo-card:focus-visible{outline:3px solid var(--brand-deep);outline-offset:3px}
+  .demo-card img{width:100%;height:210px;object-fit:cover;display:block}
+  .demo-card-body{padding:20px 22px 24px}
+  .demo-tag{display:inline-block;font-size:0.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 11px;border-radius:100px;margin-bottom:12px}
+  .demo-tag.live{background:rgba(46,158,107,.14);color:#1f7a51}
+  .demo-tag.case{background:rgba(205,90,31,.14);color:var(--brand-deep)}
+  .demo-card h3{font-family:var(--disp);font-weight:700;font-size:1.4rem;color:var(--plum);margin:0 0 8px}
+  .demo-card p{color:var(--muted);margin:0 0 14px;font-size:0.97rem}
+  .demo-go{font-family:var(--disp);font-weight:700;color:var(--brand-deep);font-size:0.95rem}
+  .demo-card:hover .demo-go{color:var(--brand)}
+  .demo-credit{font-size:0.76rem;color:var(--muted);margin:2px 0 0}
+  .demo-back{display:inline-block;font-family:var(--disp);font-weight:700;color:var(--brand-deep);text-decoration:none;font-size:0.92rem;margin:0 0 20px}
+  .demo-back:hover{color:var(--brand)}
+  @media(max-width:640px){.demo-cards{grid-template-columns:1fr}}
 </style>
 <section>
   <span class="eyebrow">Demo · Real Satellite Monitoring</span>
   <h2 style="font-size:clamp(2rem,5.5vw,3.2rem)">Two dams, watched from orbit.</h2>
   <p class="lede">The same pipeline on two very different structures. The Three Gorges Dam, the largest on Earth, monitored live from open satellite data for both ground movement and reservoir water. And the Córrego do Feijão tailings dam at Brumadinho, whose 2019 collapse killed 270 people, reconstructed as a case study of what the deformation signal looks like before a failure. One we track today; the other is a hindcast, not a live feed.</p>
-  <div class="demo-photos">
-    <figure><img src="img/three-gorges.jpg" alt="The Three Gorges Dam on the Yangtze River, China" loading="lazy"><figcaption>Three Gorges Dam, China. The working dam we monitor live below.<span>Photo: Thomas Bächinger, CC BY-SA 2.0, via Wikimedia Commons.</span></figcaption></figure>
-    <figure><img src="img/brumadinho.jpg" alt="The Brumadinho valley buried in mine tailings after the 2019 dam collapse" loading="lazy"><figcaption>Córrego do Feijão tailings dam, Brumadinho, after its 2019 collapse. The case study below.<span>Photo: Guilherme Venaglia, CC BY-SA 4.0, via Wikimedia Commons.</span></figcaption></figure>
+  <p style="margin:6px 0 20px"><a href="pipeline/how-it-works.html" style="color:var(--brand-deep);font-weight:600;text-decoration:none">How this pipeline works, step by step &rarr;</a></p>
+
+  <div id="demo-chooser">
+    <div class="demo-cards">
+      <a class="demo-card" href="#" id="tg-card">
+        <img src="img/three-gorges.jpg" alt="The Three Gorges Dam on the Yangtze River, China" loading="lazy">
+        <div class="demo-card-body">
+          <span class="demo-tag live">Live monitoring</span>
+          <h3>Three Gorges Dam</h3>
+          <p>The largest dam on Earth. Millimetre ground movement and reservoir water, measured from open satellite data and tracked today.</p>
+          <span class="demo-go">Open the live monitor &rarr;</span>
+        </div>
+      </a>
+      <a class="demo-card" href="demo/">
+        <img src="img/brumadinho.jpg" alt="The Brumadinho valley buried in mine tailings after the 2019 dam collapse" loading="lazy">
+        <div class="demo-card-body">
+          <span class="demo-tag case">Case study · hindcast</span>
+          <h3>Brumadinho tailings dam</h3>
+          <p>The 2019 collapse that killed 270 people, reconstructed from the record to show the deformation that came before it. Not a live feed.</p>
+          <span class="demo-go">Open the reconstruction &rarr;</span>
+        </div>
+      </a>
+    </div>
+    <p class="demo-credit">Photos: Three Gorges by Thomas Bächinger (CC BY-SA 2.0); Brumadinho by Guilherme Venaglia (CC BY-SA 4.0), via Wikimedia Commons.</p>
+    <div class="dark cta-dark" style="text-align:left;margin-top:26px">
+      <span class="label">Have an asset like this?</span>
+      <h2>We Can Point This At Yours.</h2>
+      <p>The same pipeline runs over a tailings dam, a slope, a reclamation site or a port. Tell us the coordinates and the question, and we will scope a pilot.</p>
+      <div class="cta-row" style="margin-top:8px">
+        <a class="btn" href="https://www.linkedin.com/company/rheality/">Message us on LinkedIn</a>
+        <a class="btn ghost email-btn" href="#contact">Email us</a>
+      </div>
+    </div>
   </div>
-  <p style="margin:8px 0 4px"><a href="pipeline/how-it-works.html" style="color:var(--brand-deep);font-weight:600;text-decoration:none">How this pipeline works, step by step &rarr;</a></p>
+
+  <div id="demo-tg" style="display:none">
+    <a href="#" class="demo-back" id="tg-back">&larr; Back to both dams</a>
 
   <h2 style="margin:34px 0 6px;font-size:clamp(1.5rem,4.2vw,2.1rem)">Is the dam actually moving?</h2>
   <p class="lede" style="margin-bottom:18px">There are persistent rumours that the Three Gorges Dam is deforming or about to fail. So we measured it: three years of Sentinel-1 radar, turned into millimetre ground movement with InSAR. This is the deformation parameter, the signal that actually precedes a dam failure.</p>
@@ -423,25 +466,6 @@
   <div class="pl-note" id="pl-note"></div>
   <p class="pl-src" id="pl-src"></p>
 
-  <h2 style="margin:44px 0 6px;font-size:clamp(1.5rem,4.2vw,2.1rem)">The tailings example</h2>
-  <p class="lede" style="margin-bottom:16px">A working dam is the easy case. The tailings dam is the one that matters, where slow ground movement is the signal that precedes a collapse. On 25 January 2019 the Córrego do Feijão tailings dam at Brumadinho failed in seconds and killed 270 people, releasing about 12 million cubic metres of mine waste. It had been deforming, measurably, before it went.</p>
-  <div class="dark" style="text-align:left">
-    <span class="label">Case study · a hindcast, not a live feed</span>
-    <h2 style="color:#fff">What a failure looks like before it fails.</h2>
-    <p>We reconstruct the ground movement in the run-up to the collapse, from the published post-event record, to show exactly what an independent satellite monitor is built to catch. This is the deformation parameter doing the job it exists for.</p>
-    <div class="cta-row" style="margin-top:8px">
-      <a class="btn" href="demo/">Open the reconstruction &rarr;</a>
-    </div>
-  </div>
-
-  <div class="dark cta-dark" style="text-align:left;margin-top:26px">
-    <span class="label">Have an asset like this?</span>
-    <h2>We Can Point This At Yours.</h2>
-    <p>The same pipeline runs over a tailings dam, a slope, a reclamation site or a port. Tell us the coordinates and the question, and we will scope a pilot.</p>
-    <div class="cta-row" style="margin-top:8px">
-      <a class="btn" href="https://www.linkedin.com/company/rheality/">Message us on LinkedIn</a>
-      <a class="btn ghost email-btn" href="#contact">Email us</a>
-    </div>
   </div>
 </section>
 <script>
@@ -573,6 +597,17 @@
     Note.innerHTML='<strong>Verdict: stable.</strong> Over three years the dam moves at '+vel.toFixed(2)+' mm per year in line of sight, inside the '+scat.toFixed(1)+' mm measurement noise, with no accelerating trend. That is the small reversible seasonal breathing of a sound structure, not the runaway creep that precedes an embankment or tailings failure. Caveats we do not hide: this is one ascending track, so line-of-sight rather than full 3D motion, and the coherent pixels concentrate on the dam and its hard structures in the steep gorge.';
     Src.innerHTML=d.source.attribution+'. Processor: '+d.source.processor+', '+d.source.looks+' looks. Inversion: '+d.method.inversion+'. Last run '+d.generated_utc+'.';
   }).catch(function(e){C.innerHTML='<p style="color:var(--muted);font-size:.9rem">Deformation data will appear here once the InSAR run is published.</p>';});
+})();
+</script>
+<script>
+(function(){
+  var chooser=document.getElementById('demo-chooser'),tg=document.getElementById('demo-tg'),
+      card=document.getElementById('tg-card'),back=document.getElementById('tg-back');
+  if(!chooser||!tg||!card) return;
+  function show(detail){chooser.style.display=detail?'none':'';tg.style.display=detail?'':'none';if(detail)window.scrollTo(0,0);}
+  card.addEventListener('click',function(e){e.preventDefault();show(true);});
+  if(back)back.addEventListener('click',function(e){e.preventDefault();show(false);window.scrollTo(0,0);});
+  window.addEventListener('hashchange',function(){if(location.hash.replace('#','')==='pipeline')show(false);});
 })();
 </script>
 </div>
