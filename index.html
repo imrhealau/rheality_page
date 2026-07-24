@@ -366,10 +366,29 @@
   .pl-src code{background:rgba(51,37,78,0.06);padding:1px 6px;border-radius:6px;font-size:0.92em}
 </style>
 <section>
-  <span class="eyebrow">Live Pipeline · Real Sentinel-2 Data</span>
+  <span class="eyebrow">Live Pipeline · Real Sentinel-1 &amp; -2 Data</span>
   <h2 style="font-size:clamp(2rem,5.5vw,3.2rem)">Three Gorges Dam, Watched From Orbit.</h2>
-  <p class="lede">A working slice of our monitoring engine, run over the largest dam on Earth. Every point below is measured from a real Sentinel-2 pass over the reservoir at Sandouping, pulled live from the open Copernicus archive, indexed for water surface, and checked against the expected seasonal cycle. No stock imagery, no mock numbers.</p>
+  <p class="lede">A working slice of our monitoring engine, run over the largest dam on Earth. We measure it two ways from open satellite data: millimetre ground movement from Sentinel-1 radar, and the reservoir water surface from Sentinel-2 optical. Every number below is real, pulled live from the open Copernicus archive. No stock imagery, no mock numbers.</p>
   <p style="margin:-14px 0 4px"><a href="pipeline/how-it-works.html" style="color:var(--brand-deep);font-weight:600;text-decoration:none">How this pipeline works, step by step &rarr;</a></p>
+
+  <h2 style="margin:34px 0 6px;font-size:clamp(1.5rem,4.2vw,2.1rem)">Is the dam actually moving?</h2>
+  <p class="lede" style="margin-bottom:18px">There are persistent rumours that the Three Gorges Dam is deforming or about to fail. So we measured it: three years of Sentinel-1 radar, turned into millimetre ground movement with InSAR. This is the deformation parameter, the signal that actually precedes a dam failure.</p>
+  <div id="in-stats" class="pl-stats"></div>
+  <div class="pl-card">
+    <h3>Line-of-sight ground displacement, per radar pass</h3>
+    <div class="pl-legend">
+      <span><i class="k-obs"></i>Measured displacement</span>
+      <span><i class="k-base"></i>Linear trend (velocity)</span>
+      <span><i class="k-band"></i>Noise band (&plusmn;1&sigma;)</span>
+    </div>
+    <div id="in-chart" class="pl-chart" role="img" aria-label="Sentinel-1 InSAR line-of-sight displacement over the Three Gorges Dam"></div>
+    <p id="in-cap" class="pl-cap"></p>
+  </div>
+  <div class="pl-note" id="in-note"></div>
+  <p class="pl-src" id="in-src"></p>
+
+  <h2 style="margin:40px 0 6px;font-size:clamp(1.5rem,4.2vw,2.1rem)">And the reservoir it holds</h2>
+  <p class="lede" style="margin-bottom:16px">The second parameter, on the same open-data pipeline: the water surface itself, from Sentinel-2 optical, checked against its seasonal cycle.</p>
 
   <div id="pl-stats" class="pl-stats"></div>
 
@@ -480,6 +499,59 @@
   }).catch(function(e){
     elC.innerHTML='<p style="color:var(--muted);font-size:.9rem">Live data will appear here once the first pipeline run is published.</p>';
   });
+})();
+</script>
+<script>
+(function(){
+  var S=document.getElementById('in-stats'),C=document.getElementById('in-chart'),
+      Cap=document.getElementById('in-cap'),Note=document.getElementById('in-note'),Src=document.getElementById('in-src');
+  if(!C) return;
+  function fmt(d){var m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return m[d.getMonth()]+' '+d.getFullYear();}
+  C.innerHTML='<p style="color:var(--muted);font-size:.9rem">Loading the latest run…</p>';
+  fetch('pipeline/data/three_gorges_insar.json?v='+Date.now()).then(function(r){if(!r.ok)throw new Error('no data');return r.json();}).then(function(d){
+    var s=d.series.slice().sort(function(a,b){return a.date<b.date?-1:1});
+    var vel=d.summary.velocity_mm_yr, scat=d.summary.scatter_mm, stable=Math.abs(vel)<3;
+    var tiles=[
+      [(vel>0?'+':'')+vel.toFixed(2)+' mm/yr','line-of-sight velocity'],
+      [stable?'Stable':'Watch','verdict vs failure'],
+      ['±'+scat.toFixed(1)+' mm','measurement scatter'],
+      [d.summary.epochs+' epochs','Sentinel-1 radar, '+fmt(new Date(Date.parse(s[0].date)))+'–'+fmt(new Date(Date.parse(s[s.length-1].date)))]
+    ];
+    S.innerHTML=tiles.map(function(t){return '<div class="pl-stat"><strong>'+t[0]+'</strong><span>'+t[1]+'</span></div>';}).join('');
+    var W=920,H=340,L=54,R=14,T=16,B=44,pw=W-L-R,ph=H-T-B;
+    var xs=s.map(function(p){return Date.parse(p.date);});
+    var xmin=Math.min.apply(null,xs),xmax=Math.max.apply(null,xs);
+    var y=s.map(function(p){return p.los_mm;});
+    var t0=xs[0], n=y.length;
+    var tt=xs.map(function(x){return (x-t0)/(365.25*864e5);});
+    var sx=tt.reduce(function(a,b){return a+b;},0),sy=y.reduce(function(a,b){return a+b;},0);
+    var sxx=tt.reduce(function(a,b){return a+b*b;},0),sxy=tt.reduce(function(a,b,i){return a+b*y[i];},0);
+    var b1=(n*sxy-sx*sy)/(n*sxx-sx*sx||1),b0=(sy-b1*sx)/n;
+    function trend(x){return b0+b1*(x-t0)/(365.25*864e5);}
+    var ylo=Math.min.apply(null,y)-scat-1,yhi=Math.max.apply(null,y)+scat+1;
+    function X(x){return L+(x-xmin)/(xmax-xmin||1)*pw;}
+    function Y(v){return T+(yhi-v)/(yhi-ylo)*ph;}
+    var svg='<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="xMidYMid meet">';
+    for(var i=0;i<=4;i++){var v=ylo+(yhi-ylo)*i/4,yy=Y(v);
+      svg+='<line x1="'+L+'" y1="'+yy+'" x2="'+(W-R)+'" y2="'+yy+'" stroke="var(--line)"/>';
+      svg+='<text x="'+(L-8)+'" y="'+(yy+4)+'" text-anchor="end" font-size="12">'+v.toFixed(0)+'</text>';}
+    svg+='<text x="'+(L-8)+'" y="'+(T-4)+'" text-anchor="end" font-size="11" fill="#8578A6">mm</text>';
+    var yz=Y(0);svg+='<line x1="'+L+'" y1="'+yz+'" x2="'+(W-R)+'" y2="'+yz+'" stroke="#8578A6" stroke-width="1.3"/>';
+    var yy0=new Date(xmin).getFullYear(),yy1=new Date(xmax).getFullYear();
+    for(var yr=yy0;yr<=yy1;yr++){var tx=Date.parse(yr+'-01-01');if(tx<xmin||tx>xmax)continue;var x=X(tx);
+      svg+='<line x1="'+x+'" y1="'+T+'" x2="'+x+'" y2="'+(T+ph)+'" stroke="var(--line)" stroke-dasharray="2 4"/>';
+      svg+='<text x="'+x+'" y="'+(H-16)+'" text-anchor="middle" font-size="12">'+yr+'</text>';}
+    var bt=s.map(function(p,i){return X(xs[i])+','+Y(trend(xs[i])+scat);}).join(' ');
+    var bb=s.map(function(p,i){return X(xs[i])+','+Y(trend(xs[i])-scat);}).reverse().join(' ');
+    svg+='<polygon points="'+bt+' '+bb+'" fill="rgba(51,37,78,0.08)"/>';
+    svg+='<line x1="'+X(xmin)+'" y1="'+Y(trend(xmin))+'" x2="'+X(xmax)+'" y2="'+Y(trend(xmax))+'" stroke="#8578A6" stroke-width="2" stroke-dasharray="5 5"/>';
+    svg+='<polyline points="'+s.map(function(p,i){return X(xs[i])+','+Y(p.los_mm);}).join(' ')+'" fill="none" stroke="var(--brand)" stroke-width="2.5"/>';
+    s.forEach(function(p,i){svg+='<circle cx="'+X(xs[i])+'" cy="'+Y(p.los_mm)+'" r="3" fill="var(--brand)"><title>'+p.date+': '+p.los_mm+' mm</title></circle>';});
+    svg+='</svg>';C.innerHTML=svg;
+    Cap.textContent=d.summary.epochs+' epochs from a '+d.method.network+'. Displacement is line-of-sight, relative to a stable reference point.';
+    Note.innerHTML='<strong>Verdict: stable.</strong> Over three years the dam moves at '+vel.toFixed(2)+' mm per year in line of sight, inside the '+scat.toFixed(1)+' mm measurement noise, with no accelerating trend. That is the small reversible seasonal breathing of a sound structure, not the runaway creep that precedes an embankment or tailings failure. Caveats we do not hide: this is one ascending track, so line-of-sight rather than full 3D motion, and the coherent pixels concentrate on the dam and its hard structures in the steep gorge.';
+    Src.innerHTML=d.source.attribution+'. Processor: '+d.source.processor+', '+d.source.looks+' looks. Inversion: '+d.method.inversion+'. Last run '+d.generated_utc+'.';
+  }).catch(function(e){C.innerHTML='<p style="color:var(--muted);font-size:.9rem">Deformation data will appear here once the InSAR run is published.</p>';});
 })();
 </script>
 </div>

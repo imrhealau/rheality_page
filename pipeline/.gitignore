@@ -1,3 +1,8 @@
 .venv/
 __pycache__/
 *.pyc
+# InSAR intermediates (kept local; only the final JSON is committed)
+insar/
+data/hyp3_jobs.json
+*.tif
+*.zip
