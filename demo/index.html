@@ -4,40 +4,51 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rheality — Deformation Monitoring</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --plum:#241a38; --plum2:#33254e; --panel:#2c2142; --line:#4a3d63;
-    --terra:#cd5a1f; --terra2:#e07a3e; --ink:#f3eef7; --mut:#b3a8c6;
-    --green:#3fb27f; --amber:#e2b93b; --red:#e4483d;
+    --bg:#F2EEF9; --panel:#ffffff; --line:#E4DDF1;
+    --plum:#33254E; --plum-deep:#1E1537;
+    --terra:#CD5A1F; --terra-deep:#A84613;
+    --ink:#352A4A; --mut:#6F6488;
+    --green:#2E9E6B; --amber:#C08A16; --red:#D63A2E;
+    --disp:'Fraunces',Georgia,serif; --body:'Inter',system-ui,sans-serif;
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--plum);color:var(--ink);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    -webkit-font-smoothing:antialiased}
+  body{margin:0;color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(60% 50% at 50% 0%, rgba(122,80,255,0.16) 0%, transparent 70%),
+      radial-gradient(40% 40% at 90% 10%, rgba(205,90,31,0.06) 0%, transparent 70%),
+      var(--bg);}
   .wrap{max-width:1180px;margin:0 auto;padding:22px 20px 40px}
   header{display:flex;align-items:center;justify-content:space-between;gap:16px;
     border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:18px;flex-wrap:wrap}
   .brand{display:flex;align-items:center;gap:12px}
   .mark{width:34px;height:34px;border-radius:50%;
-    background:radial-gradient(circle at 35% 30%,var(--terra2),var(--terra) 60%,#8a3a12);
-    box-shadow:0 0 0 3px rgba(205,90,31,.18)}
-  .brand h1{font-size:19px;margin:0;letter-spacing:.2px}
+    background:radial-gradient(circle at 35% 30%,#e07a3e,var(--terra) 60%,#8a3a12);
+    box-shadow:0 0 0 3px rgba(205,90,31,.14)}
+  .brand h1{font-family:var(--disp);font-size:21px;margin:0;letter-spacing:.2px;color:var(--plum)}
   .brand span{color:var(--mut);font-size:12.5px;display:block;margin-top:1px}
   .asset{font-size:13px;color:var(--mut);text-align:right}
-  .asset b{color:var(--ink);display:block;font-size:14px}
-  .statusbar{display:flex;align-items:center;gap:14px;background:linear-gradient(90deg,rgba(228,72,61,.16),rgba(228,72,61,.04));
-    border:1px solid rgba(228,72,61,.5);border-radius:12px;padding:14px 18px;margin-bottom:18px}
-  .dot{width:11px;height:11px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px rgba(228,72,61,.18);animation:pulse 1.6s infinite}
-  @keyframes pulse{0%{box-shadow:0 0 0 3px rgba(228,72,61,.28)}70%{box-shadow:0 0 0 9px rgba(228,72,61,0)}100%{box-shadow:0 0 0 3px rgba(228,72,61,0)}}
-  .statusbar .t{font-weight:600;font-size:15px}
+  .asset b{color:var(--plum);display:block;font-size:14px}
+  .statusbar{display:flex;align-items:center;gap:14px;
+    background:linear-gradient(90deg,rgba(214,58,46,.12),rgba(214,58,46,.03));
+    border:1px solid rgba(214,58,46,.38);border-radius:14px;padding:14px 18px;margin-bottom:18px}
+  .dot{width:11px;height:11px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px rgba(214,58,46,.15);animation:pulse 1.6s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 3px rgba(214,58,46,.28)}70%{box-shadow:0 0 0 9px rgba(214,58,46,0)}100%{box-shadow:0 0 0 3px rgba(214,58,46,0)}}
+  .statusbar .t{font-weight:600;font-size:15px;color:var(--plum)}
   .statusbar .s{color:var(--mut);font-size:13px}
   .grid{display:grid;grid-template-columns:1fr 1.35fr;gap:16px}
   @media(max-width:820px){.grid{grid-template-columns:1fr}}
-  .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;
+    box-shadow:0 6px 22px rgba(51,37,78,.05)}
   .panel h2{font-size:12px;text-transform:uppercase;letter-spacing:1.2px;color:var(--mut);margin:0 0 12px}
   .kpis{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
-  .kpi{flex:1;min-width:120px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
-  .kpi .v{font-size:22px;font-weight:650;letter-spacing:.3px}
+  .kpi{flex:1;min-width:120px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:12px 14px;
+    box-shadow:0 6px 22px rgba(51,37,78,.05)}
+  .kpi .v{font-family:var(--disp);font-size:23px;font-weight:600;letter-spacing:.2px;color:var(--plum)}
   .kpi .l{font-size:11.5px;color:var(--mut);margin-top:3px}
   .legend{display:flex;gap:14px;font-size:11.5px;color:var(--mut);margin-top:10px;flex-wrap:wrap}
   .legend i{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:5px;vertical-align:middle}
@@ -46,13 +57,14 @@
   .log li:last-child{border-bottom:0}
   .log .when{color:var(--mut);min-width:74px;font-variant-numeric:tabular-nums}
   .tag{font-size:10.5px;font-weight:600;padding:2px 7px;border-radius:20px;white-space:nowrap}
-  .tag.red{background:rgba(228,72,61,.16);color:#ff9a90;border:1px solid rgba(228,72,61,.4)}
-  .tag.amber{background:rgba(226,185,59,.14);color:#f0d271;border:1px solid rgba(226,185,59,.35)}
-  .verdict{font-size:14.5px;line-height:1.5}
-  .verdict b{color:var(--terra2)}
-  .prov{font-size:12px;color:var(--mut);line-height:1.6}
-  .prov b{color:var(--ink);font-weight:600}
+  .tag.red{background:rgba(214,58,46,.12);color:#b12e23;border:1px solid rgba(214,58,46,.35)}
+  .tag.amber{background:rgba(192,138,22,.12);color:#8a6410;border:1px solid rgba(192,138,22,.3)}
+  .verdict{font-size:14.5px;line-height:1.55;color:var(--ink)}
+  .verdict b{color:var(--terra-deep)}
+  .prov{font-size:12px;color:var(--mut);line-height:1.6;margin-top:10px}
+  .prov b{color:var(--plum);font-weight:600}
   .foot{margin-top:20px;font-size:11.5px;color:var(--mut);line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  .foot b{color:var(--ink)}
   svg{display:block;width:100%;height:auto}
   .chartwrap{position:relative}
 </style>
@@ -164,6 +176,11 @@ const fmt = dt => dt.toLocaleDateString('en-GB',{day:'2-digit',month:'short',yea
 document.getElementById('kpiPeak').textContent = Math.round(peak)+' mm/yr';
 document.getElementById('kpiLead').textContent = Math.round(days(alertDate, COLLAPSE))+' days';
 
+// palette (matches rheality.space)
+const C={grid:'#E9E3F4',axis:'#6F6488',line:'#CD5A1F',amber:'#C08A16',red:'#D63A2E',
+  redSoft:'rgba(214,58,46,.07)',mapbg:'#F7F4FC',dam:'#B9ABD6',damtxt:'#8B7FA6',
+  green:'#2E9E6B',hot:'#D63A2E'};
+
 // ---- Chart (inline SVG) ----
 (function(){
   const W=560,H=300,ml=52,mr=16,mt=14,mb=34;
@@ -173,57 +190,48 @@ document.getElementById('kpiLead').textContent = Math.round(days(alertDate, COLL
   const X=t=>ml+(t-x0)/(x1-x0)*(W-ml-mr);
   const Y=v=>mt+(y1-v)/(y1-y0)*(H-mt-mb);
   let g='';
-  // grid + y labels
   for(let v=0; v>=Math.floor(y0/20)*20; v-=20){
-    g+=`<line x1="${ml}" y1="${Y(v)}" x2="${W-mr}" y2="${Y(v)}" stroke="#4a3d63" stroke-width="1"/>`;
-    g+=`<text x="${ml-8}" y="${Y(v)+4}" fill="#b3a8c6" font-size="11" text-anchor="end">${v}</text>`;
+    g+=`<line x1="${ml}" y1="${Y(v)}" x2="${W-mr}" y2="${Y(v)}" stroke="${C.grid}" stroke-width="1"/>`;
+    g+=`<text x="${ml-8}" y="${Y(v)+4}" fill="${C.axis}" font-size="11" text-anchor="end">${v}</text>`;
   }
-  // x labels (quarterly)
   ['2018-01-05','2018-04-01','2018-07-01','2018-10-01','2019-01-25'].forEach(s=>{
     const t=new Date(s).getTime(); const lx=X(t);
-    g+=`<text x="${lx}" y="${H-12}" fill="#b3a8c6" font-size="11" text-anchor="middle">${new Date(s).toLocaleDateString('en-GB',{month:'short',year:'2-digit'})}</text>`;
+    g+=`<text x="${lx}" y="${H-12}" fill="${C.axis}" font-size="11" text-anchor="middle">${new Date(s).toLocaleDateString('en-GB',{month:'short',year:'2-digit'})}</text>`;
   });
-  // acceleration shaded zone
   const ax=X(ACC_ONSET.getTime());
-  g+=`<rect x="${ax}" y="${mt}" width="${X(x1)-ax}" height="${H-mt-mb}" fill="rgba(228,72,61,.10)"/>`;
-  g+=`<text x="${ax+6}" y="${mt+14}" fill="#ff9a90" font-size="10.5">acceleration onset</text>`;
-  // displacement line
+  g+=`<rect x="${ax}" y="${mt}" width="${X(x1)-ax}" height="${H-mt-mb}" fill="${C.redSoft}"/>`;
+  g+=`<text x="${ax+6}" y="${mt+14}" fill="${C.red}" font-size="10.5">acceleration onset</text>`;
   const pts=series.map(p=>`${X(p.date.getTime())},${Y(p.disp)}`).join(' ');
-  g+=`<polyline points="${pts}" fill="none" stroke="#e07a3e" stroke-width="2.4"/>`;
-  series.forEach(p=>{ g+=`<circle cx="${X(p.date.getTime())}" cy="${Y(p.disp)}" r="2.4" fill="#e07a3e"/>`;});
-  // alert marker
+  g+=`<polyline points="${pts}" fill="none" stroke="${C.line}" stroke-width="2.4"/>`;
+  series.forEach(p=>{ g+=`<circle cx="${X(p.date.getTime())}" cy="${Y(p.disp)}" r="2.4" fill="${C.line}"/>`;});
   const axl=X(alertDate.getTime());
-  g+=`<line x1="${axl}" y1="${mt}" x2="${axl}" y2="${H-mb}" stroke="#e2b93b" stroke-width="1.4" stroke-dasharray="4 3"/>`;
-  g+=`<text x="${axl}" y="${mt-2}" fill="#f0d271" font-size="10.5" text-anchor="middle">alert</text>`;
-  // collapse marker
+  g+=`<line x1="${axl}" y1="${mt}" x2="${axl}" y2="${H-mb}" stroke="${C.amber}" stroke-width="1.4" stroke-dasharray="4 3"/>`;
+  g+=`<text x="${axl}" y="${mt-2}" fill="${C.amber}" font-size="10.5" text-anchor="middle">alert</text>`;
   const cx=X(x1);
-  g+=`<line x1="${cx}" y1="${mt}" x2="${cx}" y2="${H-mb}" stroke="#e4483d" stroke-width="1.8"/>`;
-  g+=`<text x="${cx-4}" y="${mt+28}" fill="#ff9a90" font-size="10.5" text-anchor="end">collapse 25 Jan</text>`;
-  g+=`<text x="${ml-40}" y="${mt-2}" fill="#b3a8c6" font-size="10.5">mm</text>`;
+  g+=`<line x1="${cx}" y1="${mt}" x2="${cx}" y2="${H-mb}" stroke="${C.red}" stroke-width="1.8"/>`;
+  g+=`<text x="${cx-4}" y="${mt+28}" fill="${C.red}" font-size="10.5" text-anchor="end">collapse 25 Jan</text>`;
+  g+=`<text x="${ml-40}" y="${mt-2}" fill="${C.axis}" font-size="10.5">mm</text>`;
   document.getElementById('chart').innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="cumulative displacement chart">${g}</svg>`;
 })();
 
 // ---- AOI point map (stylised) ----
 (function(){
-  const W=380,H=300; let g=`<rect x="0" y="0" width="${W}" height="${H}" rx="10" fill="#20182f"/>`;
-  // dam crescent outline
-  g+=`<path d="M60,232 C120,150 260,150 320,232" fill="none" stroke="#6b5c86" stroke-width="2" stroke-dasharray="3 4"/>`;
-  g+=`<text x="190" y="250" fill="#8f83a8" font-size="11" text-anchor="middle">Dam I embankment</text>`;
-  g+=`<text x="190" y="120" fill="#6b5c86" font-size="10.5" text-anchor="middle">tailings basin</text>`;
-  // deterministic scatter, colour by velocity band; hottest cluster low on the face
+  const W=380,H=300; let g=`<rect x="0" y="0" width="${W}" height="${H}" rx="12" fill="${C.mapbg}" stroke="${C.grid}"/>`;
+  g+=`<path d="M60,232 C120,150 260,150 320,232" fill="none" stroke="${C.dam}" stroke-width="2" stroke-dasharray="3 4"/>`;
+  g+=`<text x="190" y="250" fill="${C.damtxt}" font-size="11" text-anchor="middle">Dam I embankment</text>`;
+  g+=`<text x="190" y="120" fill="${C.dam}" font-size="10.5" text-anchor="middle">tailings basin</text>`;
   let seed=42; const rnd=()=>{seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff;};
   for(let i=0;i<150;i++){
     const u=rnd(),v=rnd();
     const x=60+u*260, y=150+v*80 - Math.pow(Math.abs(u-.5)*2,2)*30;
     const faceProx=1-Math.abs(y-215)/70 - Math.abs(x-190)/200;
     const band=faceProx>0.65?2:faceProx>0.3?1:0;
-    const col=band===2?'#e4483d':band===1?'#e2b93b':'#3fb27f';
+    const col=band===2?C.red:band===1?C.amber:C.green;
     const r=band===2?3.1:2.2;
-    g+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" fill="${col}" opacity="${band===2?0.95:0.7}"/>`;
+    g+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" fill="${col}" opacity="${band===2?0.95:0.72}"/>`;
   }
-  // hotspot label
-  g+=`<circle cx="190" cy="214" r="6" fill="none" stroke="#ff9a90" stroke-width="1.6"/>`;
-  g+=`<text x="200" y="210" fill="#ff9a90" font-size="10.5">P-417</text>`;
+  g+=`<circle cx="190" cy="214" r="6" fill="none" stroke="${C.hot}" stroke-width="1.6"/>`;
+  g+=`<text x="200" y="210" fill="${C.hot}" font-size="10.5">P-417</text>`;
   document.getElementById('map').innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="area of interest velocity map">${g}</svg>`;
 })();
 
@@ -240,7 +248,7 @@ document.getElementById('log').innerHTML=logItems.map(i=>
 // ---- Verdict + provenance ----
 document.getElementById('verdict').innerHTML =
   `Hotspot P-417 on the lower embankment moved from a stable creep of about <b>-36 mm/yr</b> into `+
-  `<b>anomalous acceleration</b> from late November 2018, breaching the alert threshold on <b>${fmt(alertDate)}</b>, `+
+  `<b>anomalous acceleration</b> from early November 2018, breaching the alert threshold on <b>${fmt(alertDate)}</b>, `+
   `<b>${Math.round(days(alertDate,COLLAPSE))} days</b> before the collapse. The motion was inconsistent with normal `+
   `consolidation settlement. On this signal, the timing of failure was foreseeable.`;
 document.getElementById('prov').innerHTML =
