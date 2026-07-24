@@ -1,0 +1,6 @@
+# Three Gorges anomaly pipeline (Python 3.12)
+# Set up:  uv venv --python 3.12 .venv && VIRTUAL_ENV=.venv uv pip install -r requirements.txt
+rasterio==1.5.0
+pystac-client>=0.8
+requests>=2.31
+numpy>=2.0

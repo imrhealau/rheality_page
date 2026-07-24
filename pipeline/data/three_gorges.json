@@ -1,0 +1,270 @@
+{
+  "generated_utc": "2026-07-24T12:01:14Z",
+  "aoi": {
+    "name": "Three Gorges Dam and reservoir reach",
+    "dam_lat": 30.826,
+    "dam_lon": 111.003,
+    "bbox": [
+      110.88,
+      30.77,
+      111.06,
+      30.89
+    ]
+  },
+  "tile": "MGRS-49RDQ",
+  "source": {
+    "mission": "Sentinel-2 L2A (ESA Copernicus)",
+    "archive": "Element84 Earth Search STAC on AWS Open Data (no credentials)",
+    "stac": "https://earth-search.aws.element84.com/v1",
+    "collection": "sentinel-2-l2a",
+    "date_range": "2023-01-01/2025-07-01",
+    "resolution_m": 60.0
+  },
+  "method": {
+    "water_index": "NDWI = (B03 - B08) / (B03 + B08), McFeeters 1996; water where NDWI > 0",
+    "cloud_mask": "Sentinel-2 SCL; scenes below 80% cloud-free AOI coverage discarded",
+    "baseline": "annual + semi-annual harmonic regression of water area vs day-of-year",
+    "anomaly": "robust z-score (MAD) of the residual; flagged at |z| >= 3",
+    "limitation": "optical water-extent monitor, not millimetre structural deformation (Sentinel-1 InSAR extension)"
+  },
+  "summary": {
+    "scenes": 21,
+    "water_km2_min": 22.08,
+    "water_km2_max": 34.33,
+    "water_km2_mean": 30.12,
+    "anomalies": 1
+  },
+  "series": [
+    {
+      "date": "2023-01-30",
+      "doy": 30,
+      "water_km2": 29.311,
+      "valid_frac": 0.944,
+      "cloud": 0.0,
+      "expected_km2": 32.306,
+      "residual_km2": -2.995,
+      "z": -1.89,
+      "anomaly": false
+    },
+    {
+      "date": "2023-04-15",
+      "doy": 105,
+      "water_km2": 24.106,
+      "valid_frac": 0.991,
+      "cloud": 0.1,
+      "expected_km2": 28.54,
+      "residual_km2": -4.434,
+      "z": -2.6,
+      "anomaly": false
+    },
+    {
+      "date": "2023-06-09",
+      "doy": 160,
+      "water_km2": 27.983,
+      "valid_frac": 0.988,
+      "cloud": 26.9,
+      "expected_km2": 27.5,
+      "residual_km2": 0.483,
+      "z": -0.18,
+      "anomaly": false
+    },
+    {
+      "date": "2023-07-09",
+      "doy": 190,
+      "water_km2": 29.801,
+      "valid_frac": 0.934,
+      "cloud": 18.4,
+      "expected_km2": 28.062,
+      "residual_km2": 1.739,
+      "z": 0.44,
+      "anomaly": false
+    },
+    {
+      "date": "2023-08-23",
+      "doy": 235,
+      "water_km2": 30.55,
+      "valid_frac": 0.816,
+      "cloud": 7.1,
+      "expected_km2": 29.717,
+      "residual_km2": 0.833,
+      "z": -0.01,
+      "anomaly": false
+    },
+    {
+      "date": "2023-10-22",
+      "doy": 295,
+      "water_km2": 33.829,
+      "valid_frac": 0.896,
+      "cloud": 6.3,
+      "expected_km2": 32.051,
+      "residual_km2": 1.778,
+      "z": 0.46,
+      "anomaly": false
+    },
+    {
+      "date": "2023-11-01",
+      "doy": 305,
+      "water_km2": 34.333,
+      "valid_frac": 0.99,
+      "cloud": 0.0,
+      "expected_km2": 32.365,
+      "residual_km2": 1.968,
+      "z": 0.55,
+      "anomaly": false
+    },
+    {
+      "date": "2023-12-06",
+      "doy": 340,
+      "water_km2": 32.404,
+      "valid_frac": 0.951,
+      "cloud": 0.5,
+      "expected_km2": 33.082,
+      "residual_km2": -0.678,
+      "z": -0.75,
+      "anomaly": false
+    },
+    {
+      "date": "2024-01-25",
+      "doy": 25,
+      "water_km2": 33.851,
+      "valid_frac": 0.889,
+      "cloud": 37.0,
+      "expected_km2": 32.485,
+      "residual_km2": 1.366,
+      "z": 0.26,
+      "anomaly": false
+    },
+    {
+      "date": "2024-03-20",
+      "doy": 80,
+      "water_km2": 31.475,
+      "valid_frac": 0.873,
+      "cloud": 10.1,
+      "expected_km2": 29.788,
+      "residual_km2": 1.687,
+      "z": 0.41,
+      "anomaly": false
+    },
+    {
+      "date": "2024-04-14",
+      "doy": 105,
+      "water_km2": 30.758,
+      "valid_frac": 0.982,
+      "cloud": 0.6,
+      "expected_km2": 28.54,
+      "residual_km2": 2.218,
+      "z": 0.67,
+      "anomaly": false
+    },
+    {
+      "date": "2024-05-24",
+      "doy": 145,
+      "water_km2": 30.402,
+      "valid_frac": 0.888,
+      "cloud": 15.5,
+      "expected_km2": 27.499,
+      "residual_km2": 2.903,
+      "z": 1.01,
+      "anomaly": false
+    },
+    {
+      "date": "2024-07-23",
+      "doy": 205,
+      "water_km2": 24.779,
+      "valid_frac": 0.86,
+      "cloud": 30.7,
+      "expected_km2": 28.547,
+      "residual_km2": -3.768,
+      "z": -2.27,
+      "anomaly": false
+    },
+    {
+      "date": "2024-08-12",
+      "doy": 225,
+      "water_km2": 27.774,
+      "valid_frac": 0.823,
+      "cloud": 6.1,
+      "expected_km2": 29.31,
+      "residual_km2": -1.536,
+      "z": -1.17,
+      "anomaly": false
+    },
+    {
+      "date": "2024-09-01",
+      "doy": 245,
+      "water_km2": 31.093,
+      "valid_frac": 0.992,
+      "cloud": 14.5,
+      "expected_km2": 30.13,
+      "residual_km2": 0.963,
+      "z": 0.06,
+      "anomaly": false
+    },
+    {
+      "date": "2024-10-31",
+      "doy": 305,
+      "water_km2": 28.782,
+      "valid_frac": 0.946,
+      "cloud": 21.7,
+      "expected_km2": 32.365,
+      "residual_km2": -3.583,
+      "z": -2.18,
+      "anomaly": false
+    },
+    {
+      "date": "2024-11-10",
+      "doy": 315,
+      "water_km2": 33.156,
+      "valid_frac": 0.954,
+      "cloud": 1.1,
+      "expected_km2": 32.639,
+      "residual_km2": 0.517,
+      "z": -0.16,
+      "anomaly": false
+    },
+    {
+      "date": "2025-01-19",
+      "doy": 19,
+      "water_km2": 33.52,
+      "valid_frac": 0.883,
+      "cloud": 0.3,
+      "expected_km2": 32.673,
+      "residual_km2": 0.847,
+      "z": 0.0,
+      "anomaly": false
+    },
+    {
+      "date": "2025-03-25",
+      "doy": 84,
+      "water_km2": 32.065,
+      "valid_frac": 0.961,
+      "cloud": 0.1,
+      "expected_km2": 29.572,
+      "residual_km2": 2.493,
+      "z": 0.81,
+      "anomaly": false
+    },
+    {
+      "date": "2025-05-09",
+      "doy": 129,
+      "water_km2": 22.082,
+      "valid_frac": 0.993,
+      "cloud": 0.4,
+      "expected_km2": 27.738,
+      "residual_km2": -5.656,
+      "z": -3.2,
+      "anomaly": true
+    },
+    {
+      "date": "2025-06-13",
+      "doy": 164,
+      "water_km2": 30.391,
+      "valid_frac": 0.992,
+      "cloud": 7.4,
+      "expected_km2": 27.535,
+      "residual_km2": 2.856,
+      "z": 0.99,
+      "anomaly": false
+    }
+  ]
+}
