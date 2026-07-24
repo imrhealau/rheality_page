@@ -65,6 +65,9 @@
   .tabs a:hover{color:var(--plum)}
   .tabs a:focus-visible{outline:3px solid var(--brand-deep);outline-offset:2px}
   .tabs a.active{background:rgba(205,90,31,0.16);color:var(--brand-deep)}
+  .tabs a.demo-link{color:var(--brand-deep)}
+  .tabs a.demo-link::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;
+    background:var(--brand);margin-right:7px;vertical-align:middle}
   @media (max-width:640px){
     .nav-inner{padding:8px 10px 8px 14px;gap:8px}
     .nav-inner img{height:26px}
@@ -207,6 +210,7 @@
       <a href="#home" data-tab="home" class="active">Company</a>
       <a href="#product" data-tab="product">How It Works</a>
       <a href="#founder" data-tab="founder">Founder</a>
+      <a href="demo/" class="demo-link">Live demo</a>
     </div>
     <a class="btn" href="https://www.linkedin.com/company/rheality/">Get in touch</a>
   </div>
