@@ -13,96 +13,144 @@
   *{box-sizing:border-box}
   body{margin:0;color:var(--ink);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;
     background:radial-gradient(60% 50% at 50% 0%,rgba(122,80,255,.16) 0%,transparent 70%),var(--bg);}
-  .wrap{max-width:860px;margin:0 auto;padding:34px 22px 70px}
-  a{color:var(--terra-deep)} .back{display:inline-block;margin-bottom:18px;font-size:13px}
-  .brand{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+  .wrap{max-width:880px;margin:0 auto;padding:22px 22px 70px}
+  a{color:var(--terra-deep)}
+  .topnav{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;font-size:13.5px}
+  .topnav a{color:var(--mut);text-decoration:none}
+  .topnav a:hover{color:var(--plum)}
+  .topnav .cta{color:#fff;background:var(--terra);padding:7px 14px;border-radius:20px;font-weight:500}
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:12px}
   .brand .logo{height:34px;width:auto;display:block}
-  h2{font-family:var(--disp);color:var(--plum);font-size:26px;margin:8px 0 4px}
-  .lead{font-size:16px;color:var(--ink);max-width:640px}
-  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:22px 0 6px;color:var(--mut);font-size:12.5px}
-  .flow .chip{background:#fff;border:1px solid var(--line);border-radius:20px;padding:6px 12px;color:var(--plum);font-weight:500}
-  .flow .arr{color:var(--terra)}
-  .step{display:flex;gap:16px;background:var(--panel);border:1px solid var(--line);border-radius:16px;
-    padding:18px 20px;margin-top:14px;box-shadow:0 6px 22px rgba(51,37,78,.05)}
-  .num{flex:0 0 40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-    font-family:var(--disp);font-size:18px;font-weight:600;color:#fff;background:var(--terra)}
-  .step h3{margin:2px 0 4px;font-size:17px;color:var(--plum)}
-  .step p{margin:0;color:var(--ink);font-size:14.5px}
-  .tag{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;margin-top:8px}
+  h2{font-family:var(--disp);color:var(--plum);font-size:28px;margin:8px 0 6px}
+  .lead{font-size:16px;color:var(--ink);max-width:660px}
+
+  /* hero pipeline */
+  .pipe{display:flex;align-items:flex-start;gap:0;margin:26px 0 8px;overflow-x:auto;padding-bottom:6px}
+  .pnode{flex:1;min-width:118px;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative}
+  .pnode .circ{width:56px;height:56px;border-radius:50%;background:#fff;border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;color:var(--terra-deep);box-shadow:0 6px 18px rgba(51,37,78,.06);z-index:2}
+  .pnode .circ svg{width:26px;height:26px}
+  .pnode span{font-size:12px;color:var(--plum);font-weight:500;margin-top:9px;max-width:110px}
+  .pnode::after{content:"";position:absolute;top:28px;left:50%;width:100%;height:2px;
+    background:linear-gradient(90deg,var(--line),var(--line));z-index:1}
+  .pnode:last-child::after{display:none}
+
+  /* timeline steps */
+  .steps{margin-top:26px}
+  .step{display:grid;grid-template-columns:56px 1fr;gap:20px}
+  .rail{position:relative;display:flex;justify-content:center}
+  .rail::before{content:"";position:absolute;top:52px;bottom:-18px;width:2px;background:var(--line)}
+  .step:last-child .rail::before{display:none}
+  .node{width:52px;height:52px;border-radius:50%;background:var(--terra);color:#fff;
+    display:flex;align-items:center;justify-content:center;position:relative;z-index:2;box-shadow:0 6px 16px rgba(205,90,31,.28)}
+  .node svg{width:24px;height:24px}
+  .node .n{position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:#fff;
+    color:var(--terra-deep);border:1px solid var(--line);font-size:12px;font-weight:600;font-family:var(--disp);
+    display:flex;align-items:center;justify-content:center}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px 20px;margin-bottom:20px;
+    box-shadow:0 6px 22px rgba(51,37,78,.05);transition:transform .15s ease, box-shadow .15s ease}
+  .card:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(51,37,78,.09)}
+  .card h3{margin:0 0 5px;font-size:17px;color:var(--plum)}
+  .card p{margin:0;color:var(--ink);font-size:14.5px}
+  .tag{display:inline-block;font-size:11px;font-weight:600;padding:2px 9px;border-radius:20px;margin-top:10px}
   .tag.buy{background:rgba(46,158,107,.12);color:#1f7a51;border:1px solid rgba(46,158,107,.3)}
   .tag.ours{background:rgba(205,90,31,.12);color:var(--terra-deep);border:1px solid rgba(205,90,31,.3)}
+  .cta-row{margin-top:10px;padding:18px 22px;background:#fff;border:1px solid var(--line);border-radius:16px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;box-shadow:0 6px 22px rgba(51,37,78,.05)}
+  .cta-row p{margin:0;color:var(--plum);font-family:var(--disp);font-size:16px}
+  .cta-row a.btn{background:var(--terra);color:#fff;text-decoration:none;padding:9px 18px;border-radius:20px;font-weight:500;font-size:14px;white-space:nowrap}
+  .cta-row a.btn:hover{background:var(--terra-deep)}
   .muted{color:var(--mut);font-size:13px;margin-top:22px}
+  @media(max-width:560px){.step{grid-template-columns:44px 1fr;gap:14px}.node{width:44px;height:44px}h2{font-size:24px}}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <g id="i-sat"><path d="M4 10a7.31 7.31 0 0 0 10 10Z"/><path d="m9 15 3-3"/><path d="M17 13a6 6 0 0 0-6-6"/><path d="M21 13A10 10 0 0 0 11 3"/></g>
+  <g id="i-radio"><path d="M4.9 16.1C1 12.2 1 5.8 4.9 1.9"/><path d="M7.8 4.7a6.14 6.14 0 0 0-.8 8.3"/><circle cx="12" cy="9" r="2"/><path d="M16.2 4.8c2 2 2.26 5.11.8 7.47"/><path d="M19.1 1.9a9.96 9.96 0 0 1 0 14.1"/><path d="M9.5 18h5"/><path d="m8 22 4-11 4 11"/></g>
+  <g id="i-activity"><path d="M22 12h-2.5a2 2 0 0 0-1.9 1.5l-2.4 8.3a.25.25 0 0 1-.5 0L9.2 2.2a.25.25 0 0 0-.5 0l-2.3 8.3A2 2 0 0 1 4.5 12H2"/></g>
+  <g id="i-alert"><path d="m21.7 18-8-14a2 2 0 0 0-3.4 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></g>
+  <g id="i-bell"><path d="M10.3 21a2 2 0 0 0 3.4 0"/><path d="M3.3 15.3A1 1 0 0 0 4 17h16a1 1 0 0 0 .7-1.7C19.4 14 18 12.5 18 8A6 6 0 0 0 6 8c0 4.5-1.4 6-2.7 7.3"/></g>
+</defs></svg>
+
 <div class="wrap">
-  <a class="back" href="./">&larr; Back to the demo</a>
-  <div class="brand"><img class="logo" src="logo-nav.png" alt="Rheality"></div>
+  <nav class="topnav">
+    <a href="/">&larr; Home</a>
+    <a href="./" class="cta">Open the live demo</a>
+  </nav>
+  <div class="brand"><a href="/" aria-label="Rheality home"><img class="logo" src="logo-nav.png" alt="Rheality"></a></div>
   <h2>How it works</h2>
   <p class="lead">From a free radar satellite to an alert on an engineer's screen. We buy the satellite data as a
   commodity and build the part that matters: turning raw radar into a trustworthy answer about whether the ground is moving.</p>
 
-  <div class="flow">
-    <span class="chip">Sentinel-1 radar</span><span class="arr">&rarr;</span>
-    <span class="chip">Interferograms</span><span class="arr">&rarr;</span>
-    <span class="chip">Displacement time series</span><span class="arr">&rarr;</span>
-    <span class="chip">Anomaly detection</span><span class="arr">&rarr;</span>
-    <span class="chip">Report &amp; alert</span>
+  <div class="pipe">
+    <div class="pnode"><div class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-sat"/></svg></div><span>Free radar</span></div>
+    <div class="pnode"><div class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-radio"/></svg></div><span>Phase change</span></div>
+    <div class="pnode"><div class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-activity"/></svg></div><span>Time series</span></div>
+    <div class="pnode"><div class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-alert"/></svg></div><span>Anomaly</span></div>
+    <div class="pnode"><div class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-bell"/></svg></div><span>Report &amp; alert</span></div>
   </div>
 
-  <div class="step">
-    <div class="num">1</div>
-    <div>
-      <h3>Acquire free radar</h3>
-      <p>We pull the Sentinel-1 radar archive over the asset from the European Copernicus programme, going back to
-      2015. Radar sees through cloud and works day or night, which optical satellites cannot. For faster revisit we
-      task commercial radar (ICEYE, Capella) only where it is needed.</p>
-      <span class="tag buy">Bought, not built</span>
+  <div class="steps">
+    <div class="step">
+      <div class="rail"><div class="node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-sat"/></svg><span class="n">1</span></div></div>
+      <div class="card">
+        <h3>Acquire free radar</h3>
+        <p>We pull the Sentinel-1 radar archive over the asset from the European Copernicus programme, going back to
+        2015. Radar sees through cloud and works day or night, which optical satellites cannot. For faster revisit we
+        task commercial radar (ICEYE, Capella) only where it is needed.</p>
+        <span class="tag buy">Bought, not built</span>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="rail"><div class="node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-radio"/></svg><span class="n">2</span></div></div>
+      <div class="card">
+        <h3>Measure phase change between passes</h3>
+        <p>Each time the satellite passes, we compare the radar phase against earlier passes to form interferograms.
+        A shift in phase corresponds to the ground moving toward or away from the satellite, down to millimetres. We
+        build on pre-processed interferograms from the COMET LiCSAR service where they exist, to skip the slowest step.</p>
+        <span class="tag buy">Bought, not built</span>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="rail"><div class="node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-activity"/></svg><span class="n">3</span></div></div>
+      <div class="card">
+        <h3>Build a displacement time series</h3>
+        <p>We run small-baseline InSAR inversion across the whole stack of interferograms to produce a cumulative
+        displacement history for every coherent point in the area, referenced to stable bedrock, and corrected for
+        atmospheric noise. The output is a clean movement curve per point over time.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="rail"><div class="node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-alert"/></svg><span class="n">4</span></div></div>
+      <div class="card">
+        <h3>Detect anomalies</h3>
+        <p>This is the part that is ours. A model separates normal settlement from genuine anomalous movement, flags
+        points that accelerate away from a consolidation trend, and cuts false alarms, using the deep-learning approach
+        behind the landslide-detection model I built and deployed across Fugro. A moving point is only useful once you
+        know it is the dangerous kind of moving.</p>
+        <span class="tag ours">Rheality's layer</span>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="rail"><div class="node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-bell"/></svg><span class="n">5</span></div></div>
+      <div class="card">
+        <h3>Report and alert, with provenance</h3>
+        <p>Findings arrive as a monitoring dashboard, a compliance-ready report, and an alert to the operator's engineer
+        when a point crosses threshold. Every figure carries an audit trail (which satellite scenes, which dates, which
+        settings) so it stands up as independent verification. The engineer decides; we surface the signal early.</p>
+        <span class="tag ours">Rheality's layer</span>
+      </div>
     </div>
   </div>
 
-  <div class="step">
-    <div class="num">2</div>
-    <div>
-      <h3>Measure phase change between passes</h3>
-      <p>Each time the satellite passes, we compare the radar phase against earlier passes to form interferograms.
-      A shift in phase corresponds to the ground moving toward or away from the satellite, down to millimetres. We
-      build on pre-processed interferograms from the COMET LiCSAR service where they exist, to skip the slowest step.</p>
-      <span class="tag buy">Bought, not built</span>
-    </div>
-  </div>
-
-  <div class="step">
-    <div class="num">3</div>
-    <div>
-      <h3>Build a displacement time series</h3>
-      <p>We run small-baseline InSAR inversion across the whole stack of interferograms to produce a cumulative
-      displacement history for every coherent point in the area, referenced to stable bedrock, and corrected for
-      atmospheric noise. The output is a clean movement curve per point over time.</p>
-    </div>
-  </div>
-
-  <div class="step">
-    <div class="num">4</div>
-    <div>
-      <h3>Detect anomalies</h3>
-      <p>This is the part that is ours. A model separates normal settlement from genuine anomalous movement, flags
-      points that accelerate away from a consolidation trend, and cuts false alarms, using the deep-learning approach
-      behind the landslide-detection model I built and deployed across Fugro. A moving point is only useful once you
-      know it is the dangerous kind of moving.</p>
-      <span class="tag ours">Rheality's layer</span>
-    </div>
-  </div>
-
-  <div class="step">
-    <div class="num">5</div>
-    <div>
-      <h3>Report and alert, with provenance</h3>
-      <p>Findings arrive as a monitoring dashboard, a compliance-ready report, and an alert to the operator's engineer
-      when a point crosses threshold. Every figure carries an audit trail (which satellite scenes, which dates, which
-      settings) so it stands up as independent verification. The engineer decides; we surface the signal early.</p>
-      <span class="tag ours">Rheality's layer</span>
-    </div>
+  <div class="cta-row">
+    <p>See it running on the 2019 Brumadinho dam collapse.</p>
+    <a class="btn" href="./">Open the live demo &rarr;</a>
   </div>
 
   <p class="muted">Rheality provides decision-support monitoring data, not a safety guarantee. See

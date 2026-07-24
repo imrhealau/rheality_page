@@ -23,7 +23,8 @@
       radial-gradient(40% 40% at 90% 10%, rgba(205,90,31,0.06) 0%, transparent 70%),
       var(--bg);}
   .wrap{max-width:1180px;margin:0 auto;padding:22px 20px 40px}
-  .topnav{display:flex;justify-content:flex-end;align-items:center;gap:18px;margin-bottom:14px;font-size:13.5px}
+  .topnav{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:14px;font-size:13.5px}
+  .topnav .navright{display:flex;align-items:center;gap:18px}
   .topnav a{color:var(--mut);text-decoration:none}
   .topnav a:hover{color:var(--plum)}
   .topnav a.cta{color:#fff;background:var(--terra);padding:7px 14px;border-radius:20px;font-weight:500}
@@ -35,6 +36,12 @@
   .brand .tagline{color:var(--mut);font-size:12.5px}
   .asset{font-size:13px;color:var(--mut);text-align:right}
   .asset b{color:var(--plum);display:block;font-size:14px}
+  .intro{margin:2px 0 18px;max-width:780px}
+  .intro h2{font-family:var(--disp);color:var(--plum);font-size:24px;margin:0 0 9px;font-weight:600;line-height:1.25}
+  .intro p{margin:0 0 9px;font-size:14.5px;color:var(--ink);line-height:1.62}
+  .intro p b{color:var(--plum)}
+  .intro .note{font-size:12.5px;color:var(--mut);border-left:2px solid var(--terra);padding-left:11px;margin-top:12px}
+  .panel .sub{font-size:12px;color:var(--mut);margin:-6px 0 12px;line-height:1.45}
   .statusbar{display:flex;align-items:center;gap:14px;
     background:linear-gradient(90deg,rgba(214,58,46,.12),rgba(214,58,46,.03));
     border:1px solid rgba(214,58,46,.38);border-radius:14px;padding:14px 18px;margin-bottom:18px}
@@ -75,13 +82,16 @@
 <div class="wrap">
 
   <nav class="topnav">
-    <a href="how-it-works.html" class="cta">How it works</a>
-    <a href="terms.html">Terms &amp; disclaimer</a>
+    <a href="/">&larr; Home</a>
+    <span class="navright">
+      <a href="how-it-works.html" class="cta">How it works</a>
+      <a href="terms.html">Terms &amp; disclaimer</a>
+    </span>
   </nav>
 
   <header>
     <div class="brand">
-      <img class="logo" src="logo-nav.png" alt="Rheality">
+      <a href="/" aria-label="Rheality home"><img class="logo" src="logo-nav.png" alt="Rheality"></a>
       <span class="tagline">Independent satellite deformation monitoring</span>
     </div>
     <div class="asset">
@@ -89,6 +99,19 @@
       Brumadinho, Minas Gerais, Brazil
     </div>
   </header>
+
+  <section class="intro">
+    <h2>Reading a disaster before it happened</h2>
+    <p>On <b>25 January 2019</b>, the Dam I tailings dam at Corrego do Feijao in Brumadinho, Brazil collapsed
+    without public warning, releasing about 12 million cubic metres of mine waste and killing <b>270 people</b>.
+    In the year before it fell, the dam face was already moving, and that movement was measurable from space.</p>
+    <p>This is Rheality's monitoring dashboard, replayed over the 12 months before the collapse using free
+    Sentinel-1 satellite radar. It shows what an operator, regulator or insurer would have seen: slow creep on the
+    embankment turning into anomalous acceleration, and an <b>alert raised 40 days before the wall gave way</b>.
+    No ground sensors, no site visit, one independent read from orbit.</p>
+    <p class="note">Below: a velocity map of the whole dam, the movement history of the failing point, the alert
+    log the system would have produced, and a plain-language verdict with its data provenance.</p>
+  </section>
 
   <div class="statusbar">
     <div class="dot"></div>
@@ -108,6 +131,7 @@
   <div class="grid">
     <div class="panel">
       <h2>Area of interest &middot; line-of-sight velocity</h2>
+      <p class="sub">Every dot is a radar measurement point on the dam. Colour is how fast it is moving. The red cluster sits low on the embankment, where the wall later failed.</p>
       <div id="map"></div>
       <div class="legend">
         <span><i style="background:var(--green)"></i>Stable (0 to -10 mm/yr)</span>
@@ -118,6 +142,7 @@
 
     <div class="panel">
       <h2>Hotspot P-417 &middot; cumulative displacement</h2>
+      <p class="sub">The worst point, tracked over 13 months. Down means the ground is sinking. The shaded band marks where slow creep turned into acceleration; the amber line is the alert, the red line is the collapse.</p>
       <div class="chartwrap"><div id="chart"></div></div>
     </div>
   </div>
@@ -125,10 +150,12 @@
   <div class="grid" style="margin-top:16px">
     <div class="panel">
       <h2>Alert log</h2>
+      <p class="sub">What the system flagged, and when, in the weeks before failure.</p>
       <ul class="log" id="log"></ul>
     </div>
     <div class="panel">
       <h2>Verdict &amp; provenance</h2>
+      <p class="sub">The plain-language readout, and where the underlying data came from.</p>
       <p class="verdict" id="verdict"></p>
       <p class="prov" id="prov"></p>
     </div>
