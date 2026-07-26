@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-07-24T14:07:17Z",
+  "generated_utc": "2026-07-24T17:10:11Z",
   "target": {
     "name": "Three Gorges Dam",
     "lat": 30.826,
@@ -14,168 +14,203 @@
     "attribution": "Contains modified Copernicus Sentinel data 2023-2025, processed by ASF HyP3"
   },
   "method": {
-    "network": "57 small-baseline burst interferograms, monthly epochs",
+    "network": "71 small-baseline burst interferograms, monthly epochs",
     "inversion": "per-pixel weighted least-squares SBAS, referenced to the highest-coherence stable pixel",
     "series": "median line-of-sight displacement over coherent dam-area pixels",
     "limitation": "line-of-sight, one ascending track; steep-gorge layover limits coherence on parts of the wall"
   },
   "summary": {
-    "epochs": 30,
-    "velocity_mm_yr": -0.63,
-    "scatter_mm": 2.48,
-    "los_min_mm": -8.37,
-    "los_max_mm": 3.19
+    "epochs": 37,
+    "velocity_mm_yr": 0.01,
+    "scatter_mm": 2.33,
+    "los_min_mm": -8.57,
+    "los_max_mm": 2.25
   },
   "series": [
     {
       "date": "2023-02-09",
       "los_mm": 0.0,
-      "n_px": 419
+      "n_px": 442
     },
     {
       "date": "2023-03-05",
-      "los_mm": -2.29,
-      "n_px": 419
+      "los_mm": -2.09,
+      "n_px": 442
     },
     {
       "date": "2023-04-10",
-      "los_mm": -3.47,
-      "n_px": 419
+      "los_mm": -3.59,
+      "n_px": 442
     },
     {
       "date": "2023-05-04",
-      "los_mm": -0.11,
-      "n_px": 419
+      "los_mm": -0.26,
+      "n_px": 442
     },
     {
       "date": "2023-06-21",
-      "los_mm": 0.27,
-      "n_px": 419
+      "los_mm": -0.0,
+      "n_px": 442
     },
     {
       "date": "2023-07-15",
-      "los_mm": -0.06,
-      "n_px": 419
+      "los_mm": -0.53,
+      "n_px": 442
     },
     {
       "date": "2023-08-08",
-      "los_mm": -1.93,
-      "n_px": 419
+      "los_mm": -2.08,
+      "n_px": 442
     },
     {
       "date": "2023-09-01",
-      "los_mm": -1.34,
-      "n_px": 419
+      "los_mm": -2.04,
+      "n_px": 442
     },
     {
       "date": "2023-10-07",
-      "los_mm": -5.76,
-      "n_px": 419
+      "los_mm": -5.96,
+      "n_px": 442
     },
     {
       "date": "2023-11-12",
-      "los_mm": -4.66,
-      "n_px": 419
+      "los_mm": -4.73,
+      "n_px": 442
     },
     {
       "date": "2023-12-06",
-      "los_mm": -1.29,
-      "n_px": 419
+      "los_mm": -1.55,
+      "n_px": 442
     },
     {
       "date": "2024-02-28",
-      "los_mm": -2.67,
-      "n_px": 419
+      "los_mm": -2.71,
+      "n_px": 442
     },
     {
       "date": "2024-03-11",
-      "los_mm": -4.4,
-      "n_px": 419
+      "los_mm": -4.34,
+      "n_px": 442
     },
     {
       "date": "2024-04-04",
-      "los_mm": -0.89,
-      "n_px": 419
+      "los_mm": -0.9,
+      "n_px": 442
     },
     {
       "date": "2024-05-22",
-      "los_mm": 0.0,
-      "n_px": 419
+      "los_mm": -0.0,
+      "n_px": 442
     },
     {
       "date": "2024-06-15",
-      "los_mm": -8.29,
-      "n_px": 419
+      "los_mm": -8.57,
+      "n_px": 442
     },
     {
       "date": "2024-08-14",
-      "los_mm": -1.82,
-      "n_px": 419
+      "los_mm": -2.72,
+      "n_px": 442
     },
     {
       "date": "2024-09-07",
-      "los_mm": 3.19,
-      "n_px": 419
+      "los_mm": 2.25,
+      "n_px": 442
     },
     {
       "date": "2024-10-01",
-      "los_mm": -3.66,
-      "n_px": 419
+      "los_mm": -3.63,
+      "n_px": 442
     },
     {
       "date": "2024-11-06",
-      "los_mm": -1.42,
-      "n_px": 419
+      "los_mm": -2.21,
+      "n_px": 442
     },
     {
       "date": "2024-12-12",
-      "los_mm": -1.49,
-      "n_px": 419
+      "los_mm": -1.94,
+      "n_px": 442
     },
     {
       "date": "2025-01-05",
-      "los_mm": -0.0,
-      "n_px": 419
+      "los_mm": -0.67,
+      "n_px": 442
     },
     {
       "date": "2025-03-18",
-      "los_mm": -1.59,
-      "n_px": 419
+      "los_mm": -1.45,
+      "n_px": 442
     },
     {
       "date": "2025-05-05",
-      "los_mm": -2.73,
-      "n_px": 419
+      "los_mm": -3.14,
+      "n_px": 442
     },
     {
       "date": "2025-07-16",
-      "los_mm": -8.37,
-      "n_px": 419
+      "los_mm": -8.54,
+      "n_px": 442
     },
     {
       "date": "2025-08-09",
       "los_mm": -0.0,
-      "n_px": 419
+      "n_px": 442
     },
     {
       "date": "2025-09-02",
-      "los_mm": -2.38,
-      "n_px": 419
+      "los_mm": -2.28,
+      "n_px": 442
     },
     {
       "date": "2025-10-08",
-      "los_mm": -5.96,
-      "n_px": 419
+      "los_mm": -5.87,
+      "n_px": 442
     },
     {
       "date": "2025-11-01",
-      "los_mm": -5.0,
-      "n_px": 419
+      "los_mm": -4.83,
+      "n_px": 442
     },
     {
       "date": "2025-12-07",
-      "los_mm": -1.27,
-      "n_px": 419
+      "los_mm": -1.11,
+      "n_px": 442
+    },
+    {
+      "date": "2026-01-12",
+      "los_mm": -2.36,
+      "n_px": 442
+    },
+    {
+      "date": "2026-02-05",
+      "los_mm": -3.79,
+      "n_px": 442
+    },
+    {
+      "date": "2026-03-25",
+      "los_mm": -1.4,
+      "n_px": 442
+    },
+    {
+      "date": "2026-04-06",
+      "los_mm": -1.48,
+      "n_px": 442
+    },
+    {
+      "date": "2026-05-24",
+      "los_mm": -0.2,
+      "n_px": 442
+    },
+    {
+      "date": "2026-06-05",
+      "los_mm": 0.0,
+      "n_px": 442
+    },
+    {
+      "date": "2026-07-06",
+      "los_mm": 0.0,
+      "n_px": 442
     }
   ]
 }

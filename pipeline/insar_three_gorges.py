@@ -25,7 +25,7 @@ OUT = os.path.join(HERE, "data", "three_gorges_insar.json")
 # Three Gorges Dam wall, Sandouping. Ascending track 11, burst 011_021659_IW1.
 DAM = {"lat": 30.826, "lon": 111.003}
 TRACK = 11
-DATE_START, DATE_END = "2023-01-01", "2025-12-31"
+DATE_START, DATE_END = "2023-01-01", "2026-07-25"
 LOOKS = "10x2"                 # ~25 m pixels; good coherence on the dam/rock
 WAVELENGTH = 0.055465          # Sentinel-1 C-band, metres
 BATCH_NAME = "threegorges-dam-insar"
@@ -55,22 +55,29 @@ def build_network():
 def cmd_submit():
     import hyp3_sdk
     epochs, pairs = build_network()
-    print(f"{len(epochs)} epochs {epochs[0]['date']}..{epochs[-1]['date']}, {len(pairs)} interferograms")
+    # incremental: keep already-submitted pairs, only queue new ones
+    records, existing = [], set()
+    if os.path.exists(JOBS):
+        old = json.load(open(JOBS))
+        records = old.get("jobs", [])
+        existing = {(j["ref"], j["sec"]) for j in records}
+    new_pairs = [(a, b) for (a, b) in pairs if (a["date"], b["date"]) not in existing]
+    print(f"{len(epochs)} epochs {epochs[0]['date']}..{epochs[-1]['date']}, "
+          f"{len(pairs)} pairs total, {len(new_pairs)} new to submit")
     h = hyp3_sdk.HyP3()
     print("credits before:", h.check_credits())
-    records = []
-    for k, (a, b) in enumerate(pairs, 1):
+    for k, (a, b) in enumerate(new_pairs, 1):
         batch = h.submit_insar_isce_burst_job(
             granule1=a["scene"], granule2=b["scene"], name=BATCH_NAME,
             apply_water_mask=False, looks=LOOKS)
         job = batch.jobs[0]
         records.append({"job_id": job.job_id, "ref": a["date"], "sec": b["date"],
                         "ref_scene": a["scene"], "sec_scene": b["scene"]})
-        print(f"  [{k}/{len(pairs)}] {a['date']} -> {b['date']}  {job.job_id}", flush=True)
+        print(f"  [{k}/{len(new_pairs)}] {a['date']} -> {b['date']}  {job.job_id}", flush=True)
     os.makedirs(os.path.dirname(JOBS), exist_ok=True)
     json.dump({"batch": BATCH_NAME, "looks": LOOKS, "submitted_utc": now(),
                "epochs": epochs, "jobs": records}, open(JOBS, "w"), indent=2)
-    print(f"\nSubmitted {len(records)} jobs. Saved {JOBS}. credits after:", h.check_credits())
+    print(f"\nSubmitted {len(new_pairs)} new jobs ({len(records)} total). credits after:", h.check_credits())
 
 
 def cmd_status():
