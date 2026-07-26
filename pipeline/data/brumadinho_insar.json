@@ -1,0 +1,132 @@
+{
+  "generated_utc": "2026-07-24T17:06:18Z",
+  "target": {
+    "name": "Corrego do Feijao tailings dam, Brumadinho",
+    "lat": -20.1189,
+    "lon": -44.1197,
+    "track": 53,
+    "burst": "053_112890_IW1",
+    "failure_date": "2019-01-25"
+  },
+  "source": {
+    "mission": "Sentinel-1 (ESA Copernicus)",
+    "processor": "ASF HyP3 ISCE burst InSAR",
+    "looks": "10x2",
+    "attribution": "Contains modified Copernicus Sentinel data 2017-2019, processed by ASF HyP3"
+  },
+  "method": {
+    "network": "37 small-baseline burst interferograms, monthly epochs",
+    "inversion": "per-pixel weighted least-squares SBAS, referenced to the highest-coherence stable pixel",
+    "series": "median line-of-sight displacement over coherent dam-area pixels",
+    "limitation": "line-of-sight, one descending track; a tailings surface decorrelates fast, so coherence on the dam face is limited and the signal is subtle"
+  },
+  "summary": {
+    "epochs": 20,
+    "velocity_mm_yr": -7.61,
+    "scatter_mm": 6.23,
+    "los_min_mm": -17.13,
+    "los_max_mm": 10.53
+  },
+  "series": [
+    {
+      "date": "2017-06-01",
+      "los_mm": 0.0,
+      "n_px": 817
+    },
+    {
+      "date": "2017-07-07",
+      "los_mm": -10.16,
+      "n_px": 817
+    },
+    {
+      "date": "2017-08-12",
+      "los_mm": -1.69,
+      "n_px": 817
+    },
+    {
+      "date": "2017-09-05",
+      "los_mm": 0.15,
+      "n_px": 817
+    },
+    {
+      "date": "2017-10-23",
+      "los_mm": 10.43,
+      "n_px": 817
+    },
+    {
+      "date": "2017-11-04",
+      "los_mm": 10.53,
+      "n_px": 817
+    },
+    {
+      "date": "2017-12-10",
+      "los_mm": 5.45,
+      "n_px": 817
+    },
+    {
+      "date": "2018-01-03",
+      "los_mm": 5.64,
+      "n_px": 817
+    },
+    {
+      "date": "2018-02-08",
+      "los_mm": -0.64,
+      "n_px": 817
+    },
+    {
+      "date": "2018-03-04",
+      "los_mm": 3.28,
+      "n_px": 817
+    },
+    {
+      "date": "2018-04-09",
+      "los_mm": 2.81,
+      "n_px": 817
+    },
+    {
+      "date": "2018-05-03",
+      "los_mm": 4.76,
+      "n_px": 817
+    },
+    {
+      "date": "2018-06-08",
+      "los_mm": -2.8,
+      "n_px": 817
+    },
+    {
+      "date": "2018-07-02",
+      "los_mm": 3.67,
+      "n_px": 817
+    },
+    {
+      "date": "2018-08-07",
+      "los_mm": -9.26,
+      "n_px": 817
+    },
+    {
+      "date": "2018-09-12",
+      "los_mm": -7.41,
+      "n_px": 817
+    },
+    {
+      "date": "2018-10-06",
+      "los_mm": -0.81,
+      "n_px": 817
+    },
+    {
+      "date": "2018-11-11",
+      "los_mm": -9.58,
+      "n_px": 817
+    },
+    {
+      "date": "2018-12-05",
+      "los_mm": -17.13,
+      "n_px": 817
+    },
+    {
+      "date": "2019-01-10",
+      "los_mm": -9.6,
+      "n_px": 817
+    }
+  ]
+}
