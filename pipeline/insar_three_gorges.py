@@ -100,7 +100,7 @@ def _download():
     import hyp3_sdk
     h = hyp3_sdk.HyP3()
     batch = h.find_jobs(name=BATCH_NAME)
-    batch = h.watch(batch) if any(j.running() for j in batch) else batch
+    batch = h.watch(batch) if any(not j.complete() for j in batch) else batch
     os.makedirs(INSAR_DIR, exist_ok=True)
     got = 0
     for j in batch:

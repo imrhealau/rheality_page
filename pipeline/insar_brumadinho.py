@@ -36,7 +36,7 @@ AOI = [-44.16, -20.15, -44.08, -20.09]
 
 
 def build_network():
-    """Monthly-subsampled epochs and consecutive + skip-1 interferogram pairs."""
+    """Every available pass as an epoch, consecutive + skip-1 interferogram pairs."""
     import asf_search as asf
     r = asf.search(dataset=asf.DATASET.SLC_BURST, intersectsWith=f"POINT({DAM['lon']} {DAM['lat']})",
                    relativeOrbit=TRACK, start=DATE_START, end=DATE_END, maxResults=2000)
@@ -45,8 +45,8 @@ def build_network():
                     key=lambda s: s[1])
     seen, epochs = set(), []
     for name, d in scenes:
-        if d[:7] not in seen:
-            seen.add(d[:7]); epochs.append({"scene": name, "date": d})
+        if d not in seen:
+            seen.add(d); epochs.append({"scene": name, "date": d})
     pairs = []
     for i in range(len(epochs)):
         for j in (i + 1, i + 2):
@@ -103,7 +103,7 @@ def _download():
     import hyp3_sdk
     h = hyp3_sdk.HyP3()
     batch = h.find_jobs(name=BATCH_NAME)
-    batch = h.watch(batch) if any(j.running() for j in batch) else batch
+    batch = h.watch(batch) if any(not j.complete() for j in batch) else batch
     os.makedirs(INSAR_DIR, exist_ok=True)
     got = 0
     for j in batch:
@@ -219,6 +219,33 @@ def cmd_process():
         if vals.size:
             series.append({"date": d, "los_mm": round(float(np.median(vals)) * 1000, 2),
                            "n_px": int(vals.size)})
+
+    # hotspot: the fastest-subsiding 10% of coherent dam pixels, tracked as their own series
+    tyr = np.array([_ord(d) for d in epochs]) / 365.25
+    vel_px = np.full((H, W), np.nan)
+    for y, x in zip(ys, xs):
+        col = ts[:, y, x]
+        good = np.isfinite(col)
+        if good.sum() >= 8:
+            vel_px[y, x] = np.polyfit(tyr[good] - tyr[good][0], col[good] * 1000, 1)[0]
+    hot_sel = dam & np.isfinite(vel_px)
+    hotspot = None
+    if hot_sel.sum() >= 20:
+        cut = np.nanpercentile(vel_px[hot_sel], 10)
+        hot = hot_sel & (vel_px <= cut)
+        hseries = []
+        for i, d in enumerate(epochs):
+            vals = ts[i][hot]
+            vals = vals[~np.isnan(vals)]
+            if vals.size:
+                hseries.append({"date": d, "los_mm": round(float(np.median(vals)) * 1000, 2)})
+        hy = np.array([s["los_mm"] for s in hseries])
+        ht = np.array([_ord(s["date"]) for s in hseries]) / 365.25
+        hotspot = {"n_px": int(hot.sum()),
+                   "velocity_mm_yr": round(float(np.polyfit(ht - ht[0], hy, 1)[0]), 2),
+                   "los_min_mm": round(float(hy.min()), 2),
+                   "series": hseries}
+        print(f"hotspot: {hot.sum()} px, velocity {hotspot['velocity_mm_yr']:+.2f} mm/yr")
     # linear velocity over the series
     t = np.array([(_ord(s["date"])) for s in series]) / 365.25
     y = np.array([s["los_mm"] for s in series])
@@ -230,14 +257,15 @@ def cmd_process():
         "source": {"mission": "Sentinel-1 (ESA Copernicus)",
                    "processor": "ASF HyP3 ISCE burst InSAR", "looks": LOOKS,
                    "attribution": "Contains modified Copernicus Sentinel data 2017-2019, processed by ASF HyP3"},
-        "method": {"network": f"{len(ifgs)} small-baseline burst interferograms, monthly epochs",
+        "method": {"network": f"{len(ifgs)} small-baseline burst interferograms, every available pass",
                    "inversion": "per-pixel weighted least-squares SBAS, referenced to the highest-coherence stable pixel",
-                   "series": "median line-of-sight displacement over coherent dam-area pixels",
+                   "series": "median line-of-sight displacement over coherent dam-area pixels; hotspot = fastest-subsiding 10% of them",
                    "limitation": "line-of-sight, one descending track; a tailings surface decorrelates fast, so coherence on the dam face is limited and the signal is subtle"},
         "summary": {"epochs": len(series), "velocity_mm_yr": round(vel, 2),
                     "scatter_mm": round(float(np.std(resid)), 2),
                     "los_min_mm": round(float(y.min()), 2), "los_max_mm": round(float(y.max()), 2)},
         "series": series,
+        "hotspot": hotspot,
     }
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     json.dump(out, open(OUT, "w"), indent=2)

@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-07-24T17:06:18Z",
+  "generated_utc": "2026-07-26T10:35:07Z",
   "target": {
     "name": "Corrego do Feijao tailings dam, Brumadinho",
     "lat": -20.1189,
@@ -15,118 +15,475 @@
     "attribution": "Contains modified Copernicus Sentinel data 2017-2019, processed by ASF HyP3"
   },
   "method": {
-    "network": "37 small-baseline burst interferograms, monthly epochs",
+    "network": "126 small-baseline burst interferograms, every available pass",
     "inversion": "per-pixel weighted least-squares SBAS, referenced to the highest-coherence stable pixel",
-    "series": "median line-of-sight displacement over coherent dam-area pixels",
+    "series": "median line-of-sight displacement over coherent dam-area pixels; hotspot = fastest-subsiding 10% of them",
     "limitation": "line-of-sight, one descending track; a tailings surface decorrelates fast, so coherence on the dam face is limited and the signal is subtle"
   },
   "summary": {
-    "epochs": 20,
-    "velocity_mm_yr": -7.61,
-    "scatter_mm": 6.23,
-    "los_min_mm": -17.13,
-    "los_max_mm": 10.53
+    "epochs": 50,
+    "velocity_mm_yr": -16.59,
+    "scatter_mm": 3.74,
+    "los_min_mm": -28.6,
+    "los_max_mm": 4.56
   },
   "series": [
     {
       "date": "2017-06-01",
       "los_mm": 0.0,
-      "n_px": 817
+      "n_px": 1722
+    },
+    {
+      "date": "2017-06-13",
+      "los_mm": 2.23,
+      "n_px": 1722
+    },
+    {
+      "date": "2017-06-25",
+      "los_mm": -5.34,
+      "n_px": 1722
     },
     {
       "date": "2017-07-07",
-      "los_mm": -10.16,
-      "n_px": 817
+      "los_mm": -9.87,
+      "n_px": 1722
+    },
+    {
+      "date": "2017-07-19",
+      "los_mm": 4.56,
+      "n_px": 1722
+    },
+    {
+      "date": "2017-07-31",
+      "los_mm": 3.13,
+      "n_px": 1722
     },
     {
       "date": "2017-08-12",
-      "los_mm": -1.69,
-      "n_px": 817
+      "los_mm": -2.2,
+      "n_px": 1722
+    },
+    {
+      "date": "2017-08-24",
+      "los_mm": -4.44,
+      "n_px": 1722
     },
     {
       "date": "2017-09-05",
-      "los_mm": 0.15,
-      "n_px": 817
+      "los_mm": 0.42,
+      "n_px": 1722
+    },
+    {
+      "date": "2017-09-17",
+      "los_mm": 0.65,
+      "n_px": 1722
+    },
+    {
+      "date": "2017-09-29",
+      "los_mm": 3.7,
+      "n_px": 1722
     },
     {
       "date": "2017-10-23",
-      "los_mm": 10.43,
-      "n_px": 817
+      "los_mm": -4.51,
+      "n_px": 1722
     },
     {
       "date": "2017-11-04",
-      "los_mm": 10.53,
-      "n_px": 817
+      "los_mm": -3.33,
+      "n_px": 1722
+    },
+    {
+      "date": "2017-11-16",
+      "los_mm": -10.95,
+      "n_px": 1722
+    },
+    {
+      "date": "2017-11-28",
+      "los_mm": -8.87,
+      "n_px": 1722
     },
     {
       "date": "2017-12-10",
-      "los_mm": 5.45,
-      "n_px": 817
+      "los_mm": -9.37,
+      "n_px": 1722
+    },
+    {
+      "date": "2017-12-22",
+      "los_mm": -9.89,
+      "n_px": 1722
     },
     {
       "date": "2018-01-03",
-      "los_mm": 5.64,
-      "n_px": 817
+      "los_mm": -9.26,
+      "n_px": 1722
+    },
+    {
+      "date": "2018-01-15",
+      "los_mm": -11.78,
+      "n_px": 1722
+    },
+    {
+      "date": "2018-01-27",
+      "los_mm": -18.39,
+      "n_px": 1722
     },
     {
       "date": "2018-02-08",
-      "los_mm": -0.64,
-      "n_px": 817
+      "los_mm": -16.09,
+      "n_px": 1722
+    },
+    {
+      "date": "2018-02-20",
+      "los_mm": -10.37,
+      "n_px": 1722
     },
     {
       "date": "2018-03-04",
-      "los_mm": 3.28,
-      "n_px": 817
+      "los_mm": -12.88,
+      "n_px": 1722
+    },
+    {
+      "date": "2018-03-16",
+      "los_mm": -17.41,
+      "n_px": 1722
+    },
+    {
+      "date": "2018-03-28",
+      "los_mm": -13.24,
+      "n_px": 1722
     },
     {
       "date": "2018-04-09",
-      "los_mm": 2.81,
-      "n_px": 817
+      "los_mm": -12.78,
+      "n_px": 1722
+    },
+    {
+      "date": "2018-04-21",
+      "los_mm": -17.74,
+      "n_px": 1722
     },
     {
       "date": "2018-05-03",
-      "los_mm": 4.76,
-      "n_px": 817
+      "los_mm": -10.06,
+      "n_px": 1722
+    },
+    {
+      "date": "2018-05-15",
+      "los_mm": -13.84,
+      "n_px": 1722
+    },
+    {
+      "date": "2018-05-27",
+      "los_mm": -15.81,
+      "n_px": 1722
     },
     {
       "date": "2018-06-08",
-      "los_mm": -2.8,
-      "n_px": 817
+      "los_mm": -18.14,
+      "n_px": 1722
+    },
+    {
+      "date": "2018-06-20",
+      "los_mm": -18.42,
+      "n_px": 1722
     },
     {
       "date": "2018-07-02",
-      "los_mm": 3.67,
-      "n_px": 817
+      "los_mm": -11.46,
+      "n_px": 1722
+    },
+    {
+      "date": "2018-07-14",
+      "los_mm": -17.62,
+      "n_px": 1722
+    },
+    {
+      "date": "2018-07-26",
+      "los_mm": -16.64,
+      "n_px": 1722
     },
     {
       "date": "2018-08-07",
-      "los_mm": -9.26,
-      "n_px": 817
+      "los_mm": -24.74,
+      "n_px": 1722
+    },
+    {
+      "date": "2018-08-19",
+      "los_mm": -14.73,
+      "n_px": 1722
+    },
+    {
+      "date": "2018-08-31",
+      "los_mm": -15.71,
+      "n_px": 1722
     },
     {
       "date": "2018-09-12",
-      "los_mm": -7.41,
-      "n_px": 817
+      "los_mm": -22.58,
+      "n_px": 1722
+    },
+    {
+      "date": "2018-09-24",
+      "los_mm": -23.8,
+      "n_px": 1722
     },
     {
       "date": "2018-10-06",
-      "los_mm": -0.81,
-      "n_px": 817
+      "los_mm": -17.26,
+      "n_px": 1722
+    },
+    {
+      "date": "2018-10-18",
+      "los_mm": -24.85,
+      "n_px": 1722
+    },
+    {
+      "date": "2018-10-30",
+      "los_mm": -20.27,
+      "n_px": 1722
     },
     {
       "date": "2018-11-11",
-      "los_mm": -9.58,
-      "n_px": 817
+      "los_mm": -23.46,
+      "n_px": 1722
+    },
+    {
+      "date": "2018-11-23",
+      "los_mm": -26.24,
+      "n_px": 1722
     },
     {
       "date": "2018-12-05",
-      "los_mm": -17.13,
-      "n_px": 817
+      "los_mm": -28.6,
+      "n_px": 1722
+    },
+    {
+      "date": "2018-12-17",
+      "los_mm": -20.54,
+      "n_px": 1722
+    },
+    {
+      "date": "2018-12-29",
+      "los_mm": -25.44,
+      "n_px": 1722
     },
     {
       "date": "2019-01-10",
-      "los_mm": -9.6,
-      "n_px": 817
+      "los_mm": -22.88,
+      "n_px": 1722
+    },
+    {
+      "date": "2019-01-22",
+      "los_mm": -27.93,
+      "n_px": 1722
     }
-  ]
+  ],
+  "hotspot": {
+    "n_px": 173,
+    "velocity_mm_yr": -49.2,
+    "los_min_mm": -79.0,
+    "series": [
+      {
+        "date": "2017-06-01",
+        "los_mm": 0.0
+      },
+      {
+        "date": "2017-06-13",
+        "los_mm": 2.44
+      },
+      {
+        "date": "2017-06-25",
+        "los_mm": -9.51
+      },
+      {
+        "date": "2017-07-07",
+        "los_mm": -12.87
+      },
+      {
+        "date": "2017-07-19",
+        "los_mm": 1.06
+      },
+      {
+        "date": "2017-07-31",
+        "los_mm": -0.64
+      },
+      {
+        "date": "2017-08-12",
+        "los_mm": -6.48
+      },
+      {
+        "date": "2017-08-24",
+        "los_mm": -9.91
+      },
+      {
+        "date": "2017-09-05",
+        "los_mm": -7.45
+      },
+      {
+        "date": "2017-09-17",
+        "los_mm": -7.45
+      },
+      {
+        "date": "2017-09-29",
+        "los_mm": -4.96
+      },
+      {
+        "date": "2017-10-23",
+        "los_mm": -18.03
+      },
+      {
+        "date": "2017-11-04",
+        "los_mm": -15.72
+      },
+      {
+        "date": "2017-11-16",
+        "los_mm": -27.83
+      },
+      {
+        "date": "2017-11-28",
+        "los_mm": -25.67
+      },
+      {
+        "date": "2017-12-10",
+        "los_mm": -27.83
+      },
+      {
+        "date": "2017-12-22",
+        "los_mm": -28.01
+      },
+      {
+        "date": "2018-01-03",
+        "los_mm": -28.2
+      },
+      {
+        "date": "2018-01-15",
+        "los_mm": -33.62
+      },
+      {
+        "date": "2018-01-27",
+        "los_mm": -38.97
+      },
+      {
+        "date": "2018-02-08",
+        "los_mm": -38.81
+      },
+      {
+        "date": "2018-02-20",
+        "los_mm": -36.96
+      },
+      {
+        "date": "2018-03-04",
+        "los_mm": -39.62
+      },
+      {
+        "date": "2018-03-16",
+        "los_mm": -43.5
+      },
+      {
+        "date": "2018-03-28",
+        "los_mm": -46.89
+      },
+      {
+        "date": "2018-04-09",
+        "los_mm": -44.69
+      },
+      {
+        "date": "2018-04-21",
+        "los_mm": -50.61
+      },
+      {
+        "date": "2018-05-03",
+        "los_mm": -44.39
+      },
+      {
+        "date": "2018-05-15",
+        "los_mm": -46.91
+      },
+      {
+        "date": "2018-05-27",
+        "los_mm": -50.88
+      },
+      {
+        "date": "2018-06-08",
+        "los_mm": -51.94
+      },
+      {
+        "date": "2018-06-20",
+        "los_mm": -54.9
+      },
+      {
+        "date": "2018-07-02",
+        "los_mm": -46.97
+      },
+      {
+        "date": "2018-07-14",
+        "los_mm": -56.29
+      },
+      {
+        "date": "2018-07-26",
+        "los_mm": -54.14
+      },
+      {
+        "date": "2018-08-07",
+        "los_mm": -64.49
+      },
+      {
+        "date": "2018-08-19",
+        "los_mm": -54.37
+      },
+      {
+        "date": "2018-08-31",
+        "los_mm": -58.96
+      },
+      {
+        "date": "2018-09-12",
+        "los_mm": -65.15
+      },
+      {
+        "date": "2018-09-24",
+        "los_mm": -66.21
+      },
+      {
+        "date": "2018-10-06",
+        "los_mm": -60.65
+      },
+      {
+        "date": "2018-10-18",
+        "los_mm": -67.13
+      },
+      {
+        "date": "2018-10-30",
+        "los_mm": -64.72
+      },
+      {
+        "date": "2018-11-11",
+        "los_mm": -71.65
+      },
+      {
+        "date": "2018-11-23",
+        "los_mm": -74.06
+      },
+      {
+        "date": "2018-12-05",
+        "los_mm": -76.69
+      },
+      {
+        "date": "2018-12-17",
+        "los_mm": -71.87
+      },
+      {
+        "date": "2018-12-29",
+        "los_mm": -73.77
+      },
+      {
+        "date": "2019-01-10",
+        "los_mm": -72.91
+      },
+      {
+        "date": "2019-01-22",
+        "los_mm": -79.0
+      }
+    ]
+  }
 }
