@@ -5,6 +5,7 @@ import re, sys
 
 TELLS = [
     (r'\w — \w|\w—\w', "em-dash in prose (use comma, colon, or split the sentence)"),
+    (r'\w &mdash; \w|\w&mdash;\w|&mdash; \w|\w &mdash;', "em-dash entity in prose (use comma, colon, or split the sentence)"),
     (r"\bisn'?t just\b|\baren'?t just\b|\bnot just\b|\bmore than just\b", "antithesis tell: 'not just X'"),
     (r"\bIt'?s not about\b|\bwon'?t just\b|\bdoesn'?t just\b", "antithesis tell"),
     (r'\bdelve\b|\bseamless(ly)?\b|\bleverage[sd]?\b|\brobust\b|\btapestry\b', "banned AI word"),

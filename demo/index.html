@@ -157,7 +157,7 @@
     measurable from space.</p>
     <p class="lede">Everything on this page is <strong>our own measurement</strong>: we reprocessed the raw
     Sentinel-1 radar over the dam ourselves, ending with the final satellite pass three days before failure. No ground
-    sensors, no site visit, one independent read from orbit &mdash; and the movement was there all along.</p>
+    sensors, no site visit, one independent read from orbit. The public radar record shows the dam moving for more than a year before it fell.</p>
   </section>
 
   <section class="more">
@@ -186,7 +186,7 @@
       <p class="sub">One point per satellite pass. Down means the ground is moving away from the satellite. The orange
       series is the median over the whole dam area; the red series is the fastest-subsiding tenth of its pixels. The
       dashed line is the fitted trend; the red vertical line marks the collapse. <strong>Press replay</strong> to watch
-      the final year play out, pass by pass, from 1 February 2018 to 31 January 2019 &mdash; the alert computed from
+      the final year play out, pass by pass, from 1 February 2018 to 31 January 2019. The alert computed from
       this series was already live before the year began.</p>
       <div class="replay">
         <button class="rp-btn" id="rpBtn" type="button">&#9654;&ensp;Replay the final year</button>
@@ -216,10 +216,9 @@
     <div class="card" style="grid-column:1/-1">
       <h3>29 January: the radar proof it was gone</h3>
       <p class="sub">Our track's next pass over the dam came only on 3 February. But the neighbouring descending track
-      passed on <strong>29 January, four days after the failure</strong>. Displacement can no longer be measured across
-      the collapse &mdash; the surface that carried the signal was destroyed with the dam &mdash; but the radar still
-      testifies: an intact surface keeps its interferometric coherence from one pass to the next, while ground torn
-      away and replaced by a debris flow drops to noise.</p>
+      passed on <strong>29 January, four days after the failure</strong>. That pass cannot measure displacement any more, because
+      the surface that carried the signal went with the dam. What it can still measure is coherence: an intact
+      surface returns a similar radar echo pass after pass, and a fresh debris field returns noise.</p>
       <div class="coh-row" id="postStats"></div>
       <p class="prov" id="postProv"></p>
     </div>
@@ -228,13 +227,12 @@
   <section class="more">
     <span class="eyebrow">The published study &middot; production-grade monitoring</span>
     <h2>What a fully funded monitor sees</h2>
-    <p class="lede">The post-event analysis (Grebby et al. 2021) went further than our free-data quick-look: it
-    tracked <strong>every coherent point on the dam individually</strong> &mdash; the per-point engine of a
-    production monitoring service, run by specialists. At that level the final acceleration is unmistakable: an
-    alert fires <strong>40 days before failure</strong>, peaking at &minus;119&nbsp;mm/yr on the lower embankment.
-    Production systems then layer on what money buys &mdash; tasked high-resolution commercial radar (ICEYE,
-    TerraSAR-X) revisiting daily instead of every 12 days. Running that engine live, on every pass, for every
-    asset is exactly what Rheality is raising to build.</p>
+    <p class="lede">After the disaster, a specialist team reprocessed the same free radar with a heavier method (Grebby et al.
+    2021): <strong>every coherent point on the dam, tracked individually</strong>. At that level the final
+    acceleration is easy to see, and an alert fires <strong>40 days before failure</strong>, peaking at
+    &minus;119&nbsp;mm/yr on the lower embankment. A funded service adds tasked commercial radar (ICEYE,
+    TerraSAR-X) that revisits daily instead of every 12 days. That live, per-point service is what Rheality is
+    raising to build.</p>
   </section>
 
   <div class="stats">
@@ -268,7 +266,7 @@
       of that pace. A healthy embankment does not move like that; on our alerting thresholds this signal is flagged long
       before the failure. What our coarse 25-metre quick-look does not resolve is the final-weeks acceleration the study
       found: that took per-point tracking of the single worst spot on the face, tuned after the event. Production
-      monitoring runs that per-point tracking on every pass, in advance, which is exactly what the subscription is.</p>
+      monitoring runs that per-point tracking on every pass, in advance, that is the subscription.</p>
     </div>
   </div>
 
@@ -285,8 +283,8 @@
   </section>
 
   <div class="foot">
-    <b>Demo note.</b> The measurement charts on this page &mdash; the displacement series, the zoom, and the
-    coherence circles &mdash; are our own processing results, built from raw Sentinel-1 radar through the same
+    <b>Demo note.</b> The measurement charts on this page (the displacement series, the zoom, and the
+    coherence circles) are our own processing results, built from raw Sentinel-1 radar through the same
     pipeline that runs our live monitoring today. The two panels under "What a fully funded monitor sees" are a
     stylised replay of the published post-event analysis of Dam I (Grebby et al. 2021,
     <i>Communications Earth &amp; Environment</i>), shown to illustrate what per-point production monitoring
@@ -451,7 +449,7 @@ fetch('../pipeline/data/brumadinho_insar.json?v='+Date.now()).then(r=>{
   g2+=`<g id="rpCollapseG2"><rect x="${cx2}" y="${mt}" width="${X2(z1)-cx2}" height="${Hz-mt-mb}" fill="${C.redSoft}"/>`;
   g2+=`<line x1="${cx2}" y1="${mt}" x2="${cx2}" y2="${Hz-mb}" stroke="${C.red}" stroke-width="1.8"/>`;
   g2+=`<text x="${cx2-4}" y="${mt+14}" fill="${C.red}" font-size="10.5" text-anchor="end">collapse 25 Jan</text>`;
-  g2+=`<text x="${cx2-4}" y="${mt+28}" fill="${C.red}" font-size="10.5" text-anchor="end" opacity="0.75">no further passes &mdash; dam gone</text></g>`;
+  g2+=`<text x="${cx2-4}" y="${mt+28}" fill="${C.red}" font-size="10.5" text-anchor="end" opacity="0.75">no further passes: dam gone</text></g>`;
   document.getElementById('realChartZoom').innerHTML=`<svg class="chart" viewBox="0 0 ${W} ${Hz}" role="img" aria-label="zoom on December 2018 and January 2019, up to 31 January">${g2}</svg>`;
 
   // replay wiring
@@ -473,15 +471,15 @@ fetch('../pipeline/data/brumadinho_insar.json?v='+Date.now()).then(r=>{
     let cls='rp-banner', html;
     if(t>=COLLAPSE.getTime()){
       cls+=' collapse';
-      html='<b>25 January 2019 &mdash; Dam I collapses.</b>'+(aliveDays?' The alert computed from this series had been live for <b>'+aliveDays+' days</b>.':'');
+      html='<b>25 January 2019: Dam I collapses.</b>'+(aliveDays?' The alert computed from this series had been live for <b>'+aliveDays+' days</b>.':'');
     } else if(ev.alert&&t>=ev.alert){
       cls+=' alert';
-      html='<b>Alert active</b> since '+fmt(new Date(ev.alert))+' &mdash; '+Math.round((t-ev.alert)/86400000)+' days of sustained hotspot subsidence and counting.';
+      html='<b>Alert active</b> since '+fmt(new Date(ev.alert))+': '+Math.round((t-ev.alert)/86400000)+' days of sustained hotspot subsidence and counting.';
     } else if(ev.watch&&t>=ev.watch){
       cls+=' alert';
-      html='<b>Watch</b> &mdash; hotspot subsidence above the watch threshold.';
+      html='<b>Watch</b>: hotspot subsidence above the watch threshold.';
     } else {
-      html='Quiet &mdash; no alerting threshold crossed yet.';
+      html='Quiet: no alerting threshold crossed yet.';
     }
     banner.className=cls; banner.innerHTML=html;
     logEl.innerHTML=rpEvents.filter(e=>e.t<=t).map(e=>
