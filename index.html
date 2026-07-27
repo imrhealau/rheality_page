@@ -70,10 +70,17 @@
     .nav-inner{padding:8px 10px 8px 14px;gap:8px}
     .nav-inner img{height:26px}
     .nav-inner > .btn{display:none}
-    nav.nav.shrunk .nav-inner .logo-word{display:none}
-    nav.nav.shrunk .nav-inner .logo-mark{display:block;height:30px}
+    .nav-inner .logo-word{max-width:150px;object-fit:contain;object-position:left center;
+      transition:max-width .35s ease,opacity .2s ease}
+    .nav-inner .logo-mark{display:block;max-width:0;opacity:0;transform:scale(.5) rotate(-60deg);
+      transition:max-width .35s ease,opacity .25s ease,transform .35s ease}
+    nav.nav.shrunk .nav-inner .logo-word{max-width:0;opacity:0}
+    nav.nav.shrunk .nav-inner .logo-mark{max-width:30px;height:30px;opacity:1;transform:none}
     .tabs{flex:1;justify-content:space-between;overflow-x:auto;-webkit-overflow-scrolling:touch}
     .tabs a{padding:6px 8px;font-size:0.78rem}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .nav-inner .logo-word,.nav-inner .logo-mark{transition:none}
   }
   @media (max-width:400px){
     .nav-inner{padding:8px 6px 8px 10px;gap:5px}
