@@ -1,0 +1,39 @@
+{
+  "generated_utc": "2026-07-27T08:13:06Z",
+  "target": {
+    "name": "Corrego do Feijao Dam I, Brumadinho",
+    "lat": -20.1189,
+    "lon": -44.1197,
+    "track": 155,
+    "note": "adjacent descending track; first post-collapse pass 29 Jan 2019"
+  },
+  "source": {
+    "mission": "Sentinel-1 (ESA Copernicus)",
+    "processor": "ASF HyP3 ISCE burst InSAR",
+    "looks": "10x2",
+    "attribution": "Contains modified Copernicus Sentinel data 2019, processed by ASF HyP3"
+  },
+  "method": "Interferometric coherence over the dam footprint vs a stable control area, for a pre-collapse pair (5-17 Jan) and the pair spanning the failure (17-29 Jan). Coherence measures whether the ground surface physically persisted between passes. A blind search for the strongest coherence loss anywhere in the 14 km scene lands on the dam site itself.",
+  "pairs": [
+    {
+      "ref": "2019-01-05",
+      "sec": "2019-01-17",
+      "spans_collapse": false,
+      "coh_dam_mean": 0.569,
+      "coh_control_mean": 0.621,
+      "frac_dam_below_03": 0.142,
+      "n_px_dam": 650,
+      "n_px_control": 4424
+    },
+    {
+      "ref": "2019-01-17",
+      "sec": "2019-01-29",
+      "spans_collapse": true,
+      "coh_dam_mean": 0.321,
+      "coh_control_mean": 0.626,
+      "frac_dam_below_03": 0.497,
+      "n_px_dam": 650,
+      "n_px_control": 4424
+    }
+  ]
+}

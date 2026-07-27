@@ -4,7 +4,9 @@ __pycache__/
 # InSAR intermediates (kept local; only the final JSON is committed)
 insar/
 insar_brumadinho/
+insar_brumadinho_post/
 data/hyp3_jobs.json
 data/hyp3_jobs_brumadinho.json
+data/hyp3_jobs_brumadinho_post.json
 *.tif
 *.zip

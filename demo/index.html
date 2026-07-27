@@ -184,6 +184,19 @@
     </div>
   </div>
 
+  <div class="cards" id="postCards" style="display:none">
+    <div class="card" style="grid-column:1/-1">
+      <h3>29 January: the radar proof it was gone</h3>
+      <p class="sub">Our track's next pass over the dam came only on 3 February. But the neighbouring descending track
+      passed on <strong>29 January, four days after the failure</strong>. Displacement can no longer be measured across
+      the collapse &mdash; the surface that carried the signal was destroyed with the dam &mdash; but the radar still
+      testifies: an intact surface keeps its interferometric coherence from one pass to the next, while ground torn
+      away and replaced by a debris flow drops to noise.</p>
+      <div class="stats" id="postStats" style="margin:0 0 4px;box-shadow:none;border:0;padding:0"></div>
+      <p class="prov" id="postProv"></p>
+    </div>
+  </div>
+
   <div class="cards">
     <div class="card" style="grid-column:1/-1">
       <h3>How this compares with the published study</h3>
@@ -440,6 +453,22 @@ fetch('../pipeline/data/brumadinho_insar.json?v='+Date.now()).then(r=>{
   document.getElementById('realChart').innerHTML =
     '<p class="prov">Measurement file failed to load. The series is in pipeline/data/brumadinho_insar.json in the repository.</p>';
 });
+
+fetch('../pipeline/data/brumadinho_postcollapse.json?v='+Date.now()).then(r=>{
+  if(!r.ok) throw new Error(r.status); return r.json();
+}).then(j=>{
+  const pre=j.pairs.find(p=>!p.spans_collapse), post=j.pairs.find(p=>p.spans_collapse);
+  if(!pre||!post) return;
+  const drop=Math.round((1-post.coh_dam_mean/pre.coh_dam_mean)*100);
+  document.getElementById('postStats').innerHTML=
+    `<div class="f-fact"><strong>${pre.coh_dam_mean.toFixed(2)}</strong><span>Dam coherence, 5 &rarr; 17 Jan &mdash; surface intact</span></div>`+
+    `<div class="f-fact red"><strong>${post.coh_dam_mean.toFixed(2)}</strong><span>Dam coherence, 17 &rarr; 29 Jan &mdash; spans the collapse</span></div>`+
+    `<div class="f-fact"><strong>${post.coh_control_mean.toFixed(2)}</strong><span>Control area, same pair &mdash; terrain the flow never touched</span></div>`+
+    `<div class="f-fact amber"><strong>&minus;${drop}%</strong><span>Coherence lost over the dam across the failure</span></div>`;
+  document.getElementById('postProv').innerHTML=
+    `<b>Method:</b> ${j.method} <b>Track:</b> ${j.target.track} (descending). ${j.source.attribution}.`;
+  document.getElementById('postCards').style.display='';
+}).catch(()=>{});
 </script>
 </body>
 </html>
