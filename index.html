@@ -57,10 +57,6 @@
   }
   .nav-inner img{height:34px;width:auto;display:block}
   .logo-mark{display:none}
-  @media (max-width:640px){
-    nav.nav.shrunk .logo-word{display:none}
-    nav.nav.shrunk .logo-mark{display:block}
-  }
   .tabs{display:flex;gap:4px;margin-left:auto}
   .tabs a{
     font-family:var(--disp);font-weight:700;font-size:0.9rem;color:var(--muted);
@@ -74,8 +70,10 @@
     .nav-inner{padding:8px 10px 8px 14px;gap:8px}
     .nav-inner img{height:26px}
     .nav-inner > .btn{display:none}
-    .tabs a{padding:6px 10px;font-size:0.78rem}
-    .tabs{overflow-x:auto;-webkit-overflow-scrolling:touch}
+    .logo-word{display:none}
+    .logo-mark{display:block;height:30px}
+    .tabs{flex:1;justify-content:space-between;overflow-x:auto;-webkit-overflow-scrolling:touch}
+    .tabs a{padding:6px 8px;font-size:0.78rem}
   }
   @media (max-width:400px){
     .nav-inner{padding:8px 6px 8px 10px;gap:5px}
@@ -746,15 +744,6 @@
     window.addEventListener('hashchange', route);
     route();
   })();
-</script>
-<script>
-(function(){
-  var nav=document.querySelector('nav.nav');
-  if(!nav) return;
-  var on=false;
-  function upd(){var s=window.scrollY>70; if(s!==on){on=s; nav.classList.toggle('shrunk',s);}}
-  window.addEventListener('scroll',upd,{passive:true}); upd();
-})();
 </script>
 <noscript><style>.panel{display:block}</style></noscript>
 </body>

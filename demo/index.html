@@ -29,10 +29,6 @@
     padding:10px 14px 10px 22px;display:flex;align-items:center;gap:18px;box-shadow:0 6px 24px rgba(46,31,74,.08)}
   .nav-inner .logo{height:34px;width:auto;display:block}
   .logo-mark{display:none}
-  @media (max-width:640px){
-    nav.nav.shrunk .logo-word{display:none}
-    nav.nav.shrunk .logo-mark{display:block}
-  }
   .tabs{display:flex;gap:4px;margin-left:auto}
   .tabs a{font-family:var(--disp);font-weight:700;font-size:.9rem;color:var(--muted);text-decoration:none;padding:8px 16px;border-radius:100px;white-space:nowrap}
   .tabs a:hover{color:var(--plum)}
@@ -40,7 +36,8 @@
     padding:10px 22px;border-radius:100px;white-space:nowrap;transition:transform .15s ease,background .15s ease}
   .btn:hover{transform:translateY(-1px);background:var(--brand-deep)}
   @media(max-width:640px){.nav-inner{padding:8px 10px 8px 14px;gap:8px}.nav-inner .logo{height:26px}
-    .nav-inner>.btn{display:none}.tabs a{padding:6px 10px;font-size:.78rem}.tabs{overflow-x:auto}}
+    .nav-inner>.btn{display:none}.logo-word{display:none}.logo-mark{display:block;height:30px}
+    .tabs{flex:1;justify-content:space-between;overflow-x:auto}.tabs a{padding:6px 8px;font-size:.78rem}}
 
   /* hero */
   .eyebrow{display:inline-block;font-size:.76rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
@@ -586,15 +583,6 @@ fetch('../pipeline/data/brumadinho_postcollapse.json?v='+Date.now()).then(r=>{
     g+=`<text x="200" y="210" fill="${SC.hot}" font-size="10.5">P-417</text>`;
     document.getElementById('map').innerHTML=`<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="published-study velocity point map, stylised">${g}</svg>`;
   })();
-})();
-
-// collapse the wordmark to the Saturn mark on scroll, so all tabs fit on a phone
-(function(){
-  var nav=document.querySelector('nav.nav');
-  if(!nav) return;
-  var on=false;
-  function upd(){var s=window.scrollY>70; if(s!==on){on=s; nav.classList.toggle('shrunk',s);}}
-  window.addEventListener('scroll',upd,{passive:true}); upd();
 })();
 </script>
 </body>
