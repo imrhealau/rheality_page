@@ -27,6 +27,7 @@
   nav.nav{position:sticky;top:18px;z-index:40;margin:18px auto 0;max-width:var(--maxw);padding:0 20px}
   .nav-inner{background:var(--white);border:1px solid var(--line);border-radius:100px;
     padding:10px 14px 10px 22px;display:flex;align-items:center;gap:18px;box-shadow:0 6px 24px rgba(46,31,74,.08)}
+  .nav-inner .brand{display:flex;align-items:center}
   .nav-inner .logo{height:34px;width:auto;display:block}
   .nav-inner .logo-mark{display:none}
   .tabs{display:flex;gap:4px;margin-left:auto}
@@ -127,7 +128,7 @@
 
 <nav class="nav">
   <div class="nav-inner">
-    <a href="/" aria-label="Rheality home"><img class="logo logo-word" src="logo-nav.png" alt="Rheality"><img class="logo logo-mark" src="/favicon.png" alt="Rheality"></a>
+    <a href="/" class="brand" aria-label="Rheality home"><img class="logo logo-word" src="logo-nav.png" alt="Rheality"><img class="logo logo-mark" src="/favicon.png" alt="Rheality"></a>
     <div class="tabs">
       <a href="/">Company</a>
       <a href="how-it-works.html">How it works</a>

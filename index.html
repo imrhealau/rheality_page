@@ -55,6 +55,7 @@
     padding:10px 14px 10px 22px;display:flex;align-items:center;justify-content:space-between;gap:18px;
     box-shadow:0 6px 24px rgba(46,31,74,0.08);
   }
+  .nav-inner .brand{display:flex;align-items:center}
   .nav-inner img{height:34px;width:auto;display:block}
   .nav-inner .logo-mark{display:none}
   .tabs{display:flex;gap:4px;margin-left:auto}
@@ -215,8 +216,7 @@
 
 <nav class="nav" aria-label="Main">
   <div class="nav-inner">
-    <img class="logo-word" src="logo-nav.png" alt="Rheality">
-    <img class="logo-mark" src="favicon.png" alt="Rheality">
+    <a href="#home" class="brand" aria-label="Rheality home"><img class="logo-word" src="logo-nav.png" alt="Rheality"><img class="logo-mark" src="favicon.png" alt="Rheality"></a>
     <div class="tabs">
       <a href="#home" data-tab="home" class="active">Company</a>
       <a href="#product" data-tab="product">How It Works</a>
