@@ -403,10 +403,12 @@
   @media(max-width:640px){.demo-cards{grid-template-columns:1fr}}
 </style>
 <section>
+  <div id="demo-intro">
   <span class="eyebrow">Demo · Real Satellite Monitoring</span>
   <h2 style="font-size:clamp(2rem,5.5vw,3.2rem)">Two dams, watched from orbit.</h2>
   <p class="lede">The same pipeline on two very different structures. The Córrego do Feijão tailings dam at Brumadinho, whose 2019 collapse killed 270 people, reconstructed from the record to show what the deformation signal looks like before a failure. And the Three Gorges Dam, the largest on Earth, monitored live from open satellite data for both ground movement and reservoir water. One is a hindcast, not a live feed; the other we track today.</p>
   <p style="margin:6px 0 20px"><a href="pipeline/how-it-works.html" style="color:var(--brand-deep);font-weight:600;text-decoration:none">How this pipeline works, step by step &rarr;</a></p>
+  </div>
 
   <div id="demo-chooser">
     <div class="demo-cards">
@@ -443,6 +445,13 @@
 
   <div id="demo-tg" style="display:none">
     <a href="#" class="demo-back" id="tg-back">&larr; Back to both dams</a>
+
+  <span class="eyebrow" style="margin-top:26px">Live monitor &middot; Three Gorges Dam &middot; updates with every pass</span>
+  <h2 style="font-size:clamp(2rem,5.5vw,3.2rem)">The largest dam on Earth, watched live.</h2>
+  <p class="lede">Two real pipelines run over the Three Gorges Dam today: Sentinel-1 radar turned into millimetre
+  ground movement with InSAR, and Sentinel-2 optical turned into a reservoir water monitor checked against the
+  season. Every number below is measured from open satellite data on the dates shown &mdash; nothing is illustrative.</p>
+  <p style="margin:6px 0 20px"><a href="pipeline/how-it-works.html" style="color:var(--brand-deep);font-weight:600;text-decoration:none">How this pipeline works, step by step &rarr;</a></p>
 
   <h2 style="margin:34px 0 6px;font-size:clamp(1.5rem,4.2vw,2.1rem)">Is the dam actually moving?</h2>
   <p class="lede" style="margin-bottom:18px">There are persistent rumours that the Three Gorges Dam is deforming or about to fail. So we measured it: three years of Sentinel-1 radar, turned into millimetre ground movement with InSAR. This is the deformation parameter, the signal that actually precedes a dam failure.</p>
@@ -624,9 +633,11 @@
 <script>
 (function(){
   var chooser=document.getElementById('demo-chooser'),tg=document.getElementById('demo-tg'),
-      card=document.getElementById('tg-card'),back=document.getElementById('tg-back');
+      card=document.getElementById('tg-card'),back=document.getElementById('tg-back'),
+      intro=document.getElementById('demo-intro');
   if(!chooser||!tg||!card) return;
-  function show(detail){chooser.style.display=detail?'none':'';tg.style.display=detail?'':'none';if(detail)window.scrollTo(0,0);}
+  function show(detail){chooser.style.display=detail?'none':'';tg.style.display=detail?'':'none';
+    if(intro)intro.style.display=detail?'none':'';if(detail)window.scrollTo(0,0);}
   card.addEventListener('click',function(e){e.preventDefault();show(true);});
   if(back)back.addEventListener('click',function(e){e.preventDefault();show(false);window.scrollTo(0,0);});
   window.addEventListener('hashchange',function(){if(location.hash.replace('#','')==='pipeline')show(false);});
