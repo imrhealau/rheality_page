@@ -28,7 +28,7 @@
   .nav-inner{background:var(--white);border:1px solid var(--line);border-radius:100px;
     padding:10px 14px 10px 22px;display:flex;align-items:center;gap:18px;box-shadow:0 6px 24px rgba(46,31,74,.08)}
   .nav-inner .logo{height:34px;width:auto;display:block}
-  .logo-mark{display:none}
+  .nav-inner .logo-mark{display:none}
   .tabs{display:flex;gap:4px;margin-left:auto}
   .tabs a{font-family:var(--disp);font-weight:700;font-size:.9rem;color:var(--muted);text-decoration:none;padding:8px 16px;border-radius:100px;white-space:nowrap}
   .tabs a:hover{color:var(--plum)}
@@ -36,7 +36,9 @@
     padding:10px 22px;border-radius:100px;white-space:nowrap;transition:transform .15s ease,background .15s ease}
   .btn:hover{transform:translateY(-1px);background:var(--brand-deep)}
   @media(max-width:640px){.nav-inner{padding:8px 10px 8px 14px;gap:8px}.nav-inner .logo{height:26px}
-    .nav-inner>.btn{display:none}.logo-word{display:none}.logo-mark{display:block;height:30px}
+    .nav-inner>.btn{display:none}
+    nav.nav.shrunk .nav-inner .logo-word{display:none}
+    nav.nav.shrunk .nav-inner .logo-mark{display:block;height:30px}
     .tabs{flex:1;justify-content:space-between;overflow-x:auto}.tabs a{padding:6px 8px;font-size:.78rem}}
 
   /* hero */
@@ -514,6 +516,15 @@ fetch('../pipeline/data/brumadinho_postcollapse.json?v='+Date.now()).then(r=>{
     `<b>Method:</b> ${j.method} <b>Track:</b> ${j.target.track} (descending). ${j.source.attribution}.`;
   document.getElementById('postCards').style.display='';
 }).catch(()=>{});
+
+// on phones: wordmark at the top of the page, Saturn mark once scrolled
+(function(){
+  var nav=document.querySelector('nav.nav');
+  if(!nav) return;
+  var on=false;
+  function upd(){var s=window.scrollY>70; if(s!==on){on=s; nav.classList.toggle('shrunk',s);}}
+  window.addEventListener('scroll',upd,{passive:true}); upd();
+})();
 
 // ---- published-study panels (Grebby et al. 2021), stylised replay ----
 (function(){

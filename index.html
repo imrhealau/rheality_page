@@ -56,7 +56,7 @@
     box-shadow:0 6px 24px rgba(46,31,74,0.08);
   }
   .nav-inner img{height:34px;width:auto;display:block}
-  .logo-mark{display:none}
+  .nav-inner .logo-mark{display:none}
   .tabs{display:flex;gap:4px;margin-left:auto}
   .tabs a{
     font-family:var(--disp);font-weight:700;font-size:0.9rem;color:var(--muted);
@@ -70,8 +70,8 @@
     .nav-inner{padding:8px 10px 8px 14px;gap:8px}
     .nav-inner img{height:26px}
     .nav-inner > .btn{display:none}
-    .logo-word{display:none}
-    .logo-mark{display:block;height:30px}
+    nav.nav.shrunk .nav-inner .logo-word{display:none}
+    nav.nav.shrunk .nav-inner .logo-mark{display:block;height:30px}
     .tabs{flex:1;justify-content:space-between;overflow-x:auto;-webkit-overflow-scrolling:touch}
     .tabs a{padding:6px 8px;font-size:0.78rem}
   }
@@ -744,6 +744,15 @@
     window.addEventListener('hashchange', route);
     route();
   })();
+</script>
+<script>
+(function(){
+  var nav=document.querySelector('nav.nav');
+  if(!nav) return;
+  var on=false;
+  function upd(){var s=window.scrollY>70; if(s!==on){on=s; nav.classList.toggle('shrunk',s);}}
+  window.addEventListener('scroll',upd,{passive:true}); upd();
+})();
 </script>
 <noscript><style>.panel{display:block}</style></noscript>
 </body>
