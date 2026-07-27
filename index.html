@@ -489,7 +489,7 @@
   <div class="cards">
     <div class="card"><div class="card-photo" style="background-image:url('img/cards/data-in.jpg')"></div><h3>Real data in</h3><p>Sentinel-2 L2A scenes over tile 49RDQ, read straight from Copernicus COGs on AWS Open Data. No credentials, no download step: the pipeline reads only the pixels over the reservoir, on demand.</p></div>
     <div class="card"><div class="card-photo" style="background-image:url('img/cards/indexed-cleaned.jpg')"></div><h3>Indexed &amp; cleaned</h3><p>Each pass is masked for cloud and shadow with the scene classification band, then scored for open water with the NDWI index. Passes with too little clear sky over the reservoir are dropped, not guessed.</p></div>
-    <div class="card"><div class="card-photo" style="background-image:url('img/cards/anomalies-flagged.jpg')"></div><h3>Anomalies flagged</h3><p>A seasonal baseline is fitted to the water-area history, and each pass is scored by how far it sits from what the season predicts. Anything past three robust standard deviations is flagged for a human to look at.</p></div>
+    <div class="card"><div class="card-photo" style="background-image:url('img/cards/anomalies-flagged.jpg')"></div><h3>Anomalies flagged</h3><p>A seasonal baseline is fitted to the water-area history, and each pass is scored by how far it sits from what the season predicts. Anything past three standard deviations, computed to resist outliers, is flagged for a human to look at.</p></div>
   </div>
 
   <div class="pl-note" id="pl-note"></div>

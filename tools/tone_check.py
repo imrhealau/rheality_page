@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 """Blocks commits containing AI-writing tells in prose files.
-Usage: tone_check.py file1 [file2 ...]   Exit 1 if tells found."""
+Usage: tone_check.py file1 [file2 ...]   Exit 1 if tells found.
+
+Markup is stripped before matching, so prose sharing a line with HTML
+attributes is still checked. CSS (<style> blocks) is skipped; JS is
+checked because user-visible strings live there. Headings and titles
+may keep em-dashes (they are names, not prose).
+"""
 import re, sys
 
 TELLS = [
@@ -15,10 +21,13 @@ TELLS = [
     (r'\bIn summary\b|\bOverall,\b|\bUltimately,\b', "AI summary opener"),
 ]
 
-SKIP_LINE = re.compile(r'(<svg|<path|viewBox|polyline|<style|</style|<script|url\(|class=|content="[^"]*—[^"]*Revenue Side|<title|og:title|twitter:title|<h[1-6][^>]*>[^<]*—)')
+# lines where an em-dash is a name separator, not prose
+HEAD_OK = re.compile(r'<h[1-6][^>]*>|<title|og:title|twitter:title')
+
 
 def strip_tags(line):
     return re.sub(r'<[^>]+>', ' ', line)
+
 
 bad = 0
 for path in sys.argv[1:]:
@@ -26,11 +35,20 @@ for path in sys.argv[1:]:
         lines = open(path, encoding='utf-8').read().splitlines()
     except Exception:
         continue
+    in_style = False
     for i, raw in enumerate(lines, 1):
-        if SKIP_LINE.search(raw):
+        if '<style' in raw:
+            in_style = True
+        if '</style' in raw:
+            in_style = False
             continue
+        if in_style:
+            continue
+        head_ok = bool(HEAD_OK.search(raw))
         text = strip_tags(raw)
         for pat, msg in TELLS:
+            if head_ok and 'em-dash' in msg:
+                continue
             m = re.search(pat, text)
             if m:
                 print(f"{path}:{i}: [{msg}] ...{text.strip()[:90]}")
