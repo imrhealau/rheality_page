@@ -608,6 +608,7 @@
   card.addEventListener('click',function(e){e.preventDefault();show(true);});
   if(back)back.addEventListener('click',function(e){e.preventDefault();show(false);window.scrollTo(0,0);});
   window.addEventListener('hashchange',function(){if(location.hash.replace('#','')==='pipeline')show(false);});
+  if(/[?&]tg=1/.test(location.search))show(true);
 })();
 </script>
 </div>
