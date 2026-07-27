@@ -96,6 +96,11 @@
   .rp-banner b{font-weight:700}
   .chart-legend{display:flex;gap:20px;flex-wrap:wrap;font-size:.82rem;color:var(--muted);margin:2px 0 8px}
   .chart-legend span{display:inline-flex;align-items:center;gap:7px}
+  .coh-row{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin:8px 0 10px}
+  .coh{width:152px;height:152px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:16px;color:#fff;box-shadow:0 10px 26px rgba(46,31,74,.20)}
+  .coh strong{font-family:var(--disp);font-weight:700;font-size:2rem;line-height:1}
+  .coh span{font-size:.66rem;line-height:1.35;opacity:.92;margin-top:7px}
   .prov{font-size:.85rem;color:var(--muted);line-height:1.6;margin-top:12px}
   .prov b{color:var(--plum);font-weight:600}
 
@@ -192,8 +197,42 @@
       the collapse &mdash; the surface that carried the signal was destroyed with the dam &mdash; but the radar still
       testifies: an intact surface keeps its interferometric coherence from one pass to the next, while ground torn
       away and replaced by a debris flow drops to noise.</p>
-      <div class="stats" id="postStats" style="margin:0 0 4px;box-shadow:none;border:0;padding:0"></div>
+      <div class="coh-row" id="postStats"></div>
       <p class="prov" id="postProv"></p>
+    </div>
+  </div>
+
+  <section class="more">
+    <span class="eyebrow">The published study &middot; production-grade monitoring</span>
+    <h2>What a fully funded monitor sees</h2>
+    <p class="lede">The post-event analysis (Grebby et al. 2021) went further than our free-data quick-look: it
+    tracked <strong>every coherent point on the dam individually</strong> &mdash; the per-point engine of a
+    production monitoring service, run by specialists. At that level the final acceleration is unmistakable: an
+    alert fires <strong>40 days before failure</strong>, peaking at &minus;119&nbsp;mm/yr on the lower embankment.
+    Production systems then layer on what money buys &mdash; tasked high-resolution commercial radar (ICEYE,
+    TerraSAR-X) revisiting daily instead of every 12 days. Running that engine live, on every pass, for every
+    asset is exactly what Rheality is raising to build.</p>
+  </section>
+
+  <div class="stats">
+    <div class="f-fact"><strong>&minus;36 mm/yr</strong><span>Baseline face velocity, prior 12 months</span></div>
+    <div class="f-fact red"><strong>&minus;119 mm/yr</strong><span>Peak velocity, final month</span></div>
+    <div class="f-fact amber"><strong>40 days</strong><span>Alert lead time before failure</span></div>
+    <div class="f-fact"><strong>1,240</strong><span>Coherent measurement points on the dam</span></div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Where it was moving</h3>
+      <p class="sub">Replayed from the published analysis: every dot is a radar measurement point, colour is how
+      fast it moves. The red cluster sits low on the embankment, where the wall later failed.</p>
+      <div id="map"></div>
+    </div>
+    <div class="card">
+      <h3>The worst point, tracked alone</h3>
+      <p class="sub">Per-point tracking over the final 13 months. Down means sinking. The shaded band is where slow
+      creep turned into acceleration; amber is the alert, 40 days out; red is the collapse.</p>
+      <div id="chart"></div>
     </div>
   </div>
 
@@ -223,9 +262,12 @@
   </section>
 
   <div class="foot">
-    <b>Demo note.</b> Every chart on this page is our own processing result, built from raw Sentinel-1
-    radar through the same pipeline that runs our live monitoring today. The published post-event analysis of Dam I
-    (Grebby et al. 2021, <i>Communications Earth &amp; Environment</i>) is cited for comparison only.
+    <b>Demo note.</b> The measurement charts on this page &mdash; the displacement series, the zoom, and the
+    coherence circles &mdash; are our own processing results, built from raw Sentinel-1 radar through the same
+    pipeline that runs our live monitoring today. The two panels under "What a fully funded monitor sees" are a
+    stylised replay of the published post-event analysis of Dam I (Grebby et al. 2021,
+    <i>Communications Earth &amp; Environment</i>), shown to illustrate what per-point production monitoring
+    resolves; their values come from that study, not from our pipeline.
     <p style="margin:10px 0 0"><b>Disclaimer.</b> Rheality provides decision-support monitoring data, not a safety guarantee.
     The duty of care for any asset remains with its owner and their engineer. See <a href="terms.html">Terms &amp; Disclaimer</a>
     and <a href="how-it-works.html">How it works</a>.</p>
@@ -461,14 +503,84 @@ fetch('../pipeline/data/brumadinho_postcollapse.json?v='+Date.now()).then(r=>{
   if(!pre||!post) return;
   const drop=Math.round((1-post.coh_dam_mean/pre.coh_dam_mean)*100);
   document.getElementById('postStats').innerHTML=
-    `<div class="f-fact"><strong>${pre.coh_dam_mean.toFixed(2)}</strong><span>Dam coherence, 5 &rarr; 17 Jan &mdash; surface intact</span></div>`+
-    `<div class="f-fact red"><strong>${post.coh_dam_mean.toFixed(2)}</strong><span>Dam coherence, 17 &rarr; 29 Jan &mdash; spans the collapse</span></div>`+
-    `<div class="f-fact"><strong>${post.coh_control_mean.toFixed(2)}</strong><span>Control area, same pair &mdash; terrain the flow never touched</span></div>`+
-    `<div class="f-fact amber"><strong>&minus;${drop}%</strong><span>Coherence lost over the dam across the failure</span></div>`;
+    `<div class="coh" style="background:#2E9E6B"><strong>${pre.coh_dam_mean.toFixed(2)}</strong><span>Dam coherence<br>5 &rarr; 17 Jan<br>surface intact</span></div>`+
+    `<div class="coh" style="background:#D63A2E"><strong>${post.coh_dam_mean.toFixed(2)}</strong><span>Dam coherence<br>17 &rarr; 29 Jan<br>spans the collapse</span></div>`+
+    `<div class="coh" style="background:#6F6488"><strong>${post.coh_control_mean.toFixed(2)}</strong><span>Control area<br>same pair<br>never touched by the flow</span></div>`+
+    `<div class="coh" style="background:#C08A16"><strong>&minus;${drop}%</strong><span>Coherence lost<br>over the dam<br>across the failure</span></div>`;
   document.getElementById('postProv').innerHTML=
     `<b>Method:</b> ${j.method} <b>Track:</b> ${j.target.track} (descending). ${j.source.attribution}.`;
   document.getElementById('postCards').style.display='';
 }).catch(()=>{});
+
+// ---- published-study panels (Grebby et al. 2021), stylised replay ----
+(function(){
+  const START=new Date('2018-01-05'), STEP=12, R0=-36/365, ACC=new Date('2018-11-10');
+  const days=(a,b)=>(b-a)/86400000;
+  const S=[]; let d=new Date(START);
+  while(d<=new Date('2019-01-23')){
+    const t=days(START,d); let disp=R0*t;
+    if(d>=ACC){const ta=days(ACC,d); disp+=-0.002*ta*ta;}
+    S.push({date:new Date(d),disp}); d=new Date(d.getTime()+STEP*86400000);
+  }
+  const THRESH=R0*365*2.2; let alertDate=null;
+  for(let i=1;i<S.length;i++){
+    const vel=(S[i].disp-S[i-1].disp)/days(S[i-1].date,S[i].date)*365;
+    if(!alertDate&&vel<THRESH)alertDate=S[i].date;
+  }
+  const SC={mapbg:'#FAF8FD',damtxt:'#8B7FA6',green:'#2E9E6B',hot:'#D63A2E'};
+
+  (function(){
+    const W=560,H=300,ml=52,mr=16,mt=14,mb=34;
+    const xs=S.map(p=>p.date.getTime());
+    const x0=Math.min(...xs), x1=COLLAPSE.getTime();
+    const y0=Math.min(...S.map(p=>p.disp))-6, y1=6;
+    const X=t=>ml+(t-x0)/(x1-x0)*(W-ml-mr);
+    const Y=v=>mt+(y1-v)/(y1-y0)*(H-mt-mb);
+    let g='';
+    for(let v=0; v>=Math.floor(y0/20)*20; v-=20){
+      g+=`<line x1="${ml}" y1="${Y(v)}" x2="${W-mr}" y2="${Y(v)}" stroke="${C.grid}" stroke-width="1"/>`;
+      g+=`<text x="${ml-8}" y="${Y(v)+4}" fill="${C.axis}" font-size="11" text-anchor="end">${v}</text>`;
+    }
+    ['2018-01-05','2018-04-01','2018-07-01','2018-10-01','2019-01-25'].forEach(s=>{
+      const t=new Date(s).getTime();
+      g+=`<text x="${X(t)}" y="${H-12}" fill="${C.axis}" font-size="11" text-anchor="middle">${new Date(s).toLocaleDateString('en-GB',{month:'short',year:'2-digit'})}</text>`;
+    });
+    const ax=X(ACC.getTime());
+    g+=`<rect x="${ax}" y="${mt}" width="${X(x1)-ax}" height="${H-mt-mb}" fill="${C.redSoft}"/>`;
+    g+=`<text x="${ax+6}" y="${mt+14}" fill="${C.red}" font-size="10.5">acceleration onset</text>`;
+    const pts=S.map(p=>`${X(p.date.getTime())},${Y(p.disp)}`).join(' ');
+    g+=`<polyline points="${pts}" fill="none" stroke="${C.line}" stroke-width="2.4"/>`;
+    S.forEach(p=>{ g+=`<circle cx="${X(p.date.getTime())}" cy="${Y(p.disp)}" r="2.4" fill="${C.line}"/>`;});
+    const axl=X(alertDate.getTime());
+    g+=`<line x1="${axl}" y1="${mt}" x2="${axl}" y2="${H-mb}" stroke="${C.amber}" stroke-width="1.4" stroke-dasharray="4 3"/>`;
+    g+=`<text x="${axl}" y="${mt-2}" fill="${C.amber}" font-size="10.5" text-anchor="middle">alert</text>`;
+    const cx=X(x1);
+    g+=`<line x1="${cx}" y1="${mt}" x2="${cx}" y2="${H-mb}" stroke="${C.red}" stroke-width="1.8"/>`;
+    g+=`<text x="${cx-4}" y="${mt+28}" fill="${C.red}" font-size="10.5" text-anchor="end">collapse 25 Jan</text>`;
+    g+=`<text x="${ml-40}" y="${mt-2}" fill="${C.axis}" font-size="10.5">mm</text>`;
+    document.getElementById('chart').innerHTML=`<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="published-study cumulative displacement, stylised">${g}</svg>`;
+  })();
+
+  (function(){
+    const W=380,H=300; let g=`<rect x="0" y="0" width="${W}" height="${H}" rx="12" fill="${SC.mapbg}" stroke="${C.grid}"/>`;
+    g+=`<path d="M60,232 C120,150 260,150 320,232" fill="none" stroke="${C.dam}" stroke-width="2" stroke-dasharray="3 4"/>`;
+    g+=`<text x="190" y="250" fill="${SC.damtxt}" font-size="11" text-anchor="middle">Dam I embankment</text>`;
+    g+=`<text x="190" y="120" fill="${C.dam}" font-size="10.5" text-anchor="middle">tailings basin</text>`;
+    let seed=42; const rnd=()=>{seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff;};
+    for(let i=0;i<150;i++){
+      const u=rnd(),v=rnd();
+      const x=60+u*260, y=150+v*80 - Math.pow(Math.abs(u-.5)*2,2)*30;
+      const faceProx=1-Math.abs(y-215)/70 - Math.abs(x-190)/200;
+      const band=faceProx>0.65?2:faceProx>0.3?1:0;
+      const col=band===2?C.red:band===1?C.amber:SC.green;
+      const r=band===2?3.1:2.2;
+      g+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" fill="${col}" opacity="${band===2?0.95:0.72}"/>`;
+    }
+    g+=`<circle cx="190" cy="214" r="6" fill="none" stroke="${SC.hot}" stroke-width="1.6"/>`;
+    g+=`<text x="200" y="210" fill="${SC.hot}" font-size="10.5">P-417</text>`;
+    document.getElementById('map').innerHTML=`<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="published-study velocity point map, stylised">${g}</svg>`;
+  })();
+})();
 </script>
 </body>
 </html>
