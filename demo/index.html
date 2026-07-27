@@ -47,6 +47,14 @@
     nav.nav.shrunk .nav-inner .logo-word{max-width:0;opacity:0}
     nav.nav.shrunk .nav-inner .logo-mark{max-width:30px;height:30px;opacity:1;transform:none}
     .tabs{flex:1;justify-content:space-between;overflow-x:auto}.tabs a{padding:6px 8px;font-size:.78rem}}
+  @media (min-width:641px){
+    .nav-inner .logo-word{max-width:220px;object-fit:contain;object-position:left center;
+      transition:max-width .35s ease,opacity .2s ease}
+    .nav-inner .logo-mark{display:block;max-width:0;opacity:0;transform:scale(.5) rotate(-60deg);
+      transition:max-width .35s ease,opacity .25s ease,transform .35s ease}
+    nav.nav.scrolling .logo-word{max-width:0;opacity:0}
+    nav.nav.scrolling .logo-mark{max-width:34px;height:34px;opacity:1;transform:none}
+  }
   @media (prefers-reduced-motion:reduce){
     .nav-inner .logo-word,.nav-inner .logo-mark{transition:none}
   }
@@ -527,13 +535,21 @@ fetch('../pipeline/data/brumadinho_postcollapse.json?v='+Date.now()).then(r=>{
   document.getElementById('postCards').style.display='';
 }).catch(()=>{});
 
-// on phones: wordmark at the top of the page, Saturn mark once scrolled
+// phones: wordmark at top, Saturn once scrolled (shrunk).
+// desktop: Saturn while actively scrolling, wordmark on pause (scrolling).
 (function(){
   var nav=document.querySelector('nav.nav');
   if(!nav) return;
-  var on=false;
-  function upd(){var s=window.scrollY>70; if(s!==on){on=s; nav.classList.toggle('shrunk',s);}}
-  window.addEventListener('scroll',upd,{passive:true}); upd();
+  var on=false, t=null;
+  function upd(){
+    var s=window.scrollY>70;
+    if(s!==on){on=s; nav.classList.toggle('shrunk',s);}
+    nav.classList.add('scrolling');
+    clearTimeout(t);
+    t=setTimeout(function(){nav.classList.remove('scrolling');},600);
+  }
+  window.addEventListener('scroll',upd,{passive:true});
+  nav.classList.toggle('shrunk',window.scrollY>70);
 })();
 
 // ---- published-study panels (Grebby et al. 2021), stylised replay ----

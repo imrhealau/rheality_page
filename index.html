@@ -81,6 +81,14 @@
     .tabs{flex:1;justify-content:space-between;overflow-x:auto;-webkit-overflow-scrolling:touch}
     .tabs a{padding:6px 8px;font-size:0.78rem}
   }
+  @media (min-width:641px){
+    .nav-inner .logo-word{max-width:220px;object-fit:contain;object-position:left center;
+      transition:max-width .35s ease,opacity .2s ease}
+    .nav-inner .logo-mark{display:block;max-width:0;opacity:0;transform:scale(.5) rotate(-60deg);
+      transition:max-width .35s ease,opacity .25s ease,transform .35s ease}
+    nav.nav.scrolling .logo-word{max-width:0;opacity:0}
+    nav.nav.scrolling .logo-mark{max-width:34px;height:34px;opacity:1;transform:none}
+  }
   @media (prefers-reduced-motion:reduce){
     .nav-inner .logo-word,.nav-inner .logo-mark{transition:none}
   }
@@ -758,9 +766,16 @@
 (function(){
   var nav=document.querySelector('nav.nav');
   if(!nav) return;
-  var on=false;
-  function upd(){var s=window.scrollY>70; if(s!==on){on=s; nav.classList.toggle('shrunk',s);}}
-  window.addEventListener('scroll',upd,{passive:true}); upd();
+  var on=false, t=null;
+  function upd(){
+    var s=window.scrollY>70;
+    if(s!==on){on=s; nav.classList.toggle('shrunk',s);}
+    nav.classList.add('scrolling');
+    clearTimeout(t);
+    t=setTimeout(function(){nav.classList.remove('scrolling');},600);
+  }
+  window.addEventListener('scroll',upd,{passive:true});
+  nav.classList.toggle('shrunk',window.scrollY>70);
 })();
 </script>
 <noscript><style>.panel{display:block}</style></noscript>
