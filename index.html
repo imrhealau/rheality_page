@@ -56,6 +56,11 @@
     box-shadow:0 6px 24px rgba(46,31,74,0.08);
   }
   .nav-inner img{height:34px;width:auto;display:block}
+  .logo-mark{display:none}
+  @media (max-width:640px){
+    nav.nav.shrunk .logo-word{display:none}
+    nav.nav.shrunk .logo-mark{display:block}
+  }
   .tabs{display:flex;gap:4px;margin-left:auto}
   .tabs a{
     font-family:var(--disp);font-weight:700;font-size:0.9rem;color:var(--muted);
@@ -203,7 +208,8 @@
 
 <nav class="nav" aria-label="Main">
   <div class="nav-inner">
-    <img src="logo-nav.png" alt="Rheality">
+    <img class="logo-word" src="logo-nav.png" alt="Rheality">
+    <img class="logo-mark" src="favicon.png" alt="Rheality">
     <div class="tabs">
       <a href="#home" data-tab="home" class="active">Company</a>
       <a href="#product" data-tab="product">How It Works</a>
@@ -740,6 +746,15 @@
     window.addEventListener('hashchange', route);
     route();
   })();
+</script>
+<script>
+(function(){
+  var nav=document.querySelector('nav.nav');
+  if(!nav) return;
+  var on=false;
+  function upd(){var s=window.scrollY>70; if(s!==on){on=s; nav.classList.toggle('shrunk',s);}}
+  window.addEventListener('scroll',upd,{passive:true}); upd();
+})();
 </script>
 <noscript><style>.panel{display:block}</style></noscript>
 </body>
