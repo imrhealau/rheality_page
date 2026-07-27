@@ -87,7 +87,7 @@
     .nav-inner .logo-mark{display:block;max-width:0;opacity:0;transform:scale(.5) rotate(-60deg);
       transition:max-width .35s ease,opacity .25s ease,transform .35s ease}
     nav.nav.scrolling .logo-word{max-width:0;opacity:0}
-    nav.nav.scrolling .logo-mark{max-width:45px;height:45px;opacity:1;transform:none}
+    nav.nav.scrolling .logo-mark{max-width:45px;height:45px;margin:-6px 0;opacity:1;transform:none}
   }
   @media (prefers-reduced-motion:reduce){
     .nav-inner .logo-word,.nav-inner .logo-mark{transition:none}
@@ -778,10 +778,12 @@
 (function(){
   var nav=document.querySelector('nav.nav');
   if(!nav) return;
-  var on=false, t=null;
+  var on=false, t=null, lastY=window.scrollY;
   function upd(){
-    var s=window.scrollY>70;
+    var y=window.scrollY, s=y>70, dy=Math.abs(y-lastY);
+    lastY=y;
     if(s!==on){on=s; nav.classList.toggle('shrunk',s);}
+    if(dy<8) return;
     nav.classList.add('scrolling');
     clearTimeout(t);
     t=setTimeout(function(){nav.classList.remove('scrolling');},600);
