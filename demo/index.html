@@ -70,6 +70,7 @@
   .pip{width:46px;height:46px;border-radius:13px;background:rgba(205,90,31,.14);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
   .pip svg{width:24px;height:24px;color:var(--brand-deep)}
   .card h3{font-size:1.22rem;font-weight:700;color:var(--plum);margin:0 0 6px}
+  .card-photo{height:110px;margin:-26px -28px 16px;border-radius:20px 20px 0 0;background-size:cover;background-position:center;-webkit-mask-image:linear-gradient(to bottom,#000 25%,transparent 100%);mask-image:linear-gradient(to bottom,#000 25%,transparent 100%)}
   .card .sub{color:var(--muted);font-size:.92rem;margin:0 0 16px;line-height:1.5}
 
   .log{list-style:none;margin:0;padding:0}
@@ -152,7 +153,7 @@
 
   <div class="cards">
     <div class="card" style="grid-column:1/-1">
-      <div class="pip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
+      <div class="card-photo" style="background-image:url('../img/cards/velocity-map.jpg')"></div>
       <h3>Measured line-of-sight displacement, our pipeline</h3>
       <p class="sub">One point per satellite pass. Down means the ground is moving away from the satellite. The orange
       series is the median over the whole dam area; the red series is the fastest-subsiding tenth of its pixels. The
@@ -213,6 +214,7 @@
     <p style="margin:10px 0 0"><b>Disclaimer.</b> Rheality provides decision-support monitoring data, not a safety guarantee.
     The duty of care for any asset remains with its owner and their engineer. See <a href="terms.html">Terms &amp; Disclaimer</a>
     and <a href="how-it-works.html">How it works</a>.</p>
+    <p style="margin:10px 0 0">Header image: Kīlauea InSAR interferogram, ASI/NASA/JPL-Caltech (public domain), via Wikimedia Commons.</p>
   </div>
 
 </div>

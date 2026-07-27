@@ -45,13 +45,14 @@
   .step:last-child .rail::before{display:none}
   .node{width:52px;height:52px;border-radius:50%;background:var(--terra);color:#fff;
     display:flex;align-items:center;justify-content:center;position:relative;z-index:2;box-shadow:0 6px 16px rgba(205,90,31,.28)}
-  .node svg{width:24px;height:24px}
+  .node .num{font-family:var(--disp);font-weight:700;font-size:19px}
   .node .n{position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:#fff;
     color:var(--terra-deep);border:1px solid var(--line);font-size:12px;font-weight:600;font-family:var(--disp);
     display:flex;align-items:center;justify-content:center}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px 20px;margin-bottom:20px;
     box-shadow:0 6px 22px rgba(51,37,78,.05);transition:transform .15s ease, box-shadow .15s ease}
   .card:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(51,37,78,.09)}
+  .step .card-photo{height:96px;margin:-16px -20px 12px;border-radius:16px 16px 0 0;background-size:cover;background-position:center;-webkit-mask-image:linear-gradient(to bottom,#000 25%,transparent 100%);mask-image:linear-gradient(to bottom,#000 25%,transparent 100%)}
   .card h3{margin:0 0 5px;font-size:17px;color:var(--plum)}
   .card p{margin:0;color:var(--ink);font-size:14.5px}
   .tag{display:inline-block;font-size:11px;font-weight:600;padding:2px 9px;border-radius:20px;margin-top:10px}
@@ -67,14 +68,6 @@
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-  <g id="i-sat"><path d="M4 10a7.31 7.31 0 0 0 10 10Z"/><path d="m9 15 3-3"/><path d="M17 13a6 6 0 0 0-6-6"/><path d="M21 13A10 10 0 0 0 11 3"/></g>
-  <g id="i-radio"><path d="M4.9 16.1C1 12.2 1 5.8 4.9 1.9"/><path d="M7.8 4.7a6.14 6.14 0 0 0-.8 8.3"/><circle cx="12" cy="9" r="2"/><path d="M16.2 4.8c2 2 2.26 5.11.8 7.47"/><path d="M19.1 1.9a9.96 9.96 0 0 1 0 14.1"/><path d="M9.5 18h5"/><path d="m8 22 4-11 4 11"/></g>
-  <g id="i-activity"><path d="M22 12h-2.5a2 2 0 0 0-1.9 1.5l-2.4 8.3a.25.25 0 0 1-.5 0L9.2 2.2a.25.25 0 0 0-.5 0l-2.3 8.3A2 2 0 0 1 4.5 12H2"/></g>
-  <g id="i-alert"><path d="m21.7 18-8-14a2 2 0 0 0-3.4 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></g>
-  <g id="i-bell"><path d="M10.3 21a2 2 0 0 0 3.4 0"/><path d="M3.3 15.3A1 1 0 0 0 4 17h16a1 1 0 0 0 .7-1.7C19.4 14 18 12.5 18 8A6 6 0 0 0 6 8c0 4.5-1.4 6-2.7 7.3"/></g>
-</defs></svg>
-
 <div class="wrap">
   <nav class="topnav">
     <a href="/">&larr; Home</a>
@@ -86,17 +79,18 @@
   commodity and build the part that matters: turning raw radar into a trustworthy answer about whether the ground is moving.</p>
 
   <div class="pipe">
-    <div class="pnode"><div class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-sat"/></svg></div><span>Free radar</span></div>
-    <div class="pnode"><div class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-radio"/></svg></div><span>Phase change</span></div>
-    <div class="pnode"><div class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-activity"/></svg></div><span>Time series</span></div>
-    <div class="pnode"><div class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-alert"/></svg></div><span>Anomaly</span></div>
-    <div class="pnode"><div class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-bell"/></svg></div><span>Report &amp; alert</span></div>
+    <div class="pnode"><div class="circ" style="background:url('../img/cards/sentinel-radar.jpg') center/cover"></div><span>Free radar</span></div>
+    <div class="pnode"><div class="circ" style="background:url('../img/cards/radar-phase.jpg') center/cover"></div><span>Phase change</span></div>
+    <div class="pnode"><div class="circ" style="background:url('../img/cards/anomalies-flagged.jpg') center/cover"></div><span>Time series</span></div>
+    <div class="pnode"><div class="circ" style="background:url('../img/cards/detect-anomaly.jpg') center/cover"></div><span>Anomaly</span></div>
+    <div class="pnode"><div class="circ" style="background:url('../img/cards/report-bell.jpg') center/cover"></div><span>Report &amp; alert</span></div>
   </div>
 
   <div class="steps">
     <div class="step">
-      <div class="rail"><div class="node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-sat"/></svg><span class="n">1</span></div></div>
+      <div class="rail"><div class="node"><span class="num">1</span></div></div>
       <div class="card">
+        <div class="card-photo" style="background-image:url('../img/cards/sentinel-radar.jpg')"></div>
         <h3>Acquire free radar</h3>
         <p>We pull the Sentinel-1 radar archive over the asset from the European Copernicus programme, going back to
         2015. Radar sees through cloud and works day or night, which optical satellites cannot. For faster revisit we
@@ -106,8 +100,9 @@
     </div>
 
     <div class="step">
-      <div class="rail"><div class="node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-radio"/></svg><span class="n">2</span></div></div>
+      <div class="rail"><div class="node"><span class="num">2</span></div></div>
       <div class="card">
+        <div class="card-photo" style="background-image:url('../img/cards/radar-phase.jpg')"></div>
         <h3>Measure phase change between passes</h3>
         <p>Each time the satellite passes, we compare the radar phase against earlier passes to form interferograms.
         A shift in phase corresponds to the ground moving toward or away from the satellite, down to millimetres. We
@@ -117,8 +112,9 @@
     </div>
 
     <div class="step">
-      <div class="rail"><div class="node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-activity"/></svg><span class="n">3</span></div></div>
+      <div class="rail"><div class="node"><span class="num">3</span></div></div>
       <div class="card">
+        <div class="card-photo" style="background-image:url('../img/cards/anomalies-flagged.jpg')"></div>
         <h3>Build a displacement time series</h3>
         <p>We run small-baseline InSAR inversion across the whole stack of interferograms to produce a cumulative
         displacement history for every coherent point in the area, referenced to stable bedrock, and corrected for
@@ -127,8 +123,9 @@
     </div>
 
     <div class="step">
-      <div class="rail"><div class="node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-alert"/></svg><span class="n">4</span></div></div>
+      <div class="rail"><div class="node"><span class="num">4</span></div></div>
       <div class="card">
+        <div class="card-photo" style="background-image:url('../img/cards/detect-anomaly.jpg')"></div>
         <h3>Detect anomalies</h3>
         <p>This is the part that is ours. A model separates normal settlement from genuine anomalous movement, flags
         points that accelerate away from a consolidation trend, and cuts false alarms, using the deep-learning approach
@@ -139,8 +136,9 @@
     </div>
 
     <div class="step">
-      <div class="rail"><div class="node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-bell"/></svg><span class="n">5</span></div></div>
+      <div class="rail"><div class="node"><span class="num">5</span></div></div>
       <div class="card">
+        <div class="card-photo" style="background-image:url('../img/cards/report-bell.jpg')"></div>
         <h3>Report and alert, with provenance</h3>
         <p>Findings arrive as a monitoring dashboard, a compliance-ready report, and an alert to the operator's engineer
         when a point crosses threshold. Every figure carries an audit trail (which satellite scenes, which dates, which
@@ -161,7 +159,7 @@
   </div>
 
   <p class="muted">Rheality provides decision-support monitoring data, not a safety guarantee. See
-  <a href="terms.html">Terms &amp; Disclaimer</a>. &nbsp; Rheality Limited, Hong Kong.</p>
+  <a href="terms.html">Terms &amp; Disclaimer</a>. &nbsp; Rheality Limited, Hong Kong.<br>Step photos via Wikimedia Commons: Rama (CC BY-SA 2.0 FR); Roberto Monti (CC BY-SA 4.0); Z22 (CC BY-SA 3.0); U.S. Navy (public domain); Blogtrepreneur (CC BY 2.0).</p>
 </div>
 </body>
 </html>
