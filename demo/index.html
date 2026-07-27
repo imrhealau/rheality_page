@@ -93,6 +93,8 @@
   .rp-banner.alert{background:rgba(214,58,46,.07);border-color:rgba(214,58,46,.35);color:#b12e23}
   .rp-banner.collapse{background:rgba(214,58,46,.12);border-color:rgba(214,58,46,.5);color:#8f241c}
   .rp-banner b{font-weight:700}
+  .chart-legend{display:flex;gap:20px;flex-wrap:wrap;font-size:.82rem;color:var(--muted);margin:2px 0 8px}
+  .chart-legend span{display:inline-flex;align-items:center;gap:7px}
   .prov{font-size:.85rem;color:var(--muted);line-height:1.6;margin-top:12px}
   .prov b{color:var(--plum);font-weight:600}
 
@@ -212,10 +214,18 @@
         <span class="rp-date" id="rpDate"></span>
       </div>
       <div class="rp-banner" id="rpBanner"></div>
+      <div class="chart-legend" id="rpLeg1">
+        <span><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="4.5" fill="#E08C1F"/></svg>Dam-area median</span>
+        <span><svg width="14" height="14" aria-hidden="true"><path d="M7,1.8 L12.8,12.2 L1.2,12.2 Z" fill="#C22015"/></svg>Fastest 10% of dam pixels</span>
+      </div>
       <div id="realChart"></div>
       <p class="sub" id="rpZoomCap" style="margin:18px 0 6px"><strong>The final eight weeks, zoomed.</strong> Same
       data, December and January only. The last satellite pass lands on 22 January, three days before the collapse;
       the timeline runs on to 31 January.</p>
+      <div class="chart-legend" id="rpLeg2">
+        <span><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="4.5" fill="#E08C1F"/></svg>Dam-area median</span>
+        <span><svg width="14" height="14" aria-hidden="true"><path d="M7,1.8 L12.8,12.2 L1.2,12.2 Z" fill="#C22015"/></svg>Fastest 10% of dam pixels</span>
+      </div>
       <div id="realChartZoom"></div>
       <ul class="log" id="rpLog" style="margin-top:10px"></ul>
       <p class="prov" id="realProv"></p>
@@ -434,11 +444,9 @@ fetch('../pipeline/data/brumadinho_insar.json?v='+Date.now()).then(r=>{
     const t=new Date(d).getTime();
     g+=`<text x="${X(t)}" y="${H-12}" fill="${C.axis}" font-size="11" text-anchor="middle">${new Date(d).toLocaleDateString('en-GB',{month:'short',year:'2-digit'})}</text>`;
   });
-  if(hot){
-    g+=`<circle cx="${ml+12}" cy="${mt+10}" r="3" fill="${C.red}"/><text x="${ml+20}" y="${mt+14}" fill="${C.axis}" font-size="10.5">fastest 10% of dam pixels</text>`;
-    g+=`<circle cx="${ml+12}" cy="${mt+26}" r="3" fill="${C.line}"/><text x="${ml+20}" y="${mt+30}" fill="${C.axis}" font-size="10.5">dam-area median</text>`;
-  }
   g+=`<text x="${ml-40}" y="${mt-2}" fill="${C.axis}" font-size="10.5">mm</text>`;
+  const MED='#E08C1F', HOT='#C22015';
+  const tri=(x,y,r,fill,op)=>`<path d="M${x},${y-r} L${(x+r*0.9).toFixed(1)},${y+r*0.65} L${(x-r*0.9).toFixed(1)},${y+r*0.65} Z" fill="${fill}"${op?` opacity="${op}"`:''}/>`;
 
   // dynamic layer, revealed by the scrubber
   let dyn='';
@@ -455,19 +463,20 @@ fetch('../pipeline/data/brumadinho_insar.json?v='+Date.now()).then(r=>{
   }
   if(hot){
     const hpts=hot.map(p=>`${X(new Date(p.date).getTime())},${Y(p.los_mm)}`).join(' ');
-    dyn+=`<polyline points="${hpts}" fill="none" stroke="${C.red}" stroke-width="2" opacity="0.85"/>`;
-    hot.forEach(p=>{ dyn+=`<circle cx="${X(new Date(p.date).getTime())}" cy="${Y(p.los_mm)}" r="2.2" fill="${C.red}" opacity="0.85"/>`;});
+    dyn+=`<polyline points="${hpts}" fill="none" stroke="${HOT}" stroke-width="2" opacity="0.85"/>`;
+    hot.forEach(p=>{ dyn+=tri(X(new Date(p.date).getTime()),Y(p.los_mm),3.2,HOT,0.9);});
   }
   const pts=s.map(p=>`${X(new Date(p.date).getTime())},${Y(p.los_mm)}`).join(' ');
-  dyn+=`<polyline points="${pts}" fill="none" stroke="${C.line}" stroke-width="2.4"/>`;
-  s.forEach(p=>{ dyn+=`<circle cx="${X(new Date(p.date).getTime())}" cy="${Y(p.los_mm)}" r="3" fill="${C.line}"/>`;});
+  dyn+=`<polyline points="${pts}" fill="none" stroke="${MED}" stroke-width="2.4"/>`;
+  s.forEach(p=>{ dyn+=`<circle cx="${X(new Date(p.date).getTime())}" cy="${Y(p.los_mm)}" r="3" fill="${MED}"/>`;});
   const lastX=X(lastDate.getTime());
   dyn+=`<text x="${lastX}" y="${Y(s[n-1].los_mm)-10}" fill="${C.axis}" font-size="10.5" text-anchor="middle">last pass ${lastDate.toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</text>`;
   g+=`<g clip-path="url(#rpClip)">${dyn}</g>`;
 
   // collapse marker, shown once the replay reaches 25 Jan
   const cx=X(COLLAPSE.getTime());
-  g+=`<g id="rpCollapseG"><line x1="${cx}" y1="${mt}" x2="${cx}" y2="${H-mb}" stroke="${C.red}" stroke-width="1.8"/>`;
+  g+=`<g id="rpCollapseG"><rect x="${cx}" y="${mt}" width="${X(x1)-cx}" height="${H-mt-mb}" fill="${C.redSoft}"/>`;
+  g+=`<line x1="${cx}" y1="${mt}" x2="${cx}" y2="${H-mb}" stroke="${C.red}" stroke-width="1.8"/>`;
   g+=`<text x="${cx-4}" y="${mt+14}" fill="${C.red}" font-size="10.5" text-anchor="end">collapse 25 Jan</text></g>`;
   document.getElementById('realChart').innerHTML=`<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="our measured line-of-sight displacement over the dam area, replayable over the final year">${g}</svg>`;
 
@@ -493,20 +502,22 @@ fetch('../pipeline/data/brumadinho_insar.json?v='+Date.now()).then(r=>{
   dyn2+=`<line x1="${X2(z0)}" y1="${Y2(trend((z0-x0)/86400000))}" x2="${X2(z1)}" y2="${Y2(trend((z1-x0)/86400000))}" stroke="${C.axis}" stroke-width="1.4" stroke-dasharray="5 4" opacity="0.7"/>`;
   if(hot){
     const hpts2=hot.map(p=>`${X2(new Date(p.date).getTime())},${Y2(p.los_mm)}`).join(' ');
-    dyn2+=`<polyline points="${hpts2}" fill="none" stroke="${C.red}" stroke-width="2" opacity="0.85"/>`;
-    hot.filter(inWin).forEach(p=>{ dyn2+=`<circle cx="${X2(new Date(p.date).getTime())}" cy="${Y2(p.los_mm)}" r="3.4" fill="${C.red}" opacity="0.9"/>`;});
+    dyn2+=`<polyline points="${hpts2}" fill="none" stroke="${HOT}" stroke-width="2" opacity="0.85"/>`;
+    hot.filter(inWin).forEach(p=>{ dyn2+=tri(X2(new Date(p.date).getTime()),Y2(p.los_mm),4.4,HOT,0.9);});
   }
   const pts2=s.map(p=>`${X2(new Date(p.date).getTime())},${Y2(p.los_mm)}`).join(' ');
-  dyn2+=`<polyline points="${pts2}" fill="none" stroke="${C.line}" stroke-width="2.4"/>`;
-  s.filter(inWin).forEach(p=>{ dyn2+=`<circle cx="${X2(new Date(p.date).getTime())}" cy="${Y2(p.los_mm)}" r="3.4" fill="${C.line}"/>`;});
+  dyn2+=`<polyline points="${pts2}" fill="none" stroke="${MED}" stroke-width="2.4"/>`;
+  s.filter(inWin).forEach(p=>{ dyn2+=`<circle cx="${X2(new Date(p.date).getTime())}" cy="${Y2(p.los_mm)}" r="3.4" fill="${MED}"/>`;});
   if(hot){
     const lp=hot[hot.length-1];
     dyn2+=`<text x="${X2(lastDate.getTime())}" y="${Y2(lp.los_mm)-12}" fill="${C.axis}" font-size="10.5" text-anchor="middle">last pass ${lastDate.toLocaleDateString('en-GB',{day:'numeric',month:'short'})}, ${lp.los_mm.toFixed(0)} mm</text>`;
   }
   g2+=`<g clip-path="url(#rpClip2)">${dyn2}</g>`;
   const cx2=X2(COLLAPSE.getTime());
-  g2+=`<g id="rpCollapseG2"><line x1="${cx2}" y1="${mt}" x2="${cx2}" y2="${Hz-mb}" stroke="${C.red}" stroke-width="1.8"/>`;
-  g2+=`<text x="${cx2-4}" y="${mt+14}" fill="${C.red}" font-size="10.5" text-anchor="end">collapse 25 Jan</text></g>`;
+  g2+=`<g id="rpCollapseG2"><rect x="${cx2}" y="${mt}" width="${X2(z1)-cx2}" height="${Hz-mt-mb}" fill="${C.redSoft}"/>`;
+  g2+=`<line x1="${cx2}" y1="${mt}" x2="${cx2}" y2="${Hz-mb}" stroke="${C.red}" stroke-width="1.8"/>`;
+  g2+=`<text x="${cx2-4}" y="${mt+14}" fill="${C.red}" font-size="10.5" text-anchor="end">collapse 25 Jan</text>`;
+  g2+=`<text x="${cx2-4}" y="${mt+28}" fill="${C.red}" font-size="10.5" text-anchor="end" opacity="0.75">no further passes &mdash; dam gone</text></g>`;
   document.getElementById('realChartZoom').innerHTML=`<svg class="chart" viewBox="0 0 ${W} ${Hz}" role="img" aria-label="zoom on December 2018 and January 2019, up to 31 January">${g2}</svg>`;
 
   // replay wiring
@@ -568,6 +579,8 @@ fetch('../pipeline/data/brumadinho_insar.json?v='+Date.now()).then(r=>{
   document.querySelector('.replay').style.display='none';
   document.getElementById('rpBanner').style.display='none';
   document.getElementById('rpZoomCap').style.display='none';
+  document.getElementById('rpLeg1').style.display='none';
+  document.getElementById('rpLeg2').style.display='none';
   document.getElementById('realChart').innerHTML =
     '<p class="prov">Measurement file failed to load. The series is in pipeline/data/brumadinho_insar.json in the repository.</p>';
 });
