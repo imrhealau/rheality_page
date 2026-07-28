@@ -282,6 +282,20 @@
     ground, need independent proof the site is stable from the reclamation phase onward.</p>
   </section>
 
+  <section class="more" style="max-width:none">
+    <span class="eyebrow">Your Asset &middot; Live Archive Check</span>
+    <h2>Now point it at your own.</h2>
+    <p class="lede" style="max-width:900px">You have just read a dam failure measured from orbit. The same
+    archives cover your site today. Click it on the map, or start from a preset, and this page queries the
+    public Sentinel catalogues live from your browser: real pass counts, the best radar orbit, how fresh the
+    optical record is, and what a deformation history over your asset would take.</p>
+    <div id="portal-widget"></div>
+    <p class="prov" style="margin-top:16px"><b>What this is.</b> The coverage numbers are live queries against
+    the Copernicus Sentinel archives (ASF for radar, Earth Search for optical); nothing is canned. The ground
+    motion itself is measured, never simulated: the first deformation history arrives about a day after an
+    order, built the same way as the series above.</p>
+  </section>
+
   <div class="foot">
     <b>Demo note.</b> The measurement charts on this page (the displacement series, the zoom, and the
     coherence circles) are our own processing results, built from raw Sentinel-1 radar through the same
@@ -622,5 +636,6 @@ fetch('../pipeline/data/brumadinho_postcollapse.json?v='+Date.now()).then(r=>{
   })();
 })();
 </script>
+<script src="/portal.js" defer></script>
 </body>
 </html>
