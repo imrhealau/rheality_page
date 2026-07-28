@@ -21,6 +21,17 @@
     '.ptw-chip:hover{border-color:var(--brand);color:var(--brand-deep)}',
     '.ptw-chip:focus-visible{outline:3px solid var(--brand-deep);outline-offset:2px}',
     '.ptw-hint{font-size:0.85rem;color:var(--muted);margin:8px 0 0}',
+    '.ptw-search{display:flex;gap:10px;margin:0 0 14px}',
+    '.ptw-search input{flex:1;min-width:0;font-family:var(--body);font-size:0.95rem;color:var(--ink);',
+    '  background:var(--white);border:1.5px solid var(--line);border-radius:100px;padding:10px 20px;outline:none}',
+    '.ptw-search input:focus{border-color:var(--brand)}',
+    '.ptw-search .btn{border:0;cursor:pointer}',
+    '.ptw-hits{margin:-6px 0 14px}',
+    '.ptw-hit{display:block;width:100%;text-align:left;font-family:var(--body);font-size:0.9rem;color:var(--ink);',
+    '  background:var(--white);border:1px solid var(--line);border-radius:12px;padding:10px 16px;margin-top:6px;',
+    '  cursor:pointer;transition:border-color .15s ease}',
+    '.ptw-hit:hover{border-color:var(--brand)}',
+    'div.ptw-hit{cursor:default;color:var(--muted)}',
     '.ptw-results{display:none;margin-top:26px}',
     '.ptw-coords{font-size:0.88rem;color:var(--muted);margin:0 0 14px}',
     '.ptw-coords code{background:rgba(51,37,78,0.06);padding:1px 7px;border-radius:6px;font-size:0.94em}',
@@ -39,6 +50,11 @@
   document.head.appendChild(style);
 
   root.innerHTML=
+    '<div class="ptw-search">'+
+      '<input id="ptw-q" type="search" placeholder="Search a place: a dam, a port, the Tower of Pisa" aria-label="Search for a place">'+
+      '<button class="btn" id="ptw-go">Search</button>'+
+    '</div>'+
+    '<div class="ptw-hits" id="ptw-hits"></div>'+
     '<div class="ptw-map" id="ptw-map" role="application" aria-label="World map. Click a location to check satellite coverage over it."></div>'+
     '<div class="ptw-presets" aria-label="Example sites">'+
       '<button class="ptw-chip" data-lat="30.826" data-lon="111.003">Three Gorges Dam</button>'+
@@ -89,6 +105,42 @@
       });
     });
   }
+
+  function esc(s){ var d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+
+  function search(){
+    var q=document.getElementById('ptw-q').value.trim();
+    var hits=document.getElementById('ptw-hits');
+    if(!q) return;
+    if(typeof L==='undefined'||!map){ boot(); hits.innerHTML='<div class="ptw-hit">The map is still loading; try again in a second.</div>'; return; }
+    hits.innerHTML='<div class="ptw-hit">Searching&hellip;</div>';
+    fetch('https://photon.komoot.io/api/?limit=6&lang=en&q='+encodeURIComponent(q))
+      .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+      .then(function(d){
+        var rs=(d.features||[]).filter(function(f){ return f.geometry&&f.geometry.coordinates; });
+        if(!rs.length){ hits.innerHTML='<div class="ptw-hit">No match for that. Check the spelling, add a country, or click the map directly.</div>'; return; }
+        hits.innerHTML=rs.map(function(f,i){
+          var p=f.properties||{};
+          var label=[p.name,(p.city||p.state),p.country].filter(Boolean).join(', ');
+          return '<button class="ptw-hit" data-i="'+i+'">'+esc(label||'Unnamed place')+'</button>';
+        }).join('');
+        hits.querySelectorAll('button.ptw-hit').forEach(function(b){
+          b.addEventListener('click',function(){
+            var f=rs[+b.dataset.i];
+            hits.innerHTML='';
+            var lo=f.geometry.coordinates[0], la=f.geometry.coordinates[1];
+            map.setView([la,lo],12);
+            pick(la,lo,(f.properties&&f.properties.name)||null);
+          });
+        });
+      })
+      .catch(function(){ hits.innerHTML='<div class="ptw-hit">The place search did not respond. Click the location on the map instead.</div>'; });
+  }
+
+  document.getElementById('ptw-go').addEventListener('click',search);
+  document.getElementById('ptw-q').addEventListener('keydown',function(e){
+    if(e.key==='Enter'){ e.preventDefault(); search(); }
+  });
 
   function pick(lat,lon,name){
     var dLat=0.045, dLon=0.045/Math.max(0.2,Math.cos(lat*Math.PI/180));
@@ -153,7 +205,7 @@
     }
 
     if(radar&&radar.total){
-      stats.push('<div class="ptw-stat"><strong>'+radar.total+'</strong><span>Sentinel-1 radar passes here since Jan 2023</span></div>');
+      stats.push('<div class="ptw-stat"><strong>'+radar.total+(radar.total===400?'+':'')+'</strong><span>Sentinel-1 radar passes here since Jan 2023</span></div>');
       stats.push('<div class="ptw-stat"><strong>'+(radar.bestK||'&mdash;')+'</strong><span>best orbit for interferometry ('+radar.bestN+' passes)</span></div>');
       if(radar.cadence) stats.push('<div class="ptw-stat"><strong>~'+radar.cadence+' days</strong><span>current revisit on that orbit</span></div>');
     } else if(radar){
