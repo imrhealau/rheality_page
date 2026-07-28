@@ -225,7 +225,6 @@
       <a href="#home" data-tab="home" class="active">Company</a>
       <a href="#product" data-tab="product">How It Works</a>
       <a href="#pipeline" data-tab="pipeline">Demo</a>
-      <a href="#portal" data-tab="portal">Portal</a>
       <a href="#founder" data-tab="founder">Founder</a>
     </div>
     <a class="btn" href="https://www.linkedin.com/company/rheality/">Get in touch</a>
@@ -402,6 +401,21 @@
       </a>
     </div>
     <p class="demo-credit">Photos: Brumadinho by Guilherme Venaglia (CC BY-SA 4.0); Three Gorges by Thomas Bächinger (CC BY-SA 2.0), via Wikimedia Commons.</p>
+    <div style="margin-top:40px">
+      <span class="eyebrow">Your Asset &middot; Live Archive Check</span>
+      <h2 style="margin-top:16px">Point it at your own.</h2>
+      <p class="lede">Search for your asset or click it on the map. This page checks the real satellite record
+      over that exact spot: the passes, the orbit, the freshness. <strong>The check is instant. The measurement
+      itself takes about a day.</strong></p>
+      <div id="portal-widget"></div>
+      <div class="pl-note" style="margin-top:26px">Straight answer on what this does: the coverage numbers are
+      live queries against the Copernicus Sentinel archives (ASF for radar, Earth Search for optical) for the point
+      you clicked; nothing is canned. What it does not do is invent your ground motion. A deformation history is
+      measured from about a hundred radar interferograms processed in the cloud, which is why it arrives in a day
+      and not a click. To see what the finished product looks like, open the Three Gorges live monitor above.</div>
+    </div>
+    <script src="/portal.js" defer></script>
+
     <div class="dark cta-dark" style="text-align:left;margin-top:26px">
       <span class="label">Have an asset like this?</span>
       <h2>We can point this at yours.</h2>
@@ -616,24 +630,6 @@
 </script>
 </div>
 
-<div class="panel" id="p-portal">
-<section>
-  <span class="eyebrow">Portal &middot; Live Archive Check</span>
-  <h2 style="font-size:clamp(2rem,5.5vw,3.2rem)">Point the pipeline at any asset on Earth.</h2>
-  <p class="lede">Search for your asset or click it on the map. This page checks the real satellite record
-  over that exact spot: the passes, the orbit, the freshness. <strong>The check is instant. The measurement
-  itself takes about a day.</strong></p>
-  <div id="portal-widget"></div>
-  <div class="pl-note" style="margin-top:26px">Straight answer on what this page does: the coverage numbers are
-  live queries against the Copernicus Sentinel archives (ASF for radar, Earth Search for optical) for the point
-  you clicked; nothing is canned. What it does not do is invent your ground motion. A deformation history is
-  measured from about a hundred radar interferograms processed in the cloud, which is why it arrives in a day
-  and not a click. To see what the finished product looks like, open the <a href="#pipeline"
-  style="color:var(--brand-deep);font-weight:600">live Three Gorges monitor</a>.</div>
-</section>
-<script src="/portal.js" defer></script>
-</div>
-
 <div class="panel" id="p-founder">
 <section id="founder">
   <h2>Founder</h2>
@@ -771,7 +767,7 @@
   revealArm();
   // tab routing
   (function(){
-    var tabs = ['home','product','pipeline','portal','founder'];
+    var tabs = ['home','product','pipeline','founder'];
     function show(name){
       tabs.forEach(function(t){
         var p = document.getElementById('p-'+t);
@@ -786,6 +782,7 @@
     }
     function route(){
       var h = location.hash.replace('#','');
+      if (h === 'portal') h = 'pipeline';
       show(tabs.indexOf(h) >= 0 ? h : 'home');
       if (typeof revealArm === 'function') revealArm();
     }
