@@ -45,7 +45,13 @@
     '.ptw-plan{margin:12px 0 4px;padding-left:20px}',
     '.ptw-plan li{margin-bottom:9px;color:var(--muted);font-size:0.97rem}',
     '.ptw-plan li strong{color:var(--ink)}',
-    '.ptw-cta{margin-top:16px}'
+    '.ptw-cta{margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}',
+    '.ptw-ghost{font-family:var(--disp);font-weight:700;font-size:0.92rem;background:var(--white);',
+    '  color:var(--plum);border:1.5px solid rgba(51,37,78,0.22);border-radius:100px;padding:10px 22px;',
+    '  cursor:pointer;white-space:nowrap;transition:border-color .15s ease,color .15s ease}',
+    '.ptw-ghost:hover{border-color:var(--brand);color:var(--brand-deep)}',
+    '.ptw-mail{font-size:0.85rem;color:var(--muted);margin:10px 0 0}',
+    '.ptw-mail strong{color:var(--ink)}'
   ].join('\n');
   document.head.appendChild(style);
 
@@ -67,7 +73,9 @@
       '<div class="ptw-stats" id="ptw-stats"></div>'+
       '<div class="ptw-plan-card"><h3>What a monitoring order here looks like</h3>'+
       '<ul class="ptw-plan" id="ptw-plan"></ul>'+
-      '<div class="ptw-cta"><a class="btn" id="ptw-order" href="#">Request this monitor</a></div></div>'+
+      '<div class="ptw-cta"><a class="btn" id="ptw-order" href="#">Request this monitor</a>'+
+      '<button class="ptw-ghost" id="ptw-copy">Copy request details</button></div>'+
+      '<p class="ptw-mail" id="ptw-mail"></p></div>'+
     '</div>';
 
   var booted=false, map=null, dot=null, box=null;
@@ -240,6 +248,35 @@
                'What I want monitored: %0A';
       document.getElementById('ptw-order').href=
         'mailto:'+addr+'?subject='+encodeURIComponent(sub)+'&body='+body;
+      lastReq='Monitoring request\n'+
+        'Site: '+lat.toFixed(4)+', '+lon.toFixed(4)+(name?(' ('+name+')'):'')+'\n'+
+        (radar&&radar.bestK?('Best orbit: '+radar.bestK+', '+radar.bestN+' passes since 2023\n'):'')+
+        'Send to: '+addr+'\n'+
+        'What I want monitored: ';
+      document.getElementById('ptw-mail').innerHTML=
+        'The request button opens your email app. If it does not, use the copy button and send the details to <strong>'+addr+'</strong> from anywhere.';
     }catch(e){}
   }
+
+  var lastReq='';
+  document.getElementById('ptw-copy').addEventListener('click',function(){
+    if(!lastReq) return;
+    var b=this;
+    function done(ok){
+      b.textContent=ok?'Copied':'Copy failed, select the text above';
+      setTimeout(function(){ b.textContent='Copy request details'; },2200);
+    }
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(lastReq).then(function(){done(true);},function(){fallback();});
+    } else { fallback(); }
+    function fallback(){
+      try{
+        var t=document.createElement('textarea');
+        t.value=lastReq; t.style.position='fixed'; t.style.opacity='0';
+        document.body.appendChild(t); t.select();
+        var ok=document.execCommand('copy');
+        document.body.removeChild(t); done(ok);
+      }catch(e){ done(false); }
+    }
+  });
 })();
