@@ -14,13 +14,13 @@
     '.ptw-map{height:460px;border-radius:var(--radius);border:1px solid var(--line);',
     '  box-shadow:0 12px 36px rgba(46,31,74,0.12);background:var(--plum-deep);z-index:1}',
     '@media(max-width:640px){.ptw-map{height:360px}}',
-    '.ptw-presets{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 4px}',
+    '.ptw-presets{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 6px}',
     '.ptw-chip{font-family:var(--body);font-weight:600;font-size:0.82rem;color:var(--plum);',
     '  background:var(--white);border:1.5px solid var(--line);border-radius:100px;padding:7px 15px;',
     '  cursor:pointer;transition:border-color .15s ease,color .15s ease}',
     '.ptw-chip:hover{border-color:var(--brand);color:var(--brand-deep)}',
     '.ptw-chip:focus-visible{outline:3px solid var(--brand-deep);outline-offset:2px}',
-    '.ptw-hint{font-size:0.85rem;color:var(--muted);margin:8px 0 0}',
+    '.ptw-hint{font-size:0.85rem;color:var(--muted);margin:4px 0 14px}',
     '.ptw-search{display:flex;gap:10px;margin:0 0 14px}',
     '.ptw-search input{flex:1;min-width:0;font-family:var(--body);font-size:0.95rem;color:var(--ink);',
     '  background:var(--white);border:1.5px solid var(--line);border-radius:100px;padding:10px 20px;outline:none}',
@@ -61,13 +61,13 @@
       '<button class="btn" id="ptw-go">Search</button>'+
     '</div>'+
     '<div class="ptw-hits" id="ptw-hits"></div>'+
-    '<div class="ptw-map" id="ptw-map" role="application" aria-label="World map. Click a location to check satellite coverage over it."></div>'+
     '<div class="ptw-presets" aria-label="Example sites">'+
       '<button class="ptw-chip" data-lat="30.826" data-lon="111.003">Three Gorges Dam</button>'+
       '<button class="ptw-chip" data-lat="-20.1194" data-lon="-44.1219">Brumadinho tailings dam</button>'+
       '<button class="ptw-chip" data-lat="22.3080" data-lon="113.9185">Hong Kong airport reclamation</button>'+
     '</div>'+
     '<p class="ptw-hint" id="ptw-hint">Or click anywhere on the map. The dashed box is the area one monitoring order covers, about 10 km across.</p>'+
+    '<div class="ptw-map" id="ptw-map" role="application" aria-label="World map. Click a location to check satellite coverage over it."></div>'+
     '<div class="ptw-results" id="ptw-results">'+
       '<p class="ptw-coords" id="ptw-coords"></p>'+
       '<div class="ptw-stats" id="ptw-stats"></div>'+
