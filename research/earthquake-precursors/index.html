@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rheality — Earthquake precursors from satellites, tested</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="/favicon.png?v=6">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F2EEF9;--panel:#fff;--line:#E4DDF1;--plum:#33254E;--terra:#CD5A1F;--terra-deep:#A84613;
+    --ink:#352A4A;--mut:#6F6488;--disp:'Fraunces',Georgia,serif;--body:'Inter',system-ui,sans-serif;}
+  *{box-sizing:border-box}
+  body{margin:0;color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.65;
+    background:radial-gradient(60% 50% at 50% 0%,rgba(122,80,255,.16) 0%,transparent 70%),var(--bg);}
+  .wrap{max-width:880px;margin:0 auto;padding:22px 22px 70px}
+  a{color:var(--terra-deep)}
+  .topnav{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;font-size:13.5px}
+  .topnav a{color:var(--mut);text-decoration:none}
+  .topnav a:hover{color:var(--plum)}
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  .brand .logo{height:34px;width:auto;display:block}
+  h1{font-family:var(--disp);color:var(--plum);font-size:34px;line-height:1.1;margin:14px 0 8px}
+  h2{font-family:var(--disp);color:var(--plum);font-size:23px;margin:34px 0 8px}
+  .lead{font-size:17px;max-width:680px}
+  .note{font-size:13px;color:var(--mut)}
+  figure{margin:26px 0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
+  figure img{width:100%;height:auto;display:block;border-radius:8px}
+  figcaption{font-size:13.5px;color:var(--mut);margin-top:10px;line-height:1.5}
+  .verdict{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--terra);
+    border-radius:12px;padding:16px 18px;margin:26px 0}
+  .verdict strong{font-family:var(--disp);color:var(--plum)}
+  ul{padding-left:20px}
+  li{margin:6px 0}
+  code{background:#EAE4F4;border-radius:5px;padding:1px 6px;font-size:13.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topnav">
+    <a href="/">&larr; rheality.space</a>
+    <span class="note">Research note, August 2026</span>
+  </div>
+
+  <div class="brand">
+    <img class="logo" src="/logo-nav.png" alt="Rheality">
+  </div>
+
+  <h1>Can you see an earthquake coming from orbit? We checked.</h1>
+
+  <p class="lead">There is a large body of papers claiming satellites pick up warning signs
+  days before big earthquakes: ionospheric disturbances, infrared "thermal anomalies",
+  odd radiation readings. If true, this would be the most valuable signal in Earth
+  observation. So we ran the test ourselves, on free public data, with the one safeguard
+  most of those papers skip: a control window where no earthquake happened.</p>
+
+  <h2>The setup</h2>
+  <p>We took three well-studied events: Tohoku 2011 (M9.0), Gorkha, Nepal 2015 (M7.8),
+  and Kahramanmaras, Turkey 2023 (M7.8). For each one we pulled four datasets over the
+  75 days around the quake, all free and anonymous to download:</p>
+  <ul>
+    <li><strong>Ionospheric electron content (TEC)</strong> from JPL global ionosphere maps,
+      every 2 hours, interpolated to the epicenter. Anomaly rule: outside the median
+      &plusmn;1.5&times;IQR of the previous 15 days, the standard detector in this literature.</li>
+    <li><strong>Outgoing longwave radiation (OLR)</strong> from NOAA daily grids, scored
+      against a 10-year same-calendar-day climatology. Anomaly rule: z &gt; 2.</li>
+    <li><strong>Ground skin temperature</strong> from NASA POWER, scored the same way
+      against 2001&ndash;2024.</li>
+    <li><strong>Kp geomagnetic index</strong> from GFZ, to mark solar-storm days, the
+      main thing that moves the ionosphere and gets mistaken for a precursor.</li>
+  </ul>
+  <p>Every threshold was fixed before we computed anything. Then the key step: each
+  earthquake window got a twin, the identical 75-day window at the same location exactly
+  one year earlier, run through exactly the same pipeline. If the detectors light up in
+  a quiet year too, they are measuring weather and space weather, not earthquakes.</p>
+
+  <h2>The results</h2>
+
+  <figure>
+    <img src="img/tohoku.png" alt="Four rows of time series for Tohoku 2011, earthquake window beside control window">
+    <figcaption>Tohoku 2011. The TEC surges near day &minus;9 look like a textbook precursor,
+    until you notice the control year produces surges of similar size with no earthquake.
+    Early 2011 also sits on the steep ramp-up of solar cycle 24, which biases this detector
+    toward positive hits. Thermal channels: flat.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="img/gorkha.png" alt="Four rows of time series for Gorkha 2015, earthquake window beside control window">
+    <figcaption>Gorkha 2015. The largest ionospheric excursion in the whole study is the
+    deep negative spike at day &minus;38. That is the St. Patrick's Day geomagnetic storm
+    of March 2015, correctly flagged by the Kp shading. Solar, not seismic.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="img/kahraman.png" alt="Four rows of time series for Kahramanmaras 2023, earthquake window beside control window">
+    <figcaption>Kahramanmaras 2023. The big TEC exceedances land on and after quake day,
+    riding a February 2023 surge in solar activity. Ground temperature ran cold before the
+    quake (the region was in a winter cold snap), the opposite of the claimed thermal
+    precursor.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="img/summary.png" alt="Bar chart comparing anomalous day counts before each quake against its control window">
+    <figcaption>The scorecard. "Anomalous" days in the 30 days before each quake versus the
+    same count in the no-earthquake control window. The standard TEC detector fires on
+    roughly two thirds of all days everywhere, quake or no quake. Stricter rules (sustained
+    6-hour anomalies on geomagnetically quiet days, exceedances above 5 TECU) leave the
+    earthquake and control windows statistically indistinguishable, apart from a modest
+    Tohoku surplus explained by the solar ramp. OLR and temperature: zero hits, three for three.</figcaption>
+  </figure>
+
+  <div class="verdict">
+    <strong>Verdict: nothing here predicts an earthquake.</strong>
+    The anomalies are real fluctuations, but they appear at the same rate when no
+    earthquake follows. With fixed thresholds and honest controls, every "precursor"
+    we reproduced dissolves into solar activity, weather, or base rate. This matches
+    the systematic critiques of the precursor literature, and it is why decades of
+    retrospective case studies have never produced a working prospective forecast.
+  </div>
+
+  <h2>Why we publish negative results</h2>
+  <p>Because the alternative is selling things that do not work. Satellites are genuinely
+  good at the other side of this problem: measuring where strain is accumulating, mapping
+  ground deformation to millimeter precision, and delivering damage assessments within
+  hours of an event. That is measurement, it holds up, and it is what we build on.
+  Prediction from orbit does not hold up, so we do not offer it, and this page is the
+  receipt.</p>
+
+  <p class="note">Method notes: three events is a demonstration, so treat the statistics
+  accordingly. Global ionosphere maps smooth over any hypothetical local feature at their
+  5&deg;&times;2.5&deg; resolution. The Tohoku temperature point sits offshore. Analysis
+  code and data sources are a few hundred lines of Python against JPL, NOAA, NASA POWER
+  and GFZ public archives; write us if you want the scripts.</p>
+
+</div>
+</body>
+</html>
