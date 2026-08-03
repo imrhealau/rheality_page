@@ -129,6 +129,19 @@
       <td>Used to shade storm days in every plot</td>
     </tr>
     <tr>
+      <td><strong>F10.7 solar flux</strong></td>
+      <td>Not a precursor: the other confounder. Solar EUV sets the background
+        ionisation level, and a rising level fools any trailing-window detector</td>
+      <td>GFZ Potsdam API (Penticton 10.7 cm flux)</td>
+      <td>Daily, whole-Sun</td>
+      <td>Used as a regression covariate, with its 81-day mean, to remove the
+        solar trend and the 27-day rotation from TEC</td>
+      <td><a href="https://doi.org/10.1002/2016JA023652">Thomas et al. 2017</a>
+        detrend for the same reason</td>
+      <td class="ok">Yes, API</td>
+      <td>Used, after despiking solar radio bursts</td>
+    </tr>
+    <tr>
       <td><strong>In-situ plasma density</strong></td>
       <td>Electron density and EM wave anomalies on orbit (the DEMETER stacked statistic)</td>
       <td>ESA Swarm via VirES; DEMETER (CNES); CSES (application)</td>
@@ -161,8 +174,12 @@
     <img src="img/tohoku.png" alt="Four rows of time series for Tohoku 2011, earthquake window beside control window">
     <figcaption>Tohoku 2011. The TEC surges near day &minus;9 look like a textbook precursor,
     until you notice the control year produces surges of similar size with no earthquake.
-    Early 2011 also sits on the steep ramp-up of solar cycle 24, which biases this detector
-    toward positive hits. Thermal channels: flat.</figcaption>
+    Row 4 shows why: the quake window sits on the steep ramp-up of solar cycle 24, its
+    81-day mean solar flux climbing from 85 to 112 sfu, while the control year is flat near
+    80. A detector whose baseline trails 15 days behind a rising signal reports positive
+    hits every day, which is the red-dominated pattern in row 2. Row 3 repeats the detector
+    with that solar term regressed out, and the excursions become symmetric. Thermal
+    channels: flat throughout.</figcaption>
   </figure>
 
   <figure>
@@ -186,18 +203,37 @@
     same count in the no-earthquake control window. With the papers' own bounds the base
     detector saturates: it fires on 28 to 30 of 30 days in every window, quake or no quake.
     Sustained 6-hour anomalies on quiet days (the Liu group's own day criterion, Kp &le; 3
-    after Thomas et al.) are as common in control windows: Tohoku counts 14 before the quake
-    and 15 in the quiet year. Large exceedances above 5 TECU lean toward the quake windows
-    (6 vs 2, 22 vs 18, 10 vs 5), but Gorkha's control year alone shows 18 such days, which
-    is solar maximum talking, not the fault. OLR and temperature stay at zero to two days
-    on both sides.</figcaption>
+    after Thomas et al.) are as common in control windows. The two "detrend" bars repeat
+    those tests with the solar flux term removed. Tohoku's one precursor-friendly number,
+    6 large exceedances against the control's 2, becomes 1 against 3 once the solar ramp
+    is taken out. Across all 21 comparisons on this chart, a Fisher exact test returns no
+    p-value below 0.23.</figcaption>
   </figure>
+
+  <h2>The solar test</h2>
+  <p>One number in the first version of this page pointed the other way: Tohoku showed
+  6 large ionospheric exceedances in the month before the quake against 2 in the control
+  year. We suspected the solar cycle rather than the fault, so we tested it instead of
+  asserting it. Adding daily solar radio flux and its 81-day mean as a regression
+  covariate, then running the identical detector on the residuals, settles the question.
+  In the Tohoku quake window the solar term explains 41 percent of the variance in
+  electron content and the 81-day mean climbs 11 sfu per month; in the control window it
+  explains 3 percent and the trend is flat. Remove it and the count goes from 6 against 2
+  to 1 against 3. The one apparent precursor in the study was the Sun.</p>
+  <p>The same correction barely moves Gorkha, where the solar term explains 3 percent of
+  the variance and there was nothing to remove, and halves the Kahramanmaras counts.
+  Notably the corrections do not all push one way: Tohoku's sustained-anomaly count shifts
+  slightly toward the quake window while its large-exceedance count reverses away from it.
+  Numbers that shuffle in different directions under a physically motivated correction are
+  what measurement noise looks like. A real signal gets clearer when you clean the data,
+  not merely different.</p>
 
   <div class="verdict">
     <strong>Verdict: nothing here predicts an earthquake.</strong>
     The anomalies are real fluctuations, but they appear at the same rate when no
-    earthquake follows. With fixed thresholds and honest controls, every "precursor"
-    we reproduced dissolves into solar activity, weather, or base rate. This matches
+    earthquake follows, and not one of the 21 quake-versus-control comparisons here
+    reaches statistical significance. With fixed thresholds and honest controls, every
+    "precursor" we reproduced dissolves into solar activity, weather, or base rate. This matches
     the systematic critiques of the precursor literature, and it is why decades of
     retrospective case studies have never produced a working prospective forecast.
   </div>
