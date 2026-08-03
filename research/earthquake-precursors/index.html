@@ -30,7 +30,7 @@
   figure img{width:100%;height:auto;display:block;border-radius:8px}
   figcaption{font-size:13.5px;color:var(--mut);margin-top:10px;line-height:1.5}
   .tblwrap{overflow-x:auto;margin:20px 0;background:var(--panel);border:1px solid var(--line);border-radius:14px}
-  table{border-collapse:collapse;width:100%;min-width:840px;font-size:13.5px;line-height:1.45}
+  table{border-collapse:collapse;width:100%;min-width:980px;font-size:13.5px;line-height:1.45}
   th{font-family:var(--disp);color:var(--plum);text-align:left;font-size:13px;
     padding:12px 14px;border-bottom:2px solid var(--line);white-space:nowrap}
   td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
@@ -81,6 +81,7 @@
       <th>Product and archive</th>
       <th>Cadence</th>
       <th>Anomaly rule we applied</th>
+      <th>Method from</th>
       <th>Free?</th>
       <th>In this test</th>
     </tr>
@@ -90,6 +91,7 @@
       <td>JPL global ionosphere maps (IONEX), NASA sideshow archive</td>
       <td>2 h, 5&deg;&times;2.5&deg; grid</td>
       <td>Outside median &plusmn;1.5&times;IQR of prior 15 days, per epoch</td>
+      <td><a href="https://doi.org/10.1029/2008JA013698">Liu et al. 2009, JGR</a> (Wenchuan)</td>
       <td class="ok">Yes, anonymous</td>
       <td>Used, interpolated at each epicenter</td>
     </tr>
@@ -99,6 +101,7 @@
       <td>NOAA interpolated OLR to 2022, NOAA CDR v02r00 after (the older product retired Dec 2022)</td>
       <td>Daily, 2.5&deg; / 1&deg;</td>
       <td>z &gt; 2 vs 10-year same-calendar-day climatology</td>
+      <td><a href="https://doi.org/10.1016/j.tecto.2006.05.042">Ouzounov et al. 2007, Tectonophysics</a></td>
       <td class="ok">Yes, anonymous</td>
       <td>Used</td>
     </tr>
@@ -108,6 +111,7 @@
       <td>NASA POWER daily point API</td>
       <td>Daily, ~0.5&deg;</td>
       <td>z &gt; 2 vs 2001&ndash;2024 climatology, quake year excluded</td>
+      <td>Claim from <a href="https://doi.org/10.1016/s0264-3707(02)00013-3">Tronin et al. 2002, J. Geodyn.</a>; scored with the OLR rule</td>
       <td class="ok">Yes, no key</td>
       <td>Used (the Tohoku point sits offshore, so it reads sea surface)</td>
     </tr>
@@ -117,6 +121,7 @@
       <td>GFZ Potsdam API</td>
       <td>3 h, global</td>
       <td>Day flagged disturbed at Kp &ge; 5</td>
+      <td><a href="https://doi.org/10.1002/2016JA023652">Thomas et al. 2017, JGR</a> (storm-time control)</td>
       <td class="ok">Yes, API</td>
       <td>Used to shade storm days in every plot</td>
     </tr>
@@ -126,6 +131,7 @@
       <td>ESA Swarm via VirES; DEMETER (CNES); CSES (application)</td>
       <td>Along-track</td>
       <td>n/a</td>
+      <td><a href="https://doi.org/10.1029/2007GL032517">N&#283;mec et al. 2008, GRL</a> (DEMETER stack)</td>
       <td class="no">Registration</td>
       <td>Not used: the one channel we could not pull anonymously</td>
     </tr>
@@ -135,6 +141,7 @@
       <td>Sentinel-1 via Copernicus</td>
       <td>6&ndash;12 days</td>
       <td>n/a</td>
+      <td><a href="https://doi.org/10.1126/science.adg2565">Bletery &amp; Nocquet 2023, Science</a> (contested)</td>
       <td class="ok">Yes, account</td>
       <td>Not used: wrong timescale for a days-ahead test, and it measures strain, which is the part that does work</td>
     </tr>
