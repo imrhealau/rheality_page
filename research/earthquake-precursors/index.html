@@ -90,7 +90,8 @@
       <td>Electron content shifts days before large quakes</td>
       <td>JPL global ionosphere maps (IONEX), NASA sideshow archive</td>
       <td>2 h, 5&deg;&times;2.5&deg; grid</td>
-      <td>Outside median &plusmn;1.5&times;IQR of prior 15 days, per epoch</td>
+      <td>Below M &minus; 1.5(M &minus; LQ) or above M + 1.5(UQ &minus; M) from the prior
+        15 days, per 2 h epoch (their exact quartile bounds, about &plusmn;1&sigma;)</td>
       <td><a href="https://doi.org/10.1029/2008JA013698">Liu et al. 2009, JGR</a> (Wenchuan)</td>
       <td class="ok">Yes, anonymous</td>
       <td>Used, interpolated at each epicenter</td>
@@ -100,7 +101,8 @@
       <td>Infrared flux rises over the fault before rupture</td>
       <td>NOAA interpolated OLR to 2022, NOAA CDR v02r00 after (the older product retired Dec 2022)</td>
       <td>Daily, 2.5&deg; / 1&deg;</td>
-      <td>z &gt; 2 vs 10-year same-calendar-day climatology</td>
+      <td>Zonal band mean removed first (their eddy field), then z &gt; 2 vs
+        prior-decade same-calendar-day climatology</td>
       <td><a href="https://doi.org/10.1016/j.tecto.2006.05.042">Ouzounov et al. 2007, Tectonophysics</a></td>
       <td class="ok">Yes, anonymous</td>
       <td>Used</td>
@@ -110,7 +112,8 @@
       <td>Surface warms in the epicentral region</td>
       <td>NASA POWER daily point API</td>
       <td>Daily, ~0.5&deg;</td>
-      <td>z &gt; 2 vs 2001&ndash;2024 climatology, quake year excluded</td>
+      <td>z &gt; 2 vs prior-decade climatology (their 1 km night imagery is out of
+        reach here, so this is a coarse stand-in)</td>
       <td>Claim from <a href="https://doi.org/10.1016/s0264-3707(02)00013-3">Tronin et al. 2002, J. Geodyn.</a>; scored with the OLR rule</td>
       <td class="ok">Yes, no key</td>
       <td>Used (the Tohoku point sits offshore, so it reads sea surface)</td>
@@ -120,7 +123,7 @@
       <td>Not a precursor: the confounder. Solar storms move the ionosphere far more than any claimed seismic effect</td>
       <td>GFZ Potsdam API</td>
       <td>3 h, global</td>
-      <td>Day flagged disturbed at Kp &ge; 5</td>
+      <td>Quiet day requires max Kp &le; 3; plots shade both Kp &gt; 3 and Kp &ge; 5</td>
       <td><a href="https://doi.org/10.1002/2016JA023652">Thomas et al. 2017, JGR</a> (storm-time control)</td>
       <td class="ok">Yes, API</td>
       <td>Used to shade storm days in every plot</td>
@@ -180,11 +183,14 @@
   <figure>
     <img src="img/summary.png" alt="Bar chart comparing anomalous day counts before each quake against its control window">
     <figcaption>The scorecard. "Anomalous" days in the 30 days before each quake versus the
-    same count in the no-earthquake control window. The standard TEC detector fires on
-    roughly two thirds of all days everywhere, quake or no quake. Stricter rules (sustained
-    6-hour anomalies on geomagnetically quiet days, exceedances above 5 TECU) leave the
-    earthquake and control windows statistically indistinguishable, apart from a modest
-    Tohoku surplus explained by the solar ramp. OLR and temperature: zero hits, three for three.</figcaption>
+    same count in the no-earthquake control window. With the papers' own bounds the base
+    detector saturates: it fires on 28 to 30 of 30 days in every window, quake or no quake.
+    Sustained 6-hour anomalies on quiet days (the Liu group's own day criterion, Kp &le; 3
+    after Thomas et al.) are as common in control windows: Tohoku counts 14 before the quake
+    and 15 in the quiet year. Large exceedances above 5 TECU lean toward the quake windows
+    (6 vs 2, 22 vs 18, 10 vs 5), but Gorkha's control year alone shows 18 such days, which
+    is solar maximum talking, not the fault. OLR and temperature stay at zero to two days
+    on both sides.</figcaption>
   </figure>
 
   <div class="verdict">
@@ -209,6 +215,19 @@
   5&deg;&times;2.5&deg; resolution. The Tohoku temperature point sits offshore. Analysis
   code and data sources are a few hundred lines of Python against JPL, NOAA, NASA POWER
   and GFZ public archives; write us if you want the scripts.</p>
+
+  <p class="note">Verification, August 2026: we audited every processing step against the
+  source papers before settling the numbers on this page. Two corrections came out of it.
+  First, the TEC bounds: the formula that circulates as "median &plusmn;1.5&times;IQR"
+  actually belongs to a 2006 paper in the same lineage; the 2009 Wenchuan study uses
+  1.5 times the quartile-to-median distances, which is roughly half as wide, and that is
+  what runs here now. Second, the OLR score now removes the 10-degree zonal band mean
+  before comparison, which is the eddy-field step the 2007 paper actually describes.
+  Climatologies were also restricted to years before each event, and the quiet-day rule
+  tightened to Kp &le; 3 following Thomas et al. Every change made the detectors fire
+  more, on quake and control windows alike, and the verdict above got stronger, not
+  weaker. One missing day (8 Feb 2022, absent from the JPL archive) is treated as a gap,
+  never as a quiet day.</p>
 
 </div>
 </body>
