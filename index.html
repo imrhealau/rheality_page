@@ -374,8 +374,8 @@
 <section>
   <div id="demo-intro">
   <span class="eyebrow">Demo · Real Satellite Monitoring</span>
-  <h2 style="font-size:clamp(2rem,5.5vw,3.2rem)">Two dams, watched from orbit.</h2>
-  <p class="lede">The same pipeline on two very different structures. The Córrego do Feijão tailings dam at Brumadinho, whose 2019 collapse killed 270 people, reconstructed from the record to show what the deformation signal looks like before a failure. And the Three Gorges Dam, the largest on Earth, monitored live from open satellite data for both ground movement and reservoir water. One is a hindcast, not a live feed; the other we track today.</p>
+  <h2 style="font-size:clamp(2rem,5.5vw,3.2rem)">Two dams and a rainstorm, watched from orbit.</h2>
+  <p class="lede">The same pipeline on very different problems. The Córrego do Feijão tailings dam at Brumadinho, whose 2019 collapse killed 270 people, reconstructed from the record to show what the deformation signal looks like before a failure. The Three Gorges Dam, the largest on Earth, monitored live from open satellite data for both ground movement and reservoir water. And the September 2023 Hong Kong black rainstorm, re-run through the same change-detection machinery to ask a blunt question: when the hills fail under cloud, can free radar find the scars?</p>
   <p style="margin:6px 0 20px"><a href="pipeline/how-it-works.html" style="color:var(--brand-deep);font-weight:600;text-decoration:none">How this pipeline works, step by step &rarr;</a></p>
   </div>
 
@@ -397,6 +397,15 @@
           <h3>Three Gorges Dam</h3>
           <p>The largest dam on Earth. Millimetre ground movement and reservoir water, measured from open satellite data and tracked today.</p>
           <span class="demo-go">Open the live monitor &rarr;</span>
+        </div>
+      </a>
+      <a class="demo-card" href="#" id="hk-card">
+        <img src="img/hk-landslides-map.jpg" alt="Hillshade map of Hong Kong with landslide candidate detections circled after the September 2023 black rainstorm" loading="lazy">
+        <div class="demo-card-body">
+          <span class="demo-tag case">Case study · real storm</span>
+          <h3>Hong Kong black rainstorm</h3>
+          <p>158 mm of rain in one hour, hillsides down across the territory, days of cloud. We re-ran the storm through free radar and measured exactly where free data stops.</p>
+          <span class="demo-go">Read the study &rarr;</span>
         </div>
       </a>
     </div>
@@ -481,6 +490,58 @@
 
   <p style="margin:26px 0 0"><a href="demo/" style="color:var(--brand-deep);font-weight:600;text-decoration:none">See the other demo: Brumadinho tailings dam, the collapse read from orbit &rarr;</a></p>
 
+  </div>
+
+  <div id="demo-hk" style="display:none">
+    <a href="#" class="demo-back" id="hk-back">&larr; Back to the demos</a>
+
+  <span class="eyebrow" style="margin-top:26px">Case study &middot; Hong Kong &middot; 7&ndash;8 September 2023</span>
+  <h2 style="font-size:clamp(2rem,5.5vw,3.2rem)">Could a satellite have found the landslides?</h2>
+  <p class="lede">On the night of 7 September 2023, Hong Kong recorded 158.1&nbsp;mm of rain in a single hour, the most in any hour since records began in 1884. By morning the hillside behind Shiu Fai Terrace had come down, a slope above Yiu Hing Road in Shau Kei Wan had failed, and a stretch of Shek O Road had collapsed. The cloud that brought the rain also blinded every optical satellite and grounded the survey flights. Radar sees through rain. So we re-ran the storm through our change-detection pipeline on free Sentinel-1 radar and asked one blunt question: would it have found those failures?</p>
+
+  <div class="pl-stats">
+    <div class="pl-stat"><strong>18:25</strong><span>first radar pass, 8 Sept, through active rain</span></div>
+    <div class="pl-stat"><strong>10 scenes</strong><span>July to October 2023, two orbits</span></div>
+    <div class="pl-stat"><strong>3</strong><span>reported failures checked against the result</span></div>
+    <div class="pl-stat"><strong>0 of 3</strong><span>cleanly detected at 10&nbsp;m resolution</span></div>
+  </div>
+
+  <p class="lede" style="margin:18px 0 16px">The honest answer is no. Measured properly, that answer is worth more to a slope owner than a sales pitch.</p>
+
+  <div class="pl-card">
+    <h3>The scar signal against the noise</h3>
+    <img src="img/hk-landslides-sites.png" alt="Six radar change maps in 800 metre windows centred on the three reported failures, showing the landslide signal barely distinguishable from speckle noise" style="width:100%;height:auto;display:block;border-radius:8px" loading="lazy">
+    <p class="pl-cap">Persistent radar change over the month after the storm, in 800&nbsp;m windows centred on the three reported failures (crosshairs), from both satellite orbits. Red is vegetation lost. The Yiu Hing Road scar is genuinely there in one orbit: the dark spot on the crosshair, two pixels wide. Nothing else separates from the speckle.</p>
+  </div>
+
+  <h2 style="margin:34px 0 6px;font-size:clamp(1.5rem,4.2vw,2.1rem)">What we did</h2>
+  <p>Sentinel-1 imaged Hong Kong at 18:25 on 8 September, about nineteen hours after the black rainstorm signal went up, while the rain was still falling. That same-day pass is the part optical satellites cannot offer: they returned nothing usable for days. We took four quiet scenes from before the storm as a baseline for each orbit, differenced every later pass against it, and kept only the changes that persisted across a month of passes on slopes steeper than 15 degrees. A real scar strips the vegetation and stays bare; noise comes and goes. This is the standard method, done carefully, on the best free radar data there is.</p>
+  <p style="margin-top:12px">Then we checked the result against the three failures everyone in Hong Kong read about.</p>
+
+  <h2 style="margin:34px 0 6px;font-size:clamp(1.5rem,4.2vw,2.1rem)">What we found</h2>
+  <p>These landslides were serious: buildings evacuated, a road severed. But each scar covers a few hundred square metres, a handful of pixels at 10&nbsp;m resolution, and radar speckle on steep vegetated ground swings several decibels between passes. Shiu Fai Terrace does produce a candidate 59&nbsp;m from the mapped failure, but it ranks 1,722nd of 2,341 candidates territory-wide: real, and useless, because no duty officer can walk two thousand sites after a storm. The other two never rise above the noise at any threshold. This matches the published detection limit for Sentinel-1 amplitude change, roughly one hectare, an order of magnitude larger than a typical Hong Kong failure.</p>
+
+  <div class="pl-card" style="margin-top:18px">
+    <h3>Territory-wide candidates, ranked and unvalidated</h3>
+    <img src="img/hk-landslides-map.jpg" alt="Hillshade map of Hong Kong and the border hills with the 100 strongest persistent-change clusters circled" style="width:100%;height:auto;display:block;border-radius:8px" loading="lazy">
+    <p class="pl-cap">The 100 strongest persistent-change clusters after the storm, sized by area; grey circles fall across the boundary in Shenzhen. Some of these are real failures, and many are construction, clearance or residual noise. At this resolution the map is a triage list, and it has to carry the label: unvalidated.</p>
+  </div>
+
+  <h2 style="margin:34px 0 6px;font-size:clamp(1.5rem,4.2vw,2.1rem)">Why publish a negative result?</h2>
+  <p>Because "why not use the free satellites?" is the first question every slope owner asks, and it deserves a measured answer rather than a confident one. We ran the free route to its limit so that you do not have to: every scene ID, threshold and number in this study is checkable against the open archive.</p>
+  <p style="margin-top:12px">The physics is fine; the resolution is the constraint. A tasked commercial radar satellite images at around one metre in the same all-weather way, so the scar that gives Sentinel-1 eight ambiguous pixels gives it eight hundred clear ones. The operational design then writes itself from the rainfall: the observatory's warning triggers the tasking, the satellite images through the storm, and the scar map is on a desk while the cloud is still overhead. Days of not knowing become hours.</p>
+
+  <p class="pl-src">Contains modified Copernicus Sentinel data 2023, processed via Microsoft Planetary Computer. Terrain: Copernicus DEM GLO-30. Full numbers: <a href="pipeline/data/hk_landslides_2023.json">the run's JSON</a>.</p>
+
+  <div class="dark cta-dark" style="text-align:left;margin-top:26px">
+    <span class="label">Slopes above a road, a railway, a reservoir?</span>
+    <h2>When the next black rainstorm lifts, know that evening.</h2>
+    <p>The trigger comes from the rainfall, the tasking follows automatically, and the answer arrives while the response is still running. Tell us the portfolio and we will scope the design.</p>
+    <div class="cta-row" style="margin-top:8px">
+      <a class="btn" href="https://www.linkedin.com/company/rheality/">Message us on LinkedIn</a>
+      <a class="btn ghost email-btn" href="#contact">Email us</a>
+    </div>
+  </div>
   </div>
 </section>
 <script>
@@ -616,16 +677,24 @@
 </script>
 <script>
 (function(){
-  var chooser=document.getElementById('demo-chooser'),tg=document.getElementById('demo-tg'),
-      card=document.getElementById('tg-card'),back=document.getElementById('tg-back'),
-      intro=document.getElementById('demo-intro');
-  if(!chooser||!tg||!card) return;
-  function show(detail){chooser.style.display=detail?'none':'';tg.style.display=detail?'':'none';
-    if(intro)intro.style.display=detail?'none':'';if(detail)window.scrollTo(0,0);}
-  card.addEventListener('click',function(e){e.preventDefault();show(true);});
-  if(back)back.addEventListener('click',function(e){e.preventDefault();show(false);window.scrollTo(0,0);});
-  window.addEventListener('hashchange',function(){if(location.hash.replace('#','')==='pipeline')show(false);});
-  if(/[?&]tg=1/.test(location.search))show(true);
+  var chooser=document.getElementById('demo-chooser'),intro=document.getElementById('demo-intro'),
+      views=[['tg-card','demo-tg','tg-back'],['hk-card','demo-hk','hk-back']],panes=[];
+  if(!chooser) return;
+  function show(pane){chooser.style.display=pane?'none':'';
+    if(intro)intro.style.display=pane?'none':'';
+    panes.forEach(function(p){p.style.display=p===pane?'':'none';});
+    if(pane)window.scrollTo(0,0);}
+  views.forEach(function(v){
+    var card=document.getElementById(v[0]),pane=document.getElementById(v[1]),
+        back=document.getElementById(v[2]);
+    if(!card||!pane) return;
+    panes.push(pane);
+    card.addEventListener('click',function(e){e.preventDefault();show(pane);});
+    if(back)back.addEventListener('click',function(e){e.preventDefault();show(null);window.scrollTo(0,0);});
+  });
+  window.addEventListener('hashchange',function(){if(location.hash.replace('#','')==='pipeline')show(null);});
+  if(/[?&]tg=1/.test(location.search))show(document.getElementById('demo-tg'));
+  if(/[?&]hk=1/.test(location.search))show(document.getElementById('demo-hk'));
 })();
 </script>
 </div>
