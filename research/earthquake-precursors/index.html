@@ -63,7 +63,8 @@
   days before big earthquakes: ionospheric disturbances, infrared "thermal anomalies",
   odd radiation readings. If true, this would be the most valuable signal in Earth
   observation. So we ran the test ourselves, on free public data, with the one safeguard
-  most of those papers skip: a control window where no earthquake happened.</p>
+  most of those papers skip: a control window where no earthquake happened. Then we went
+  further and tested a channel nobody had checked at all.</p>
 
   <h2>The setup</h2>
   <p>We took three well-studied events: Tohoku 2011 (M9.0), Gorkha, Nepal 2015 (M7.8),
@@ -127,6 +128,19 @@
       <td><a href="https://doi.org/10.1002/2016JA023652">Thomas et al. 2017, JGR</a> (storm-time control)</td>
       <td class="ok">Yes, API</td>
       <td>Used to shade storm days in every plot</td>
+    </tr>
+    <tr>
+      <td><strong>Trace gases and aerosol</strong></td>
+      <td>Gas seepage along faults before rupture, one of the oldest precursor
+        claims and the one with the best modern instrument pointed at it</td>
+      <td>Sentinel-5P TROPOMI, seven products, via the public meeo-s5p bucket</td>
+      <td>Daily, 5.5 &times; 3.5 km</td>
+      <td>Epicentre column minus surrounding zonal strip, then the same Liu
+        quartile bounds used for TEC</td>
+      <td>No prior study found, see below</td>
+      <td class="ok">Yes, anonymous</td>
+      <td>Used: CO, CH<sub>4</sub>, NO<sub>2</sub>, SO<sub>2</sub>, aerosol index,
+        HCHO, O<sub>3</sub></td>
     </tr>
     <tr>
       <td><strong>F10.7 solar flux</strong></td>
@@ -228,12 +242,53 @@
   what measurement noise looks like. A real signal gets clearer when you clean the data,
   not merely different.</p>
 
+  <h2>Testing something nobody had tested</h2>
+  <p>Reproducing other people's negative results is useful but safe. So we went
+  looking for a gap: a satellite observable with a real precursor claim attached
+  that nobody appears to have checked. We found one. Gas seepage along faults is
+  among the oldest precursor ideas in the field, and since 2018 the Sentinel-5P
+  TROPOMI instrument has been measuring atmospheric trace gases daily at roughly
+  5 km resolution, which is by far the best instrument ever pointed at that claim.
+  A literature search turned up no study testing it.</p>
+  <p>So we ran it. Seven products (carbon monoxide, methane, nitrogen dioxide,
+  sulfur dioxide, aerosol index, formaldehyde, ozone) over four continental
+  earthquakes in the TROPOMI era: Kahramanmaras 2023, Al Haouz in Morocco 2023,
+  Noto in Japan 2024, and Mandalay in Myanmar 2025. Each with a control window one
+  year earlier at the same place, each through the same detector we used for the
+  ionosphere.</p>
+
+  <figure>
+    <img src="img/tropomi.png" alt="Bar chart of anomaly rates per gas and a plot of all 50 p-values against the no-signal line">
+    <figcaption>Left: how often each gas triggered the detector in the 30 days
+    before an earthquake against the control year. Every gas fires at
+    essentially the same rate either way, between 35 and 52 percent of days.
+    Right: all 50 statistical tests plotted against what they would look like if
+    nothing were happening. A genuine precursor would drag points toward the
+    bottom-left corner. None go there.</figcaption>
+  </figure>
+
+  <p>The multiple-comparison arithmetic is the part worth dwelling on. Fifty tests
+  at the conventional 5 percent threshold should throw up about two or three
+  false positives from chance alone, and in a field that reports whichever channel
+  came out lowest, those are exactly the results that get published. We got
+  <strong>zero</strong>. The smallest p-value across all seven gases, four
+  earthquakes and both metrics is 0.199. There was not even a spurious hit to
+  explain away, which is a cleaner outcome than we expected when we set the test up.</p>
+
+  <figure>
+    <img src="img/tropomi_gases.png" alt="Time series of all seven gases before the Kahramanmaras earthquake beside the control year">
+    <figcaption>All seven gases before Kahramanmaras 2023, with the control year
+    beside them. Red points are days the detector flagged. Cover the labels and
+    you cannot tell which column contains the M7.8 earthquake.</figcaption>
+  </figure>
+
   <div class="verdict">
     <strong>Verdict: nothing here predicts an earthquake.</strong>
     The anomalies are real fluctuations, but they appear at the same rate when no
-    earthquake follows, and not one of the 21 quake-versus-control comparisons here
-    reaches statistical significance. With fixed thresholds and honest controls, every
-    "precursor" we reproduced dissolves into solar activity, weather, or base rate. This matches
+    earthquake follows, and not one of the 71 quake-versus-control comparisons on this
+    page reaches statistical significance. With fixed thresholds and honest controls,
+    every "precursor" we reproduced dissolves into solar activity, weather, or base
+    rate, and the one channel nobody had tested came out empty too. This matches
     the systematic critiques of the precursor literature, and it is why decades of
     retrospective case studies have never produced a working prospective forecast.
   </div>
