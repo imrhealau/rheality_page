@@ -29,6 +29,14 @@
   figure{margin:26px 0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
   figure img{width:100%;height:auto;display:block;border-radius:8px}
   figcaption{font-size:13.5px;color:var(--mut);margin-top:10px;line-height:1.5}
+  .tblwrap{overflow-x:auto;margin:20px 0;background:var(--panel);border:1px solid var(--line);border-radius:14px}
+  table{border-collapse:collapse;width:100%;min-width:840px;font-size:13.5px;line-height:1.45}
+  th{font-family:var(--disp);color:var(--plum);text-align:left;font-size:13px;
+    padding:12px 14px;border-bottom:2px solid var(--line);white-space:nowrap}
+  td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td.ok{color:#2E9E6B;font-weight:600;white-space:nowrap}
+  td.no{color:var(--mut);white-space:nowrap}
   .verdict{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--terra);
     border-radius:12px;padding:16px 18px;margin:26px 0}
   .verdict strong{font-family:var(--disp);color:var(--plum)}
@@ -59,19 +67,79 @@
 
   <h2>The setup</h2>
   <p>We took three well-studied events: Tohoku 2011 (M9.0), Gorkha, Nepal 2015 (M7.8),
-  and Kahramanmaras, Turkey 2023 (M7.8). For each one we pulled four datasets over the
-  75 days around the quake, all free and anonymous to download:</p>
-  <ul>
-    <li><strong>Ionospheric electron content (TEC)</strong> from JPL global ionosphere maps,
-      every 2 hours, interpolated to the epicenter. Anomaly rule: outside the median
-      &plusmn;1.5&times;IQR of the previous 15 days, the standard detector in this literature.</li>
-    <li><strong>Outgoing longwave radiation (OLR)</strong> from NOAA daily grids, scored
-      against a 10-year same-calendar-day climatology. Anomaly rule: z &gt; 2.</li>
-    <li><strong>Ground skin temperature</strong> from NASA POWER, scored the same way
-      against 2001&ndash;2024.</li>
-    <li><strong>Kp geomagnetic index</strong> from GFZ, to mark solar-storm days, the
-      main thing that moves the ionosphere and gets mistaken for a precursor.</li>
-  </ul>
+  and Kahramanmaras, Turkey 2023 (M7.8). For each one we pulled data over the 75 days
+  around the quake.</p>
+  <p>The channels were picked to cover each rung of the claimed coupling chain, ground
+  to atmosphere to ionosphere, and each comes with a standard detector from the precursor
+  literature that we could copy rather than invent. The other filter was access: everything
+  in the test can be downloaded anonymously, today, by anyone who wants to check us.</p>
+
+  <div class="tblwrap"><table>
+    <tr>
+      <th>Signal</th>
+      <th>What the papers claim</th>
+      <th>Product and archive</th>
+      <th>Cadence</th>
+      <th>Anomaly rule we applied</th>
+      <th>Free?</th>
+      <th>In this test</th>
+    </tr>
+    <tr>
+      <td><strong>Ionospheric TEC</strong></td>
+      <td>Electron content shifts days before large quakes</td>
+      <td>JPL global ionosphere maps (IONEX), NASA sideshow archive</td>
+      <td>2 h, 5&deg;&times;2.5&deg; grid</td>
+      <td>Outside median &plusmn;1.5&times;IQR of prior 15 days, per epoch</td>
+      <td class="ok">Yes, anonymous</td>
+      <td>Used, interpolated at each epicenter</td>
+    </tr>
+    <tr>
+      <td><strong>Outgoing longwave radiation</strong></td>
+      <td>Infrared flux rises over the fault before rupture</td>
+      <td>NOAA interpolated OLR to 2022, NOAA CDR v02r00 after (the older product retired Dec 2022)</td>
+      <td>Daily, 2.5&deg; / 1&deg;</td>
+      <td>z &gt; 2 vs 10-year same-calendar-day climatology</td>
+      <td class="ok">Yes, anonymous</td>
+      <td>Used</td>
+    </tr>
+    <tr>
+      <td><strong>Ground skin temperature</strong></td>
+      <td>Surface warms in the epicentral region</td>
+      <td>NASA POWER daily point API</td>
+      <td>Daily, ~0.5&deg;</td>
+      <td>z &gt; 2 vs 2001&ndash;2024 climatology, quake year excluded</td>
+      <td class="ok">Yes, no key</td>
+      <td>Used (the Tohoku point sits offshore, so it reads sea surface)</td>
+    </tr>
+    <tr>
+      <td><strong>Kp geomagnetic index</strong></td>
+      <td>Not a precursor: the confounder. Solar storms move the ionosphere far more than any claimed seismic effect</td>
+      <td>GFZ Potsdam API</td>
+      <td>3 h, global</td>
+      <td>Day flagged disturbed at Kp &ge; 5</td>
+      <td class="ok">Yes, API</td>
+      <td>Used to shade storm days in every plot</td>
+    </tr>
+    <tr>
+      <td><strong>In-situ plasma density</strong></td>
+      <td>Electron density and EM wave anomalies on orbit (the DEMETER stacked statistic)</td>
+      <td>ESA Swarm via VirES; DEMETER (CNES); CSES (application)</td>
+      <td>Along-track</td>
+      <td>n/a</td>
+      <td class="no">Registration</td>
+      <td>Not used: the one channel we could not pull anonymously</td>
+    </tr>
+    <tr>
+      <td><strong>InSAR deformation</strong></td>
+      <td>Hypothetical pre-slip at the surface (never reproducibly observed)</td>
+      <td>Sentinel-1 via Copernicus</td>
+      <td>6&ndash;12 days</td>
+      <td>n/a</td>
+      <td class="ok">Yes, account</td>
+      <td>Not used: wrong timescale for a days-ahead test, and it measures strain, which is the part that does work</td>
+    </tr>
+  </table></div>
+
   <p>Every threshold was fixed before we computed anything. Then the key step: each
   earthquake window got a twin, the identical 75-day window at the same location exactly
   one year earlier, run through exactly the same pipeline. If the detectors light up in
