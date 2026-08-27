@@ -49,6 +49,21 @@
   ul{padding-left:20px}
   li{margin:7px 0}
   code{background:#EAE4F4;border-radius:5px;padding:1px 6px;font-size:13.5px}
+
+  /* rheality-toc: sticky contents rail, built from the h2 elements at load */
+  html{scroll-behavior:smooth}
+  .wrap h2{scroll-margin-top:26px}
+  .toc{position:fixed;top:98px;left:calc(50% - 658px);width:190px;z-index:20;
+    max-height:calc(100vh - 140px);overflow-y:auto}
+  .toc::-webkit-scrollbar{width:0}
+  .toc-h{font-family:var(--disp);font-weight:700;font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--mut);margin:0 0 10px 13px}
+  .toc a{display:block;font-size:12.6px;line-height:1.38;color:var(--mut);
+    text-decoration:none;padding:6px 0 6px 13px;border-left:2px solid var(--line);
+    transition:color .14s ease,border-color .14s ease}
+  .toc a:hover{color:var(--plum);border-left-color:var(--mut)}
+  .toc a.on{color:var(--plum);font-weight:600;border-left-color:var(--terra)}
+  @media (max-width:1340px){.toc{display:none}}
 </style>
 </head>
 <body>
@@ -186,6 +201,16 @@
   and forecast 3 million more over three days, with a high risk of breach. That figure
   rests on a single source, so we are measuring it independently.</p>
 
+  <figure>
+    <img src="img/overview_map.png" alt="Map of the Bhote Koshi and Trishuli corridor showing the flood path in red running 60 km from Rasuwagadhi past Timure and Syabrubesi, and a dashed zone in the upper catchment where the second barrier lake is reported">
+    <figcaption>The corridor in red is the flood path, traced by steepest descent down the
+    Copernicus DEM rather than drawn by hand, so the route and the distances along it are
+    measured. It runs 70 km from the border to the Trishuli, of which roughly the first 60
+    carried the damage. The dashed zone is where the second lake is reported. It is drawn
+    as a reach and not a point because no source has published a coordinate for it, which
+    is one of the things the 28 August pass should settle.</figcaption>
+  </figure>
+
   <div class="stats">
     <div class="stat"><strong>2 Mm&sup3;</strong><span>reported volume, single source, 27 Aug</span></div>
     <div class="stat"><strong>3&ndash;4%</strong><span>volume spread across three elevation models</span></div>
@@ -259,5 +284,39 @@
   send it to anyone who wants to check the numbers.</p>
 
 </div>
+
+<script>
+/* rheality-toc */
+(function(){
+  var hs=[].slice.call(document.querySelectorAll('.wrap h2'));
+  if(hs.length<3)return;
+  var nav=document.createElement('nav');
+  nav.className='toc';
+  nav.setAttribute('aria-label','Contents');
+  nav.innerHTML='<div class="toc-h">Contents</div>';
+  var links=hs.map(function(h,i){
+    if(!h.id)h.id='sec-'+i;
+    /* headings may carry an eyebrow label; the rail wants the heading itself */
+    var c=h.cloneNode(true),eb=c.querySelector('.eyebrow');
+    if(eb)eb.parentNode.removeChild(eb);
+    var a=document.createElement('a');
+    a.href='#'+h.id;
+    a.textContent=c.textContent.trim();
+    nav.appendChild(a);
+    return a;
+  });
+  document.body.appendChild(nav);
+  function update(){
+    var y=window.scrollY+140,cur=0;
+    for(var i=0;i<hs.length;i++){if(hs[i].offsetTop<=y)cur=i;}
+    for(var j=0;j<links.length;j++){
+      if(j===cur)links[j].classList.add('on');else links[j].classList.remove('on');
+    }
+  }
+  window.addEventListener('scroll',update,{passive:true});
+  window.addEventListener('resize',update);
+  update();
+})();
+</script>
 </body>
 </html>
