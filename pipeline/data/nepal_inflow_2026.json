@@ -1,0 +1,84 @@
+{
+  "generated_utc": "2026-08-27T15:13:24Z",
+  "source": "Open-Meteo hourly precipitation, no key, non-commercial terms",
+  "catchment_sample": {
+    "box": {
+      "lat": [
+        28.38,
+        28.72
+      ],
+      "lon": [
+        85.42,
+        85.8
+      ],
+      "n": 4
+    },
+    "n_points": 16,
+    "elev_range_m": [
+      3917.0,
+      5907.0
+    ]
+  },
+  "daily_mean_mm": {
+    "2026-08-17": 6.32,
+    "2026-08-18": 4.54,
+    "2026-08-19": 4.44,
+    "2026-08-20": 1.45,
+    "2026-08-21": 0.68,
+    "2026-08-22": 2.34,
+    "2026-08-23": 1.07,
+    "2026-08-24": 0.33,
+    "2026-08-25": 0.27,
+    "2026-08-26": 7.04,
+    "2026-08-27": 0.88,
+    "2026-08-28": 0.53,
+    "2026-08-29": 11.11,
+    "2026-08-30": 7.51,
+    "2026-08-31": 6.16
+  },
+  "next_3_days_mm": 12.5,
+  "reference": {
+    "cn_inflow_m3_3d": 3000000,
+    "cn_volume_m3": 2000000
+  },
+  "inflow_scenarios": [
+    {
+      "area_km2": 100,
+      "inflow_m3": {
+        "0.5": 626250,
+        "0.7": 876750,
+        "0.9": 1127250
+      }
+    },
+    {
+      "area_km2": 200,
+      "inflow_m3": {
+        "0.5": 1252500,
+        "0.7": 1753500,
+        "0.9": 2254500
+      }
+    },
+    {
+      "area_km2": 300,
+      "inflow_m3": {
+        "0.5": 1878750,
+        "0.7": 2630250,
+        "0.9": 3381750
+      }
+    },
+    {
+      "area_km2": 500,
+      "inflow_m3": {
+        "0.5": 3131250,
+        "0.7": 4383750,
+        "0.9": 5636250
+      }
+    }
+  ],
+  "implied_catchment_km2_for_cn_forecast": {
+    "0.5": 479.0,
+    "0.7": 342.2,
+    "0.9": 266.1
+  },
+  "limits": "Open-Meteo is a reanalysis and forecast blend, not a gauge. High Himalayan precipitation is poorly constrained by any model and orographic gradients are severe over a few km. Melt is excluded and is a real term at these elevations in late August. Treat this as an order of magnitude cross-check on the reported inflow, not a measurement of it."
+}

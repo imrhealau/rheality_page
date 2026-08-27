@@ -1,0 +1,122 @@
+{
+  "generated_utc": "2026-08-27T15:16:24Z",
+  "aoi": [
+    85.35,
+    28.3,
+    85.8,
+    28.7
+  ],
+  "res_m": 30.0,
+  "dems": {
+    "cop-dem-glo-30": "Copernicus GLO-30, TanDEM-X 2011-2015",
+    "nasadem": "NASADEM, SRTM 2000",
+    "alos-dem": "ALOS World 3D-30m, 2006-2011"
+  },
+  "pairwise_difference_m": {
+    "cop-dem-glo-30 - nasadem": {
+      "all": {
+        "median": -1.09,
+        "std": 17.95,
+        "p5": -29.4,
+        "p95": 15.45
+      },
+      "flat": {
+        "median": -0.72,
+        "std": 7.53,
+        "p5": -17.0,
+        "p95": 3.36
+      }
+    },
+    "cop-dem-glo-30 - alos-dem": {
+      "all": {
+        "median": -1.52,
+        "std": 21.88,
+        "p5": -27.28,
+        "p95": 18.56
+      },
+      "flat": {
+        "median": -1.2,
+        "std": 5.85,
+        "p5": -9.61,
+        "p95": 0.9
+      }
+    },
+    "nasadem - alos-dem": {
+      "all": {
+        "median": -0.48,
+        "std": 16.73,
+        "p5": -18.47,
+        "p95": 22.39
+      },
+      "flat": {
+        "median": -0.49,
+        "std": 5.77,
+        "p5": -4.76,
+        "p95": 9.78
+      }
+    }
+  },
+  "seed": {
+    "lat": 28.40022,
+    "lon": 85.45009,
+    "valley_floor_m": 3125.0
+  },
+  "impoundment_volume_by_dem": [
+    {
+      "rise_m": 10,
+      "stage_m": 3135.0,
+      "footprint_m2": 3974400,
+      "volume_m3": {
+        "cop-dem-glo-30": 429653920,
+        "nasadem": 415063424,
+        "alos-dem": 412320832
+      },
+      "spread_frac": 0.041
+    },
+    {
+      "rise_m": 20,
+      "stage_m": 3145.0,
+      "footprint_m2": 4202100,
+      "volume_m3": {
+        "cop-dem-glo-30": 470492000,
+        "nasadem": 455104064,
+        "alos-dem": 452375744
+      },
+      "spread_frac": 0.039
+    },
+    {
+      "rise_m": 30,
+      "stage_m": 3155.0,
+      "footprint_m2": 4435200,
+      "volume_m3": {
+        "cop-dem-glo-30": 513691328,
+        "nasadem": 497480640,
+        "alos-dem": 494639744
+      },
+      "spread_frac": 0.038
+    },
+    {
+      "rise_m": 40,
+      "stage_m": 3165.0,
+      "footprint_m2": 4647600,
+      "volume_m3": {
+        "cop-dem-glo-30": 559140480,
+        "nasadem": 542212352,
+        "alos-dem": 539164416
+      },
+      "spread_frac": 0.037
+    },
+    {
+      "rise_m": 60,
+      "stage_m": 3185.0,
+      "footprint_m2": 5081400,
+      "volume_m3": {
+        "cop-dem-glo-30": 656528320,
+        "nasadem": 638206656,
+        "alos-dem": 634754304
+      },
+      "spread_frac": 0.034
+    }
+  ],
+  "note": "Same fill geometry through three DEMs of different epochs. The spread is a floor on volume uncertainty, not a full error budget: it excludes error in the radar-derived water outline and in the stage estimate, and the debris dam itself is in none of these DEMs."
+}
