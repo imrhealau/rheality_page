@@ -192,11 +192,35 @@
   change consistent with rapid filling in the fortnight before the event, and the 24
   August scene looks like 19 July and like 12 August.</p>
 
+  <h2>A second instrument, and a gap in our own reasoning</h2>
+
+  <p>We ran this on radar and justified it on monsoon cloud without checking whether the
+  cloud was actually there. On the date that mattered, it was not. Sentinel-2 imaged the
+  catchment on 24 August, the same day as the radar pass, and its scene classification
+  puts the source zone at 75.6 percent clear and the blockage reach at 51.7 percent.
+  Optical was available and we had not looked at it.</p>
+
+  <p>So we looked. The classifier flags 6.9 percent of the source zone as water on 24
+  August against 0.15 percent on 12 August, which on its face is alarming. It does not
+  survive a spectral check. Liquid water is dark in both the near infrared and the
+  shortwave infrared, with near infrared reflectance typically below 0.05. The pixels
+  flagged as water on the 24th have a median near infrared reflectance of 0.116 and
+  shortwave of 0.117, and not one pixel in the zone on either date comes in below 0.10 in
+  both bands. A spectrally flat dark surface at those values is cloud shadow, which this
+  classifier is known to confuse with water, and the zone was 24 percent cloud that day.
+  Post-event is a different story: by 27 August the same zone is 11 percent clear, which
+  is where the usual claim about optical being blind in the monsoon does hold.</p>
+
+  <p>Two instruments measuring different physics, radar backscatter and reflected
+  sunlight, and neither finds standing water in the source zone 48 hours before the
+  collapse. That is a stronger result than radar alone, and we would not have it if
+  nobody had asked why we were only using one satellite.</p>
+
   <div class="verdict">
     <strong>Verdict: the lake was not visible, because it was not yet there.</strong>
     No impoundment was detectable anywhere in this catchment 48 hours before the breach,
-    at any threshold, at any elevation, and the detector demonstrably works in this
-    terrain. The blockage formed and failed inside a four-day observation gap, and
+    at any threshold, at any elevation, on either radar or optical, and the detector
+    demonstrably works in this terrain. The blockage formed and failed inside a four-day observation gap, and
     probably inside a few hours. No system running at Sentinel-1 cadence could have
     warned about it. The window that existed ran from the seismic detection of the
     collapse, which is t=0 and is an instrument that already fired, to the surge reaching
