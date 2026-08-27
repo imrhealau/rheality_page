@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rheality — Was the Nepal barrier lake visible from orbit before it burst?</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="/favicon.png?v=6">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F2EEF9;--panel:#fff;--line:#E4DDF1;--plum:#33254E;--terra:#CD5A1F;--terra-deep:#A84613;
+    --ink:#352A4A;--mut:#6F6488;--disp:'Fraunces',Georgia,serif;--body:'Inter',system-ui,sans-serif;}
+  *{box-sizing:border-box}
+  body{margin:0;color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.65;
+    background:radial-gradient(60% 50% at 50% 0%,rgba(122,80,255,.16) 0%,transparent 70%),var(--bg);}
+  .wrap{max-width:880px;margin:0 auto;padding:22px 22px 70px}
+  a{color:var(--terra-deep)}
+  .topnav{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;font-size:13.5px}
+  .topnav a{color:var(--mut);text-decoration:none}
+  .topnav a:hover{color:var(--plum)}
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  .brand .logo{height:34px;width:auto;display:block}
+  h1{font-family:var(--disp);color:var(--plum);font-size:34px;line-height:1.1;margin:14px 0 8px}
+  h2{font-family:var(--disp);color:var(--plum);font-size:23px;margin:34px 0 8px}
+  .lead{font-size:17px;max-width:680px}
+  .note{font-size:13px;color:var(--mut)}
+  figure{margin:26px 0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
+  figure img{width:100%;height:auto;display:block;border-radius:8px}
+  figcaption{font-size:13.5px;color:var(--mut);margin-top:10px;line-height:1.5}
+  .tblwrap{overflow-x:auto;margin:20px 0;background:var(--panel);border:1px solid var(--line);border-radius:14px}
+  table{border-collapse:collapse;width:100%;min-width:620px;font-size:13.5px;line-height:1.45}
+  th{font-family:var(--disp);color:var(--plum);text-align:left;font-size:13px;
+    padding:12px 14px;border-bottom:2px solid var(--line);white-space:nowrap}
+  td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td.ok{color:#2E9E6B;font-weight:600;white-space:nowrap}
+  td.no{color:var(--mut);white-space:nowrap}
+  td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+  .verdict{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--terra);
+    border-radius:12px;padding:16px 18px;margin:26px 0}
+  .verdict strong{font-family:var(--disp);color:var(--plum)}
+  ul{padding-left:20px}
+  li{margin:6px 0}
+  code{background:#EAE4F4;border-radius:5px;padding:1px 6px;font-size:13.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topnav">
+    <a href="/">&larr; rheality.space</a>
+    <span class="note">Research note, 27 August 2026</span>
+  </div>
+
+  <div class="brand">
+    <img class="logo" src="/logo-nav.png" alt="Rheality">
+  </div>
+
+  <h1>Was the Nepal barrier lake visible from orbit before it burst?</h1>
+
+  <p class="lead">On 26 August 2026 a rock and ice avalanche came off the Tibetan side
+  of the border and dropped into the Lhende Khola. It dammed the river, a lake ponded
+  behind the debris, and the dam failed. The surge ran about 60 km down the Bhote Koshi
+  through Timure and Syabrubesi. We went looking for that lake in the last satellite
+  image taken before it broke.</p>
+
+  <p>The collapse registered 5.2 on local seismometers, which was widely reported at
+  first as an earthquake trigger. It was not an earthquake: the signal is the avalanche
+  itself, as
+  <a href="https://eos.org/thelandslideblog/26-august-2026-nepal-and-tibet">Dave Petley
+  set out the same day</a>. Six Nepal Electricity Authority hydropower and transmission
+  facilities were damaged, among them
+  <a href="https://www.waterpowermagazine.com/news/nepal-floods-affect-hydropower-projects-in-rasuwa-and-nuwakot/">Rasuwagadhi
+  111 MW, Sanjen Khola 78 MW and Upper Trishuli 3A</a>. Casualty figures were still
+  moving as we wrote this and we are not going to pin a number to them.</p>
+
+  <p>This is the question we can answer. A barrier lake is the one part of this cascade
+  that sits still long enough to be photographed. If it was there on the last pass, free
+  radar saw it and nobody looked. If it was not, the warning case is for a different
+  instrument entirely. Either answer is worth having, so we ran it.</p>
+
+  <h2>One look, 48 hours out</h2>
+
+  <p>Three Sentinel-1 tracks cover this catchment, and they interleave to give a look
+  every three to five days rather than the twelve you get from any single track. In the
+  fortnight before the collapse that produced passes on 4, 7, 12, 16, 19 and 24 August.
+  Then a gap.</p>
+
+  <figure>
+    <img src="img/timeline.png" alt="Timeline of Sentinel-1 passes over the Lhende catchment in August 2026, showing the last pass on 24 August and a four-day gap containing the 26 August collapse">
+    <figcaption>The last orbital look before the collapse was Sentinel-1D on descending
+    orbit 19, 00:18Z on 24 August, about 48 hours ahead of the event. The next pass on any
+    track was the 28th. The collapse happened inside a four-day gap.</figcaption>
+  </figure>
+
+  <h2>Method</h2>
+
+  <p>Radiometrically terrain corrected backscatter from the Microsoft Planetary Computer,
+  the same free archive and the same pipeline architecture as our
+  <a href="/?hk=1">Hong Kong landslide study</a>, with the polarisation and the
+  terrain logic inverted. Smooth open water reflects the radar away from the sensor and
+  goes dark, so water is a far stronger signal than a landslide scar and it shows up best
+  in VV co-polarisation rather than VH.</p>
+
+  <p>The baseline is a median of four monsoon-season scenes off the same track, from 25
+  June to 31 July. Same season, same wetness, same snow line. That matters for a reason
+  beyond fairness: radar shadow in a Himalayan gorge is dark too, but it is static, so it
+  sits in the baseline and subtracts itself out. A detection has to be dark in absolute
+  terms (at or below &minus;15 dB) and at least 3 dB darker than the baseline, on ground
+  flatter than 8 degrees, in a cluster of at least 2000 m<sup>2</sup>. We also ran 12
+  August as a control. A method that finds new lakes two weeks before the event is
+  finding noise.</p>
+
+  <h2>Nothing was there</h2>
+
+  <p>Zero new-water clusters on 24 August. The 12 August control produced one, of
+  2000 m<sup>2</sup>, which is to say the control came out dirtier than the test.</p>
+
+  <p>Before treating that as a result we had to rule out the boring explanation, that the
+  detector cannot see into a gorge at all. It can. The reach where the blockage was
+  reported, 15 to 25 km upstream of the Miteri Bridge, gives 21,489 valley-floor pixels
+  that are valid on every single date, with a median baseline return of &minus;8.8 dB.
+  That is ordinary ground. A shadowed reach would sit down at the noise floor. The valley
+  bottom there runs at 3 to 8 degrees, which is inside the mask, not outside it.</p>
+
+  <div class="tblwrap"><table>
+    <tr><th>Mask</th><th>Water threshold</th><th>Drop</th><th>Control, 12 Aug</th><th>Test, 24 Aug</th><th>Excess</th></tr>
+    <tr><td>slope &le; 8&deg;</td><td>&minus;15 dB</td><td>&minus;3 dB</td><td class="num">3,688 px</td><td class="num">3,740 px</td><td class="num">+52</td></tr>
+    <tr><td>slope &le; 15&deg;</td><td>&minus;15 dB</td><td>&minus;3 dB</td><td class="num">6,872 px</td><td class="num">7,025 px</td><td class="num">+153</td></tr>
+    <tr><td>slope &le; 25&deg;</td><td>&minus;15 dB</td><td>&minus;3 dB</td><td class="num">13,285 px</td><td class="num">13,321 px</td><td class="num">+36</td></tr>
+    <tr><td>no mask</td><td>&minus;15 dB</td><td>&minus;3 dB</td><td class="num">76,775 px</td><td class="num">74,869 px</td><td class="num">&minus;1,906</td></tr>
+  </table></div>
+
+  <p>We swept every sensible combination of the three thresholds, twenty-four in total.
+  The excess never separates from the speckle floor, and with the terrain mask removed it
+  goes negative. The dB change distribution bottoms out around &minus;5 dB at the first
+  percentile, the same speckle floor we hit in Hong Kong. A lake capable of driving a
+  surge that wrecked 60 km of valley would cover something like 10<sup>4</sup> to
+  10<sup>5</sup> m<sup>2</sup>, hundreds to thousands of pixels, far above that floor.</p>
+
+  <figure>
+    <img src="img/change_distribution.png" alt="Overlaid histograms of VV backscatter change from baseline for the 12 August control and 24 August test scenes, showing a small uniform offset and no excess in the dark tail">
+    <figcaption>Valley-floor change from the monsoon baseline, 309,370 pixels. The 24
+    August scene is about 0.8 dB darker across the whole floor, which is what rain on the
+    ground looks like in the middle of a monsoon. What it is not is a lake: a filling
+    impoundment puts a lump in the dark tail in one place, and there is no such lump
+    anywhere in this scene. Broad and uniform, not local and deep.</figcaption>
+  </figure>
+
+  <h2>The glacier hypothesis, and a threshold we had wrong</h2>
+
+  <p>Our first version of this analysis capped detections at 5000 m, on the reasoning that
+  impoundments pond on valley floors and that above the snow line wet snow mimics open
+  water in C-band. Then reporting appeared placing an active water area
+  <a href="https://www.recentnaturaldisasters.com/2026/08/nepal-flood-map-2026-rasuwa-bhotekoshi.html">35
+  to 38 km upstream</a> and citing the 24 August scene as the key comparison, and ICIMOD
+  had attributed
+  <a href="https://www.newsonair.gov.in/nepal-rasuwas-devastating-flood-caused-by-supraglacial-outburst-in-china">the
+  2025 flood in this same corridor</a> to a supraglacial lake draining off the Purepu
+  Glacier. A supraglacial lake sits on the ice at exactly the elevation our ceiling was
+  throwing away. The threshold was excluding the leading hypothesis by construction.</p>
+
+  <p>So we took the ceiling off and ran a time series over that zone, 33 to 40 km
+  upstream at 5100 to 5600 m, across all six passes. This is the test that separates the
+  two explanations. Wet snow tracks the weather and wanders up and down. A lake fills
+  monotonically.</p>
+
+  <figure>
+    <img src="img/source_series.png" alt="Time series of dark area in the glaciated source zone from 25 June to 24 August, showing non-monotonic variation including a fall on 31 July">
+    <figcaption>It wanders. The dark area in the source zone goes 8.59, 11.60, 12.09,
+    10.22, 12.37, 12.67 km<sup>2</sup>, falling by 1.87 km<sup>2</sup> on 31 July, a move
+    four times larger than the +0.30 between the last two passes. A control zone in the
+    same elevation and slope band swings just as widely, between 12.1 and 18.9 percent,
+    with no event underneath it. The largest connected patch has a compactness of 0.25 to
+    0.57, which is ragged snow rather than a pond, and its centre has not moved since
+    early July.</figcaption>
+  </figure>
+
+  <p>One more correction, because it is the kind of mistake worth publishing. Our first
+  read of these scenes reported that the largest cluster in the source zone had doubled
+  between 12 and 24 August, from 411,000 to 919,000 m<sup>2</sup>. That was an artifact of
+  the clustering step, separate patches merging across the threshold into one label. Total
+  area, which is the number that actually means something, went from 12.37 to 12.67
+  km<sup>2</sup>. Two percent. Counting blobs instead of measuring area produced a
+  headline that was not in the data.</p>
+
+  <p>What this does not settle: a supraglacial lake that drains englacially can empty
+  without much change in surface area, and on a glacier at 10 m C-band the separation
+  between water and wet snow is genuinely ambiguous. Our claim is narrow. There was no
+  change consistent with rapid filling in the fortnight before the event, and the 24
+  August scene looks like 19 July and like 12 August.</p>
+
+  <div class="verdict">
+    <strong>Verdict: the lake was not visible, because it was not yet there.</strong>
+    No impoundment was detectable anywhere in this catchment 48 hours before the breach,
+    at any threshold, at any elevation, and the detector demonstrably works in this
+    terrain. The blockage formed and failed inside a four-day observation gap, and
+    probably inside a few hours. No system running at Sentinel-1 cadence could have
+    warned about it. The window that existed ran from the seismic detection of the
+    collapse, which is t=0 and is an instrument that already fired, to the surge reaching
+    Timure. That is a seismometer and a siren, not a satellite.
+  </div>
+
+  <h2>What radar is for here</h2>
+
+  <p>The honest answer to "could you have predicted this" is no, and we would rather say
+  so on our own website than be asked in a meeting. The parts of this problem that free
+  and tasked radar do handle:</p>
+
+  <ul>
+    <li><strong>Mapping through cloud.</strong> This happened mid-monsoon, so optical
+      satellites were blind for days. Radar was not.
+      <a href="https://mapping.emergency.copernicus.eu/news/flood-in-nepal-emsr927/">Copernicus
+      EMS activated as EMSR927</a> on the day, and their rapid mapping is good and free.
+      We are not going to duplicate it.</li>
+    <li><strong>Secondary impoundments.</strong> Sixty kilometres of valley now holds
+      fresh debris, the monsoon is still running, and tributaries get dammed by new
+      deposit fans. That hazard persists for weeks and it is exactly what the pipeline on
+      this page detects. It is the part still worth watching.</li>
+    <li><strong>Attribution.</strong> The earthquake confusion in the first 24 hours is
+      the ordinary case for independent verification. A seismic trace and a pair of radar
+      scenes settle what actually moved.</li>
+    <li><strong>Slow deformation on owned assets.</strong> Tailings dams, reservoir
+      slopes and cut faces creep measurably for weeks before they fail, and InSAR reads
+      that at millimetre precision. Engineered structures with stable scatterers on them
+      are a different physical problem from a rock and ice face at 5000 m, and it is the
+      problem where the measurement holds up.</li>
+  </ul>
+
+  <h2>Why we publish negative results</h2>
+
+  <p>Because the alternative is selling things that do not work. We ran this the day
+  after the event, expecting either a quiet confirmation or a striking image of a lake
+  nobody had noticed. We got neither, and we found two errors in our own first pass on
+  the way: an elevation threshold that ruled out the leading hypothesis before testing
+  it, and a doubling that turned out to be an artifact of counting instead of measuring.
+  Both are in this note because a method you can check is worth more than a result you
+  cannot.</p>
+
+  <p class="note">Method notes: Copernicus Sentinel-1 RTC via Microsoft Planetary
+  Computer, Copernicus DEM GLO-30, no login required for either. Descending orbit 19,
+  Sentinel-1D, VV gamma0 at 10 m. Baseline 25 Jun, 7 Jul, 19 Jul, 31 Jul; control 12 Aug;
+  test 24 Aug. Detection AOI 85.30 to 85.70 E, 28.20 to 28.60 N. Wind roughening raises
+  the backscatter of open water and can hide a small lake, and in a confined gorge an
+  early-stage impoundment may be only 20 to 50 m wide, which is two to five pixels, below
+  what we would claim to see. Piping failure of a debris dam gives no surface warning at
+  all. Detecting water is not assessing stability: seeing a lake would tell you an
+  impoundment exists, never when it will go. The pipeline is about 400 lines of Python
+  and we will send it to anyone who wants to check the numbers.</p>
+
+</div>
+</body>
+</html>

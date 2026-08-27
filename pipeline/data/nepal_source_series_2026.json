@@ -1,0 +1,49 @@
+{
+  "generated_utc": "2026-08-27T09:23:22Z",
+  "zone": "33-40 km upstream, 5100-5600 m",
+  "monotonic": false,
+  "series": [
+    {
+      "date": "2026-06-25",
+      "source_km2": 8.59,
+      "control_frac": 0.176,
+      "largest_blob_m2": 3505100,
+      "compactness": 0.25
+    },
+    {
+      "date": "2026-07-07",
+      "source_km2": 11.6,
+      "control_frac": 0.189,
+      "largest_blob_m2": 5220900,
+      "compactness": 0.56
+    },
+    {
+      "date": "2026-07-19",
+      "source_km2": 12.09,
+      "control_frac": 0.136,
+      "largest_blob_m2": 5219000,
+      "compactness": 0.56
+    },
+    {
+      "date": "2026-07-31",
+      "source_km2": 10.22,
+      "control_frac": 0.156,
+      "largest_blob_m2": 3259300,
+      "compactness": 0.4
+    },
+    {
+      "date": "2026-08-12",
+      "source_km2": 12.37,
+      "control_frac": 0.121,
+      "largest_blob_m2": 5108100,
+      "compactness": 0.55
+    },
+    {
+      "date": "2026-08-24",
+      "source_km2": 12.67,
+      "control_frac": 0.13,
+      "largest_blob_m2": 5251000,
+      "compactness": 0.57
+    }
+  ]
+}

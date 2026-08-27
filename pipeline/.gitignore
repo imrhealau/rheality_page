@@ -11,4 +11,5 @@ data/hyp3_jobs_brumadinho_post.json
 *.tif
 *.zip
 data/hk2023_cache/
+data/nepal2026_cache/
 *.npz
