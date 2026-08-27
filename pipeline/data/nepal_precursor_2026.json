@@ -1,0 +1,265 @@
+{
+  "zone": [
+    85.55,
+    28.48,
+    85.68,
+    28.58
+  ],
+  "zone_km2": 144.55,
+  "method": "Sentinel-2 L2A. Liquid water = NIR < 0.1 and SWIR < 0.1, clusters >= 4800 m2, scenes with at least 35% clear over the zone.",
+  "reference_2025": {
+    "lake": "Purepu Glacier supraglacial",
+    "from_km2": 0.08,
+    "to_km2": 0.69,
+    "window": "9 May to 6 Jul 2025"
+  },
+  "verdict": "A water body of some size was present. Growth pattern needs inspecting before calling it a precursor.",
+  "series": [
+    {
+      "date": "2026-04-01",
+      "clear": 0.937,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-04-04",
+      "clear": 1.0,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-04-06",
+      "clear": 0.414,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-04-06",
+      "clear": 0.364,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-04-09",
+      "clear": 0.77,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-04-11",
+      "clear": 0.985,
+      "water_km2": 0.0052,
+      "largest_m2": 5200
+    },
+    {
+      "date": "2026-04-13",
+      "clear": 0.991,
+      "water_km2": 0.5124,
+      "largest_m2": 333200
+    },
+    {
+      "date": "2026-04-14",
+      "clear": 0.71,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-04-16",
+      "clear": 0.992,
+      "water_km2": 0.2428,
+      "largest_m2": 224800
+    },
+    {
+      "date": "2026-04-21",
+      "clear": 0.982,
+      "water_km2": 0.0964,
+      "largest_m2": 96400
+    },
+    {
+      "date": "2026-04-24",
+      "clear": 0.984,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-04-26",
+      "clear": 0.778,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-04-26",
+      "clear": 0.763,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-05-01",
+      "clear": 0.949,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-05-03",
+      "clear": 0.351,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-05-04",
+      "clear": 0.88,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-05-11",
+      "clear": 0.986,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-05-14",
+      "clear": 0.875,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-05-16",
+      "clear": 0.999,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-05-16",
+      "clear": 0.97,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-05-19",
+      "clear": 0.974,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-05-21",
+      "clear": 1.0,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-05-23",
+      "clear": 0.965,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-05-24",
+      "clear": 0.838,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-05-26",
+      "clear": 0.722,
+      "water_km2": 0.0596,
+      "largest_m2": 33200
+    },
+    {
+      "date": "2026-06-03",
+      "clear": 0.853,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-06-05",
+      "clear": 0.965,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-06-08",
+      "clear": 0.658,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-06-10",
+      "clear": 0.567,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-06-12",
+      "clear": 0.589,
+      "water_km2": 1.4312,
+      "largest_m2": 1082800
+    },
+    {
+      "date": "2026-06-13",
+      "clear": 0.776,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-06-15",
+      "clear": 0.998,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-06-18",
+      "clear": 0.805,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-06-20",
+      "clear": 0.508,
+      "water_km2": 0.0996,
+      "largest_m2": 99600
+    },
+    {
+      "date": "2026-06-23",
+      "clear": 0.821,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-07-10",
+      "clear": 0.544,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-07-20",
+      "clear": 0.659,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-07-22",
+      "clear": 0.424,
+      "water_km2": 1.0292,
+      "largest_m2": 561600
+    },
+    {
+      "date": "2026-08-14",
+      "clear": 0.504,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-08-24",
+      "clear": 0.714,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    },
+    {
+      "date": "2026-08-24",
+      "clear": 0.756,
+      "water_km2": 0.0,
+      "largest_m2": 0
+    }
+  ]
+}
