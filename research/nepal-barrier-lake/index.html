@@ -216,6 +216,25 @@
   collapse. That is a stronger result than radar alone, and we would not have it if
   nobody had asked why we were only using one satellite.</p>
 
+  <h2>A third check: there was no water to fill it with</h2>
+
+  <p>Radar and optical both go looking for the lake. Rainfall asks a different question,
+  which is whether there was enough water arriving to build one. Catchment-mean rainfall
+  over sixteen sample points runs 1.4, 0.7, 2.3, 1.1, 0.3 and 0.3 mm per day from 20 to 25
+  August. The week before the collapse was close to dry.</p>
+
+  <figure>
+    <img src="img/rainfall.png" alt="Daily catchment-mean rainfall from 17 to 31 August 2026, showing a dry spell from the 20th to the 25th, the collapse on the 26th, and heavy forecast rain from the 29th">
+    <figcaption>Catchment-mean rainfall, sixteen sample points between 3,900 and 5,900 m.
+    The days before the collapse carried almost nothing. The bars from 27 August are
+    forecast rather than observed.</figcaption>
+  </figure>
+
+  <p>That matters twice over. A blockage formed days earlier would have been filling
+  slowly at best, which is what finding nothing on the 24th would look like. And it points
+  away from rainfall as the trigger, which is consistent with a rock and ice mass letting
+  go under its own strength loss rather than being pushed by a storm.</p>
+
   <div class="verdict">
     <strong>Verdict: the lake was not visible, because it was not yet there.</strong>
     No impoundment was detectable anywhere in this catchment 48 hours before the breach,
@@ -253,18 +272,66 @@
       problem where the measurement holds up.</li>
   </ul>
 
+  <h2>What we are doing now</h2>
+
+  <p>A second lake formed after the outburst, upstream near the confluence of the Chhochen
+  Khola and the Purepu Tsangpo on the border. On 27 August China's Ministry of Water
+  Resources put it at about 2 million cubic metres and forecast 3 million more entering
+  over three days, with a high risk of breach. Nepal moved people out of the valley below.
+  That 2 million figure rests on a single source, and measuring it independently seemed a
+  better use of the week than writing about it.</p>
+
+  <p>The measurement is simple in principle. A lake surface is flat, so its shoreline is an
+  equipotential: intersect a radar-derived outline with an elevation model and the
+  shoreline elevation is the water level. Integrate the model below that level for volume.
+  Two passes give the filling rate, which makes the lake its own flow gauge, and the river
+  gauges that would ordinarily do that job on the Trishuli were destroyed in the flood.
+  Sentinel-1 sees this reach on 28 August, 31 August and 5 September, and baselines for all
+  three tracks are already built so each measurement is a single scene download.</p>
+
+  <p>Two things we checked before trusting any of it. Running one fixed impoundment
+  footprint through three independent global elevation models, from three different epochs,
+  returns volumes within 3 to 4 percent of each other, and on the valley floor the models
+  agree to about a metre with a scatter of 6 to 8. The elevation model is not the weak
+  link, which is not what we expected going in. The weak link is the water outline and the
+  water surface estimate. Second, the reported inflow: for 3 million cubic metres to arrive
+  on rainfall alone needs a catchment of roughly 270 to 480 square kilometres depending on
+  runoff, which is plausible for these two catchments together, with melt on top. The
+  Chinese figure is consistent with the weather.</p>
+
+  <p>What none of this produces is a breach time. The debris dam is in no elevation model
+  we have, so there is no freeboard, and freeboard is what sets the clock. We can say how
+  much water is behind it and how fast that is changing. We cannot say when it goes, and
+  nor can anyone else working from orbit.</p>
+
   <h2>Why we publish negative results</h2>
 
   <p>Because the alternative is selling things that do not work. We ran this the day
   after the event, expecting either a quiet confirmation or a striking image of a lake
-  nobody had noticed. We got neither, and we found two errors in our own first pass on
+  nobody had noticed. We got neither, and we found three errors in our own first pass on
   the way: an elevation threshold that ruled out the leading hypothesis before testing
-  it, and a doubling that turned out to be an artifact of counting instead of measuring.
-  Both are in this note because a method you can check is worth more than a result you
-  cannot.</p>
+  it, a doubling that turned out to be an artifact of counting instead of measuring, and
+  an assumption that monsoon cloud had blinded the optical satellites, which we never
+  tested and which was wrong on the day that mattered. All three are in this note because
+  a method you can check is worth more than a result you cannot.</p>
 
-  <p class="note">Method notes: Copernicus Sentinel-1 RTC via Microsoft Planetary
-  Computer, Copernicus DEM GLO-30, no login required for either. Descending orbit 19,
+  <p>The last one is worth dwelling on. We reached for the instrument that had worked
+  before instead of asking what this question needed, and it took someone else asking why
+  we were using only one satellite to catch it. Radar and optical fail in unrelated ways,
+  cloud shadow and radar shadow having nothing to do with each other, so two instruments
+  agreeing is a much stronger claim than one instrument run carefully. For a company whose
+  whole offer is independent verification, that should not have needed pointing out.</p>
+
+  <p class="note">Data: Copernicus Sentinel-1 RTC and Sentinel-2 L2A via Microsoft
+  Planetary Computer; Copernicus DEM GLO-30, NASADEM and ALOS World 3D-30m for the
+  elevation spread; Open-Meteo for precipitation. None of it needs a login. Sentinel-1
+  Half-hourly GPM IMERG would have been the better rainfall source, but the Planetary
+  Computer copy ends in May 2021. ICESat-2 has no usable recent track over this catchment.
+  SWOT does cover it, on a pass pattern that should put a look somewhere around 30 August,
+  and it measures water surface elevation directly, which is the number our shoreline
+  method can only approximate.</p>
+
+  <p class="note">Method notes: descending orbit 19,
   Sentinel-1D, VV gamma0 at 10 m. Baseline 25 Jun, 7 Jul, 19 Jul, 31 Jul; control 12 Aug;
   test 24 Aug. Detection AOI 85.30 to 85.70 E, 28.20 to 28.60 N. Wind roughening raises
   the backscatter of open water and can hide a small lake, and in a confined gorge an

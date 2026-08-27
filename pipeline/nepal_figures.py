@@ -141,3 +141,40 @@ print(f"control dVV: mean {np.nanmean((ctrl-pre)[m]):+.3f} dB, "
       f"p1 {np.nanpercentile((ctrl-pre)[m],1):.2f}")
 print(f"test    dVV: mean {np.nanmean((test-pre)[m]):+.3f} dB, "
       f"p1 {np.nanpercentile((test-pre)[m],1):.2f}")
+
+# ------------------------------------------------------------------- rainfall
+inflow = json.load(open(os.path.join(DATA, "nepal_inflow_2026.json")))
+daily = inflow["daily_mean_mm"]
+days = sorted(daily)
+vals = [daily[d] for d in days]
+labels = [d[5:] for d in days]
+# Anything from today onward is forecast rather than observed.
+today = inflow["generated_utc"][:10]
+obs = [v if d < today else 0 for d, v in zip(days, vals)]
+fcst = [v if d >= today else 0 for d, v in zip(days, vals)]
+
+fig, ax = plt.subplots(figsize=(9.5, 4.2), dpi=160)
+ax.bar(labels, obs, color=MUT, width=0.72, label="observed")
+ax.bar(labels, fcst, color=MUT, width=0.72, alpha=0.40, label="forecast",
+       hatch="///", edgecolor=MUT)
+ievent = days.index("2026-08-26") if "2026-08-26" in days else None
+if ievent is not None:
+    ax.axvline(ievent, color=TERRA, lw=2.4, zorder=4)
+    ax.text(ievent + 0.15, max(vals) * 0.94, "collapse\n26 Aug", color=TERRA,
+            fontsize=9.5, weight="bold", va="top")
+for d, tag in (("2026-08-24", "last radar look"),):
+    if d in days:
+        i = days.index(d)
+        ax.annotate(tag, (i, vals[i]), xytext=(-6, 46), ha="right",
+                    textcoords="offset points", fontsize=9, color=PLUM,
+                    arrowprops=dict(arrowstyle="->", color=PLUM, lw=1.1))
+ax.set_ylabel("catchment-mean rainfall (mm/day)")
+ax.grid(axis="y", color=LINE, lw=0.9); ax.set_axisbelow(True)
+for sp in ("top", "right"): ax.spines[sp].set_visible(False)
+ax.legend(fontsize=9, frameon=False, loc="upper left")
+ax.set_title("There was no water to fill a lake with\n"
+             "Rainfall over the contributing catchment, 16-point mean",
+             color=PLUM, fontsize=11.5, pad=12)
+fig.tight_layout()
+fig.savefig(os.path.join(OUT, "rainfall.png"), bbox_inches="tight", facecolor="white")
+print("wrote rainfall.png")
