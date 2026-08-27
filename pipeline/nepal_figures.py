@@ -178,3 +178,48 @@ ax.set_title("There was no water to fill a lake with\n"
 fig.tight_layout()
 fig.savefig(os.path.join(OUT, "rainfall.png"), bbox_inches="tight", facecolor="white")
 print("wrote rainfall.png")
+
+# ------------------------------------------------------- detection limit chart
+# The whole argument in one axis: what radar can see, what was there, and how
+# big a lake would have had to be to drive the flood that followed.
+fig, ax = plt.subplots(figsize=(9.5, 3.4), dpi=160)
+ax.set_xscale("log")
+ax.set_xlim(200, 1e6)
+ax.set_ylim(0, 1)
+
+ax.axvspan(200, 2000, color=MUT, alpha=0.16, zorder=1)
+ax.axvspan(1e4, 1e5, color=TERRA, alpha=0.20, zorder=1)
+
+ax.text(630, 0.86, "below what 10 m radar\ncan honestly resolve", ha="center",
+        fontsize=9, color=MUT, style="italic")
+ax.text(10**4.5, 0.86, "size a lake needed to be\nto drive the flood that followed",
+        ha="center", fontsize=9.5, color=TERRA, weight="bold")
+
+# The detectable range, drawn as a bracket, and empty is the whole point.
+Y = 0.44
+ax.annotate("", xy=(2000, Y), xytext=(1e6, Y),
+            arrowprops=dict(arrowstyle="|-|,widthA=0.5,widthB=0.5",
+                            color=PLUM, lw=2.0))
+ax.text(10**4.35, Y + 0.09,
+        "on 24 Aug, 48 h before the collapse, this entire range was empty",
+        ha="center", fontsize=11, color=PLUM, weight="bold")
+ax.text(10**4.35, Y - 0.13, "at every threshold, and at every elevation",
+        ha="center", fontsize=9.5, color=PLUM)
+
+# what the detector actually returned, on the control date rather than the test
+ax.scatter([2000], [Y], s=130, marker="o", facecolors="white",
+           edgecolors=MUT, linewidths=2.0, zorder=6)
+ax.annotate("the only hit in the study was 2,000 m$^2$ on the\n"
+            "12 Aug control, so the control ran dirtier than the test",
+            xy=(2000, Y), xytext=(2300, 0.14), fontsize=9, color=MUT,
+            arrowprops=dict(arrowstyle="->", color=MUT, lw=1.1))
+
+ax.set_yticks([])
+ax.set_xlabel("water body area (m$^2$)")
+for sp in ("left", "right", "top"): ax.spines[sp].set_visible(False)
+ax.set_title("The gap between what was detectable and what was there",
+             color=PLUM, fontsize=12, pad=12)
+fig.tight_layout()
+fig.savefig(os.path.join(OUT, "detection_limit.png"), bbox_inches="tight",
+            facecolor="white")
+print("wrote detection_limit.png")

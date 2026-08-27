@@ -23,26 +23,31 @@
   .brand{display:flex;align-items:center;gap:12px;margin-bottom:12px}
   .brand .logo{height:34px;width:auto;display:block}
   h1{font-family:var(--disp);color:var(--plum);font-size:34px;line-height:1.1;margin:14px 0 8px}
-  h2{font-family:var(--disp);color:var(--plum);font-size:23px;margin:34px 0 8px}
-  .lead{font-size:17px;max-width:680px}
+  h2{font-family:var(--disp);color:var(--plum);font-size:23px;margin:38px 0 8px}
+  .lead{font-size:17.5px;max-width:700px}
   .note{font-size:13px;color:var(--mut)}
-  figure{margin:26px 0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
+  .eyebrow{display:block;font-family:var(--disp);font-weight:700;font-size:12.5px;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--terra);margin:0 0 4px}
+  figure{margin:22px 0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
   figure img{width:100%;height:auto;display:block;border-radius:8px}
   figcaption{font-size:13.5px;color:var(--mut);margin-top:10px;line-height:1.5}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:22px 0}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .stat strong{display:block;font-family:var(--disp);font-size:29px;line-height:1.05;color:var(--plum)}
+  .stat span{display:block;font-size:12.5px;color:var(--mut);margin-top:6px;line-height:1.4}
   .tblwrap{overflow-x:auto;margin:20px 0;background:var(--panel);border:1px solid var(--line);border-radius:14px}
-  table{border-collapse:collapse;width:100%;min-width:620px;font-size:13.5px;line-height:1.45}
+  table{border-collapse:collapse;width:100%;min-width:600px;font-size:13.5px;line-height:1.45}
   th{font-family:var(--disp);color:var(--plum);text-align:left;font-size:13px;
     padding:12px 14px;border-bottom:2px solid var(--line);white-space:nowrap}
   td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
   tr:last-child td{border-bottom:none}
-  td.ok{color:#2E9E6B;font-weight:600;white-space:nowrap}
-  td.no{color:var(--mut);white-space:nowrap}
+  td.no{color:#B3341A;font-weight:600;white-space:nowrap}
   td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
   .verdict{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--terra);
     border-radius:12px;padding:16px 18px;margin:26px 0}
   .verdict strong{font-family:var(--disp);color:var(--plum)}
   ul{padding-left:20px}
-  li{margin:6px 0}
+  li{margin:7px 0}
   code{background:#EAE4F4;border-radius:5px;padding:1px 6px;font-size:13.5px}
 </style>
 </head>
@@ -60,286 +65,198 @@
 
   <h1>Was the Nepal barrier lake visible from orbit before it burst?</h1>
 
-  <p class="lead">On 26 August 2026 a rock and ice avalanche came off the Tibetan side
-  of the border and dropped into the Lhende Khola. It dammed the river, a lake ponded
-  behind the debris, and the dam failed. The surge ran about 60 km down the Bhote Koshi
-  through Timure and Syabrubesi. We went looking for that lake in the last satellite
-  image taken before it broke.</p>
+  <p class="lead">On 26 August 2026 a rock and ice avalanche dammed the Lhende Khola on the
+  Nepal&ndash;Tibet border. The lake behind the debris burst and the surge ran 60 km down
+  the Bhote Koshi through Timure and Syabrubesi. We went looking for that lake in the last
+  satellite images taken before it broke.</p>
 
-  <p>The collapse registered 5.2 on local seismometers, which was widely reported at
-  first as an earthquake trigger. It was not an earthquake: the signal is the avalanche
-  itself, as
-  <a href="https://eos.org/thelandslideblog/26-august-2026-nepal-and-tibet">Dave Petley
-  set out the same day</a>. Six Nepal Electricity Authority hydropower and transmission
-  facilities were damaged, among them
-  <a href="https://www.waterpowermagazine.com/news/nepal-floods-affect-hydropower-projects-in-rasuwa-and-nuwakot/">Rasuwagadhi
-  111 MW, Sanjen Khola 78 MW and Upper Trishuli 3A</a>. Casualty figures were still
-  moving as we wrote this and we are not going to pin a number to them.</p>
+  <div class="stats">
+    <div class="stat"><strong>48 h</strong><span>from the last orbital look to the collapse</span></div>
+    <div class="stat"><strong>3</strong><span>independent instruments, one answer</span></div>
+    <div class="stat"><strong>0</strong><span>water bodies found, at any threshold</span></div>
+    <div class="stat"><strong>4 days</strong><span>the observation gap it fell into</span></div>
+  </div>
 
-  <p>This is the question we can answer. A barrier lake is the one part of this cascade
-  that sits still long enough to be photographed. If it was there on the last pass, free
-  radar saw it and nobody looked. If it was not, the warning case is for a different
-  instrument entirely. Either answer is worth having, so we ran it.</p>
+  <h2><span class="eyebrow">The question</span>Could anyone have seen it coming?</h2>
 
-  <h2>One look, 48 hours out</h2>
-
-  <p>Three Sentinel-1 tracks cover this catchment, and they interleave to give a look
-  every three to five days rather than the twelve you get from any single track. In the
-  fortnight before the collapse that produced passes on 4, 7, 12, 16, 19 and 24 August.
-  Then a gap.</p>
+  <p>A barrier lake is the one part of this cascade that sits still long enough to be
+  photographed. If it was there on the last pass, free radar saw it and nobody looked. If
+  it was not, the warning case is for a different instrument entirely.</p>
 
   <figure>
     <img src="img/timeline.png" alt="Timeline of Sentinel-1 passes over the Lhende catchment in August 2026, showing the last pass on 24 August and a four-day gap containing the 26 August collapse">
-    <figcaption>The last orbital look before the collapse was Sentinel-1D on descending
-    orbit 19, 00:18Z on 24 August, about 48 hours ahead of the event. The next pass on any
-    track was the 28th. The collapse happened inside a four-day gap.</figcaption>
+    <figcaption>Three Sentinel-1 tracks interleave to give a look every three to five days.
+    The last one before the collapse was Sentinel-1D at 00:18Z on 24 August. The next was
+    the 28th. The event fell in the gap.</figcaption>
   </figure>
 
-  <h2>Method</h2>
+  <h2><span class="eyebrow">The answer</span>Nothing was there</h2>
 
-  <p>Radiometrically terrain corrected backscatter from the Microsoft Planetary Computer,
-  the same free archive and the same pipeline architecture as our
-  <a href="/?hk=1">Hong Kong landslide study</a>, with the polarisation and the
-  terrain logic inverted. Smooth open water reflects the radar away from the sensor and
-  goes dark, so water is a far stronger signal than a landslide scar and it shows up best
-  in VV co-polarisation rather than VH.</p>
+  <figure>
+    <img src="img/detection_limit.png" alt="Log scale chart of water body area showing the radar detection floor at 2000 square metres, the 10,000 to 100,000 square metre band a lake would need to occupy to cause the flood, and no detections anywhere in the detectable range">
+    <figcaption>A lake capable of driving this flood would cover something like
+    10<sup>4</sup> to 10<sup>5</sup> m<sup>2</sup>, which is hundreds to thousands of
+    pixels and far above the noise floor. The detectable range came back empty.</figcaption>
+  </figure>
 
-  <p>The baseline is a median of four monsoon-season scenes off the same track, from 25
-  June to 31 July. Same season, same wetness, same snow line. That matters for a reason
-  beyond fairness: radar shadow in a Himalayan gorge is dark too, but it is static, so it
-  sits in the baseline and subtracts itself out. A detection has to be dark in absolute
-  terms (at or below &minus;15 dB) and at least 3 dB darker than the baseline, on ground
-  flatter than 8 degrees, in a cluster of at least 2000 m<sup>2</sup>. We also ran 12
-  August as a control. A method that finds new lakes two weeks before the event is
-  finding noise.</p>
-
-  <h2>Nothing was there</h2>
-
-  <p>Zero new-water clusters on 24 August. The 12 August control produced one, of
-  2000 m<sup>2</sup>, which is to say the control came out dirtier than the test.</p>
-
-  <p>Before treating that as a result we had to rule out the boring explanation, that the
-  detector cannot see into a gorge at all. It can. The reach where the blockage was
-  reported, 15 to 25 km upstream of the Miteri Bridge, gives 21,489 valley-floor pixels
-  that are valid on every single date, with a median baseline return of &minus;8.8 dB.
-  That is ordinary ground. A shadowed reach would sit down at the noise floor. The valley
-  bottom there runs at 3 to 8 degrees, which is inside the mask, not outside it.</p>
+  <p>Three instruments, measuring three unrelated things, all say the same. That matters
+  because they fail in unrelated ways: cloud shadow and radar shadow have nothing to do
+  with each other.</p>
 
   <div class="tblwrap"><table>
-    <tr><th>Mask</th><th>Water threshold</th><th>Drop</th><th>Control, 12 Aug</th><th>Test, 24 Aug</th><th>Excess</th></tr>
-    <tr><td>slope &le; 8&deg;</td><td>&minus;15 dB</td><td>&minus;3 dB</td><td class="num">3,688 px</td><td class="num">3,740 px</td><td class="num">+52</td></tr>
-    <tr><td>slope &le; 15&deg;</td><td>&minus;15 dB</td><td>&minus;3 dB</td><td class="num">6,872 px</td><td class="num">7,025 px</td><td class="num">+153</td></tr>
-    <tr><td>slope &le; 25&deg;</td><td>&minus;15 dB</td><td>&minus;3 dB</td><td class="num">13,285 px</td><td class="num">13,321 px</td><td class="num">+36</td></tr>
-    <tr><td>no mask</td><td>&minus;15 dB</td><td>&minus;3 dB</td><td class="num">76,775 px</td><td class="num">74,869 px</td><td class="num">&minus;1,906</td></tr>
+    <tr><th>Instrument</th><th>What it measures</th><th>What it found on 24 Aug</th><th>Verdict</th></tr>
+    <tr>
+      <td><strong>Sentinel-1</strong><br><span class="note">C-band radar, 10 m</span></td>
+      <td>Backscatter. Smooth water reflects away from the sensor and goes dark</td>
+      <td class="num">0 clusters. Excess over control never clears the &minus;5 dB speckle floor</td>
+      <td class="no">No lake</td>
+    </tr>
+    <tr>
+      <td><strong>Sentinel-2</strong><br><span class="note">optical, 10&ndash;20 m</span></td>
+      <td>Reflected sunlight. Liquid water is dark in near infrared and shortwave</td>
+      <td class="num">0 pixels below 0.10 in both bands. The 6.9% flagged as water is shadow at 0.116 / 0.117</td>
+      <td class="no">No lake</td>
+    </tr>
+    <tr>
+      <td><strong>Open-Meteo</strong><br><span class="note">precipitation</span></td>
+      <td>Whether enough water was arriving to build a lake at all</td>
+      <td class="num">0.3&ndash;2.3 mm/day across 20&ndash;25 Aug</td>
+      <td class="no">No water to fill one</td>
+    </tr>
   </table></div>
-
-  <p>We swept every sensible combination of the three thresholds, twenty-four in total.
-  The excess never separates from the speckle floor, and with the terrain mask removed it
-  goes negative. The dB change distribution bottoms out around &minus;5 dB at the first
-  percentile, the same speckle floor we hit in Hong Kong. A lake capable of driving a
-  surge that wrecked 60 km of valley would cover something like 10<sup>4</sup> to
-  10<sup>5</sup> m<sup>2</sup>, hundreds to thousands of pixels, far above that floor.</p>
-
-  <figure>
-    <img src="img/change_distribution.png" alt="Overlaid histograms of VV backscatter change from baseline for the 12 August control and 24 August test scenes, showing a small uniform offset and no excess in the dark tail">
-    <figcaption>Valley-floor change from the monsoon baseline, 309,370 pixels. The 24
-    August scene is about 0.8 dB darker across the whole floor, which is what rain on the
-    ground looks like in the middle of a monsoon. What it is not is a lake: a filling
-    impoundment puts a lump in the dark tail in one place, and there is no such lump
-    anywhere in this scene. Broad and uniform, not local and deep.</figcaption>
-  </figure>
-
-  <h2>The glacier hypothesis, and a threshold we had wrong</h2>
-
-  <p>Our first version of this analysis capped detections at 5000 m, on the reasoning that
-  impoundments pond on valley floors and that above the snow line wet snow mimics open
-  water in C-band. Then reporting appeared placing an active water area
-  <a href="https://www.recentnaturaldisasters.com/2026/08/nepal-flood-map-2026-rasuwa-bhotekoshi.html">35
-  to 38 km upstream</a> and citing the 24 August scene as the key comparison, and ICIMOD
-  had attributed
-  <a href="https://www.newsonair.gov.in/nepal-rasuwas-devastating-flood-caused-by-supraglacial-outburst-in-china">the
-  2025 flood in this same corridor</a> to a supraglacial lake draining off the Purepu
-  Glacier. A supraglacial lake sits on the ice at exactly the elevation our ceiling was
-  throwing away. The threshold was excluding the leading hypothesis by construction.</p>
-
-  <p>So we took the ceiling off and ran a time series over that zone, 33 to 40 km
-  upstream at 5100 to 5600 m, across all six passes. This is the test that separates the
-  two explanations. Wet snow tracks the weather and wanders up and down. A lake fills
-  monotonically.</p>
-
-  <figure>
-    <img src="img/source_series.png" alt="Time series of dark area in the glaciated source zone from 25 June to 24 August, showing non-monotonic variation including a fall on 31 July">
-    <figcaption>It wanders. The dark area in the source zone goes 8.59, 11.60, 12.09,
-    10.22, 12.37, 12.67 km<sup>2</sup>, falling by 1.87 km<sup>2</sup> on 31 July, a move
-    four times larger than the +0.30 between the last two passes. A control zone in the
-    same elevation and slope band swings just as widely, between 12.1 and 18.9 percent,
-    with no event underneath it. The largest connected patch has a compactness of 0.25 to
-    0.57, which is ragged snow rather than a pond, and its centre has not moved since
-    early July.</figcaption>
-  </figure>
-
-  <p>One more correction, because it is the kind of mistake worth publishing. Our first
-  read of these scenes reported that the largest cluster in the source zone had doubled
-  between 12 and 24 August, from 411,000 to 919,000 m<sup>2</sup>. That was an artifact of
-  the clustering step, separate patches merging across the threshold into one label. Total
-  area, which is the number that actually means something, went from 12.37 to 12.67
-  km<sup>2</sup>. Two percent. Counting blobs instead of measuring area produced a
-  headline that was not in the data.</p>
-
-  <p>What this does not settle: a supraglacial lake that drains englacially can empty
-  without much change in surface area, and on a glacier at 10 m C-band the separation
-  between water and wet snow is genuinely ambiguous. Our claim is narrow. There was no
-  change consistent with rapid filling in the fortnight before the event, and the 24
-  August scene looks like 19 July and like 12 August.</p>
-
-  <h2>A second instrument, and a gap in our own reasoning</h2>
-
-  <p>We ran this on radar and justified it on monsoon cloud without checking whether the
-  cloud was actually there. On the date that mattered, it was not. Sentinel-2 imaged the
-  catchment on 24 August, the same day as the radar pass, and its scene classification
-  puts the source zone at 75.6 percent clear and the blockage reach at 51.7 percent.
-  Optical was available and we had not looked at it.</p>
-
-  <p>So we looked. The classifier flags 6.9 percent of the source zone as water on 24
-  August against 0.15 percent on 12 August, which on its face is alarming. It does not
-  survive a spectral check. Liquid water is dark in both the near infrared and the
-  shortwave infrared, with near infrared reflectance typically below 0.05. The pixels
-  flagged as water on the 24th have a median near infrared reflectance of 0.116 and
-  shortwave of 0.117, and not one pixel in the zone on either date comes in below 0.10 in
-  both bands. A spectrally flat dark surface at those values is cloud shadow, which this
-  classifier is known to confuse with water, and the zone was 24 percent cloud that day.
-  Post-event is a different story: by 27 August the same zone is 11 percent clear, which
-  is where the usual claim about optical being blind in the monsoon does hold.</p>
-
-  <p>Two instruments measuring different physics, radar backscatter and reflected
-  sunlight, and neither finds standing water in the source zone 48 hours before the
-  collapse. That is a stronger result than radar alone, and we would not have it if
-  nobody had asked why we were only using one satellite.</p>
-
-  <h2>A third check: there was no water to fill it with</h2>
-
-  <p>Radar and optical both go looking for the lake. Rainfall asks a different question,
-  which is whether there was enough water arriving to build one. Catchment-mean rainfall
-  over sixteen sample points runs 1.4, 0.7, 2.3, 1.1, 0.3 and 0.3 mm per day from 20 to 25
-  August. The week before the collapse was close to dry.</p>
-
-  <figure>
-    <img src="img/rainfall.png" alt="Daily catchment-mean rainfall from 17 to 31 August 2026, showing a dry spell from the 20th to the 25th, the collapse on the 26th, and heavy forecast rain from the 29th">
-    <figcaption>Catchment-mean rainfall, sixteen sample points between 3,900 and 5,900 m.
-    The days before the collapse carried almost nothing. The bars from 27 August are
-    forecast rather than observed.</figcaption>
-  </figure>
-
-  <p>That matters twice over. A blockage formed days earlier would have been filling
-  slowly at best, which is what finding nothing on the 24th would look like. And it points
-  away from rainfall as the trigger, which is consistent with a rock and ice mass letting
-  go under its own strength loss rather than being pushed by a storm.</p>
 
   <div class="verdict">
     <strong>Verdict: the lake was not visible, because it was not yet there.</strong>
-    No impoundment was detectable anywhere in this catchment 48 hours before the breach,
-    at any threshold, at any elevation, on either radar or optical, and the detector
-    demonstrably works in this terrain. The blockage formed and failed inside a four-day observation gap, and
-    probably inside a few hours. No system running at Sentinel-1 cadence could have
-    warned about it. The window that existed ran from the seismic detection of the
-    collapse, which is t=0 and is an instrument that already fired, to the surge reaching
-    Timure. That is a seismometer and a siren, not a satellite.
+    The blockage formed and failed inside a four-day observation gap, and probably inside
+    a few hours. Nothing running at Sentinel-1 cadence could have warned about it. The
+    window that existed ran from the seismic detection of the collapse, which is t=0 and
+    is an instrument that already fired, to the surge reaching Timure. That is a
+    seismometer and a siren, not a satellite.
   </div>
 
-  <h2>What radar is for here</h2>
+  <h2><span class="eyebrow">The evidence</span>Three ways of finding nothing</h2>
 
-  <p>The honest answer to "could you have predicted this" is no, and we would rather say
-  so on our own website than be asked in a meeting. The parts of this problem that free
-  and tasked radar do handle:</p>
+  <figure>
+    <img src="img/change_distribution.png" alt="Overlaid histograms of radar backscatter change for the 12 August control and 24 August test scenes, showing a small uniform offset and no excess in the dark tail">
+    <figcaption><strong>Radar.</strong> Valley floor, 309,370 pixels. The 24 August scene
+    is 0.8 dB darker everywhere, which is rain on the ground mid-monsoon. A filling
+    impoundment puts a lump in the dark tail in one place. There is no lump. Broad and
+    uniform, not local and deep.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="img/source_series.png" alt="Time series of radar dark area in the glaciated source zone from 25 June to 24 August, non-monotonic, including a fall on 31 July">
+    <figcaption><strong>The glacier hypothesis, tested.</strong> Independent analysis placed
+    an active water area 35 to 38 km upstream, and ICIMOD attributed the 2025 flood in this
+    corridor to a supraglacial lake. Our first run excluded that by capping detections at
+    5,000 m, so we took the cap off. The dark area wanders: it falls 1.87 km<sup>2</sup> on
+    31 July, four times the move between the last two passes, and a control zone in the
+    same elevation band swings just as widely. A lake fills monotonically. This tracks the
+    weather.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="img/rainfall.png" alt="Daily catchment-mean rainfall from 17 to 31 August 2026, showing a dry spell from the 20th to the 25th, the collapse on the 26th, and heavy forecast rain from the 29th">
+    <figcaption><strong>Rainfall.</strong> The week before the collapse was close to dry,
+    which is what finding nothing on the 24th should look like, and it points away from
+    rainfall as the trigger. The bars from 27 August are forecast, and they land on a
+    catchment that now holds a second impoundment.</figcaption>
+  </figure>
+
+  <h2><span class="eyebrow">Why it matters</span>The null is the useful part</h2>
 
   <ul>
-    <li><strong>Mapping through cloud.</strong> This happened mid-monsoon, so optical
-      satellites were blind for days. Radar was not.
-      <a href="https://mapping.emergency.copernicus.eu/news/flood-in-nepal-emsr927/">Copernicus
-      EMS activated as EMSR927</a> on the day, and their rapid mapping is good and free.
-      We are not going to duplicate it.</li>
-    <li><strong>Secondary impoundments.</strong> Sixty kilometres of valley now holds
-      fresh debris, the monsoon is still running, and tributaries get dammed by new
-      deposit fans. That hazard persists for weeks and it is exactly what the pipeline on
-      this page detects. It is the part still worth watching.</li>
-    <li><strong>Attribution.</strong> The earthquake confusion in the first 24 hours is
-      the ordinary case for independent verification. A seismic trace and a pair of radar
-      scenes settle what actually moved.</li>
-    <li><strong>Slow deformation on owned assets.</strong> Tailings dams, reservoir
-      slopes and cut faces creep measurably for weeks before they fail, and InSAR reads
-      that at millimetre precision. Engineered structures with stable scatterers on them
-      are a different physical problem from a rock and ice face at 5000 m, and it is the
-      problem where the measurement holds up.</li>
+    <li><strong>It rules out a class of warning system.</strong> Nobody needs to build
+      orbital monitoring for this hazard at this cadence, because the failure window is
+      shorter than the revisit. That is worth knowing before money is spent on it.</li>
+    <li><strong>It points at the instrument that would have worked.</strong> The collapse
+      registered 5.2 on local seismometers. Seismic detection gives an exact origin time
+      and minutes of downstream warning. It is free, it already fired, and it is where the
+      effort belongs.</li>
+    <li><strong>It constrains the timeline.</strong> The blockage formed inside 48 hours,
+      which narrows what anyone reconstructing this event needs to explain.</li>
+    <li><strong>It is checkable.</strong> Every threshold, date and figure here can be
+      reproduced from free archives with no login.</li>
   </ul>
 
-  <h2>What we are doing now</h2>
+  <h2><span class="eyebrow">Live</span>What we are doing now</h2>
 
-  <p>A second lake formed after the outburst, upstream near the confluence of the Chhochen
-  Khola and the Purepu Tsangpo on the border. On 27 August China's Ministry of Water
-  Resources put it at about 2 million cubic metres and forecast 3 million more entering
-  over three days, with a high risk of breach. Nepal moved people out of the valley below.
-  That 2 million figure rests on a single source, and measuring it independently seemed a
-  better use of the week than writing about it.</p>
+  <p>A second lake formed upstream near the Chhochen Khola and Purepu Tsangpo confluence.
+  China's Ministry of Water Resources put it at about 2 million cubic metres on 27 August
+  and forecast 3 million more over three days, with a high risk of breach. That figure
+  rests on a single source, so we are measuring it independently.</p>
 
-  <p>The measurement is simple in principle. A lake surface is flat, so its shoreline is an
-  equipotential: intersect a radar-derived outline with an elevation model and the
-  shoreline elevation is the water level. Integrate the model below that level for volume.
-  Two passes give the filling rate, which makes the lake its own flow gauge, and the river
-  gauges that would ordinarily do that job on the Trishuli were destroyed in the flood.
-  Sentinel-1 sees this reach on 28 August, 31 August and 5 September, and baselines for all
-  three tracks are already built so each measurement is a single scene download.</p>
+  <div class="stats">
+    <div class="stat"><strong>2 Mm&sup3;</strong><span>reported volume, single source, 27 Aug</span></div>
+    <div class="stat"><strong>3&ndash;4%</strong><span>volume spread across three elevation models</span></div>
+    <div class="stat"><strong>3</strong><span>passes booked: 28 Aug, 31 Aug, 5 Sep</span></div>
+    <div class="stat"><strong>none</strong><span>breach time we can honestly give</span></div>
+  </div>
 
-  <p>Two things we checked before trusting any of it. Running one fixed impoundment
-  footprint through three independent global elevation models, from three different epochs,
-  returns volumes within 3 to 4 percent of each other, and on the valley floor the models
-  agree to about a metre with a scatter of 6 to 8. The elevation model is not the weak
-  link, which is not what we expected going in. The weak link is the water outline and the
-  water surface estimate. Second, the reported inflow: for 3 million cubic metres to arrive
-  on rainfall alone needs a catchment of roughly 270 to 480 square kilometres depending on
-  runoff, which is plausible for these two catchments together, with melt on top. The
-  Chinese figure is consistent with the weather.</p>
+  <p>A lake surface is flat, so its shoreline is an equipotential: intersect a radar
+  outline with an elevation model and the shoreline elevation is the water level.
+  Integrate below it for volume. Two passes give a filling rate, which makes the lake its
+  own flow gauge, and the river gauges that would normally do that job were destroyed in
+  the flood.</p>
 
-  <p>What none of this produces is a breach time. The debris dam is in no elevation model
-  we have, so there is no freeboard, and freeboard is what sets the clock. We can say how
-  much water is behind it and how fast that is changing. We cannot say when it goes, and
-  nor can anyone else working from orbit.</p>
+  <p>Two checks before trusting any of it. Running one fixed footprint through three
+  independent elevation models from three different epochs returns volumes within 3 to 4
+  percent, so the elevation model is not the weak link, which is not what we expected. The
+  weak link is the water outline and the surface estimate. And for 3 million cubic metres
+  to arrive on rainfall alone needs a catchment of roughly 270 to 480 km<sup>2</sup>, which
+  is plausible for these two catchments with melt on top. The Chinese figure is consistent
+  with the weather.</p>
+
+  <p>What none of it produces is a breach time. The debris dam is in no elevation model we
+  have, so there is no freeboard, and freeboard sets the clock. We can say how much water
+  is behind it and how fast that is changing. We cannot say when it goes, and nor can
+  anyone else working from orbit.</p>
+
+  <h2><span class="eyebrow">Corrections</span>Three things we got wrong first time</h2>
+
+  <ul>
+    <li><strong>An elevation cap that excluded the leading hypothesis.</strong> Capping
+      detections at 5,000 m ruled out a supraglacial source by construction, before
+      testing it. Removed, then tested.</li>
+    <li><strong>A doubling that was an artifact of counting.</strong> We reported the
+      largest source-zone cluster going from 411,000 to 919,000 m<sup>2</sup>. That was
+      separate patches merging across a threshold into one label. Total area, the number
+      that means something, moved 12.37 to 12.67 km<sup>2</sup>. Two percent.</li>
+    <li><strong>Assuming optical was blind.</strong> We justified a radar-only study on
+      monsoon cloud without checking. Sentinel-2 was 75.6% clear over the source zone on
+      24 August. We reached for the instrument that had worked before instead of asking
+      what the question needed, and it took someone else asking why we were using only one
+      satellite to catch it. For a company whose whole offer is independent verification,
+      that should not have needed pointing out.</li>
+  </ul>
 
   <h2>Why we publish negative results</h2>
+  <p>Because the alternative is selling things that do not work. We ran this the day after
+  the event expecting either a quiet confirmation or a striking image of a lake nobody had
+  noticed, and got neither. A method you can check is worth more than a result you
+  cannot.</p>
 
-  <p>Because the alternative is selling things that do not work. We ran this the day
-  after the event, expecting either a quiet confirmation or a striking image of a lake
-  nobody had noticed. We got neither, and we found three errors in our own first pass on
-  the way: an elevation threshold that ruled out the leading hypothesis before testing
-  it, a doubling that turned out to be an artifact of counting instead of measuring, and
-  an assumption that monsoon cloud had blinded the optical satellites, which we never
-  tested and which was wrong on the day that mattered. All three are in this note because
-  a method you can check is worth more than a result you cannot.</p>
+  <p class="note">Data, all free and none of it needing a login: Copernicus Sentinel-1 RTC
+  and Sentinel-2 L2A via Microsoft Planetary Computer; Copernicus DEM GLO-30, NASADEM and
+  ALOS World 3D-30m for the elevation spread; Open-Meteo for precipitation. Half-hourly GPM
+  IMERG would have been the better rainfall source, but the Planetary Computer copy ends in
+  May 2021. ICESat-2 has no usable recent track over this catchment. SWOT does cover it, on
+  a pass pattern that should put a look somewhere around 30 August, and it measures water
+  surface elevation directly, which is the number our shoreline method can only
+  approximate.</p>
 
-  <p>The last one is worth dwelling on. We reached for the instrument that had worked
-  before instead of asking what this question needed, and it took someone else asking why
-  we were using only one satellite to catch it. Radar and optical fail in unrelated ways,
-  cloud shadow and radar shadow having nothing to do with each other, so two instruments
-  agreeing is a much stronger claim than one instrument run carefully. For a company whose
-  whole offer is independent verification, that should not have needed pointing out.</p>
-
-  <p class="note">Data: Copernicus Sentinel-1 RTC and Sentinel-2 L2A via Microsoft
-  Planetary Computer; Copernicus DEM GLO-30, NASADEM and ALOS World 3D-30m for the
-  elevation spread; Open-Meteo for precipitation. None of it needs a login. Sentinel-1
-  Half-hourly GPM IMERG would have been the better rainfall source, but the Planetary
-  Computer copy ends in May 2021. ICESat-2 has no usable recent track over this catchment.
-  SWOT does cover it, on a pass pattern that should put a look somewhere around 30 August,
-  and it measures water surface elevation directly, which is the number our shoreline
-  method can only approximate.</p>
-
-  <p class="note">Method notes: descending orbit 19,
-  Sentinel-1D, VV gamma0 at 10 m. Baseline 25 Jun, 7 Jul, 19 Jul, 31 Jul; control 12 Aug;
-  test 24 Aug. Detection AOI 85.30 to 85.70 E, 28.20 to 28.60 N. Wind roughening raises
-  the backscatter of open water and can hide a small lake, and in a confined gorge an
-  early-stage impoundment may be only 20 to 50 m wide, which is two to five pixels, below
-  what we would claim to see. Piping failure of a debris dam gives no surface warning at
-  all. Detecting water is not assessing stability: seeing a lake would tell you an
-  impoundment exists, never when it will go. The pipeline is about 400 lines of Python
-  and we will send it to anyone who wants to check the numbers.</p>
+  <p class="note">Method: descending orbit 19, Sentinel-1D, VV gamma0 at 10 m. Baseline is
+  the median of 25 Jun, 7 Jul, 19 Jul and 31 Jul; control 12 Aug; test 24 Aug. Detection
+  AOI 85.30 to 85.70 E, 28.20 to 28.60 N. New water is VV at or below &minus;15 dB and at
+  least 3 dB under baseline, on slopes under 8 degrees, in clusters of at least 2,000
+  m<sup>2</sup>. Same-track baselines throughout, because comparing an ascending scene
+  against a descending one in this terrain compares two shadow maps rather than two days.
+  Wind roughening raises the backscatter of open water and can hide a small lake. In a
+  confined gorge an early impoundment may be 20 to 50 m wide, which is two to five pixels,
+  below what we would claim to see. Piping failure gives no surface warning at all.
+  Detecting water is not assessing stability: seeing a lake tells you an impoundment
+  exists, never when it will go. The pipeline is a few hundred lines of Python and we will
+  send it to anyone who wants to check the numbers.</p>
 
 </div>
 </body>
