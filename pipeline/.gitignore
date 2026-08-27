@@ -14,3 +14,4 @@ data/hk2023_cache/
 data/nepal2026_cache/
 *.npz
 data/nepal_monitor_cache/
+data/barrier_monitor*.log
