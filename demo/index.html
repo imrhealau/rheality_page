@@ -134,8 +134,15 @@
   /* rheality-toc: sticky contents rail, built from the h2 elements on screen */
   html{scroll-behavior:smooth}
   h2{scroll-margin-top:26px}
-  .toc{position:fixed;top:98px;left:calc(50% - 658px);width:190px;z-index:20;
+  /* Offsets are derived from the column this page actually uses: .wrap is
+     --maxw (1080px) with 20px padding, so the text starts at 50% - 520px.
+     Rail is 190px wide, so left:calc(50% - 710px) lands it flush against the
+     text, and 758px gives the 28px gap the 880px research notes use. The
+     hide-breakpoint is 2 x (offset + 12px margin) -- below it the rail would
+     run off the left edge, so it must move whenever the offset does. */
+  .toc{position:fixed;top:98px;left:calc(50% - 710px);width:190px;z-index:20;
     max-height:calc(100vh - 140px);overflow-y:auto}
+  @media (min-width:1540px){.toc{left:calc(50% - 758px)}}
   .toc::-webkit-scrollbar{width:0}
   .toc-h{font-family:var(--disp,Georgia,serif);font-weight:700;font-size:10.5px;
     letter-spacing:.1em;text-transform:uppercase;color:var(--mut,#6F6488);
@@ -147,7 +154,7 @@
   .toc a:hover{color:var(--plum,#33254E);border-left-color:var(--mut,#6F6488)}
   .toc a.on{color:var(--plum,#33254E);font-weight:600;
     border-left-color:var(--terra,#CD5A1F)}
-  @media (max-width:1340px){.toc{display:none}}
+  @media (max-width:1443px){.toc{display:none}}
 </style>
 </head>
 <body>

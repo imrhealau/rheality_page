@@ -105,7 +105,9 @@ JS = """
 
 def strip(html):
     """Remove a previously injected rail so re-running replaces rather than stacks."""
-    html = re.sub(r"\n  /\* %s.*?@media \(max-width:1340px\)\{\.toc\{display:none\}\}\n"
+    # The hide-breakpoint is derived from the column offset, so pages that tune the
+    # offset carry a different value here -- match whatever number is present.
+    html = re.sub(r"\n  /\* %s.*?@media \(max-width:\d+px\)\{\.toc\{display:none\}\}\n"
                   % MARK, "\n", html, flags=re.S)
     html = re.sub(r"\n<script>\n/\* %s \*/.*?</script>\n" % MARK, "\n", html, flags=re.S)
     return html
