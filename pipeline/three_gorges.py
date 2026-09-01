@@ -48,7 +48,9 @@ AOI = {
 TILE = "MGRS-49RDQ"
 STAC_URL = "https://earth-search.aws.element84.com/v1"
 COLLECTION = "sentinel-2-l2a"
-DATE_RANGE = "2023-01-01/2026-07-25"
+# Ends today rather than at a fixed date. A hardcoded end silently caps the series
+# and is how the monitor went stale while the page still claimed every pass.
+DATE_RANGE = "2023-01-01/" + datetime.now(timezone.utc).strftime("%Y-%m-%d")
 MAX_CLOUD = 60            # scene-level cloud cap; SCL does the per-pixel work
 DECIM = 6                 # read 10 m bands decimated x6 -> ~60 m grid (fast)
 NATIVE_RES = 10.0

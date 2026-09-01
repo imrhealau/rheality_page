@@ -25,7 +25,10 @@ OUT = os.path.join(HERE, "data", "three_gorges_insar.json")
 # Three Gorges Dam wall, Sandouping. Ascending track 11, burst 011_021659_IW1.
 DAM = {"lat": 30.826, "lon": 111.003}
 TRACK = 11
-DATE_START, DATE_END = "2023-01-01", "2026-07-25"
+DATE_START = "2023-01-01"
+# Runs to today rather than a fixed date: a hardcoded end silently caps the series,
+# which is how the monitor sat eight weeks stale while still claiming every pass.
+DATE_END = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 LOOKS = "10x2"                 # ~25 m pixels; good coherence on the dam/rock
 WAVELENGTH = 0.055465          # Sentinel-1 C-band, metres
 BATCH_NAME = "threegorges-dam-insar"
@@ -102,17 +105,32 @@ def _download():
     batch = h.find_jobs(name=BATCH_NAME)
     batch = h.watch(batch) if any(not j.complete() for j in batch) else batch
     os.makedirs(INSAR_DIR, exist_ok=True)
-    got = 0
+    got, have, gone = 0, 0, []
     for j in batch:
         if not j.succeeded():
             continue
-        zips = j.download_files(INSAR_DIR)
+        # HyP3 deletes products about two weeks after they finish, so on any later run
+        # most of the batch is expired. The extracted product is still on disk from the
+        # run that fetched it, and that is what the inversion reads, so a missing
+        # download is only fatal if we have nothing locally either.
+        name = j.to_dict().get("files", [{}])[0].get("filename", "")
+        local = os.path.join(INSAR_DIR, name[:-4]) if name.endswith(".zip") else None
+        if local and os.path.isdir(local):
+            have += 1
+            continue
+        try:
+            zips = j.download_files(INSAR_DIR)
+        except Exception as e:
+            gone.append(f"{j.job_id[:8]} {e.__class__.__name__}")
+            continue
         for z in zips:
             if str(z).endswith(".zip"):
                 with zipfile.ZipFile(z) as zf:
                     zf.extractall(INSAR_DIR)
                 got += 1
-    print(f"downloaded/extracted {got} products into {INSAR_DIR}")
+    print(f"downloaded {got}, already had {have}, unavailable {len(gone)} -> {INSAR_DIR}")
+    if gone:
+        print("  expired and not on disk:", ", ".join(gone[:6]), "..." if len(gone) > 6 else "")
 
 
 def _read_tif(path):

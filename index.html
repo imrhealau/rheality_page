@@ -473,7 +473,7 @@
   <div id="demo-tg" style="display:none">
     <a href="#" class="demo-back" id="tg-back">&larr; Back to both dams</a>
 
-  <span class="eyebrow" style="margin-top:26px">Live monitor &middot; Three Gorges Dam &middot; updates with every pass</span>
+  <span class="eyebrow" style="margin-top:26px">Live monitor &middot; Three Gorges Dam &middot; <span id="tg-fresh">measured through the latest pass</span></span>
   <h2 style="font-size:clamp(2rem,5.5vw,3.2rem)">The largest dam on Earth, watched live.</h2>
   <p class="lede">Two real pipelines run over the Three Gorges Dam today: Sentinel-1 radar turned into millimetre
   ground movement with InSAR, and Sentinel-2 optical turned into a reservoir water monitor checked against the
@@ -589,12 +589,35 @@
   function fmt(d){var m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     return m[d.getMonth()]+' '+d.getFullYear();}
   elC.innerHTML='<p style="color:var(--muted);font-size:.9rem">Loading the latest run…</p>';
+  /* Freshness is read off the data, never asserted in the copy. Reported per source
+     because the two run at different currencies: the radar archive lags a few weeks,
+     and the optical series stops whenever the Yangtze summer keeps the tile clouded
+     over. One combined date would quietly flatter the stale half. */
+  var tgSeen={};
+  function tgFresh(kind, dateStr){
+    if(!dateStr) return;
+    if(tgSeen[kind] && tgSeen[kind]>=dateStr) return;
+    tgSeen[kind]=dateStr;
+    var el=document.getElementById('tg-fresh');
+    if(!el) return;
+    var mon=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    function say(d){
+      var dt=new Date(Date.parse(d));
+      return dt.getUTCDate()+' '+mon[dt.getUTCMonth()]+' '+dt.getUTCFullYear();
+    }
+    var bits=[];
+    if(tgSeen.radar) bits.push('radar through '+say(tgSeen.radar));
+    if(tgSeen.optical) bits.push('optical through '+say(tgSeen.optical));
+    el.textContent=bits.join(' · ');
+  }
+
   fetch('pipeline/data/three_gorges.json?v='+Date.now()).then(function(r){
     if(!r.ok) throw new Error('no data'); return r.json();
   }).then(function(d){
     var s=d.series.slice().sort(function(a,b){return a.date<b.date?-1:1});
     // stats
     var last=s[s.length-1];
+    tgFresh('optical', last.date);
     var tiles=[
       [d.summary.scenes,'clear passes'],
       [d.summary.water_km2_min+'–'+d.summary.water_km2_max+' km²','water range'],
@@ -665,6 +688,7 @@
   C.innerHTML='<p style="color:var(--muted);font-size:.9rem">Loading the latest run…</p>';
   fetch('pipeline/data/three_gorges_insar.json?v='+Date.now()).then(function(r){if(!r.ok)throw new Error('no data');return r.json();}).then(function(d){
     var s=d.series.slice().sort(function(a,b){return a.date<b.date?-1:1});
+    tgFresh('radar', s[s.length-1].date);
     var vel=d.summary.velocity_mm_yr, scat=d.summary.scatter_mm, stable=Math.abs(vel)<3;
     var tiles=[
       [(vel>0?'+':'')+vel.toFixed(2)+' mm/yr','line-of-sight velocity'],
