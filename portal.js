@@ -179,7 +179,9 @@
           intersects:{type:'Point',coordinates:[lon,lat]},
           datetime:since.toISOString().slice(0,10)+'T00:00:00Z/..',
           query:{'eo:cloud_cover':{lt:60}},
-          sortby:[{field:'properties.datetime',direction:'desc'}],limit:100})})
+          sortby:[{field:'properties.datetime',direction:'desc'}],limit:1,
+          // count comes from context.matched; one record is enough for the latest date
+          fields:{include:['properties.datetime'],exclude:['assets','links','geometry','bbox']}})})
       .then(function(r){ if(!r.ok) throw 0; return r.json(); });
 
     Promise.allSettled([s1,s2]).then(function(out){ render(out,lat,lon,name); });
@@ -208,7 +210,7 @@
       var d=out[1].value, feats=d.features||[];
       var matched=(d.context&&d.context.matched)!=null?d.context.matched:
                   (d.numberMatched!=null?d.numberMatched:feats.length);
-      optical={matched:matched,capped:matched===feats.length&&feats.length===100,
+      optical={matched:matched,capped:false,
                latest:feats.length?feats[0].properties.datetime.slice(0,10):null};
     }
 
