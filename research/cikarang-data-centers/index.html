@@ -84,17 +84,18 @@
 
   <h1>Is the ground under Cikarang's data centers moving?</h1>
 
-  <p class="lead">Cikarang, in Bekasi regency east of Jakarta, now carries most of Indonesia's
-  new data center capacity. It sits on the same young alluvial plain that has made North
-  Jakarta one of the fastest sinking cities on record. We processed two years of free
-  Sentinel-1 radar over three of the estates and asked what the archive alone can say
-  about the ground under them.</p>
+  <p class="lead">Cikarang, in Bekasi regency east of Jakarta, now carries most of
+  Indonesia's new data center capacity. It sits on the same young alluvial plain that has
+  made North Jakarta one of the fastest sinking cities on record. We processed two years of
+  free Sentinel-1 radar over the cluster. The answer is that the ground under the halls is
+  flat to within our noise, and that the first version of this page said something else
+  because it sampled the wrong 400 metres.</p>
 
   <div class="stats">
-    <div class="stat"><strong>119</strong><span>interferograms processed, all 119 usable</span></div>
-    <div class="stat"><strong>61</strong><span>satellite passes, September 2024 to September 2026</span></div>
-    <div class="stat"><strong>&minus;24 mm/yr</strong><span>Jababeka against the other two estates</span></div>
-    <div class="stat"><strong>0</strong><span>ground instruments to calibrate against</span></div>
+    <div class="stat"><strong>8</strong><span>data center sites at verified coordinates</span></div>
+    <div class="stat"><strong>&minus;2.7 to +4.1</strong><span>mm/yr across all eight, none clear of its own noise</span></div>
+    <div class="stat"><strong>23 mm/yr</strong><span>the error from sampling an estate centroid instead</span></div>
+    <div class="stat"><strong>6.2 km</strong><span>from the moving ground to the nearest data hall</span></div>
   </div>
 
   <h2><span class="eyebrow">The question</span>Why a data center operator would care</h2>
@@ -119,91 +120,111 @@
 
   <p>The stack was inverted per pixel by coherence-weighted least squares over 186,656
   coherent pixels. Every interferogram is referenced to the median of 23,553 coherent
-  pixels in a strip south of latitude &minus;6.377, away from the estates. Each estate
-  figure below is the median of coherent pixels within 400 m of the estate point, so it is
-  an estate-level number covering roofs, roads and open ground, not a building footprint.</p>
+  pixels in a strip south of latitude &minus;6.377, away from the estates. Each site figure
+  below is the median of coherent pixels within 400 m of a coordinate.</p>
 
-  <figure>
-    <img src="img/cikarang_insar.png" alt="Three-panel figure: a line-of-sight velocity map of the Cikarang area with the three estates circled, the raw displacement series for each estate, and the differences between estates">
-    <figcaption>Left: line of sight velocity over the area, red moving away from the
-    satellite. A broad subsiding lobe covers the north east of the scene and the Jababeka
-    circle sits on its southern flank. The other two estates sit on the pale ground.
-    Top right: each estate's median displacement, one point per pass. The scatter is 9 to
-    15 mm and most of it is atmosphere. Bottom right: each estate minus the mean of the
-    other two. The scatter falls because the atmospheric delay is shared, and the Jababeka
-    trend is what is left.</figcaption>
-  </figure>
+  <h2><span class="eyebrow">The mistake</span>An estate centroid is not a building</h2>
 
-  <h2><span class="eyebrow">What came out</span>One estate apart from the other two</h2>
+  <p>The first pass sampled one point per industrial estate: MM2100, Jababeka and GIIC Kota
+  Deltamas. Those points gave +4.3, &minus;19.3 and +4.2 mm/yr, and we wrote up Jababeka as
+  an estate sinking 23 mm/yr faster than its neighbours, with the estate's data center
+  tenant named next to the number.</p>
+
+  <p>Then we went and found out where the buildings actually are. DCI Indonesia's H1
+  campus is at a published address with coordinates in PeeringDB. Seven more facilities in
+  the area are mapped in OpenStreetMap with <code>telecom=data_center</code>. Checked
+  against those, the estate points were nowhere near a data hall:</p>
+
+  <div class="tblwrap">
+  <table>
+    <tr><th>First pass sampling point</th><th>Nearest verified data center</th><th class="num">Distance</th></tr>
+    <tr><td>MM2100 estate centre</td><td>DCI Indonesia H1</td><td class="num">0.49 km</td></tr>
+    <tr><td>Kota Deltamas estate centre</td><td>Digital Hyperspace Jakarta</td><td class="num">1.70 km</td></tr>
+    <tr><td>Jababeka estate centre</td><td class="no">DCI Indonesia H1</td><td class="num no">6.20 km</td></tr>
+  </table>
+  </div>
+
+  <p>Kota Jababeka covers about 5,600 hectares. A 400 m circle dropped at its centre is a
+  sample of township, not of anybody's slab, and the one we dropped landed on the flank of
+  a subsidence lobe 6 km from the nearest hall. That is the whole error: 23 mm/yr of
+  headline produced by a coordinate nobody had checked.</p>
+
+  <h2><span class="eyebrow">The answer</span>Eight sites, all flat</h2>
+
+  <p>Re-sampling the same inverted stack at the verified coordinates gives this. Rates are
+  line of sight, relative to the reference strip, over the same 61 epochs.</p>
 
   <div class="tblwrap">
   <table>
     <tr>
-      <th>Estate</th><th>Data center tenants</th><th class="num">Rate, mm/yr</th>
-      <th class="num">Pixel spread, p10 to p90</th><th class="num">Pixels</th><th class="num">Scatter</th>
+      <th>Data center</th><th>Estate</th><th class="num">Rate, mm/yr</th>
+      <th class="num">Pixels</th><th class="num">Mean coherence</th><th>Coordinate source</th>
     </tr>
-    <tr>
-      <td>MM2100 Industrial Town</td><td>DCI Indonesia JK1 to JK3</td>
-      <td class="num">+4.3 &plusmn; 3.2</td><td class="num">&minus;0.8 to +7.9</td>
-      <td class="num">293</td><td class="num">14.8 mm</td>
-    </tr>
-    <tr>
-      <td>Jababeka Industrial Estate</td><td>Datacomm Cikarang</td>
-      <td class="num no">&minus;19.3 &plusmn; 3.2</td><td class="num">&minus;24.2 to &minus;13.3</td>
-      <td class="num">294</td><td class="num">14.9 mm</td>
-    </tr>
-    <tr>
-      <td>GIIC Kota Deltamas</td><td>Princeton Digital JC3 and JC4, EDGNEX under construction</td>
-      <td class="num">+4.2 &plusmn; 2.0</td><td class="num">+0.5 to +8.3</td>
-      <td class="num">310</td><td class="num">9.2 mm</td>
-    </tr>
+    <tr><td>Digital Hyperspace Jakarta</td><td>GIIC Kota Deltamas</td><td class="num">+4.1 &plusmn; 1.7</td><td class="num">48</td><td class="num">0.55</td><td>OpenStreetMap</td></tr>
+    <tr><td>GTN Data Center</td><td>Sertajaya</td><td class="num">+3.1 &plusmn; 2.2</td><td class="num">219</td><td class="num">0.71</td><td>OpenStreetMap</td></tr>
+    <tr><td>DCI Indonesia H1 (JK1 to JK3)</td><td>MM2100 Industrial Town</td><td class="num">+2.9 &plusmn; 3.3</td><td class="num">296</td><td class="num">0.86</td><td>PeeringDB</td></tr>
+    <tr><td>STT Jakarta 1</td><td>GIIC Kota Deltamas</td><td class="num">&minus;0.3 &plusmn; 1.6</td><td class="num">192</td><td class="num">0.66</td><td>OpenStreetMap</td></tr>
+    <tr><td>Microsoft JKT05</td><td>GIIC Kota Deltamas</td><td class="num">&minus;0.9 &plusmn; 1.6</td><td class="num">114</td><td class="num">0.61</td><td>OpenStreetMap</td></tr>
+    <tr><td>Microsoft JKT11</td><td>GIIC Kota Deltamas</td><td class="num">&minus;1.3 &plusmn; 1.6</td><td class="num">171</td><td class="num">0.66</td><td>OpenStreetMap</td></tr>
+    <tr><td>Amazon Web Services</td><td>GIIC Kota Deltamas</td><td class="num">&minus;2.3 &plusmn; 1.7</td><td class="num">297</td><td class="num">0.73</td><td>OpenStreetMap</td></tr>
+    <tr><td>Princeton Digital JC3</td><td>GIIC Kota Deltamas</td><td class="num">&minus;2.7 &plusmn; 1.7</td><td class="num">243</td><td class="num">0.69</td><td>OpenStreetMap</td></tr>
   </table>
   </div>
-
-  <p>Across the whole scene the median rate is &minus;2.1 mm/yr over 152,555 pixels, with
-  the 5th percentile at &minus;31.2 and the 95th at +7.7. So the scene has a real
-  subsidence tail, and Jababeka sits in it while the other two do not.</p>
-
-  <p>The map says something the table cannot: Jababeka is not an isolated anomaly. It sits
-  on the southern flank of a subsiding lobe that covers the north east of the scene and
-  extends well beyond it, which is the signature of regional groundwater drawdown rather
-  than of anything one estate has built. The internal gradient at Jababeka is the steepest
-  of the three, 10.9 mm/yr between the 10th and 90th percentile pixel inside an 800 m
-  circle, against 8.7 at MM2100 and 7.8 at Kota Deltamas. On a flank, which side of the
-  fence a building sits on starts to matter.</p>
-
-  <h2><span class="eyebrow">The real measurement</span>Why the difference is the number</h2>
-
-  <p>The single-estate rates above carry a scatter of 9 to 15 mm per pass. In a humid
-  tropical scene with no tropospheric correction, most of that is water vapour rather than
-  ground. Water vapour is also largely common to sites a few kilometres apart, so it
-  cancels when one estate is differenced against another. The three estates are 5.8, 8.4
-  and 12.2 km apart, and their series correlate at 0.35 to 0.54, which is the shared
-  component showing up directly.</p>
-
-  <div class="tblwrap">
-  <table>
-    <tr><th>Pair</th><th class="num">Relative rate, mm/yr</th><th class="num">Residual scatter</th></tr>
-    <tr><td>MM2100 minus GIIC Deltamas</td><td class="num">+0.1 &plusmn; 2.8</td><td class="num">13.2 mm</td></tr>
-    <tr><td>MM2100 minus Jababeka</td><td class="num no">+23.6 &plusmn; 1.8</td><td class="num">8.5 mm</td></tr>
-    <tr><td>Jababeka minus GIIC Deltamas</td><td class="num no">&minus;23.5 &plusmn; 2.3</td><td class="num">10.9 mm</td></tr>
-  </table>
-  </div>
-
-  <p>Two things in that table matter more than the headline. The two quiet estates agree
-  with each other to 0.1 mm/yr over two years while sitting 12.2 km apart, which is a
-  tighter internal check than we had any right to expect and says the stack is not drifting
-  at random. And both independent comparisons against Jababeka give the same 23.5 to 23.6
-  mm/yr, from two different baselines.</p>
 
   <div class="verdict">
-    <strong>What we would put in writing:</strong> the ground at Jababeka is moving away
-    from the satellite about 23 mm/yr faster than the ground at MM2100 and at Kota
-    Deltamas, measured over 61 passes across two years. In line of sight terms a vertical
-    settlement reads at roughly 0.8 times its true size on this geometry, so the vertical
-    gradient is around 29 mm/yr. We would not put the absolute rate of any single estate in
-    writing. See the next section for why.
+    <strong>What we would put in writing:</strong> across eight data center sites in
+    Cikarang the line of sight rates span 6.8 mm/yr, from &minus;2.7 to +4.1, with a
+    standard deviation of 2.5 mm/yr. Every one of them sits inside about two standard
+    errors of zero, and the whole span is smaller than the absolute error we can demonstrate
+    on this kind of ground. Over these two years, free radar finds nothing moving under the
+    Cikarang data centers. It does not find stability either. It finds an answer consistent
+    with zero at a resolution of a few mm/yr.
   </div>
+
+  <figure>
+    <img src="img/cikarang_insar.png" alt="Three-panel figure: velocity map of the Cikarang area with eight data center sites marked and the Jababeka estate point circled, the flat series for the eight sites, and the Jababeka estate point diverging from the data center mean">
+    <figcaption>Left: line of sight velocity, red moving away from the satellite. The
+    verified data center sites are the small circles. The orange circle is the estate point
+    the first pass used, on the southern flank of the subsiding lobe. Top right: the eight
+    verified sites, flat within their scatter. Bottom right: that estate point against the
+    mean of the eight, which is the divergence the first version of this page mistook for a
+    data center result.</figcaption>
+  </figure>
+
+  <h2><span class="eyebrow">The signal</span>Something is moving, 6 km away</h2>
+
+  <p>The subsidence is real, it is simply not under the halls. Scene-wide the median rate
+  is &minus;2.1 mm/yr over 152,555 pixels with the 5th percentile at &minus;31.2, so there
+  is a genuine subsidence tail. It sits in a lobe covering the north east of the scene,
+  which is the signature of regional groundwater drawdown rather than of anything built on
+  top. The Jababeka estate point reads &minus;19.3 &plusmn; 3.2 mm/yr on that flank.</p>
+
+  <p>For an operator inside that lobe the number would matter a great deal. None of the
+  eight verified sites is inside it. Whether a ninth site is depends on its coordinates,
+  which is the point of the exercise.</p>
+
+  <h2><span class="eyebrow">What held up</span>The parts of the method that survived</h2>
+
+  <p>Two internal checks came through the correction intact, and they are the reason we
+  trust the flat answer above rather than assuming the whole stack is noise.</p>
+
+  <ul>
+    <li><strong>Distant quiet ground agrees with itself.</strong> The MM2100 and Kota
+    Deltamas estate points, 12.2 km apart, differ by +0.1 &plusmn; 2.8 mm/yr over two
+    years. Two independent patches of ground at opposite ends of the scene landing that
+    close together is a check on the inversion, not on the geology.</li>
+    <li><strong>Differencing removes the atmosphere.</strong> Single-site series scatter 8
+    to 15 mm per pass, most of it tropical water vapour. Difference two sites in the GIIC
+    cluster, 0.5 to 2 km apart, and the residual scatter drops to 1.7 to 4.3 mm. That is
+    the delay cancelling, and it is why a gradient between neighbouring assets is worth
+    more than any single rate.</li>
+  </ul>
+
+  <p>One caution on our own error bars. The sigmas quoted here come from the least-squares
+  fit and assume each pass is an independent draw. Atmospheric delay is correlated in time,
+  so the true uncertainty on every rate on this page is larger than the number next to it,
+  by a factor we have not yet measured. The differences inside the GIIC cluster reach 6.9
+  mm/yr with a fitted sigma of 0.6, and we would not defend that as a 12 sigma result.</p>
 
   <h2><span class="eyebrow">The limits</span>What this does not say</h2>
 
@@ -212,40 +233,45 @@
     week over western Puerto Rico, tropical and vegetated on purpose, our own rates
     disagreed with 7 GNSS stations by 54 mm/yr RMS over a six-month window, an implied
     displacement error of about 45 mm. Spread across the two-year Cikarang window that is
-    still of order 20 mm/yr on an absolute rate. Jababeka's &minus;19.3 mm/yr does not
-    clear that bar. The 23 mm/yr gradient between estates does, because the differencing
-    removes the part of the error that is common to the scene.</li>
+    still of order 20 mm/yr. Nothing in the table above clears that bar, which is exactly
+    why the table is read as a null result and not as eight precise measurements.</li>
     <li><strong>The reference strip may be moving too.</strong> Every number here is
-    relative to a strip of ground south of the estates. If that strip is itself sinking,
-    every rate on this page is shifted by the same amount, which is another reason the
-    between-estate difference is the safer quantity.</li>
-    <li><strong>One look direction.</strong> Ascending track only. We cannot separate
-    vertical settlement from horizontal movement without a descending stack over the same
-    window, and the 0.8 factor above assumes the motion is purely vertical.</li>
+    relative to a strip of ground south of the estates. If that strip is sinking, every
+    rate on this page is shifted by the same amount.</li>
+    <li><strong>One look direction.</strong> Ascending track only. Vertical settlement and
+    horizontal movement cannot be separated without a descending stack over the same window.
+    On this geometry a purely vertical motion reads at about 0.8 times its true size.</li>
     <li><strong>No tropospheric correction.</strong> No ERA5 or GACOS delay model has been
-    applied. That is the first thing we would add, and it is what should bring the
-    single-estate scatter down.</li>
-    <li><strong>Estate level, not building level.</strong> A 400 m radius takes in roofs,
-    car parks, roads and vacant lots. It does not tell a specific operator what their own
-    slab is doing. Building-footprint masking needs the footprint, which needs the
-    customer.</li>
-    <li><strong>Two years is short for a settlement claim.</strong> Consolidation under a
-    new build is not linear, and a straight line fitted to 61 points cannot distinguish
-    steady groundwater drawdown from a construction transient nearby.</li>
+    applied.</li>
+    <li><strong>A 400 m circle is still not a building.</strong> It is much better than an
+    estate centroid, and it is still roofs, car parks and access roads averaged together. A
+    slab-level answer needs the footprint, which needs the customer.</li>
+    <li><strong>Some of these sites were building sites.</strong> Princeton Digital JC3
+    broke ground in November 2025 and is due in service in Q4 2026, so for much of this
+    window its coordinate covers earthworks rather than a finished structure. A settling new
+    build and bare ground being graded look different, and two years is too short to tell
+    them apart.</li>
+    <li><strong>The list is not complete.</strong> Eight sites are what PeeringDB and
+    OpenStreetMap could confirm inside the scene. DAMAC Digital, formerly EDGNEX, has
+    announced a 144 MW campus in GIIC that we could not place to a coordinate, and the
+    larger cluster around 107.25 east sits outside the area we processed.</li>
   </ul>
 
   <h2><span class="eyebrow">Next</span>What would make this sellable</h2>
 
-  <p>Three things, in cost order. A descending stack over the same two years, which is more
-  free data and another day of processing, and which turns line of sight into vertical and
-  east-west. A tropospheric correction from ERA5. And one GNSS tie or a corner reflector on
-  a customer's site, which is the only item on the list that costs real money and the only
+  <p>The correction changed the order of the list. Coordinates come first: this result was
+  wrong for a day because an estate name was treated as a location, and the fix cost one
+  lookup in two public databases. After that, a descending stack over the same two years,
+  which is more free data and another day of processing and which turns line of sight into
+  vertical and east-west. Then a tropospheric correction from ERA5. Then one GNSS tie or a
+  corner reflector on a customer's site, the only item that costs real money and the only
   one that converts a relative gradient into an absolute rate anyone can audit.</p>
 
-  <p>Until that third item exists, the honest product here is a screening tool: it ranks
-  sites against each other from free archive data in about a day, and it tells an operator
-  which of their estates deserves an instrument. That is worth something on its own,
-  because the instrument budget is finite and currently gets allocated by intuition.</p>
+  <p>The honest product here is a screening tool. It ranks assets against each other from
+  free archive data in about a day, and it tells an operator which of their sites deserves
+  an instrument. This run is what that looks like when the answer is no: eight sites, two
+  years, nothing moving, and a subsidence lobe 6 km away that would have been worth knowing
+  about if anyone had been building in it.</p>
 
   <h2><span class="eyebrow">Method</span>Reproducing this</h2>
 
@@ -253,9 +279,11 @@
   running ISCE2, and about 400 lines of Python for the network build, the weighted
   least-squares inversion and the figures. Coherence threshold 0.3 per pair, mean coherence
   threshold 0.4 per pixel. Displacements are in line of sight, negative away from the
-  satellite. Job list, urls and the full per-epoch series are in the result JSON in the
-  repository, and we will send the pipeline to anyone who wants to check the arithmetic.
-  Contains modified Copernicus Sentinel data 2024 to 2026, processed by ASF HyP3.</p>
+  satellite. Site coordinates, their sources, the per-epoch series at both 250 m and 400 m,
+  and every pairwise difference are in <code>cikarang_sites.json</code> in the repository,
+  alongside the job list and urls. We will send the pipeline to anyone who wants to check
+  the arithmetic. Contains modified Copernicus Sentinel data 2024 to 2026, processed by ASF
+  HyP3.</p>
 
 </div>
 
