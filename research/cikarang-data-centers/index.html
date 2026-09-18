@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rheality — Is the ground under Cikarang's data centers moving?</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="/favicon.png?v=6">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F2EEF9;--panel:#fff;--line:#E4DDF1;--plum:#33254E;--terra:#CD5A1F;--terra-deep:#A84613;
+    --ink:#352A4A;--mut:#6F6488;--disp:'Fraunces',Georgia,serif;--body:'Inter',system-ui,sans-serif;}
+  *{box-sizing:border-box}
+  body{margin:0;color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.65;
+    background:radial-gradient(60% 50% at 50% 0%,rgba(122,80,255,.16) 0%,transparent 70%),var(--bg);}
+  .wrap{max-width:880px;margin:0 auto;padding:22px 22px 70px}
+  a{color:var(--terra-deep)}
+  .topnav{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;font-size:13.5px}
+  .topnav a{color:var(--mut);text-decoration:none}
+  .topnav a:hover{color:var(--plum)}
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  .brand .logo{height:34px;width:auto;display:block}
+  h1{font-family:var(--disp);color:var(--plum);font-size:34px;line-height:1.1;margin:14px 0 8px}
+  h2{font-family:var(--disp);color:var(--plum);font-size:23px;margin:38px 0 8px}
+  .lead{font-size:17.5px;max-width:700px}
+  .note{font-size:13px;color:var(--mut)}
+  .eyebrow{display:block;font-family:var(--disp);font-weight:700;font-size:12.5px;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--terra);margin:0 0 4px}
+  figure{margin:22px 0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
+  figure img{width:100%;height:auto;display:block;border-radius:8px}
+  figcaption{font-size:13.5px;color:var(--mut);margin-top:10px;line-height:1.5}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:22px 0}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .stat strong{display:block;font-family:var(--disp);font-size:29px;line-height:1.05;color:var(--plum)}
+  .stat span{display:block;font-size:12.5px;color:var(--mut);margin-top:6px;line-height:1.4}
+  .tblwrap{overflow-x:auto;margin:20px 0;background:var(--panel);border:1px solid var(--line);border-radius:14px}
+  table{border-collapse:collapse;width:100%;min-width:600px;font-size:13.5px;line-height:1.45}
+  th{font-family:var(--disp);color:var(--plum);text-align:left;font-size:13px;
+    padding:12px 14px;border-bottom:2px solid var(--line);white-space:nowrap}
+  td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td.no{color:#B3341A;font-weight:600;white-space:nowrap}
+  td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+  .verdict{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--terra);
+    border-radius:12px;padding:16px 18px;margin:26px 0}
+  .verdict strong{font-family:var(--disp);color:var(--plum)}
+  ul{padding-left:20px}
+  li{margin:7px 0}
+  code{background:#EAE4F4;border-radius:5px;padding:1px 6px;font-size:13.5px}
+
+
+  /* rheality-toc: sticky contents rail, built from the h2 elements on screen */
+  html{scroll-behavior:smooth}
+  h2{scroll-margin-top:26px}
+  .toc{position:fixed;top:98px;left:calc(50% - 658px);width:190px;z-index:20;
+    max-height:calc(100vh - 140px);overflow-y:auto}
+  .toc::-webkit-scrollbar{width:0}
+  .toc-h{font-family:var(--disp,Georgia,serif);font-weight:700;font-size:10.5px;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--mut,#6F6488);
+    margin:0 0 10px 13px}
+  .toc a{display:block;font-size:12.6px;line-height:1.38;color:var(--mut,#6F6488);
+    text-decoration:none;padding:6px 0 6px 13px;
+    border-left:2px solid var(--line,#E4DDF1);
+    transition:color .14s ease,border-color .14s ease}
+  .toc a:hover{color:var(--plum,#33254E);border-left-color:var(--mut,#6F6488)}
+  .toc a.on{color:var(--plum,#33254E);font-weight:600;
+    border-left-color:var(--terra,#CD5A1F)}
+  @media (max-width:1340px){.toc{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topnav">
+    <a href="/#demo-intro">&larr; Back to the demos</a>
+    <span class="note">Research note, 18 September 2026</span>
+  </div>
+
+  <div class="brand">
+    <img class="logo" src="/logo-nav.png" alt="Rheality">
+  </div>
+
+  <h1>Is the ground under Cikarang's data centers moving?</h1>
+
+  <p class="lead">Cikarang, in Bekasi regency east of Jakarta, now carries most of Indonesia's
+  new data center capacity. It sits on the same young alluvial plain that has made North
+  Jakarta one of the fastest sinking cities on record. We processed two years of free
+  Sentinel-1 radar over three of the estates and asked what the archive alone can say
+  about the ground under them.</p>
+
+  <div class="stats">
+    <div class="stat"><strong>119</strong><span>interferograms processed, all 119 usable</span></div>
+    <div class="stat"><strong>61</strong><span>satellite passes, September 2024 to September 2026</span></div>
+    <div class="stat"><strong>&minus;24 mm/yr</strong><span>Jababeka against the other two estates</span></div>
+    <div class="stat"><strong>0</strong><span>ground instruments to calibrate against</span></div>
+  </div>
+
+  <h2><span class="eyebrow">The question</span>Why a data center operator would care</h2>
+
+  <p>A hyperscale hall does not fail because the whole site goes down by a centimetre. It
+  fails because one part of it goes down faster than the part next to it. Differential
+  settlement racks a slab, pulls a raised floor out of level, and puts a cooling pipe run
+  in tension. The ground movement that matters is therefore a gradient across a few hundred
+  metres, not an absolute number against sea level.</p>
+
+  <p>That is convenient, because a gradient is also the thing satellite radar measures
+  best. An interferogram is a difference by construction. What it struggles with is the
+  absolute rate, which is where the atmosphere and the choice of reference point get in.</p>
+
+  <h2><span class="eyebrow">What we processed</span>Two years of ascending track 98</h2>
+
+  <p>Sentinel-1 ascending track 98, bursts 098_210452_IW2 and 098_210453_IW2, every 12-day
+  pass from 1 September 2024 to 10 September 2026. That is 61 epochs. We ordered 119
+  two-burst interferograms from ASF HyP3, consecutive pairs plus skip-one pairs so the
+  network stays connected if one pass decorrelates, at 10 by 2 looks, about 40 m on the
+  ground. All 119 jobs came back and all 119 were usable.</p>
+
+  <p>The stack was inverted per pixel by coherence-weighted least squares over 186,656
+  coherent pixels. Every interferogram is referenced to the median of 23,553 coherent
+  pixels in a strip south of latitude &minus;6.377, away from the estates. Each estate
+  figure below is the median of coherent pixels within 400 m of the estate point, so it is
+  an estate-level number covering roofs, roads and open ground, not a building footprint.</p>
+
+  <figure>
+    <img src="img/cikarang_insar.png" alt="Three-panel figure: a line-of-sight velocity map of the Cikarang area with the three estates circled, the raw displacement series for each estate, and the differences between estates">
+    <figcaption>Left: line of sight velocity over the area, red moving away from the
+    satellite. A broad subsiding lobe covers the north east of the scene and the Jababeka
+    circle sits on its southern flank. The other two estates sit on the pale ground.
+    Top right: each estate's median displacement, one point per pass. The scatter is 9 to
+    15 mm and most of it is atmosphere. Bottom right: each estate minus the mean of the
+    other two. The scatter falls because the atmospheric delay is shared, and the Jababeka
+    trend is what is left.</figcaption>
+  </figure>
+
+  <h2><span class="eyebrow">What came out</span>One estate apart from the other two</h2>
+
+  <div class="tblwrap">
+  <table>
+    <tr>
+      <th>Estate</th><th>Data center tenants</th><th class="num">Rate, mm/yr</th>
+      <th class="num">Pixel spread, p10 to p90</th><th class="num">Pixels</th><th class="num">Scatter</th>
+    </tr>
+    <tr>
+      <td>MM2100 Industrial Town</td><td>DCI Indonesia JK1 to JK3</td>
+      <td class="num">+4.3 &plusmn; 3.2</td><td class="num">&minus;0.8 to +7.9</td>
+      <td class="num">293</td><td class="num">14.8 mm</td>
+    </tr>
+    <tr>
+      <td>Jababeka Industrial Estate</td><td>Datacomm Cikarang</td>
+      <td class="num no">&minus;19.3 &plusmn; 3.2</td><td class="num">&minus;24.2 to &minus;13.3</td>
+      <td class="num">294</td><td class="num">14.9 mm</td>
+    </tr>
+    <tr>
+      <td>GIIC Kota Deltamas</td><td>Princeton Digital JC3 and JC4, EDGNEX under construction</td>
+      <td class="num">+4.2 &plusmn; 2.0</td><td class="num">+0.5 to +8.3</td>
+      <td class="num">310</td><td class="num">9.2 mm</td>
+    </tr>
+  </table>
+  </div>
+
+  <p>Across the whole scene the median rate is &minus;2.1 mm/yr over 152,555 pixels, with
+  the 5th percentile at &minus;31.2 and the 95th at +7.7. So the scene has a real
+  subsidence tail, and Jababeka sits in it while the other two do not.</p>
+
+  <p>The map says something the table cannot: Jababeka is not an isolated anomaly. It sits
+  on the southern flank of a subsiding lobe that covers the north east of the scene and
+  extends well beyond it, which is the signature of regional groundwater drawdown rather
+  than of anything one estate has built. The internal gradient at Jababeka is the steepest
+  of the three, 10.9 mm/yr between the 10th and 90th percentile pixel inside an 800 m
+  circle, against 8.7 at MM2100 and 7.8 at Kota Deltamas. On a flank, which side of the
+  fence a building sits on starts to matter.</p>
+
+  <h2><span class="eyebrow">The real measurement</span>Why the difference is the number</h2>
+
+  <p>The single-estate rates above carry a scatter of 9 to 15 mm per pass. In a humid
+  tropical scene with no tropospheric correction, most of that is water vapour rather than
+  ground. Water vapour is also largely common to sites a few kilometres apart, so it
+  cancels when one estate is differenced against another. The three estates are 5.8, 8.4
+  and 12.2 km apart, and their series correlate at 0.35 to 0.54, which is the shared
+  component showing up directly.</p>
+
+  <div class="tblwrap">
+  <table>
+    <tr><th>Pair</th><th class="num">Relative rate, mm/yr</th><th class="num">Residual scatter</th></tr>
+    <tr><td>MM2100 minus GIIC Deltamas</td><td class="num">+0.1 &plusmn; 2.8</td><td class="num">13.2 mm</td></tr>
+    <tr><td>MM2100 minus Jababeka</td><td class="num no">+23.6 &plusmn; 1.8</td><td class="num">8.5 mm</td></tr>
+    <tr><td>Jababeka minus GIIC Deltamas</td><td class="num no">&minus;23.5 &plusmn; 2.3</td><td class="num">10.9 mm</td></tr>
+  </table>
+  </div>
+
+  <p>Two things in that table matter more than the headline. The two quiet estates agree
+  with each other to 0.1 mm/yr over two years while sitting 12.2 km apart, which is a
+  tighter internal check than we had any right to expect and says the stack is not drifting
+  at random. And both independent comparisons against Jababeka give the same 23.5 to 23.6
+  mm/yr, from two different baselines.</p>
+
+  <div class="verdict">
+    <strong>What we would put in writing:</strong> the ground at Jababeka is moving away
+    from the satellite about 23 mm/yr faster than the ground at MM2100 and at Kota
+    Deltamas, measured over 61 passes across two years. In line of sight terms a vertical
+    settlement reads at roughly 0.8 times its true size on this geometry, so the vertical
+    gradient is around 29 mm/yr. We would not put the absolute rate of any single estate in
+    writing. See the next section for why.
+  </div>
+
+  <h2><span class="eyebrow">The limits</span>What this does not say</h2>
+
+  <ul>
+    <li><strong>The absolute rates are not calibrated.</strong> In a separate check this
+    week over western Puerto Rico, tropical and vegetated on purpose, our own rates
+    disagreed with 7 GNSS stations by 54 mm/yr RMS over a six-month window, an implied
+    displacement error of about 45 mm. Spread across the two-year Cikarang window that is
+    still of order 20 mm/yr on an absolute rate. Jababeka's &minus;19.3 mm/yr does not
+    clear that bar. The 23 mm/yr gradient between estates does, because the differencing
+    removes the part of the error that is common to the scene.</li>
+    <li><strong>The reference strip may be moving too.</strong> Every number here is
+    relative to a strip of ground south of the estates. If that strip is itself sinking,
+    every rate on this page is shifted by the same amount, which is another reason the
+    between-estate difference is the safer quantity.</li>
+    <li><strong>One look direction.</strong> Ascending track only. We cannot separate
+    vertical settlement from horizontal movement without a descending stack over the same
+    window, and the 0.8 factor above assumes the motion is purely vertical.</li>
+    <li><strong>No tropospheric correction.</strong> No ERA5 or GACOS delay model has been
+    applied. That is the first thing we would add, and it is what should bring the
+    single-estate scatter down.</li>
+    <li><strong>Estate level, not building level.</strong> A 400 m radius takes in roofs,
+    car parks, roads and vacant lots. It does not tell a specific operator what their own
+    slab is doing. Building-footprint masking needs the footprint, which needs the
+    customer.</li>
+    <li><strong>Two years is short for a settlement claim.</strong> Consolidation under a
+    new build is not linear, and a straight line fitted to 61 points cannot distinguish
+    steady groundwater drawdown from a construction transient nearby.</li>
+  </ul>
+
+  <h2><span class="eyebrow">Next</span>What would make this sellable</h2>
+
+  <p>Three things, in cost order. A descending stack over the same two years, which is more
+  free data and another day of processing, and which turns line of sight into vertical and
+  east-west. A tropospheric correction from ERA5. And one GNSS tie or a corner reflector on
+  a customer's site, which is the only item on the list that costs real money and the only
+  one that converts a relative gradient into an absolute rate anyone can audit.</p>
+
+  <p>Until that third item exists, the honest product here is a screening tool: it ranks
+  sites against each other from free archive data in about a day, and it tells an operator
+  which of their estates deserves an instrument. That is worth something on its own,
+  because the instrument budget is finite and currently gets allocated by intuition.</p>
+
+  <h2><span class="eyebrow">Method</span>Reproducing this</h2>
+
+  <p>Sentinel-1 SLC bursts from the Copernicus archive, interferograms from ASF HyP3
+  running ISCE2, and about 400 lines of Python for the network build, the weighted
+  least-squares inversion and the figures. Coherence threshold 0.3 per pair, mean coherence
+  threshold 0.4 per pixel. Displacements are in line of sight, negative away from the
+  satellite. Job list, urls and the full per-epoch series are in the result JSON in the
+  repository, and we will send the pipeline to anyone who wants to check the arithmetic.
+  Contains modified Copernicus Sentinel data 2024 to 2026, processed by ASF HyP3.</p>
+
+</div>
+
+
+<script>
+/* rheality-toc */
+(function(){
+  var SCOPE=".wrap";
+  var nav=document.createElement('nav');
+  nav.className='toc';
+  nav.setAttribute('aria-label','Contents');
+  document.body.appendChild(nav);
+  var hs=[],links=[];
+  function vis(el){
+    return !!(el.offsetWidth||el.offsetHeight||el.getClientRects().length);
+  }
+  function top(el){
+    return el.getBoundingClientRect().top+window.pageYOffset;
+  }
+  function build(){
+    var root=null,cands=document.querySelectorAll(SCOPE);
+    for(var i=0;i<cands.length;i++){if(vis(cands[i])){root=cands[i];break;}}
+    hs=root?[].slice.call(root.querySelectorAll('h2')).filter(vis):[];
+    if(hs.length<3){nav.style.display='none';links=[];return;}
+    nav.style.display='';
+    nav.innerHTML='<div class="toc-h">Contents</div>';
+    links=hs.map(function(h,i){
+      if(!h.id)h.id='sec-'+i;
+      /* headings may carry an eyebrow label; the rail wants the heading itself */
+      var c=h.cloneNode(true),eb=c.querySelector('.eyebrow');
+      if(eb)eb.parentNode.removeChild(eb);
+      var a=document.createElement('a');
+      a.href='#'+h.id;
+      a.textContent=c.textContent.trim();
+      nav.appendChild(a);
+      return a;
+    });
+    update();
+  }
+  function update(){
+    if(!links.length)return;
+    var y=window.pageYOffset+140,cur=0;
+    for(var i=0;i<hs.length;i++){if(top(hs[i])<=y)cur=i;}
+    for(var j=0;j<links.length;j++){
+      if(j===cur)links[j].classList.add('on');else links[j].classList.remove('on');
+    }
+  }
+  window.addEventListener('scroll',update,{passive:true});
+  window.addEventListener('resize',update);
+  /* panels toggle with display:none, so rebuild when one does */
+  var t=null;
+  function later(){clearTimeout(t);t=setTimeout(build,70);}
+  if(window.MutationObserver){
+    var mo=new MutationObserver(later),c2=document.querySelectorAll(SCOPE);
+    for(var k=0;k<c2.length;k++){
+      mo.observe(c2[k],{attributes:true,attributeFilter:['style','class']});
+    }
+  }
+  document.addEventListener('click',later);
+  window.addEventListener('hashchange',later);
+  build();
+})();
+</script>
+</body>
+</html>
