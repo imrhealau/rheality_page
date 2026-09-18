@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rheality — Cikarang data centers, measured from orbit</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="/favicon.png?v=6">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --plum:#33254E;--plum-deep:#1E1537;--brand:#CD5A1F;--brand-deep:#A84613;
+    --ink:#352A4A;--muted:#6F6488;--bg:#F2EEF9;--white:#fff;--line:#E4DDF1;
+    --green:#2E9E6B;--amber:#C08A16;--red:#D63A2E;
+    --radius:20px;--maxw:1080px;--disp:'Fraunces',Georgia,serif;--body:'Inter',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{font-family:var(--body);color:var(--ink);margin:0;font-size:16.5px;line-height:1.65;-webkit-font-smoothing:antialiased;
+    background:radial-gradient(60% 50% at 50% 0%,rgba(122,80,255,.16) 0%,transparent 70%),
+      radial-gradient(40% 40% at 90% 10%,rgba(205,90,31,.06) 0%,transparent 70%),var(--bg);}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px 40px}
+  a{color:var(--brand-deep)}
+
+  /* nav (matches home) */
+  nav.nav{position:sticky;top:18px;z-index:40;margin:18px auto 0;max-width:var(--maxw);padding:0 20px}
+  .nav-inner{background:var(--white);border:1px solid var(--line);border-radius:100px;
+    padding:10px 14px 10px 22px;display:flex;align-items:center;gap:18px;box-shadow:0 6px 24px rgba(46,31,74,.08)}
+  .nav-inner .brand{display:flex;align-items:center}
+  .nav-inner .logo{height:34px;width:auto;display:block}
+  .nav-inner .logo-mark{display:none}
+  .tabs{display:flex;gap:4px;margin-left:auto}
+  .tabs a{font-family:var(--disp);font-weight:700;font-size:.9rem;color:var(--muted);text-decoration:none;padding:8px 16px;border-radius:100px;white-space:nowrap}
+  .tabs a:hover{color:var(--plum)}
+  .btn{font-family:var(--disp);font-weight:700;font-size:.92rem;background:var(--brand);color:#fff;text-decoration:none;
+    padding:10px 22px;border-radius:100px;white-space:nowrap;transition:transform .15s ease,background .15s ease}
+  .btn:hover{transform:translateY(-1px);background:var(--brand-deep)}
+  @media(max-width:640px){.nav-inner{padding:8px 10px 8px 14px;gap:8px;transition:padding .35s ease,gap .35s ease}
+    nav.nav.shrunk .nav-inner{padding:8px 8px 8px 8px;gap:6px}
+    .nav-inner .logo{height:26px}
+    .nav-inner>.btn{display:none}
+    .nav-inner .logo-word{max-width:150px;object-fit:contain;object-position:left center;
+      transition:max-width .35s ease,opacity .2s ease}
+    .nav-inner .logo-mark{display:block;max-width:0;opacity:0;transform:scale(.5) rotate(-60deg);
+      transition:max-width .35s ease,opacity .25s ease,transform .35s ease}
+    nav.nav.shrunk .nav-inner .logo-word{max-width:0;opacity:0}
+    nav.nav.shrunk .nav-inner .logo-mark{max-width:30px;height:30px;opacity:1;transform:none}
+    .tabs{flex:1;justify-content:space-between;overflow-x:auto}.tabs a{padding:6px 8px;font-size:.78rem}}
+  @media (min-width:641px){
+    .nav-inner .logo-word{max-width:220px;object-fit:contain;object-position:left center;
+      transition:max-width .35s ease,opacity .2s ease}
+    .nav-inner .logo-mark{display:block;max-width:0;opacity:0;transform:scale(.5) rotate(-60deg);
+      transition:max-width .35s ease,opacity .25s ease,transform .35s ease}
+    nav.nav.scrolling .logo-word{max-width:0;opacity:0}
+    nav.nav.scrolling .logo-mark{max-width:45px;height:45px;margin:-6px 0;opacity:1;transform:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .nav-inner .logo-word,.nav-inner .logo-mark{transition:none}
+  }
+
+  /* hero */
+  .eyebrow{display:inline-block;font-size:.76rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--plum);background:rgba(205,90,31,.14);border-radius:100px;padding:7px 16px;margin-bottom:20px}
+  h1,h2,h3{font-family:var(--disp);line-height:1.05;letter-spacing:-.02em;margin:0;color:var(--plum)}
+  h2{font-size:clamp(1.8rem,4.5vw,2.5rem);font-weight:700;margin:0 0 14px;text-wrap:balance}
+  .hero-demo{padding:52px 0 8px;max-width:900px}
+  .lede{color:var(--muted);font-size:1.1rem;margin:0 0 14px}
+  .lede strong{color:var(--ink)}
+
+  /* alert card */
+  .alertcard{display:flex;align-items:center;gap:16px;background:var(--white);border:1px solid var(--line);
+    border-left:5px solid var(--red);border-radius:var(--radius);padding:18px 24px;margin:22px 0 8px;box-shadow:0 8px 26px rgba(46,31,74,.07)}
+  .dot{width:12px;height:12px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px rgba(214,58,46,.16);animation:pulse 1.6s infinite;flex:none}
+  @keyframes pulse{0%{box-shadow:0 0 0 3px rgba(214,58,46,.28)}70%{box-shadow:0 0 0 10px rgba(214,58,46,0)}100%{box-shadow:0 0 0 3px rgba(214,58,46,0)}}
+  .alertcard .t{font-family:var(--disp);font-weight:700;font-size:1.05rem;color:var(--plum)}
+  .alertcard .s{color:var(--muted);font-size:.92rem;margin-top:2px}
+
+  /* stat facts (matches home .f-fact) */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px 24px;background:var(--white);border:1px solid var(--line);
+    border-radius:var(--radius);padding:26px 30px;margin:16px 0 8px;box-shadow:0 8px 26px rgba(46,31,74,.05)}
+  @media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
+  .f-fact strong{display:block;font-family:var(--disp);font-weight:700;font-size:1.5rem;color:var(--brand-deep);line-height:1.15;margin-bottom:5px}
+  .f-fact.red strong{color:var(--red)} .f-fact.amber strong{color:var(--amber)}
+  .f-fact span{font-size:.82rem;color:var(--muted);line-height:1.5;display:block}
+
+  /* cards (matches home) */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:22px;margin:22px 0 0}
+  .card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:26px 28px;
+    transition:transform .2s ease,box-shadow .2s ease}
+  .card:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(46,31,74,.10)}
+  .pip{width:46px;height:46px;border-radius:13px;background:rgba(205,90,31,.14);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+  .pip svg{width:24px;height:24px;color:var(--brand-deep)}
+  .card h3{font-size:1.22rem;font-weight:700;color:var(--plum);margin:0 0 6px}
+  .card-photo{height:110px;margin:-26px -28px 16px;border-radius:20px 20px 0 0;background-size:cover;background-position:center;-webkit-mask-image:linear-gradient(to bottom,#000 25%,transparent 100%);mask-image:linear-gradient(to bottom,#000 25%,transparent 100%)}
+  .card .sub{color:var(--muted);font-size:.92rem;margin:0 0 16px;line-height:1.5}
+
+  .log{list-style:none;margin:0;padding:0}
+  .log li{display:flex;gap:11px;padding:10px 0;border-bottom:1px solid var(--line);font-size:.92rem;color:var(--ink)}
+  .log li:last-child{border-bottom:0}
+  .log .when{color:var(--muted);min-width:74px;font-variant-numeric:tabular-nums}
+  .tag{font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:20px;white-space:nowrap;align-self:flex-start}
+  .tag.red{background:rgba(214,58,46,.12);color:#b12e23;border:1px solid rgba(214,58,46,.35)}
+  .tag.amber{background:rgba(192,138,22,.12);color:#8a6410;border:1px solid rgba(192,138,22,.3)}
+  .verdict{font-size:1rem;line-height:1.55;color:var(--ink)}
+  .verdict b{color:var(--brand-deep)}
+
+  /* replay controls */
+  .replay{display:flex;align-items:center;gap:14px;margin:4px 0 12px;flex-wrap:wrap}
+  .rp-btn{font-family:var(--disp);font-weight:700;font-size:.88rem;background:var(--brand);color:#fff;border:0;
+    padding:9px 18px;border-radius:100px;cursor:pointer;white-space:nowrap;transition:background .15s ease}
+  .rp-btn:hover{background:var(--brand-deep)}
+  .replay input[type=range]{flex:1;min-width:150px;accent-color:var(--brand)}
+  .rp-date{font-variant-numeric:tabular-nums;font-size:.92rem;color:var(--plum);font-weight:600;min-width:104px;text-align:right}
+  .rp-banner{border-radius:12px;padding:10px 16px;font-size:.92rem;margin:0 0 14px;border:1px solid var(--line);color:var(--muted)}
+  .rp-banner.alert{background:rgba(214,58,46,.07);border-color:rgba(214,58,46,.35);color:#b12e23}
+  .rp-banner.collapse{background:rgba(214,58,46,.12);border-color:rgba(214,58,46,.5);color:#8f241c}
+  .rp-banner b{font-weight:700}
+  .chart-legend{display:flex;gap:20px;flex-wrap:wrap;font-size:.82rem;color:var(--muted);margin:2px 0 8px}
+  .chart-legend span{display:inline-flex;align-items:center;gap:7px}
+  .coh-row{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin:8px 0 10px}
+  .coh{width:152px;height:152px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:16px;color:#fff;box-shadow:0 10px 26px rgba(46,31,74,.20)}
+  .coh strong{font-family:var(--disp);font-weight:700;font-size:2rem;line-height:1}
+  .coh span{font-size:.66rem;line-height:1.35;opacity:.92;margin-top:7px}
+  .prov{font-size:.85rem;color:var(--muted);line-height:1.6;margin-top:12px}
+  .prov b{color:var(--plum);font-weight:600}
+
+  section.more{padding:48px 0 8px;max-width:900px}
+  .foot{margin-top:26px;font-size:.82rem;color:var(--muted);line-height:1.7;border-top:1px solid var(--line);padding-top:16px}
+  .foot b{color:var(--ink)}
+  svg.chart{display:block;width:100%;height:auto}
+
+  /* rheality-toc: sticky contents rail, built from the h2 elements on screen */
+  html{scroll-behavior:smooth}
+  h2{scroll-margin-top:26px}
+  /* Offsets are derived from the column this page actually uses: .wrap is
+     --maxw (1080px) with 20px padding, so the text starts at 50% - 520px.
+     Rail is 190px wide, so left:calc(50% - 710px) lands it flush against the
+     text, and 758px gives the 28px gap the 880px research notes use. The
+     hide-breakpoint is 2 x (offset + 12px margin) -- below it the rail would
+     run off the left edge, so it must move whenever the offset does. */
+  .toc{position:fixed;top:98px;left:calc(50% - 710px);width:190px;z-index:20;
+    max-height:calc(100vh - 140px);overflow-y:auto}
+  @media (min-width:1540px){.toc{left:calc(50% - 758px)}}
+  .toc::-webkit-scrollbar{width:0}
+  .toc-h{font-family:var(--disp,Georgia,serif);font-weight:700;font-size:10.5px;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--mut,#6F6488);
+    margin:0 0 10px 13px}
+  .toc a{display:block;font-size:12.6px;line-height:1.38;color:var(--mut,#6F6488);
+    text-decoration:none;padding:6px 0 6px 13px;
+    border-left:2px solid var(--line,#E4DDF1);
+    transition:color .14s ease,border-color .14s ease}
+  .toc a:hover{color:var(--plum,#33254E);border-left-color:var(--mut,#6F6488)}
+  .toc a.on{color:var(--plum,#33254E);font-weight:600;
+    border-left-color:var(--terra,#CD5A1F)}
+  @media (max-width:1443px){.toc{display:none}}
+</style>
+<style>
+  .modes{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 12px}
+  .mode-btn{font-family:var(--disp);font-weight:700;font-size:.86rem;color:var(--muted);
+    background:var(--white);border:1px solid var(--line);border-radius:100px;padding:8px 16px;cursor:pointer}
+  .mode-btn:hover{color:var(--plum)}
+  .mode-btn.on{background:var(--plum);border-color:var(--plum);color:#fff}
+  .chart-legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .lg{display:inline-flex;align-items:center;gap:7px;font-family:var(--body);font-size:.8rem;
+    color:var(--ink);background:var(--white);border:1px solid var(--line);border-radius:100px;
+    padding:5px 12px;cursor:pointer;font-variant-numeric:tabular-nums}
+  .lg i{width:10px;height:10px;border-radius:3px;display:block}
+  .lg b{color:var(--plum)}
+  .lg.off{opacity:.42}
+  .chart{width:100%;height:auto;display:block}
+  #chart{margin-top:6px}
+  .card-map{width:100%;height:auto;display:block;border-radius:14px;margin-bottom:16px;background:#fff}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="brand" aria-label="Rheality home"><img class="logo logo-word" src="/logo-nav.png?v=2" alt="Rheality"><img class="logo logo-mark" src="/favicon.png" alt="Rheality"></a>
+    <div class="tabs">
+      <a href="/">Company</a>
+      <a href="/pipeline/how-it-works.html">How it works</a>
+      <a href="/demo/terms.html">Terms</a>
+    </div>
+    <a class="btn" href="/#contact">Get in touch</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <section class="hero-demo">
+    <span class="eyebrow">Demo &middot; Cikarang, Indonesia &middot; live archive, null result</span>
+    <h2>Eight data centers, two years, nothing moving</h2>
+    <p class="lede">Cikarang carries most of Indonesia's new data center capacity, on the same
+    alluvial plain that has made North Jakarta one of the fastest sinking cities on record. We
+    processed <strong>119 interferograms</strong> from the free Sentinel-1 archive, <strong>61
+    passes</strong> between September 2024 and September 2026, and sampled the stack at the
+    coordinates of eight data centers taken from PeeringDB and OpenStreetMap.</p>
+    <p class="lede">Every one of them is flat to within our own noise. This page is what a
+    screening run looks like when the answer is no, and what it looked like for one day when we
+    sampled the wrong 400 metres.</p>
+  </section>
+
+  <div class="stats">
+    <div class="f-fact"><strong id="kSites">&ndash;</strong><span>Data center sites at verified coordinates</span></div>
+    <div class="f-fact"><strong id="kRange">&ndash;</strong><span>Range of line of sight rates across all of them</span></div>
+    <div class="f-fact"><strong id="kEpochs">&ndash;</strong><span>Satellite passes in the stack</span></div>
+    <div class="f-fact amber"><strong>6.2 km</strong><span>From the moving ground to the nearest data hall</span></div>
+  </div>
+
+  <div class="cards">
+    <div class="card" style="grid-column:1/-1">
+      <h3>The measurement</h3>
+      <p class="sub">Median line of sight displacement inside 400 m of each data center, one point
+      per satellite pass, relative to a reference strip south of the estates. Down means moving away
+      from the satellite. Click a name to hide it.</p>
+
+      <div class="modes" id="modeRow">
+        <button class="mode-btn on" data-mode="sites" type="button">The eight data centers</button>
+        <button class="mode-btn" data-mode="correction" type="button">Add the estate point we first sampled</button>
+        <button class="mode-btn" data-mode="difference" type="button">Difference two neighbours</button>
+      </div>
+
+      <div class="rp-banner" id="modeNote"></div>
+      <div id="chart"></div>
+      <div class="chart-legend" id="legend"></div>
+      <p class="prov" id="prov"></p>
+    </div>
+  </div>
+
+  <section class="more">
+    <span class="eyebrow">The correction &middot; why coordinates come first</span>
+    <h2>An estate centroid is not a building</h2>
+    <p class="lede">The first version of this study sampled one point per industrial estate and
+    reported that Jababeka was sinking 23 mm/yr faster than its neighbours, with the estate's data
+    center tenant named beside the number. Kota Jababeka covers about 5,600 hectares. The point we
+    used sits <strong>6.2 km from the nearest verified data hall</strong>, on the flank of a
+    regional subsidence lobe. The ground there really is moving. No data center is on it.</p>
+    <p class="lede">The middle button above puts that series back on the chart. It is the same
+    pipeline, the same stack and the same inversion, sampled 6 km away, and it is a 23 mm/yr
+    difference in the headline.</p>
+  </section>
+
+  <div class="cards">
+    <div class="card" style="grid-column:1/-1">
+      <img class="card-map" src="/img/cikarang-map.png" alt="Line of sight velocity map of the Cikarang area with eight verified data center sites marked and the Jababeka estate point circled, beside the displacement series for each">
+      <h3>Where everything sits</h3>
+      <p class="sub">Line of sight velocity across the scene, red moving away from the satellite.
+      The small circles are the verified data centers: DCI H1 in MM2100 to the west, GTN in the
+      middle, and six more in the GIIC cluster at Kota Deltamas to the south. The orange circle is
+      the estate point, on the southern flank of the subsiding lobe that covers the north east of
+      the scene. That lobe is regional groundwater drawdown, not anything built on top of it.</p>
+    </div>
+  </div>
+
+  <section class="more">
+    <span class="eyebrow">What a null result is worth</span>
+    <h2>Reading this the way an operator would</h2>
+    <p class="lede">Nothing here clears its own error bar, and that is the finding. Free radar over
+    two years puts the ground under all eight halls inside a few mm/yr of each other and of zero. An
+    operator who was about to commission a ground survey on a hunch now has an ordering: none of
+    these eight, and a lobe 6 km north east that would matter a great deal to anyone building in
+    it.</p>
+    <p class="lede">What it is not is a certificate. Our own rates were off by 54 mm/yr RMS against
+    GNSS on tropical ground in Puerto Rico over a six-month window, which spread across two years is
+    still of order 20 mm/yr on an absolute rate. Nothing in the table clears that bar either, which
+    is why this is read as a null and not as eight precise measurements.</p>
+    <p style="margin:6px 0 20px"><a href="/research/cikarang-data-centers/" style="color:var(--brand-deep);font-weight:600;text-decoration:none">The full research note, with every caveat and the method &rarr;</a></p>
+  </section>
+
+  <div class="stats">
+    <div class="f-fact"><strong id="kAgree">&ndash;</strong><span>MM2100 against Kota Deltamas, 12.2 km apart, two years</span></div>
+    <div class="f-fact"><strong id="kRaw">&ndash;</strong><span>Typical single-site scatter, one pass to the next</span></div>
+    <div class="f-fact green"><strong id="kDiff">&ndash;</strong><span>Same scatter after differencing two neighbours in GIIC</span></div>
+    <div class="f-fact"><strong>119</strong><span>Interferograms, all of them usable</span></div>
+  </div>
+
+  <section class="more" style="max-width:none">
+    <span class="eyebrow">Your Asset &middot; Live Archive Check</span>
+    <h2>Now point it at your own.</h2>
+    <p class="lede" style="max-width:900px">Search for your site or click it on the map. This checks
+    the real satellite record over that exact spot: the passes, the orbit, the freshness. Give it
+    the coordinate of the building, not the name of the park.</p>
+    <div id="portal-widget"></div>
+  </section>
+  <script src="/portal.js" defer></script>
+
+  <div class="dark cta-dark" style="text-align:left;margin-top:26px">
+    <span class="label">Have a site like this?</span>
+    <h2>We can point this at yours.</h2>
+    <p>The same pipeline runs over a data center campus, a tailings dam, a slope, a reclamation site or a port. Send the coordinates and the question, and we will scope a pilot.</p>
+    <div class="cta-row" style="margin-top:8px">
+      <a class="btn" href="https://www.linkedin.com/company/rheality/">Message us on LinkedIn</a>
+      <a class="btn ghost email-btn" href="/#contact">Email us</a>
+    </div>
+  </div>
+
+  <div class="foot">
+    <b>Demo note.</b> Every number and every line on this page is our own processing result, built
+    from raw Sentinel-1 radar through the pipeline that runs our monitoring. Site coordinates come
+    from PeeringDB and OpenStreetMap and are listed with their sources in the result file. Contains
+    modified Copernicus Sentinel data 2024 to 2026, processed by ASF HyP3.
+    <p style="margin:10px 0 0"><b>Disclaimer.</b> Rheality provides decision-support monitoring data, not a safety
+    guarantee. The duty of care for any asset remains with its owner and their engineer. See
+    <a href="/demo/terms.html">Terms &amp; Disclaimer</a>.</p>
+  </div>
+
+</div>
+
+<script>
+(function(){
+var C={plum:'#33254E',brand:'#CD5A1F',mut:'#6F6488',line:'#E4DDF1',grid:'#EDE7F6'};
+var PAL=['#2E6E8E','#2E9E6B','#7A50FF','#C08A16','#B3341A','#0F766E','#9333EA','#475569'];
+var SHORT={dci_h1:'DCI H1',pdg_jc3:'PDG JC3',msft_jkt05:'Microsoft JKT05',msft_jkt11:'Microsoft JKT11',
+  aws_giic:'AWS GIIC',hyperspace:'Hyperspace',stt_jkt1:'STT Jakarta 1',gtn:'GTN'};
+var D=null,mode='sites',hidden={},series={};
+
+function fmtDate(s){return s.slice(0,7);}
+function slope(ts,ys){var n=ts.length,sx=0,sy=0,sxx=0,sxy=0;
+  for(var i=0;i<n;i++){sx+=ts[i];sy+=ys[i];sxx+=ts[i]*ts[i];sxy+=ts[i]*ys[i];}
+  var b=(n*sxy-sx*sy)/(n*sxx-sx*sx);return [b,(sy-b*sx)/n];}
+
+function build(){
+  var S=D.sites,keys=Object.keys(S).filter(function(k){return k.indexOf('_pt')<0;});
+  var t0=new Date(S[keys[0]].r400.series[0].date).getTime();
+  var ts=S[keys[0]].r400.series.map(function(p){return (new Date(p.date).getTime()-t0)/31557600000;});
+  var dates=S[keys[0]].r400.series.map(function(p){return p.date;});
+  series={ts:ts,dates:dates,keys:keys,S:S};
+  var vals=keys.map(function(k){return S[k].r400.velocity_mm_yr;});
+  var lo=Math.min.apply(null,vals),hi=Math.max.apply(null,vals);
+  document.getElementById('kSites').textContent=keys.length;
+  document.getElementById('kRange').textContent=lo.toFixed(1)+' to +'+hi.toFixed(1)+' mm/yr';
+  document.getElementById('kEpochs').textContent=D.window.epochs;
+  var P=D.pairs_r400||{};
+  var ag=P['mm2100_pt-deltamas_pt'];
+  if(ag)document.getElementById('kAgree').textContent=(ag.rate_mm_yr>=0?'+':'')+ag.rate_mm_yr.toFixed(1)+' mm/yr';
+  var sc=keys.map(function(k){return S[k].r400.scatter_mm;}).sort(function(a,b){return a-b;});
+  document.getElementById('kRaw').textContent=Math.round(sc[Math.floor(sc.length/2)])+' mm';
+  var best=null;
+  for(var p in P){var a=p.split('-');if(a[0].indexOf('_pt')<0&&a[1].indexOf('_pt')<0&&(!best||P[p].scatter_mm<P[best].scatter_mm))best=p;}
+  if(best)document.getElementById('kDiff').textContent=P[best].scatter_mm.toFixed(1)+' mm';
+  document.getElementById('prov').textContent='Sentinel-1 ascending track 98, bursts 098_210452_IW2 and 098_210453_IW2, '
+    +D.window.epochs+' epochs '+D.window.start+' to '+D.window.end+'. Coherence-weighted least-squares SBAS over '
+    +'119 interferograms. Site medians inside 400 m of each coordinate. Source file: pipeline/data/cikarang_sites.json';
+  draw();
+}
+
+function activeSeries(){
+  var S=series.S,out=[];
+  if(mode==='difference'){
+    var a='pdg_jc3',b='hyperspace';
+    var ya=S[a].r400.series.map(function(p){return p.los_mm;});
+    var yb=S[b].r400.series.map(function(p){return p.los_mm;});
+    out.push({key:'a',name:SHORT[a],color:PAL[1],y:ya});
+    out.push({key:'b',name:SHORT[b],color:PAL[3],y:yb});
+    out.push({key:'d',name:SHORT[a]+' minus '+SHORT[b],color:C.brand,y:ya.map(function(v,i){return v-yb[i];}),wide:true});
+    return out;
+  }
+  series.keys.forEach(function(k,i){
+    out.push({key:k,name:SHORT[k]||k,color:PAL[i%PAL.length],
+      y:S[k].r400.series.map(function(p){return p.los_mm;})});
+  });
+  if(mode==='correction'){
+    out.push({key:'jababeka_pt',name:'Jababeka estate point',color:C.brand,wide:true,
+      y:S.jababeka_pt.r400.series.map(function(p){return p.los_mm;})});
+  }
+  return out;
+}
+
+function draw(){
+  var W=980,H=430,ml=56,mr=18,mt=16,mb=38;
+  var all=activeSeries(),shown=all.filter(function(s){return !hidden[s.key];});
+  var ts=series.ts,ys=[];
+  shown.forEach(function(s){ys=ys.concat(s.y);});
+  if(!ys.length)ys=[0];
+  var lo=Math.min.apply(null,ys),hi=Math.max.apply(null,ys),pad=(hi-lo)*0.12||5;
+  lo-=pad;hi+=pad;
+  var X=function(v){return ml+(v-ts[0])/(ts[ts.length-1]-ts[0])*(W-ml-mr);};
+  var Y=function(v){return mt+(hi-v)/(hi-lo)*(H-mt-mb);};
+  var g='';
+  for(var v=Math.ceil(lo/20)*20;v<=hi;v+=20){
+    g+='<line x1="'+ml+'" y1="'+Y(v).toFixed(1)+'" x2="'+(W-mr)+'" y2="'+Y(v).toFixed(1)+'" stroke="'+(v===0?C.mut:C.grid)+'" stroke-width="'+(v===0?1.2:1)+'"/>';
+    g+='<text x="'+(ml-9)+'" y="'+(Y(v)+4).toFixed(1)+'" text-anchor="end" font-size="11" fill="'+C.mut+'">'+v+'</text>';
+  }
+  for(var i=0;i<series.dates.length;i+=8){
+    g+='<text x="'+X(ts[i]).toFixed(1)+'" y="'+(H-12)+'" text-anchor="middle" font-size="11" fill="'+C.mut+'">'+fmtDate(series.dates[i])+'</text>';
+  }
+  g+='<text x="14" y="'+(H/2)+'" text-anchor="middle" font-size="11.5" fill="'+C.mut+'" transform="rotate(-90 14 '+(H/2)+')">LOS displacement, mm</text>';
+  shown.forEach(function(s){
+    var d='';
+    s.y.forEach(function(v,i){d+=(i?'L':'M')+X(ts[i]).toFixed(1)+' '+Y(v).toFixed(1);});
+    g+='<path d="'+d+'" fill="none" stroke="'+s.color+'" stroke-width="'+(s.wide?1.6:1)+'" opacity="'+(s.wide?0.55:0.4)+'"/>';
+    var f=slope(ts,s.y);
+    g+='<line x1="'+X(ts[0]).toFixed(1)+'" y1="'+Y(f[1]).toFixed(1)+'" x2="'+X(ts[ts.length-1]).toFixed(1)
+      +'" y2="'+Y(f[0]*ts[ts.length-1]+f[1]).toFixed(1)+'" stroke="'+s.color+'" stroke-width="'+(s.wide?3.4:2.4)+'" stroke-linecap="round"/>';
+  });
+  document.getElementById('chart').innerHTML='<svg class="chart" viewBox="0 0 '+W+' '+H
+    +'" role="img" aria-label="line of sight displacement series for the Cikarang data center sites">'+g+'</svg>';
+  document.getElementById('legend').innerHTML=all.map(function(s){
+    var f=slope(ts,s.y);
+    return '<button class="lg'+(hidden[s.key]?' off':'')+'" data-k="'+s.key+'" type="button">'
+      +'<i style="background:'+s.color+'"></i>'+s.name+' <b>'+(f[0]>=0?'+':'')+f[0].toFixed(1)+'</b></button>';
+  }).join('');
+  var notes={sites:'Eight data centers at coordinates from PeeringDB and OpenStreetMap. The thin lines are the measurements, the thick lines the fitted rate in mm/yr. Every rate sits inside about two standard errors of zero.',
+    correction:'The orange series is a point at the centre of Kota Jababeka, 6.2 km from the nearest data hall, on the flank of a regional subsidence lobe. Same stack, same inversion, 23 mm/yr of difference in the headline.',
+    difference:'Two sites in the GIIC cluster about 500 m apart, then one subtracted from the other. Tropical water vapour is common to both and cancels, so the orange difference is far quieter than either series alone.'};
+  document.getElementById('modeNote').textContent=notes[mode];
+}
+
+document.addEventListener('click',function(e){
+  var m=e.target.closest?e.target.closest('.mode-btn'):null;
+  if(m){mode=m.getAttribute('data-mode');hidden={};
+    [].forEach.call(document.querySelectorAll('.mode-btn'),function(b){b.classList.toggle('on',b===m);});
+    draw();return;}
+  var l=e.target.closest?e.target.closest('.lg'):null;
+  if(l){var k=l.getAttribute('data-k');hidden[k]=!hidden[k];draw();}
+});
+
+fetch('/pipeline/data/cikarang_sites.json?v='+Date.now()).then(function(r){
+  if(!r.ok)throw new Error(r.status);return r.json();
+}).then(function(j){D=j;build();}).catch(function(){
+  document.getElementById('chart').innerHTML='<p class="prov">Measurement file failed to load. '
+    +'The series is in pipeline/data/cikarang_sites.json in the repository.</p>';
+});
+})();
+</script>
+</body>
+</html>
