@@ -172,6 +172,28 @@
   .chart{width:100%;height:auto;display:block}
   #chart{margin-top:6px}
   .card-map{width:100%;height:auto;display:block;border-radius:14px;margin-bottom:16px;background:#fff}
+  .tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table.res{width:100%;border-collapse:collapse;font-size:.9rem;min-width:560px}
+  table.res th{text-align:left;font-weight:600;color:var(--muted);font-size:.76rem;letter-spacing:.04em;
+    text-transform:uppercase;padding:8px 10px;border-bottom:1px solid var(--line)}
+  table.res td{padding:9px 10px;border-bottom:1px solid var(--line);color:var(--ink);vertical-align:top}
+  table.res tr:last-child td{border-bottom:0}
+  table.res .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  table.res tbody tr{cursor:pointer;transition:background .12s ease}
+  table.res tbody tr:hover{background:rgba(122,80,255,.05)}
+  table.res tbody tr.sel{background:rgba(205,90,31,.10)}
+  table.res tbody tr.sel td:first-child{box-shadow:inset 3px 0 0 var(--brand)}
+  table.res .sw{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:8px;vertical-align:middle}
+  table.res .src{color:var(--muted);font-size:.82rem}
+  #results{scroll-margin-top:90px}
+  table.res .note-m{display:none;color:var(--muted);font-size:.8rem;line-height:1.45;margin-top:4px}
+  @media(max-width:640px){
+    table.res{min-width:0;font-size:.86rem}
+    table.res th,table.res td{padding:8px 6px}
+    #resSites th:nth-child(2),#resSites td:nth-child(2),#resSites th:nth-child(5),#resSites td:nth-child(5){display:none}
+    #resEstates th:nth-child(2),#resEstates td:nth-child(2){display:none}
+    table.res .note-m{display:block}
+  }
 </style>
 </head>
 <body>
@@ -192,14 +214,15 @@
   <section class="hero-demo">
     <span class="eyebrow">Demo &middot; Cikarang, Indonesia &middot; live archive, null result</span>
     <h2>Eight data centers, two years, nothing moving</h2>
-    <p class="lede">Cikarang carries most of Indonesia's new data center capacity, on the same
-    alluvial plain that has made North Jakarta one of the fastest sinking cities on record. We
-    processed <strong>119 interferograms</strong> from the free Sentinel-1 archive, <strong>61
-    passes</strong> between September 2024 and September 2026, and sampled the stack at the
-    coordinates of eight data centers taken from PeeringDB and OpenStreetMap.</p>
-    <p class="lede">Every one of them is flat to within our own noise. This page is what a
-    screening run looks like when the answer is no, and what it looked like for one day when we
-    sampled the wrong 400 metres.</p>
+    <p class="lede">Cikarang, east of Jakarta, holds most of Indonesia's new data center capacity,
+    on the same alluvial plain that has made North Jakarta one of the fastest sinking cities on
+    record. We measured the ground under eight data centers from the free Sentinel-1 radar
+    archive: <strong>61 satellite passes</strong> between September 2024 and September 2026,
+    <strong>119 interferograms</strong>, sampled at building coordinates taken from PeeringDB
+    and OpenStreetMap.</p>
+    <p class="lede">Every one of them is flat to within our own measurement noise.
+    <a href="#results">Find your site in the table below.</a> The full working, including a
+    mistake we made and corrected in public, is further down the page.</p>
   </section>
 
   <div class="stats">
@@ -209,8 +232,32 @@
     <div class="f-fact amber"><strong>6.2 km</strong><span>From the moving ground to the nearest data hall</span></div>
   </div>
 
-  <div class="cards">
+  <div class="cards" id="results">
     <div class="card" style="grid-column:1/-1">
+      <h3>Results by site</h3>
+      <p class="sub">Rate of line of sight movement over the two years, from the median of the radar
+      pixels within 400 m of each coordinate. The &plusmn; is one standard error, and a site reads
+      as flat when its rate sits inside about two of them. Click a row to pick it out on the chart.</p>
+      <div class="tbl-wrap">
+        <table class="res" id="resSites">
+          <thead><tr><th>Data center</th><th>Estate</th><th class="num">Rate, mm/yr</th><th class="num">Pixels</th><th>Coordinate from</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <h3 style="font-size:1.02rem;margin:22px 0 6px">Estate reference points</h3>
+      <p class="sub" style="margin-bottom:10px">One point per industrial estate, sampled in our first
+      pass. They are points on the ground, not buildings, and not a verdict on a whole estate.</p>
+      <div class="tbl-wrap">
+        <table class="res" id="resEstates">
+          <thead><tr><th>Point</th><th>Note</th><th class="num">Rate, mm/yr</th><th class="num">Pixels</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card" style="grid-column:1/-1" id="measurement">
       <h3>The measurement</h3>
       <p class="sub">Median line of sight displacement inside 400 m of each data center, one point
       per satellite pass, relative to a reference strip south of the estates. Down means moving away
@@ -229,30 +276,16 @@
     </div>
   </div>
 
-  <section class="more">
-    <span class="eyebrow">The correction &middot; why coordinates come first</span>
-    <h2>An estate centroid is not a building</h2>
-    <p class="lede">The first version of this study sampled one point per industrial estate and
-    reported that Jababeka was sinking 23 mm/yr faster than its neighbours, with the estate's data
-    center tenant named beside the number. Kota Jababeka covers about 5,600 hectares. The point we
-    used sits <strong>6.2 km from the nearest verified data hall</strong>, on the flank of a
-    regional subsidence lobe. The ground there really is moving. No data center is on it.</p>
-    <p class="lede">The middle button above puts that series back on the chart. It is the same
-    pipeline, the same stack and the same inversion, sampled 6 km away, and it is a 23 mm/yr
-    difference in the headline.</p>
-  </section>
-
   <div class="cards">
     <div class="card" style="grid-column:1/-1">
-      <img class="card-map" src="/img/cikarang-map.png" alt="Line of sight velocity map of the Cikarang area with eight verified data center sites marked and the Jababeka estate point circled, beside the displacement series for each">
+      <img class="card-map" src="/img/cikarang-map.png?v=2" alt="Line of sight velocity map of the Cikarang area with eight verified data center sites marked and the first-pass estate point circled">
       <h3>Where everything sits</h3>
       <p class="sub">Line of sight velocity across the scene, red moving away from the satellite.
       The small circles are the verified data centers: DCI H1 in MM2100 to the west, EdgeConneX
       JKT01 in the middle, and six more in the GIIC cluster at Kota Deltamas to the south. The
-      orange circle is the estate point, on the southern flank of the subsiding lobe that covers
-      the north east of the scene. That lobe is regional groundwater drawdown, not anything built
-      on top of it. The image still labels the Sertajaya site GTN, which is the name it carried
-      until EdgeConneX bought it in 2022; it is the same building and the same coordinate.</p>
+      orange circle is the estate point we first sampled, on the southern flank of the subsiding
+      area that covers the north east of the scene. That area looks like regional groundwater
+      drawdown, not load from anything built on top of it.</p>
     </div>
   </div>
 
@@ -262,12 +295,14 @@
     <p class="lede">Nothing here clears its own error bar, and that is the finding. Free radar over
     two years puts the ground under all eight halls inside a few mm/yr of each other and of zero. An
     operator who was about to commission a ground survey on a hunch now has an ordering: none of
-    these eight, and a lobe 6 km north east that would matter a great deal to anyone building in
-    it.</p>
-    <p class="lede">What it is not is a certificate. Our own rates were off by 54 mm/yr RMS against
-    GNSS on tropical ground in Puerto Rico over a six-month window, which spread across two years is
-    still of order 20 mm/yr on an absolute rate. Nothing in the table clears that bar either, which
-    is why this is read as a null and not as eight precise measurements.</p>
+    these eight, and a subsiding area 6 km north east that would matter a great deal to anyone
+    building in it.</p>
+    <p class="lede">What it is not is a certificate. Free radar over two years can tell flat ground
+    from moving ground, but on tropical ground it cannot give an exact rate. When we checked our own
+    rates against GNSS stations on tropical ground in Puerto Rico over six months, they were off by
+    54 mm/yr RMS, which spread across two years is still of order 20 mm/yr on an absolute rate.
+    Nothing in the table clears that bar either, which is why this reads as a null and not as eight
+    precise measurements.</p>
     <p style="margin:6px 0 20px"><a href="/research/cikarang-data-centers/" style="color:var(--brand-deep);font-weight:600;text-decoration:none">The full research note, with every caveat and the method &rarr;</a></p>
   </section>
 
@@ -277,6 +312,20 @@
     <div class="f-fact green"><strong id="kDiff">&ndash;</strong><span>Same scatter after differencing two neighbours in GIIC</span></div>
     <div class="f-fact"><strong>119</strong><span>Interferograms, all of them usable</span></div>
   </div>
+
+  <section class="more">
+    <span class="eyebrow">The correction &middot; why coordinates come first</span>
+    <h2>An estate centroid is not a building</h2>
+    <p class="lede">The first version of this study sampled one point per industrial estate. The
+    point for Kota Jababeka, an estate of about 5,600 hectares, read 23 mm/yr faster sinking than
+    its neighbours, and we named the estate's data center tenant beside the number. That point sits
+    <strong>6.2 km from the nearest verified data hall</strong>, on the flank of a regional
+    subsidence area. The ground at that point is moving, and no data center is on it. How much of
+    that area falls inside the estate boundary is something we cannot see from outside.</p>
+    <p class="lede">The middle button on the chart puts that series back. It is the same pipeline,
+    the same stack and the same inversion, sampled 6 km away, and it is a 23 mm/yr difference in
+    the headline. That is why every study now starts from the coordinate of the building.</p>
+  </section>
 
   <section class="more" style="max-width:none">
     <span class="eyebrow">Your Asset &middot; Live Archive Check</span>
@@ -291,7 +340,7 @@
   <div class="dark cta-dark" style="text-align:left;margin-top:26px">
     <span class="label">Have a site like this?</span>
     <h2>We can point this at yours.</h2>
-    <p>The same pipeline runs over a data center campus, a tailings dam, a slope, a reclamation site or a port. Send the coordinates and the question, and we will scope a pilot.</p>
+    <p>The same pipeline runs over a data center campus, a tailings dam, a slope, a reclamation site or a port. Name two sites and we will run the free archive over them at no cost, and send you the same record as this page.</p>
     <div class="cta-row" style="margin-top:8px">
       <a class="btn" href="https://www.linkedin.com/company/rheality/">Message us on LinkedIn</a>
       <a class="btn ghost email-btn" href="/#contact">Email us</a>
@@ -316,7 +365,31 @@ var C={plum:'#33254E',brand:'#CD5A1F',mut:'#6F6488',line:'#E4DDF1',grid:'#EDE7F6
 var PAL=['#2E6E8E','#2E9E6B','#7A50FF','#C08A16','#B3341A','#0F766E','#9333EA','#475569'];
 var SHORT={dci_h1:'DCI H1',pdg_jc3:'PDG JC3',msft_jkt05:'Microsoft JKT05',msft_jkt11:'Microsoft JKT11',
   aws_giic:'AWS GIIC',hyperspace:'Hyperspace',stt_jkt1:'STT Jakarta 1',gtn:'EdgeConneX JKT01'};
-var D=null,mode='sites',hidden={},series={};
+var D=null,mode='sites',hidden={},series={},focus=null;
+var EST={mm2100_pt:['MM2100 estate point','Well clear of the subsiding area'],
+  deltamas_pt:['Kota Deltamas estate point','Well clear of the subsiding area'],
+  jababeka_pt:['First-pass point in Kota Jababeka','On the flank of a regional subsidence area, 6.2 km from the nearest data hall. How much of that area lies inside the estate boundary cannot be seen from outside']};
+var EST_ORDER=['mm2100_pt','deltamas_pt','jababeka_pt'];
+function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function rateTxt(r){return (r.velocity_mm_yr>=0?'+':'&minus;')+Math.abs(r.velocity_mm_yr).toFixed(1)+' &plusmn; '+r.velocity_sigma.toFixed(1);}
+function srcTxt(v){var c=v.coord_source||'';return c.indexOf('PeeringDB')===0?'PeeringDB':(c.indexOf('OpenStreetMap')===0?'OpenStreetMap':c);}
+function tables(){
+  var S=series.S;
+  document.querySelector('#resSites tbody').innerHTML=series.keys.map(function(k,i){var v=S[k];
+    return '<tr data-site="'+k+'"><td><span class="sw" style="background:'+PAL[i%PAL.length]+'"></span>'+esc(v.label)+'</td><td>'+esc(v.estate)
+      +'</td><td class="num">'+rateTxt(v.r400)+'</td><td class="num">'+v.r400.n_px+'</td><td class="src">'+esc(srcTxt(v))+'</td></tr>';}).join('');
+  document.querySelector('#resEstates tbody').innerHTML=EST_ORDER.filter(function(k){return S[k];}).map(function(k){var v=S[k];
+    return '<tr data-site="'+k+'"><td><span class="sw" style="background:'+C.brand+'"></span>'+EST[k][0]+'<div class="note-m">'+EST[k][1]+'</div></td><td class="src">'+EST[k][1]
+      +'</td><td class="num">'+rateTxt(v.r400)+'</td><td class="num">'+v.r400.n_px+'</td></tr>';}).join('');
+  markRows();
+}
+function markRows(){[].forEach.call(document.querySelectorAll('table.res tbody tr'),function(r){r.classList.toggle('sel',r.getAttribute('data-site')===focus);});}
+function setFocus(k,push){
+  focus=(focus===k)?null:k;hidden={};
+  if(mode==='difference'){mode='sites';[].forEach.call(document.querySelectorAll('.mode-btn'),function(b){b.classList.toggle('on',b.getAttribute('data-mode')==='sites');});}
+  markRows();draw();
+  if(push&&window.history&&history.replaceState){var u=location.pathname+(focus?'?site='+focus:'')+location.hash;history.replaceState(null,'',u);}
+}
 
 function fmtDate(s){return s.slice(0,7);}
 function slope(ts,ys){var n=ts.length,sx=0,sy=0,sxx=0,sxy=0;
@@ -345,6 +418,10 @@ function build(){
   document.getElementById('prov').textContent='Sentinel-1 ascending track 98, bursts 098_210452_IW2 and 098_210453_IW2, '
     +D.window.epochs+' epochs '+D.window.start+' to '+D.window.end+'. Coherence-weighted least-squares SBAS over '
     +'119 interferograms. Site medians inside 400 m of each coordinate. Source file: pipeline/data/cikarang_sites.json';
+  tables();
+  var q=(location.search.match(/[?&]site=([a-z0-9_]+)/)||[])[1];
+  if(q&&S[q]){focus=q;markRows();var row=document.querySelector('tr[data-site="'+q+'"]');
+    if(row)setTimeout(function(){row.scrollIntoView({block:'center'});},60);}
   draw();
 }
 
@@ -360,13 +437,16 @@ function activeSeries(){
     return out;
   }
   series.keys.forEach(function(k,i){
-    out.push({key:k,name:SHORT[k]||k,color:PAL[i%PAL.length],
+    out.push({key:k,name:SHORT[k]||k,color:PAL[i%PAL.length],rate:S[k].r400.velocity_mm_yr,
       y:S[k].r400.series.map(function(p){return p.los_mm;})});
   });
-  if(mode==='correction'){
-    out.push({key:'jababeka_pt',name:'Jababeka estate point',color:C.brand,wide:true,
-      y:S.jababeka_pt.r400.series.map(function(p){return p.los_mm;})});
-  }
+  var extra=[];
+  if(mode==='correction')extra.push('jababeka_pt');
+  if(focus&&EST[focus]&&extra.indexOf(focus)<0)extra.push(focus);
+  extra.forEach(function(k){
+    out.push({key:k,name:k==='jababeka_pt'?'First-pass estate point':EST[k][0],color:C.brand,wide:true,
+      rate:S[k].r400.velocity_mm_yr,y:S[k].r400.series.map(function(p){return p.los_mm;})});
+  });
   return out;
 }
 
@@ -392,20 +472,21 @@ function draw(){
   shown.forEach(function(s){
     var d='';
     s.y.forEach(function(v,i){d+=(i?'L':'M')+X(ts[i]).toFixed(1)+' '+Y(v).toFixed(1);});
-    g+='<path d="'+d+'" fill="none" stroke="'+s.color+'" stroke-width="'+(s.wide?1.6:1)+'" opacity="'+(s.wide?0.55:0.4)+'"/>';
+    var fo=focus&&mode!=='difference',me=fo&&s.key===focus,dim=fo&&!me;
+    g+='<path d="'+d+'" fill="none" stroke="'+s.color+'" stroke-width="'+(me?1.8:(s.wide?1.6:1))+'" opacity="'+(me?0.8:(dim?0.12:(s.wide?0.55:0.4)))+'"/>';
     var f=slope(ts,s.y);
     g+='<line x1="'+X(ts[0]).toFixed(1)+'" y1="'+Y(f[1]).toFixed(1)+'" x2="'+X(ts[ts.length-1]).toFixed(1)
-      +'" y2="'+Y(f[0]*ts[ts.length-1]+f[1]).toFixed(1)+'" stroke="'+s.color+'" stroke-width="'+(s.wide?3.4:2.4)+'" stroke-linecap="round"/>';
+      +'" y2="'+Y(f[0]*ts[ts.length-1]+f[1]).toFixed(1)+'" stroke="'+s.color+'" stroke-width="'+(me?4:(s.wide?3.4:2.4))+'" opacity="'+(dim?0.25:1)+'" stroke-linecap="round"/>';
   });
   document.getElementById('chart').innerHTML='<svg class="chart" viewBox="0 0 '+W+' '+H
     +'" role="img" aria-label="line of sight displacement series for the Cikarang data center sites">'+g+'</svg>';
   document.getElementById('legend').innerHTML=all.map(function(s){
-    var f=slope(ts,s.y);
+    var r=(s.rate!==undefined)?s.rate:slope(ts,s.y)[0];
     return '<button class="lg'+(hidden[s.key]?' off':'')+'" data-k="'+s.key+'" type="button">'
-      +'<i style="background:'+s.color+'"></i>'+s.name+' <b>'+(f[0]>=0?'+':'')+f[0].toFixed(1)+'</b></button>';
+      +'<i style="background:'+s.color+'"></i>'+s.name+' <b>'+(r>=0?'+':'')+r.toFixed(1)+'</b></button>';
   }).join('');
   var notes={sites:'Eight data centers at coordinates from PeeringDB and OpenStreetMap. The thin lines are the measurements, the thick lines the fitted rate in mm/yr. Every rate sits inside about two standard errors of zero.',
-    correction:'The orange series is a point at the centre of Kota Jababeka, 6.2 km from the nearest data hall, on the flank of a regional subsidence lobe. Same stack, same inversion, 23 mm/yr of difference in the headline.',
+    correction:'The orange series is the estate point we first sampled in Kota Jababeka, 6.2 km from the nearest data hall, on the flank of a regional subsidence area. Same stack, same inversion, 23 mm/yr of difference in the headline.',
     difference:'Two sites in the GIIC cluster about 500 m apart, then one subtracted from the other. Tropical water vapour is common to both and cancels, so the orange difference is far quieter than either series alone.'};
   document.getElementById('modeNote').textContent=notes[mode];
 }
@@ -415,6 +496,9 @@ document.addEventListener('click',function(e){
   if(m){mode=m.getAttribute('data-mode');hidden={};
     [].forEach.call(document.querySelectorAll('.mode-btn'),function(b){b.classList.toggle('on',b===m);});
     draw();return;}
+  var tr=e.target.closest?e.target.closest('table.res tbody tr'):null;
+  if(tr){setFocus(tr.getAttribute('data-site'),true);
+    var mc=document.getElementById('measurement');if(mc&&focus)mc.scrollIntoView({behavior:'smooth',block:'start'});return;}
   var l=e.target.closest?e.target.closest('.lg'):null;
   if(l){var k=l.getAttribute('data-k');hidden[k]=!hidden[k];draw();}
 });

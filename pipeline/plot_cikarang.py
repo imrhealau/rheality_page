@@ -78,7 +78,7 @@ for k, lab, dx, dy, ha in [("dci_h1", "DCI H1", 10, 8, "left"),
 kp = "jababeka_pt"
 x, y = xy(kp)
 ax.add_patch(plt.Circle((x, y), 400, fill=False, lw=2.2, color=TERRA))
-ax.annotate("Jababeka estate point\n(first pass, no data hall here)", (x, y),
+ax.annotate("First-pass estate point\n(no data hall here)", (x, y),
             xytext=(12, 10), textcoords="offset points", fontsize=9, color=TERRA,
             weight="bold", path_effects=[pe.withStroke(linewidth=2.6, foreground="white")])
 ax.set_xlim(x0, x1); ax.set_ylim(y0, y1)
@@ -108,7 +108,7 @@ ax2.set_title("Eight verified data center sites, mm/yr: none clears its own nois
 # --- bottom right: the estate point against the data centers ------------
 ax3 = fig.add_axes([0.545, 0.085, 0.40, 0.355])
 dcmean = np.mean([ser(k) for k in DC], axis=0)
-for k, col, lab in [(kp, TERRA, "Jababeka estate point")]:
+for k, col, lab in [(kp, TERRA, "First-pass estate point")]:
     y = ser(k)
     v, trend, rms = fit(y)
     ax3.plot(tt, y, "o", ms=2.6, alpha=0.45, color=col)
