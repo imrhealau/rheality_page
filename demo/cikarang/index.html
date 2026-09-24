@@ -186,6 +186,9 @@
   table.res .sw{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:8px;vertical-align:middle}
   table.res .src{color:var(--muted);font-size:.82rem}
   #results{scroll-margin-top:90px}
+  .card h2.card-h{font-size:1.22rem;font-weight:700;color:var(--plum);margin:0 0 6px;letter-spacing:-.02em}
+  /* the rail needs 190px of margin; between 1400 and 1442px there is a little less, so narrow it */
+  @media (min-width:1400px) and (max-width:1442px){.toc{display:block;left:12px;width:calc(50% - 556px)}}
   table.res .note-m{display:none;color:var(--muted);font-size:.8rem;line-height:1.45;margin-top:4px}
   @media(max-width:640px){
     table.res{min-width:0;font-size:.86rem}
@@ -234,7 +237,7 @@
 
   <div class="cards" id="results">
     <div class="card" style="grid-column:1/-1">
-      <h3>Results by site</h3>
+      <h2 class="card-h">Results by site</h2>
       <p class="sub">Rate of line of sight movement over the two years, from the median of the radar
       pixels within 400 m of each coordinate. The &plusmn; is one standard error, and a site reads
       as flat when its rate sits inside about two of them. Click a row to pick it out on the chart.</p>
@@ -258,7 +261,7 @@
 
   <div class="cards">
     <div class="card" style="grid-column:1/-1" id="measurement">
-      <h3>The measurement</h3>
+      <h2 class="card-h">The measurement</h2>
       <p class="sub">Median line of sight displacement inside 400 m of each data center, one point
       per satellite pass, relative to a reference strip south of the estates. Down means moving away
       from the satellite. Click a name to hide it.</p>
@@ -279,7 +282,7 @@
   <div class="cards">
     <div class="card" style="grid-column:1/-1">
       <img class="card-map" src="/img/cikarang-map.png?v=2" alt="Line of sight velocity map of the Cikarang area with eight verified data center sites marked and the first-pass estate point circled">
-      <h3>Where everything sits</h3>
+      <h2 class="card-h">Where everything sits</h2>
       <p class="sub">Line of sight velocity across the scene, red moving away from the satellite.
       The small circles are the verified data centers: DCI H1 in MM2100 to the west, EdgeConneX
       JKT01 in the middle, and six more in the GIIC cluster at Kota Deltamas to the south. The
@@ -509,6 +512,66 @@ fetch('/pipeline/data/cikarang_sites.json?v='+Date.now()).then(function(r){
   document.getElementById('chart').innerHTML='<p class="prov">Measurement file failed to load. '
     +'The series is in pipeline/data/cikarang_sites.json in the repository.</p>';
 });
+})();
+</script>
+
+<script>
+/* rheality-toc */
+(function(){
+  var SCOPE=".wrap";
+  var nav=document.createElement('nav');
+  nav.className='toc';
+  nav.setAttribute('aria-label','Contents');
+  document.body.appendChild(nav);
+  var hs=[],links=[];
+  function vis(el){
+    return !!(el.offsetWidth||el.offsetHeight||el.getClientRects().length);
+  }
+  function top(el){
+    return el.getBoundingClientRect().top+window.pageYOffset;
+  }
+  function build(){
+    var root=null,cands=document.querySelectorAll(SCOPE);
+    for(var i=0;i<cands.length;i++){if(vis(cands[i])){root=cands[i];break;}}
+    hs=root?[].slice.call(root.querySelectorAll('h2')).filter(vis):[];
+    if(hs.length<3){nav.style.display='none';links=[];return;}
+    nav.style.display='';
+    nav.innerHTML='<div class="toc-h">Contents</div>';
+    links=hs.map(function(h,i){
+      if(!h.id)h.id='sec-'+i;
+      /* headings may carry an eyebrow label; the rail wants the heading itself */
+      var c=h.cloneNode(true),eb=c.querySelector('.eyebrow');
+      if(eb)eb.parentNode.removeChild(eb);
+      var a=document.createElement('a');
+      a.href='#'+h.id;
+      a.textContent=c.textContent.trim();
+      nav.appendChild(a);
+      return a;
+    });
+    update();
+  }
+  function update(){
+    if(!links.length)return;
+    var y=window.pageYOffset+140,cur=0;
+    for(var i=0;i<hs.length;i++){if(top(hs[i])<=y)cur=i;}
+    for(var j=0;j<links.length;j++){
+      if(j===cur)links[j].classList.add('on');else links[j].classList.remove('on');
+    }
+  }
+  window.addEventListener('scroll',update,{passive:true});
+  window.addEventListener('resize',update);
+  /* panels toggle with display:none, so rebuild when one does */
+  var t=null;
+  function later(){clearTimeout(t);t=setTimeout(build,70);}
+  if(window.MutationObserver){
+    var mo=new MutationObserver(later),c2=document.querySelectorAll(SCOPE);
+    for(var k=0;k<c2.length;k++){
+      mo.observe(c2[k],{attributes:true,attributeFilter:['style','class']});
+    }
+  }
+  document.addEventListener('click',later);
+  window.addEventListener('hashchange',later);
+  build();
 })();
 </script>
 </body>
