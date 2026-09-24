@@ -37,7 +37,7 @@ DC = [k for k in S if not k.endswith("_pt")]
 PT = [k for k in S if k.endswith("_pt")]
 SHORT = {"dci_h1": "DCI H1", "pdg_jc3": "PDG JC3", "msft_jkt05": "MS JKT05",
          "msft_jkt11": "MS JKT11", "aws_giic": "AWS", "hyperspace": "Hyperspace",
-         "stt_jkt1": "STT JKT1", "gtn": "GTN"}
+         "stt_jkt1": "STT JKT1", "gtn": "EdgeConneX JKT01"}
 BLUE, PLUM, TERRA = "#2E6E8E", "#33254E", "#CD5A1F"
 
 tt = [date.fromisoformat(p["date"]) for p in S[DC[0]]["r400"]["series"]]
@@ -69,7 +69,7 @@ for k in DC:
     x, y = xy(k)
     ax.plot([x], [y], "o", ms=6, mfc="none", mec=BLUE, mew=1.8)
 for k, lab, dx, dy, ha in [("dci_h1", "DCI H1", 10, 8, "left"),
-                           ("gtn", "GTN", 10, 8, "left"),
+                           ("gtn", "EdgeConneX JKT01", 10, 8, "left"),
                            ("pdg_jc3", "GIIC cluster, 6 sites", -12, -16, "right")]:
     x, y = xy(k)
     ax.annotate(lab, (x, y), xytext=(dx, dy), textcoords="offset points", ha=ha,
