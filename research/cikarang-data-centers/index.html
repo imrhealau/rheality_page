@@ -126,9 +126,9 @@
   <h2><span class="eyebrow">The mistake</span>An estate centroid is not a building</h2>
 
   <p>The first pass sampled one point per industrial estate: MM2100, Jababeka and GIIC Kota
-  Deltamas. Those points gave +4.3, &minus;19.3 and +4.2 mm/yr, and we wrote up Jababeka as
-  an estate sinking 23 mm/yr faster than its neighbours, with the estate's data center
-  tenant named next to the number.</p>
+  Deltamas. Those points gave +4.3, &minus;19.3 and +4.2 mm/yr, and we wrote up the
+  Jababeka point as if the whole estate were sinking 23 mm/yr faster than its neighbours,
+  with the estate's data center tenant named next to the number.</p>
 
   <p>Then we went and found out where the buildings actually are. DCI Indonesia's H1
   campus is at a published address with coordinates in PeeringDB. Seven more facilities in
@@ -140,14 +140,16 @@
     <tr><th>First pass sampling point</th><th>Nearest verified data center</th><th class="num">Distance</th></tr>
     <tr><td>MM2100 estate centre</td><td>DCI Indonesia H1</td><td class="num">0.49 km</td></tr>
     <tr><td>Kota Deltamas estate centre</td><td>Digital Hyperspace Jakarta</td><td class="num">1.70 km</td></tr>
-    <tr><td>Jababeka estate centre</td><td class="no">DCI Indonesia H1</td><td class="num no">6.20 km</td></tr>
+    <tr><td>Kota Jababeka first-pass point</td><td class="no">DCI Indonesia H1</td><td class="num no">6.20 km</td></tr>
   </table>
   </div>
 
   <p>Kota Jababeka covers about 5,600 hectares. A 400 m circle dropped at its centre is a
   sample of township, not of anybody's slab, and the one we dropped landed on the flank of
   a subsidence lobe 6 km from the nearest hall. That is the whole error: 23 mm/yr of
-  headline produced by a coordinate nobody had checked.</p>
+  headline produced by a coordinate nobody had checked. The point says nothing about the
+  estate as a whole, and how much of the lobe falls inside the estate boundary cannot be
+  seen from outside.</p>
 
   <h2><span class="eyebrow">The answer</span>Eight sites, all flat</h2>
 
@@ -161,7 +163,7 @@
       <th class="num">Pixels</th><th class="num">Mean coherence</th><th>Coordinate source</th>
     </tr>
     <tr><td>Digital Hyperspace Jakarta</td><td>GIIC Kota Deltamas</td><td class="num">+4.1 &plusmn; 1.7</td><td class="num">48</td><td class="num">0.55</td><td>OpenStreetMap</td></tr>
-    <tr><td>GTN Data Center</td><td>Sertajaya</td><td class="num">+3.1 &plusmn; 2.2</td><td class="num">219</td><td class="num">0.71</td><td>OpenStreetMap</td></tr>
+    <tr><td>EdgeConneX JKT01 (formerly GTN)</td><td>Sertajaya</td><td class="num">+3.1 &plusmn; 2.2</td><td class="num">219</td><td class="num">0.71</td><td>OpenStreetMap</td></tr>
     <tr><td>DCI Indonesia H1 (JK1 to JK3)</td><td>MM2100 Industrial Town</td><td class="num">+2.9 &plusmn; 3.3</td><td class="num">296</td><td class="num">0.86</td><td>PeeringDB</td></tr>
     <tr><td>STT Jakarta 1</td><td>GIIC Kota Deltamas</td><td class="num">&minus;0.3 &plusmn; 1.6</td><td class="num">192</td><td class="num">0.66</td><td>OpenStreetMap</td></tr>
     <tr><td>Microsoft JKT05</td><td>GIIC Kota Deltamas</td><td class="num">&minus;0.9 &plusmn; 1.6</td><td class="num">114</td><td class="num">0.61</td><td>OpenStreetMap</td></tr>
@@ -182,7 +184,7 @@
   </div>
 
   <figure>
-    <img src="img/cikarang_insar.png" alt="Three-panel figure: velocity map of the Cikarang area with eight data center sites marked and the Jababeka estate point circled, the flat series for the eight sites, and the Jababeka estate point diverging from the data center mean">
+    <img src="img/cikarang_insar.png?v=2" alt="Three-panel figure: velocity map of the Cikarang area with eight data center sites marked and the first-pass estate point circled, the flat series for the eight sites, and that point diverging from the data center mean">
     <figcaption>Left: line of sight velocity, red moving away from the satellite. The
     verified data center sites are the small circles. The orange circle is the estate point
     the first pass used, on the southern flank of the subsiding lobe. Top right: the eight
@@ -197,7 +199,9 @@
   is &minus;2.1 mm/yr over 152,555 pixels with the 5th percentile at &minus;31.2, so there
   is a genuine subsidence tail. It sits in a lobe covering the north east of the scene,
   which is the signature of regional groundwater drawdown rather than of anything built on
-  top. The Jababeka estate point reads &minus;19.3 &plusmn; 3.2 mm/yr on that flank.</p>
+  top. The first-pass point in Kota Jababeka reads &minus;19.3 &plusmn; 3.2 mm/yr on that
+  flank. Where the lobe sits against the estate boundary is not something this data can
+  show, because there is no boundary in it.</p>
 
   <p>For an operator inside that lobe the number would matter a great deal. None of the
   eight verified sites is inside it. Whether a ninth site is depends on its coordinates,
