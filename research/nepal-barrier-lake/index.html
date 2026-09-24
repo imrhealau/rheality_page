@@ -329,6 +329,8 @@
     if(!links.length)return;
     var y=window.pageYOffset+140,cur=0;
     for(var i=0;i<hs.length;i++){if(top(hs[i])<=y)cur=i;}
+    /* the last sections can be too short to reach the line, so the bottom of the page counts as the last one */
+    if(window.innerHeight+window.pageYOffset>=document.documentElement.scrollHeight-4)cur=hs.length-1;
     for(var j=0;j<links.length;j++){
       if(j===cur)links[j].classList.add('on');else links[j].classList.remove('on');
     }
